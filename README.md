@@ -5,9 +5,6 @@
 [![npm version](https://badge.fury.io/js/toh-framework.svg)](https://www.npmjs.com/package/toh-framework)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![npm version](https://badge.fury.io/js/toh-framework.svg)](https://badge.fury.io/js/toh-framework)
-
-
 > 📖 **[🇹🇭 Thai Documentation](docs/README-TH.md)**
 
 ## 💡 Why Toh?

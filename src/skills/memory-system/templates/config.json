@@ -1,0 +1,19 @@
+{
+  "version": "1.1.0",
+  "project": {
+    "name": "{{PROJECT_NAME}}",
+    "type": "{{PROJECT_TYPE}}",
+    "language": "{{LANGUAGE}}",
+    "created": "{{TIMESTAMP}}"
+  },
+  "memory": {
+    "enabled": true,
+    "autoSave": true,
+    "autoLoad": true,
+    "archiveThreshold": 50
+  },
+  "agents": {
+    "defaultLanguage": "{{LANGUAGE}}",
+    "verbose": false
+  }
+}

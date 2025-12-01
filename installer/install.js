@@ -104,6 +104,10 @@ export async function install(options) {
     await installComponent('templates', config.targetDir);
   }
 
+  // Install Memory System (v1.1.0)
+  await installComponent('memory', config.targetDir);
+  await setupMemoryFolder(config.targetDir);
+
   // Setup IDEs
   console.log(chalk.cyan('\n🛠️  Configuring IDEs...\n'));
   
@@ -259,6 +263,9 @@ async function installComponent(componentName, targetDir) {
     case 'templates':
       destPath = join(targetDir, '.toh', 'templates');
       break;
+    case 'memory':
+      destPath = join(targetDir, '.toh', 'memory-docs');
+      break;
     default:
       destPath = join(targetDir, '.toh', componentName);
   }
@@ -293,7 +300,7 @@ async function generateManifest(config) {
   const spinner = ora('Generating manifest...').start();
   
   const manifest = {
-    version: '1.0.0',
+    version: '1.1.0',
     installedAt: new Date().toISOString(),
     targetDir: config.targetDir,
     ides: config.ides,
@@ -301,7 +308,8 @@ async function generateManifest(config) {
       skills: config.installSkills,
       agents: config.installAgents,
       commands: config.installCommands,
-      templates: config.installTemplates
+      templates: config.installTemplates,
+      memory: true
     }
   };
 
@@ -312,15 +320,96 @@ async function generateManifest(config) {
   spinner.succeed('Manifest generated');
 }
 
+async function setupMemoryFolder(targetDir) {
+  const spinner = ora('Setting up Memory System...').start();
+  
+  const memoryDir = join(targetDir, '.toh', 'memory');
+  const archiveDir = join(memoryDir, 'archive');
+  
+  try {
+    // Create memory directories
+    await fs.ensureDir(memoryDir);
+    await fs.ensureDir(archiveDir);
+    
+    // Create initial memory files (empty templates)
+    const activeTemplate = `# 🔥 Active Task
+
+## Current Work
+[ยังไม่มีงาน - รอคำสั่งจาก User]
+
+## Last Action
+[ยังไม่มี]
+
+## Next Steps
+- รอคำสั่งจาก User
+
+## Blockers
+[ไม่มี]
+
+---
+Updated: ${new Date().toISOString()}
+`;
+
+    const summaryTemplate = `# 📋 Project Summary
+
+## Project Info
+- **Name:** [ยังไม่ได้ระบุ]
+- **Type:** [ยังไม่ได้ระบุ]
+- **Stack:** Next.js 14 + Tailwind + shadcn/ui + Zustand + Supabase
+- **Language:** th
+
+## Completed Features
+[ยังไม่มี]
+
+## In Progress
+[ยังไม่มี]
+
+## Project Structure
+[จะอัพเดทเมื่อเริ่มโปรเจค]
+
+---
+Updated: ${new Date().toISOString()}
+`;
+
+    const decisionsTemplate = `# 🧠 Key Decisions
+
+## Architecture Decisions
+| Date | Decision | Reason |
+|------|----------|--------|
+| ${new Date().toISOString().split('T')[0]} | ใช้ Toh Framework v1.1.0 | AI-Orchestration Driven Development |
+
+## Design Decisions
+| Date | Decision | Reason |
+|------|----------|--------|
+
+## Technical Decisions
+| Date | Decision | Reason |
+|------|----------|--------|
+
+---
+Updated: ${new Date().toISOString()}
+`;
+
+    await fs.writeFile(join(memoryDir, 'active.md'), activeTemplate);
+    await fs.writeFile(join(memoryDir, 'summary.md'), summaryTemplate);
+    await fs.writeFile(join(memoryDir, 'decisions.md'), decisionsTemplate);
+    
+    spinner.succeed('Memory System ready (.toh/memory/)');
+  } catch (error) {
+    spinner.fail(`Failed to setup Memory System: ${error.message}`);
+  }
+}
+
 function printNextSteps(config) {
   console.log(chalk.cyan('┌────────────────────────────────────────────────────────────┐'));
-  console.log(chalk.cyan('│') + chalk.bold.white('  🎉 What\'s Next?                                          ') + chalk.cyan('│'));
+  console.log(chalk.cyan('│') + chalk.bold.white('  🎉 Toh Framework v1.1.0 Installed!                       ') + chalk.cyan('│'));
   console.log(chalk.cyan('├────────────────────────────────────────────────────────────┤'));
   
   if (config.ides.includes('claude') || config.ides.includes('claude-code')) {
     console.log(chalk.cyan('│') + chalk.white('  Claude Code:                                             ') + chalk.cyan('│'));
-    console.log(chalk.cyan('│') + chalk.green('    /toh:help') + chalk.gray('  - ดูรายการ commands ทั้งหมด            ') + chalk.cyan('│'));
-    console.log(chalk.cyan('│') + chalk.green('    /toh:vibe') + chalk.gray('  - เริ่มสร้างโปรเจคใหม่                ') + chalk.cyan('│'));
+    console.log(chalk.cyan('│') + chalk.green('    /toh:plan') + chalk.gray(' - 🧠 วางแผนและ orchestrate งาน       ') + chalk.cyan('│'));
+    console.log(chalk.cyan('│') + chalk.green('    /toh:vibe') + chalk.gray(' - 🎨 เริ่มสร้างโปรเจคใหม่             ') + chalk.cyan('│'));
+    console.log(chalk.cyan('│') + chalk.green('    /toh:help') + chalk.gray(' - 📚 ดูรายการ commands ทั้งหมด       ') + chalk.cyan('│'));
     console.log(chalk.cyan('│') + chalk.white('                                                           ') + chalk.cyan('│'));
   }
   
@@ -346,6 +435,11 @@ function printNextSteps(config) {
   
   console.log(chalk.cyan('│') + chalk.white('  Documentation:                                           ') + chalk.cyan('│'));
   console.log(chalk.cyan('│') + chalk.blue('    https://github.com/wasintoh/toh-framework             ') + chalk.cyan('│'));
+  console.log(chalk.cyan('├────────────────────────────────────────────────────────────┤'));
+  console.log(chalk.cyan('│') + chalk.bold.yellow('  ✨ New in v1.1.0:                                        ') + chalk.cyan('│'));
+  console.log(chalk.cyan('│') + chalk.white('  • 🧠 /toh:plan - The Brain (orchestrate all agents)     ') + chalk.cyan('│'));
+  console.log(chalk.cyan('│') + chalk.white('  • 💾 Auto Memory - AI remembers across sessions         ') + chalk.cyan('│'));
+  console.log(chalk.cyan('│') + chalk.white('  • 📚 Enhanced /toh:dev - Read API docs from URLs        ') + chalk.cyan('│'));
   console.log(chalk.cyan('└────────────────────────────────────────────────────────────┘'));
   console.log('');
 }

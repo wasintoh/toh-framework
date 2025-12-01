@@ -22,6 +22,11 @@ User: /toh:test ทดสอบหน้า login
 ┌─────────────────────────────────────────────────────┐
 │  🧪 Test Runner                                     │
 ├─────────────────────────────────────────────────────┤
+│  0. 🚨 READ MEMORY (MANDATORY!)                     │
+│     ├── .toh/memory/active.md                       │
+│     ├── .toh/memory/summary.md                      │
+│     └── .toh/memory/decisions.md                    │
+│                                                     │
 │  1. Setup Playwright (ถ้ายังไม่มี)                   │
 │  2. สร้าง test cases จาก UI ที่มี                    │
 │  3. Run tests                                       │
@@ -30,7 +35,13 @@ User: /toh:test ทดสอบหน้า login
 │     └── เรียก /toh:fix แก้ไข                        │
 │     └── Run tests ใหม่                              │
 │     └── Loop จนผ่าน (max 3 รอบ)                     │
-│  6. สรุปผลการทดสอบ                                  │
+│                                                     │
+│  6. 🚨 SAVE MEMORY (MANDATORY!)                     │
+│     ├── อัพเดท active.md (test results)             │
+│     ├── เพิ่ม decisions.md (ถ้ามี fixes)            │
+│     └── อัพเดท summary.md                           │
+│                                                     │
+│  7. สรุปผลการทดสอบ                                  │
 └─────────────────────────────────────────────────────┘
 ```
 

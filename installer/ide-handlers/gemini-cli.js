@@ -12,6 +12,15 @@ export async function setupGeminiCLI(targetDir, srcDir, language = 'en') {
   
   // Create directories
   await fs.ensureDir(agentsDir);
+
+  // Create .toh/memory directory structure (v1.1.0 - Memory System)
+  const tohDir = path.join(targetDir, '.toh');
+  const memoryDir = path.join(tohDir, 'memory');
+  const archiveDir = path.join(memoryDir, 'archive');
+  await fs.ensureDir(archiveDir);
+
+  // Create memory template files
+  await createMemoryFiles(memoryDir, language);
   
   // Copy agents to .gemini/agents/
   const srcAgentsDir = path.join(srcDir, 'agents');
@@ -35,7 +44,8 @@ export async function setupGeminiCLI(targetDir, srcDir, language = 'en') {
   const settings = {
     "contextFiles": [
       ".gemini/GEMINI.md",
-      ".gemini/agents/*.md"
+      ".gemini/agents/*.md",
+      ".toh/memory/*.md"
     ],
     "systemInstruction": language === 'th' 
       ? "คำสั่งการทำงานอยู่ใน .gemini/GEMINI.md ปฏิบัติตาม Toh Framework methodology ตอบเป็นภาษาไทย"
@@ -94,6 +104,7 @@ If user requests Thai language, then switch to Thai.
 | Command | Description |
 |---------|-------------|
 | \`/toh:help\` | Show all available commands |
+| \`/toh:plan\` | **THE BRAIN** - Analyze, plan, orchestrate all agents |
 | \`/toh:vibe\` | Create new project with UI + Logic + Mock Data |
 | \`/toh:ui\` | Create UI - Pages, Components, Layouts |
 | \`/toh:dev\` | Add Logic - TypeScript, Zustand, Forms |
@@ -104,6 +115,14 @@ If user requests Thai language, then switch to Thai.
 | \`/toh:mobile\` | Mobile App - Expo / React Native |
 | \`/toh:fix\` | Fix bugs - Debug and fix issues |
 | \`/toh:ship\` | Deploy - Vercel, Production ready |
+
+## Memory System (Auto)
+
+Toh Framework has automatic memory at \`.toh/memory/\`:
+- \`active.md\` - Current task (always loaded)
+- \`summary.md\` - Project summary (always loaded)
+- \`decisions.md\` - Key decisions (always loaded)
+- \`archive/\` - Historical data (on-demand)
 
 ## Behavior Rules
 
@@ -191,6 +210,7 @@ function generateGeminiMdTH() {
 | Command | คำอธิบาย |
 |---------|----------|
 | \`/toh:help\` | แสดงรายการ commands ทั้งหมด |
+| \`/toh:plan\` | 🧠 **THE BRAIN** - วิเคราะห์, วางแผน, สั่งการทุก Agent |
 | \`/toh:vibe\` | สร้างโปรเจคใหม่ UI + Logic + Mock Data |
 | \`/toh:ui\` | สร้าง UI - หน้า, Components, Layouts |
 | \`/toh:dev\` | เพิ่ม Logic - TypeScript, Zustand, Forms |
@@ -201,6 +221,14 @@ function generateGeminiMdTH() {
 | \`/toh:mobile\` | Mobile App - Expo / React Native |
 | \`/toh:fix\` | แก้ Bug - Debug และ fix issues |
 | \`/toh:ship\` | Deploy - Vercel, Production ready |
+
+## Memory System (อัตโนมัติ)
+
+Toh Framework มีระบบ Memory ที่ \`.toh/memory/\`:
+- \`active.md\` - งานปัจจุบัน (โหลดเสมอ)
+- \`summary.md\` - สรุปโปรเจค (โหลดเสมอ)
+- \`decisions.md\` - การตัดสินใจ (โหลดเสมอ)
+- \`archive/\` - ข้อมูลเก่า (โหลดเมื่อต้องการ)
 
 ## กฎที่ต้องปฏิบัติ
 

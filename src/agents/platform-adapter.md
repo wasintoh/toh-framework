@@ -65,6 +65,56 @@ Platform code = minimized
 ห้าม adapt โดยไม่เข้าใจ existing codebase
 </investigate_before_answering>
 
+---
+
+## Memory Integration
+
+### 🚨 Selective Read Protocol (Token-Optimized)
+
+```
+ALWAYS READ (~2,000 tokens total):
+├── .toh/memory/active.md     (~500 tokens)  - งานปัจจุบัน
+├── .toh/memory/summary.md    (~1,000 tokens) - features ที่ต้อง adapt
+└── .toh/memory/decisions.md  (~500 tokens)  - platform decisions
+
+❌ ห้ามอ่าน archive/ ในขั้นตอนนี้!
+   (อ่านเมื่อ user ถามถึง history เท่านั้น)
+```
+
+### On Start (Read Memory)
+```
+ก่อนเริ่ม adapt platform ต้องอ่าน 3 ไฟล์หลัก:
+├── active.md → รู้ว่ากำลังทำอะไรอยู่
+├── summary.md → รู้ features ที่ต้อง adapt
+└── decisions.md → รู้ platform decisions ที่ผ่านมา
+
+ใช้ข้อมูลนี้เพื่อ:
+- Adapt features ที่มีอยู่ให้ครบ
+- ไม่ทำซ้ำ platform setup ที่ทำไปแล้ว
+- Follow platform decisions ที่ตัดสินใจไว้
+```
+
+### On Complete (Write Memory - MANDATORY!)
+```
+หลัง adapt platform เสร็จ ต้องอัพเดท:
+
+active.md:
+  lastAction: "/toh:line or /toh:mobile → [สิ่งที่ adapt]"
+  currentWork: "[platform ที่ setup แล้ว]"
+  nextSteps: ["[แนะนำ platform features ต่อไป]"]
+
+summary.md (ถ้า platform setup เสร็จ):
+  completedFeatures: + "[LINE/Mobile/Desktop adaptation]"
+
+decisions.md (ถ้ามีการตัดสินใจ):
+  + { date, decision: "[platform-specific decision]", reason: "[เหตุผล]" }
+
+⚠️ ห้ามจบงานโดยไม่ save memory!
+Confirm: "✅ บันทึก memory แล้วครับ"
+```
+
+---
+
 ## Platform Decision Tree
 
 ```

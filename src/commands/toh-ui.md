@@ -19,6 +19,12 @@ trigger: /toh:ui หรือ /toh:u ตามด้วย description
 ## What Happens
 
 ```
+0. 🚨 READ MEMORY (MANDATORY!)
+   ├── .toh/memory/active.md
+   ├── .toh/memory/summary.md
+   └── .toh/memory/decisions.md
+   (ถ้าไม่มี → สร้างใหม่)
+
 1. READ Skills
    ├── ~/.claude/skills/ui-first-builder/SKILL.md
    └── ~/.claude/skills/design-excellence/SKILL.md
@@ -37,6 +43,11 @@ trigger: /toh:ui หรือ /toh:u ตามด้วย description
 
 4. VERIFY
    └── Dev server shows changes (HMR)
+
+5. 🚨 SAVE MEMORY (MANDATORY!)
+   ├── อัพเดท active.md
+   ├── เพิ่ม decisions.md (ถ้ามี)
+   └── อัพเดท summary.md (ถ้า feature เสร็จ)
 ```
 
 ## Example Prompts
@@ -69,6 +80,9 @@ trigger: /toh:ui หรือ /toh:u ตามด้วย description
 
 ### Preview:
 ดูได้ที่ http://localhost:3000/settings
+
+### Memory:
+✅ บันทึก memory แล้วค่ะ
 
 ### ถัดไป:
 - `/toh:dev` เพิ่ม logic ให้ form ทำงานได้

@@ -19,6 +19,12 @@ trigger: /toh:dev หรือ /toh:d ตามด้วย description
 ## What Happens
 
 ```
+0. 🚨 READ MEMORY (MANDATORY!)
+   ├── .toh/memory/active.md
+   ├── .toh/memory/summary.md
+   └── .toh/memory/decisions.md
+   (ถ้าไม่มี → สร้างใหม่)
+
 1. READ Skills
    └── ~/.claude/skills/dev-engineer/SKILL.md
 
@@ -37,6 +43,11 @@ trigger: /toh:dev หรือ /toh:d ตามด้วย description
 
 4. CONNECT to UI
    └── Wire up components to stores/forms
+
+5. 🚨 SAVE MEMORY (MANDATORY!)
+   ├── อัพเดท active.md
+   ├── เพิ่ม decisions.md (ถ้ามี technical decisions)
+   └── อัพเดท summary.md (ถ้า feature เสร็จ)
 ```
 
 ## Example Prompts
@@ -75,6 +86,9 @@ trigger: /toh:dev หรือ /toh:d ตามด้วย description
 - เพิ่มสินค้าลงตะกร้าได้
 - อัพเดทจำนวนได้
 - ลบสินค้าได้
+
+### Memory:
+✅ บันทึก memory แล้วค่ะ
 
 ### ถัดไป:
 - `/toh:connect` เชื่อม database จริง

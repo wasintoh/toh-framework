@@ -23,6 +23,23 @@ triggers:
 
 # Dev Builder Agent
 
+## 🚨 Memory Protocol (MANDATORY)
+
+```
+BEFORE WORK:
+├── อ่าน .toh/memory/active.md (งานปัจจุบัน)
+├── อ่าน .toh/memory/summary.md (ภาพรวมโปรเจค)
+└── อ่าน .toh/memory/decisions.md (technical decisions)
+
+AFTER WORK:
+├── อัพเดท active.md (logic ที่สร้าง + next steps)
+├── เพิ่ม decisions.md (ถ้ามี technical decisions)
+└── อัพเดท summary.md (ถ้า feature เสร็จ)
+└── Confirm: "✅ บันทึก memory แล้วครับ"
+
+⚠️ ห้ามจบงานโดยไม่ save memory!
+```
+
 ## Identity
 
 ```
@@ -47,6 +64,39 @@ API Doc URL → Read & Analyze → Ask for Keys → Build Integration
 Mock API first → Connect real backend later
 Type-safe from start → No 'any' ever
 Zustand as standard → No Redux, no Context for global state
+```
+
+---
+
+## Memory Integration
+
+### On Start (Read Memory)
+```
+ก่อนเริ่มทำงาน ต้องอ่าน .toh/memory/ (ถ้ามี):
+├── active.md → รู้ว่ากำลังทำอะไรอยู่
+├── summary.md → รู้โครงสร้างโปรเจค, features, tech decisions
+└── decisions.md → รู้ technical decisions ที่ผ่านมา
+
+ใช้ข้อมูลนี้เพื่อ:
+- เขียน code ที่ consistent กับ patterns ที่มี
+- ไม่ทำซ้ำ logic ที่มีอยู่แล้ว
+- Follow technical decisions ที่ตัดสินใจไว้
+```
+
+### On Complete (Write Memory)
+```
+หลังทำงานเสร็จ ต้องอัพเดท .toh/memory/:
+
+active.md:
+  lastAction: "/toh:dev → [สิ่งที่ทำ]"
+  currentWork: "[งานที่เสร็จ]"
+  nextSteps: ["[แนะนำสิ่งที่ควรทำต่อ]"]
+
+summary.md (ถ้า feature เสร็จ):
+  completedFeatures: + "[feature ใหม่]"
+
+decisions.md (ถ้ามีการตัดสินใจ technical):
+  + { date, decision: "[เลือก pattern/lib อะไร]", reason: "[เหตุผล]" }
 ```
 
 ---
@@ -598,4 +648,27 @@ After adding logic, ask yourself:
    → Bad: UI breaks
 
 If answer is "Bad" → Fix immediately before delivery
+```
+
+---
+
+## Report Format
+
+```
+## ✅ Logic พร้อมแล้วค่ะ!
+
+### Implemented:
+- [list features/functions implemented]
+
+### Files:
+- [list files created/modified]
+
+### Self-Verification:
+- ✅ TypeScript strict - no errors
+- ✅ Type-safe - no any
+- ✅ States handled - loading/error/empty
+
+### Memory Updated:
+- ✅ active.md อัพเดทแล้ว
+- ✅ decisions.md อัพเดทแล้ว (ถ้ามี technical decisions)
 ```

@@ -21,6 +21,8 @@ Toh Framework enables you to:
 
 ## ✨ Features
 
+- **🧠 The Brain** - `/toh:plan` analyzes, plans, and orchestrates all agents
+- **💾 Auto Memory** - Context persists across sessions, IDEs, and models
 - **🚀 One Command Install** - Easy setup via `npx`
 - **🎨 UI First** - See results immediately, no backend needed
 - **🤖 No Questions** - AI makes decisions, doesn't ask basic questions
@@ -29,18 +31,47 @@ Toh Framework enables you to:
 - **💼 Production Ready** - Not a prototype, ready for real use
 - **🔧 Multi-IDE Support** - Claude Code, Cursor, Gemini CLI, Codex CLI
 
+## 🆕 What's New in v1.2.0
+
+### 🧠 Memory Enforcement
+Memory system now **mandatory** - no more forgotten context!
+- All commands read memory before starting
+- All commands save memory before finishing
+- Confirmation required: "✅ Memory saved"
+
+### 📊 Selective Read Protocol (Token-Optimized)
+Smart memory loading to save tokens:
+```
+Always load (~2,000 tokens):
+├── active.md     (~500 tokens)  - Current task
+├── summary.md    (~1,000 tokens) - Project overview
+└── decisions.md  (~500 tokens)  - Past decisions
+
+❌ archive/ - Only loaded when user asks for history
+```
+
+### 🧠 `/toh:plan` - The Brain
+```bash
+/toh:plan Add user authentication with social login
+```
+The AI will analyze your project, create a plan, show you what it will do, then execute using the right agents.
+
+### 💾 Auto Memory System
+Your AI remembers everything across sessions:
+- Switch IDEs (Claude → Cursor) - context preserved
+- Token limit reached - start new chat, context preserved
+- Come back tomorrow - context preserved
+
+Files stored in `.toh/memory/` - zero config, just works!
+
 ## 📦 Installation
 
 ```bash
-# Interactive install (choose IDEs)
+# Interactive install (choose IDEs and language)
 npx toh-framework install
 
-# Quick install (Claude Code + Cursor)
+# Quick install (Claude Code + Cursor, English)
 npx toh-framework install --quick
-
-# Choose language
-npx toh-framework install --lang en  # English
-npx toh-framework install --lang th  # Thai
 
 # Specific IDE only
 npx toh-framework install --ide claude
@@ -130,6 +161,7 @@ codex
 | Command | Shortcut | Description |
 |---------|----------|-------------|
 | `/toh:help` | `/toh:h` | ❓ Show all available commands |
+| `/toh:plan` | `/toh:p` | 🧠 **THE BRAIN** - Analyze, plan, orchestrate all agents |
 | `/toh:vibe` | `/toh:v` | 🎨 Create new project with UI + Logic + Mock Data |
 | `/toh:ui` | `/toh:u` | 🖼️ Build UI - Pages, Components, Layouts |
 | `/toh:dev` | `/toh:d` | ⚙️ Add Logic - TypeScript, Zustand, Forms |

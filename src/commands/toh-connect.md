@@ -19,6 +19,12 @@ trigger: /toh:connect หรือ /toh:c
 ## What Happens
 
 ```
+0. 🚨 READ MEMORY (MANDATORY!)
+   ├── .toh/memory/active.md
+   ├── .toh/memory/summary.md
+   └── .toh/memory/decisions.md
+   (ถ้าไม่มี → สร้างใหม่)
+
 1. READ Skills
    └── ~/.claude/skills/backend-engineer/SKILL.md
 
@@ -42,6 +48,11 @@ trigger: /toh:connect หรือ /toh:c
    ├── SQL file for Supabase dashboard
    ├── Updated API functions
    └── .env.example with required vars
+
+6. 🚨 SAVE MEMORY (MANDATORY!)
+   ├── อัพเดท active.md
+   ├── เพิ่ม decisions.md (backend decisions)
+   └── อัพเดท summary.md
 ```
 
 ## Example Prompts

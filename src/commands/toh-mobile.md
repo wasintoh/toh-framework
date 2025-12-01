@@ -19,6 +19,12 @@ trigger: /toh:mobile หรือ /toh:m
 ## What Happens
 
 ```
+0. 🚨 READ MEMORY (MANDATORY!)
+   ├── .toh/memory/active.md
+   ├── .toh/memory/summary.md
+   └── .toh/memory/decisions.md
+   (ถ้าไม่มี → จะสร้างใหม่หลังจบ)
+
 1. READ Skills
    └── ~/.claude/skills/platform-specialist/SKILL.md (Expo section)
 
@@ -39,6 +45,11 @@ trigger: /toh:mobile หรือ /toh:m
 
 5. RUN
    └── npx expo start
+
+6. 🚨 SAVE MEMORY (MANDATORY!)
+   ├── สร้าง .toh/memory/ folder (ถ้าไม่มี)
+   ├── อัพเดท active.md, summary.md, decisions.md
+   └── บันทึก project info + features ที่สร้าง
 ```
 
 ## Example Prompts

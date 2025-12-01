@@ -19,6 +19,12 @@ trigger: /toh:fix หรือ /toh:f ตามด้วย error หรือ�
 ## What Happens
 
 ```
+0. 🚨 READ MEMORY (MANDATORY!)
+   ├── .toh/memory/active.md
+   ├── .toh/memory/summary.md
+   └── .toh/memory/decisions.md
+   (ดู context ว่าเคยแก้ปัญหานี้ไหม)
+
 1. ANALYZE Error
    ├── Parse error message
    ├── Identify file and line
@@ -35,7 +41,12 @@ trigger: /toh:fix หรือ /toh:f ตามด้วย error หรือ�
    ├── Build succeeds
    └── Feature still works
 
-4. REPORT
+4. 🚨 SAVE MEMORY (MANDATORY!)
+   ├── อัพเดท active.md (บันทึก bug ที่แก้)
+   ├── เพิ่ม decisions.md (ถ้าเป็น fix สำคัญ)
+   └── อัพเดท summary.md (ถ้า fix major issue)
+
+5. REPORT
    └── Explain what was wrong and how it's fixed
 ```
 

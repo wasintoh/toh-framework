@@ -21,6 +21,12 @@ trigger: /toh:vibe หรือ /toh:v ตามด้วย description ขอ�
 เมื่อ user พิมพ์ `/toh:vibe expense tracker`:
 
 ```
+0. 🚨 READ MEMORY (MANDATORY!)
+   ├── .toh/memory/active.md (ถ้ามี)
+   ├── .toh/memory/summary.md (ถ้ามี)
+   └── .toh/memory/decisions.md (ถ้ามี)
+   (ถ้าไม่มี → จะสร้างใหม่หลังจบ)
+
 1. READ Skills (parallel)
    ├── ~/.claude/skills/vibe-orchestrator/SKILL.md
    ├── ~/.claude/skills/ui-first-builder/SKILL.md
@@ -49,7 +55,12 @@ trigger: /toh:vibe หรือ /toh:v ตามด้วย description ขอ�
 6. START Dev Server
    └── npm run dev
 
-7. REPORT to User
+7. 🚨 SAVE MEMORY (MANDATORY!)
+   ├── สร้าง .toh/memory/ folder
+   ├── สร้าง active.md, summary.md, decisions.md
+   └── บันทึก project info + features ที่สร้าง
+
+8. REPORT to User
    └── "เปิด http://localhost:3000 ดูได้เลยค่ะพี่โต!"
 ```
 

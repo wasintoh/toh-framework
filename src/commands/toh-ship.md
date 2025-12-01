@@ -19,6 +19,12 @@ trigger: /toh:ship หรือ /toh:s
 ## What Happens
 
 ```
+0. 🚨 READ MEMORY (MANDATORY!)
+   ├── .toh/memory/active.md
+   ├── .toh/memory/summary.md
+   └── .toh/memory/decisions.md
+   (ดู project info + env vars ที่ต้องใช้)
+
 1. PRE-FLIGHT Checks
    ├── npm run build (must pass)
    ├── npm run lint (should pass)
@@ -39,6 +45,11 @@ trigger: /toh:ship หรือ /toh:s
    ├── Verify live site works
    ├── Check environment variables are set
    └── Test critical flows
+
+5. 🚨 SAVE MEMORY (MANDATORY!)
+   ├── อัพเดท active.md (deployed URL)
+   ├── เพิ่ม decisions.md (deployment config)
+   └── อัพเดท summary.md (production URL)
 ```
 
 ## Example Prompts

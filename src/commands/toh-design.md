@@ -19,6 +19,12 @@ trigger: /toh:design หรือ /toh:ds
 ## What Happens
 
 ```
+0. 🚨 READ MEMORY (MANDATORY!)
+   ├── .toh/memory/active.md
+   ├── .toh/memory/summary.md
+   └── .toh/memory/decisions.md
+   (ถ้าไม่มี → สร้างใหม่)
+
 1. READ Skills
    └── ~/.claude/skills/design-excellence/SKILL.md
 
@@ -37,6 +43,11 @@ trigger: /toh:design หรือ /toh:ds
    └── Remove "AI-generated" tells
 
 4. REPORT Changes
+
+5. 🚨 SAVE MEMORY (MANDATORY!)
+   ├── อัพเดท active.md
+   ├── เพิ่ม decisions.md (design decisions)
+   └── อัพเดท summary.md
 ```
 
 ## Example Prompts

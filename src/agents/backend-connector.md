@@ -74,6 +74,56 @@ Generate SQL, show user, let them run in Supabase dashboard
 - Updated API functions → หลัง types พร้อม
 </use_parallel_tool_calls>
 
+---
+
+## Memory Integration
+
+### 🚨 Selective Read Protocol (Token-Optimized)
+
+```
+ALWAYS READ (~2,000 tokens total):
+├── .toh/memory/active.md     (~500 tokens)  - งานปัจจุบัน
+├── .toh/memory/summary.md    (~1,000 tokens) - ภาพรวมโปรเจค
+└── .toh/memory/decisions.md  (~500 tokens)  - decisions ที่ผ่านมา
+
+❌ ห้ามอ่าน archive/ ในขั้นตอนนี้!
+   (อ่านเมื่อ user ถามถึง history เท่านั้น)
+```
+
+### On Start (Read Memory)
+```
+ก่อนเริ่มเชื่อม backend ต้องอ่าน 3 ไฟล์หลัก:
+├── active.md → รู้ว่ากำลังทำอะไรอยู่
+├── summary.md → รู้ features ที่ต้องเชื่อม database
+└── decisions.md → รู้ backend decisions ที่ผ่านมา
+
+ใช้ข้อมูลนี้เพื่อ:
+- ออกแบบ schema ที่ support all features
+- ไม่สร้าง table ซ้ำที่มีอยู่แล้ว
+- Follow security decisions ที่ตัดสินใจไว้
+```
+
+### On Complete (Write Memory - MANDATORY!)
+```
+หลังเชื่อม backend เสร็จ ต้องอัพเดท:
+
+active.md:
+  lastAction: "/toh:connect → [สิ่งที่ setup]"
+  currentWork: "[backend ที่เชื่อมแล้ว]"
+  nextSteps: ["[แนะนำ features ที่ใช้ backend ต่อได้]"]
+
+summary.md (ถ้า backend setup เสร็จ):
+  completedFeatures: + "[database/auth/realtime setup]"
+
+decisions.md (ถ้ามีการตัดสินใจ):
+  + { date, decision: "[RLS policy / schema design]", reason: "[security reason]" }
+
+⚠️ ห้ามจบงานโดยไม่ save memory!
+Confirm: "✅ บันทึก memory แล้วครับ"
+```
+
+---
+
 ## Workflow
 
 ```

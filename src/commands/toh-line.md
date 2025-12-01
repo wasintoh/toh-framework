@@ -19,6 +19,12 @@ trigger: /toh:line หรือ /toh:l
 ## What Happens
 
 ```
+0. 🚨 READ MEMORY (MANDATORY!)
+   ├── .toh/memory/active.md
+   ├── .toh/memory/summary.md
+   └── .toh/memory/decisions.md
+   (ดู context โปรเจคปัจจุบัน)
+
 1. READ Skills
    └── ~/.claude/skills/platform-specialist/SKILL.md (LINE section)
 
@@ -42,6 +48,11 @@ trigger: /toh:line หรือ /toh:l
 
 5. CONNECT Auth (optional)
    └── LIFF → Supabase custom auth
+
+6. 🚨 SAVE MEMORY (MANDATORY!)
+   ├── อัพเดท active.md
+   ├── เพิ่ม decisions.md (LINE config)
+   └── อัพเดท summary.md (LINE integration)
 ```
 
 ## Example Prompts

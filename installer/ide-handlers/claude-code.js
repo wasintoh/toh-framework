@@ -18,6 +18,15 @@ export async function setupClaudeCode(targetDir, language = 'en') {
     await fs.ensureDir(join(claudeDir, 'agents'));
     await fs.ensureDir(join(claudeDir, 'commands'));
 
+    // Create .toh/memory directory structure (v1.1.0 - Memory System)
+    const tohDir = join(targetDir, '.toh');
+    const memoryDir = join(tohDir, 'memory');
+    const archiveDir = join(memoryDir, 'archive');
+    await fs.ensureDir(archiveDir);
+
+    // Create memory template files
+    await createMemoryFiles(memoryDir, language);
+
     // Create CLAUDE.md with Toh Framework rules
     const claudeMdPath = join(targetDir, 'CLAUDE.md');
     const claudeMdContent = language === 'th' ? generateClaudeMdTH() : generateClaudeMdEN();
@@ -43,6 +52,157 @@ export async function setupClaudeCode(targetDir, language = 'en') {
     spinner.fail(`Claude Code setup failed: ${error.message}`);
     return false;
   }
+}
+
+/**
+ * Create memory template files for the Memory System (v1.1.0)
+ */
+async function createMemoryFiles(memoryDir, language = 'en') {
+  const timestamp = new Date().toISOString().split('T')[0];
+  
+  // active.md
+  const activeContent = language === 'th' 
+    ? `# 🔥 Active Task
+
+## Current Focus
+[รอคำสั่งจากผู้ใช้]
+
+## In Progress
+- (ยังไม่มี)
+
+## Just Completed
+- (ยังไม่มี)
+
+## Next Steps
+- รอคำสั่งจากผู้ใช้
+
+## Blockers / Issues
+- (ไม่มี)
+
+---
+*Last updated: ${timestamp}*
+`
+    : `# 🔥 Active Task
+
+## Current Focus
+[Waiting for user command]
+
+## In Progress
+- (none)
+
+## Just Completed
+- (none)
+
+## Next Steps
+- Waiting for user command
+
+## Blockers / Issues
+- (none)
+
+---
+*Last updated: ${timestamp}*
+`;
+
+  // summary.md
+  const summaryContent = language === 'th'
+    ? `# 📋 Project Summary
+
+## Project Overview
+- Name: [ชื่อโปรเจค]
+- Type: [ประเภท]
+- Tech Stack: Next.js 14, Tailwind, shadcn/ui, Zustand, Supabase
+
+## Completed Features
+- (ยังไม่มี)
+
+## Current State
+โปรเจคเพิ่งเริ่มต้น - พร้อมรับคำสั่ง
+
+## Key Files
+- (จะอัพเดทเมื่อสร้างไฟล์)
+
+## Important Notes
+- ใช้ Toh Framework v1.1.0
+- Memory System เปิดใช้งานแล้ว
+
+---
+*Last updated: ${timestamp}*
+`
+    : `# 📋 Project Summary
+
+## Project Overview
+- Name: [Project Name]
+- Type: [Type]
+- Tech Stack: Next.js 14, Tailwind, shadcn/ui, Zustand, Supabase
+
+## Completed Features
+- (none)
+
+## Current State
+Project just initialized - ready for commands
+
+## Key Files
+- (will update when files are created)
+
+## Important Notes
+- Using Toh Framework v1.1.0
+- Memory System is active
+
+---
+*Last updated: ${timestamp}*
+`;
+
+  // decisions.md
+  const decisionsContent = language === 'th'
+    ? `# 🧠 Key Decisions
+
+## Architecture Decisions
+| Date | Decision | Reason |
+|------|----------|--------|
+| ${timestamp} | ใช้ Toh Framework | AI-Orchestration Driven Development |
+
+## Design Decisions
+| Date | Decision | Reason |
+|------|----------|--------|
+
+## Business Logic
+| Date | Decision | Reason |
+|------|----------|--------|
+
+## Rejected Ideas
+| Date | Idea | Why Rejected |
+|------|------|--------------|
+
+---
+*Last updated: ${timestamp}*
+`
+    : `# 🧠 Key Decisions
+
+## Architecture Decisions
+| Date | Decision | Reason |
+|------|----------|--------|
+| ${timestamp} | Use Toh Framework | AI-Orchestration Driven Development |
+
+## Design Decisions
+| Date | Decision | Reason |
+|------|----------|--------|
+
+## Business Logic
+| Date | Decision | Reason |
+|------|----------|--------|
+
+## Rejected Ideas
+| Date | Idea | Why Rejected |
+|------|------|--------------|
+
+---
+*Last updated: ${timestamp}*
+`;
+
+  // Write files
+  await fs.writeFile(join(memoryDir, 'active.md'), activeContent);
+  await fs.writeFile(join(memoryDir, 'summary.md'), summaryContent);
+  await fs.writeFile(join(memoryDir, 'decisions.md'), decisionsContent);
 }
 
 function generateClaudeMdEN() {
@@ -85,6 +245,7 @@ If user requests Thai language, then switch to Thai.
 | Command | Shortcut | Description |
 |---------|----------|-------------|
 | /toh:help | /toh:h | Show all commands |
+| /toh:plan | /toh:p | **THE BRAIN** - Analyze, plan, orchestrate all agents |
 | /toh:vibe | /toh:v | Create new project with UI + Logic + Mock Data |
 | /toh:ui | /toh:u | Create UI - Pages, Components, Layouts |
 | /toh:dev | /toh:d | Add Logic - TypeScript, Zustand, Forms |
@@ -95,6 +256,25 @@ If user requests Thai language, then switch to Thai.
 | /toh:mobile | /toh:m | Mobile App - Expo / React Native |
 | /toh:fix | /toh:f | Fix bugs - Debug and fix issues |
 | /toh:ship | /toh:s | Deploy - Vercel, Production ready |
+
+## Memory System (Auto)
+
+Toh Framework has automatic memory that persists across sessions:
+
+\`\`\`
+.toh/
+└── memory/
+    ├── active.md     # Current task (always loaded)
+    ├── summary.md    # Project summary (always loaded)
+    ├── decisions.md  # Key decisions (always loaded)
+    └── archive/      # Historical data (loaded on-demand)
+\`\`\`
+
+**Features:**
+- **Auto-save** after every task
+- **Auto-load** when starting new session
+- **Seamless context** across IDE changes, model changes
+- **Zero config** - just works
 
 ## Behavior Rules
 
@@ -124,11 +304,12 @@ Use realistic English data:
 ## Skills & Agents
 
 Skills and Agents are located in:
-- \`.claude/skills/\` - 7 Skills
-- \`.claude/agents/\` - 6 Agents
-- \`.claude/commands/\` - 11 Commands
+- \`.claude/skills/\` - 9 Skills (including memory-system, plan-orchestrator)
+- \`.claude/agents/\` - 7 Agents (including plan-orchestrator)
+- \`.claude/commands/\` - 12 Commands (including /toh:plan)
 
 Always read the relevant skill before starting work.
+Always check .toh/memory/ for context before starting.
 `;
 }
 
@@ -173,6 +354,7 @@ function generateClaudeMdTH() {
 | Command | ชื่อย่อ | คำอธิบาย |
 |---------|--------|---------|
 | /toh:help | /toh:h | ❓ แสดงรายการ commands ทั้งหมด |
+| /toh:plan | /toh:p | 🧠 **THE BRAIN** - วิเคราะห์, วางแผน, สั่งการทุก Agent |
 | /toh:vibe | /toh:v | 🎨 สร้างโปรเจคใหม่ UI + Logic + Mock Data |
 | /toh:ui | /toh:u | 🖼️ สร้าง UI - หน้า, Components, Layouts |
 | /toh:dev | /toh:d | ⚙️ เพิ่ม Logic - TypeScript, Zustand, Forms |
@@ -183,6 +365,25 @@ function generateClaudeMdTH() {
 | /toh:mobile | /toh:m | 📱 Mobile App - Expo / React Native |
 | /toh:fix | /toh:f | 🔧 แก้ Bug - Debug และ fix issues |
 | /toh:ship | /toh:s | 🚀 Deploy - Vercel, Production ready |
+
+## Memory System (อัตโนมัติ)
+
+Toh Framework มีระบบ Memory ที่จำ context ข้าม sessions ได้:
+
+\`\`\`
+.toh/
+└── memory/
+    ├── active.md     # งานปัจจุบัน (โหลดเสมอ)
+    ├── summary.md    # สรุปโปรเจค (โหลดเสมอ)
+    ├── decisions.md  # การตัดสินใจ (โหลดเสมอ)
+    └── archive/      # ข้อมูลเก่า (โหลดเมื่อต้องการ)
+\`\`\`
+
+**คุณสมบัติ:**
+- **Auto-save** หลังทำงานเสร็จทุกครั้ง
+- **Auto-load** เมื่อเริ่ม session ใหม่
+- **Seamless** ย้าย IDE, ย้าย Model ได้เลย
+- **Zero config** - ไม่ต้อง setup อะไร
 
 ## กฎที่ต้องปฏิบัติ
 
@@ -212,10 +413,11 @@ function generateClaudeMdTH() {
 ## Skills & Agents
 
 Skills และ Agents อยู่ใน:
-- \`.claude/skills/\` - 7 Skills
-- \`.claude/agents/\` - 6 Agents
-- \`.claude/commands/\` - 11 Commands
+- \`.claude/skills/\` - 9 Skills (รวม memory-system, plan-orchestrator)
+- \`.claude/agents/\` - 7 Agents (รวม plan-orchestrator)
+- \`.claude/commands/\` - 12 Commands (รวม /toh:plan)
 
 เมื่อได้รับ request ให้อ่าน skill ที่เกี่ยวข้องก่อนเสมอ
+ให้ตรวจสอบ .toh/memory/ เพื่อดู context ก่อนเริ่มงานเสมอ
 `;
 }

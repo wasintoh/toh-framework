@@ -13,6 +13,61 @@ description: >
 
 Master brain for Lovable-style development workflow. Transform any idea into working UI immediately.
 
+<memory_protocol>
+## 🚨 CRITICAL: Memory Protocol (MANDATORY)
+
+### Before ANY Work - MUST READ MEMORY
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 0: MEMORY (ก่อนทำอะไรทั้งนั้น!)                            │
+├─────────────────────────────────────────────────────────────────┤
+│  1. ตรวจสอบ .toh/memory/ folder                                 │
+│     ├── มี → อ่านต่อ                                            │
+│     └── ไม่มี → สร้างใหม่                                        │
+│                                                                 │
+│  2. Selective Read (parallel) - ประหยัด token!                  │
+│     ├── .toh/memory/active.md     (~500 tokens)                │
+│     ├── .toh/memory/summary.md    (~1,000 tokens)              │
+│     └── .toh/memory/decisions.md  (~500 tokens)                │
+│     ⚠️ ห้ามอ่าน archive/ ในขั้นตอนนี้!                           │
+│                                                                 │
+│  3. Build Context - เข้าใจสถานการณ์                              │
+│     ├── โปรเจคคืออะไร?                                          │
+│     ├── กำลังทำอะไร?                                            │
+│     ├── ทำอะไรไปแล้ว?                                           │
+│     └── ตัดสินใจอะไรไว้บ้าง?                                     │
+│                                                                 │
+│  4. Acknowledge User                                            │
+│     "หนูโหลด memory แล้วค่ะ! เราทำ [X] อยู่..."                  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### After Work Complete - MUST SAVE MEMORY
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  FINAL STEP: SAVE MEMORY (ก่อนจบงาน!)                           │
+├─────────────────────────────────────────────────────────────────┤
+│  1. อัพเดท active.md (ทำทุกครั้ง!)                               │
+│     ├── Current Focus → งานที่ทำ                                │
+│     ├── In Progress → [x] สิ่งที่เสร็จ                          │
+│     └── Next Steps → สิ่งที่ควรทำต่อ                             │
+│                                                                 │
+│  2. เพิ่ม decisions.md (ถ้ามีการตัดสินใจ)                        │
+│     └── | Date | Decision | Reason |                           │
+│                                                                 │
+│  3. อัพเดท summary.md (ถ้า feature เสร็จ)                        │
+│     └── Completed Features: + [feature ใหม่]                   │
+│                                                                 │
+│  4. Confirm: "✅ บันทึก memory แล้วค่ะ"                          │
+└─────────────────────────────────────────────────────────────────┘
+
+⚠️ ห้ามจบงานโดยไม่ save memory!
+   ถ้าไม่ save = งานหายหมด = User ต้องเริ่มใหม่ session หน้า
+```
+</memory_protocol>
+
 <core_philosophy>
 ## The Lovable Principle
 
@@ -78,6 +133,16 @@ USER PROMPT
     │
     ▼
 ┌─────────────────────────────────────┐
+│ 🚨 STEP 0: MEMORY (MANDATORY!)      │
+│                                     │
+│ • Selective Read Memory             │
+│ • Build Context                     │
+│ • Acknowledge User                  │
+│ (ดู memory_protocol ด้านบน)          │
+└─────────────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────────────┐
 │ STEP 1: Identify Platform           │
 │                                     │
 │ • "LINE" / "LIFF" → LINE Mini App   │
@@ -101,7 +166,17 @@ USER PROMPT
     │
     ▼
 ┌─────────────────────────────────────┐
-│ STEP 3: Deliver                     │
+│ 🚨 STEP 3: SAVE MEMORY (MANDATORY!) │
+│                                     │
+│ • อัพเดท active.md                  │
+│ • เพิ่ม decisions.md (ถ้ามี)         │
+│ • อัพเดท summary.md (ถ้า feature)   │
+│ • Confirm: "✅ บันทึก memory แล้ว"  │
+└─────────────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────────────┐
+│ STEP 4: Deliver                     │
 │                                     │
 │ • Run: npm run dev                  │
 │ • Tell user: "เปิด localhost:3000   │

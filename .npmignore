@@ -6,3 +6,6 @@ node_modules/
 *.log
 coverage/
 .env*
+
+# Claude Project (private docs)
+claude-project/

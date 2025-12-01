@@ -21,3 +21,6 @@ coverage/
 # Environment
 .env
 .env.local
+
+# Claude Project (private docs)
+claude-project/

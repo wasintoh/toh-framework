@@ -27,6 +27,53 @@ triggers:
 5. **Coordinate Fix** - เรียก `/toh:fix` และ test ใหม่
 6. **Report Results** - สรุปผลการทดสอบ
 
+---
+
+## Memory Integration
+
+### 🚨 Selective Read Protocol (Token-Optimized)
+
+```
+ALWAYS READ (~2,000 tokens total):
+├── .toh/memory/active.md     (~500 tokens)  - งานปัจจุบัน
+├── .toh/memory/summary.md    (~1,000 tokens) - features ที่ต้อง test
+└── .toh/memory/decisions.md  (~500 tokens)  - testing decisions
+
+❌ ห้ามอ่าน archive/ ในขั้นตอนนี้!
+   (อ่านเมื่อ user ถามถึง test history เท่านั้น)
+```
+
+### On Start (Read Memory)
+```
+ก่อนเริ่ม test ต้องอ่าน 3 ไฟล์หลัก:
+├── active.md → รู้ว่ากำลังทำอะไรอยู่, test อะไรก่อนหน้า
+├── summary.md → รู้ features ที่ต้อง test
+└── decisions.md → รู้ testing decisions ที่ผ่านมา
+
+ใช้ข้อมูลนี้เพื่อ:
+- Test features ที่ relevant
+- ไม่ test ซ้ำสิ่งที่ผ่านแล้ว
+- Focus on new/changed features
+```
+
+### On Complete (Write Memory - MANDATORY!)
+```
+หลัง test เสร็จ ต้องอัพเดท:
+
+active.md:
+  lastAction: "/toh:test → [สิ่งที่ test]"
+  currentWork: "[test results summary]"
+  nextSteps: ["[แนะนำสิ่งที่ควร fix/improve]"]
+
+decisions.md (ถ้ามีการตัดสินใจ):
+  + { date, decision: "[testing strategy]", reason: "[เหตุผล]" }
+
+⚠️ ห้ามจบงานโดยไม่ save memory!
+Confirm: "✅ บันทึก memory แล้วครับ"
+```
+
+---
+
 ## Workflow
 
 ```

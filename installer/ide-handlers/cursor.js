@@ -15,6 +15,15 @@ export async function setupCursor(targetDir, language = 'en') {
   const cursorRulesDir = join(targetDir, '.cursor', 'rules');
   await fs.ensureDir(cursorRulesDir);
 
+  // Create .toh/memory directory structure (v1.1.0 - Memory System)
+  const tohDir = join(targetDir, '.toh');
+  const memoryDir = join(tohDir, 'memory');
+  const archiveDir = join(memoryDir, 'archive');
+  await fs.ensureDir(archiveDir);
+
+  // Create memory template files
+  await createMemoryFiles(memoryDir, language);
+
   // Create main Toh Framework rule (alwaysApply)
   const mainRulePath = join(cursorRulesDir, 'toh-framework.mdc');
   await fs.writeFile(mainRulePath, generateMainRule(language));
@@ -28,6 +37,29 @@ export async function setupCursor(targetDir, language = 'en') {
   await fs.writeFile(cursorRulesPath, generateCursorRules(language));
 
   return true;
+}
+
+/**
+ * Create memory template files for the Memory System (v1.1.0)
+ */
+async function createMemoryFiles(memoryDir, language = 'en') {
+  const timestamp = new Date().toISOString().split('T')[0];
+  
+  const activeContent = language === 'th' 
+    ? `# 🔥 Active Task\n\n## Current Focus\n[รอคำสั่งจากผู้ใช้]\n\n## In Progress\n- (ยังไม่มี)\n\n## Just Completed\n- (ยังไม่มี)\n\n## Next Steps\n- รอคำสั่งจากผู้ใช้\n\n---\n*Last updated: ${timestamp}*\n`
+    : `# 🔥 Active Task\n\n## Current Focus\n[Waiting for user command]\n\n## In Progress\n- (none)\n\n## Just Completed\n- (none)\n\n## Next Steps\n- Waiting for user command\n\n---\n*Last updated: ${timestamp}*\n`;
+
+  const summaryContent = language === 'th'
+    ? `# 📋 Project Summary\n\n## Project Overview\n- Name: [ชื่อโปรเจค]\n- Tech Stack: Next.js 14, Tailwind, shadcn/ui, Zustand, Supabase\n\n## Completed Features\n- (ยังไม่มี)\n\n## Important Notes\n- ใช้ Toh Framework v1.1.0\n\n---\n*Last updated: ${timestamp}*\n`
+    : `# 📋 Project Summary\n\n## Project Overview\n- Name: [Project Name]\n- Tech Stack: Next.js 14, Tailwind, shadcn/ui, Zustand, Supabase\n\n## Completed Features\n- (none)\n\n## Important Notes\n- Using Toh Framework v1.1.0\n\n---\n*Last updated: ${timestamp}*\n`;
+
+  const decisionsContent = language === 'th'
+    ? `# 🧠 Key Decisions\n\n## Architecture Decisions\n| Date | Decision | Reason |\n|------|----------|--------|\n| ${timestamp} | ใช้ Toh Framework | AI-Orchestration Driven Development |\n\n---\n*Last updated: ${timestamp}*\n`
+    : `# 🧠 Key Decisions\n\n## Architecture Decisions\n| Date | Decision | Reason |\n|------|----------|--------|\n| ${timestamp} | Use Toh Framework | AI-Orchestration Driven Development |\n\n---\n*Last updated: ${timestamp}*\n`;
+
+  await fs.writeFile(join(memoryDir, 'active.md'), activeContent);
+  await fs.writeFile(join(memoryDir, 'summary.md'), summaryContent);
+  await fs.writeFile(join(memoryDir, 'decisions.md'), decisionsContent);
 }
 
 function generateMainRule(lang) {
@@ -106,6 +138,7 @@ If user requests Thai language, then switch to Thai.
 | Command | Shortcut | Description |
 |---------|----------|-------------|
 | /toh:help | /toh:h | Show all commands |
+| /toh:plan | /toh:p | **THE BRAIN** - Analyze, plan, orchestrate all agents |
 | /toh:vibe | /toh:v | Create new project with UI + Logic + Mock Data |
 | /toh:ui | /toh:u | Create UI - Pages, Components, Layouts |
 | /toh:dev | /toh:d | Add Logic - TypeScript, Zustand, Forms |
@@ -116,6 +149,20 @@ If user requests Thai language, then switch to Thai.
 | /toh:mobile | /toh:m | Mobile App - Expo / React Native |
 | /toh:fix | /toh:f | Fix bugs - Debug and fix issues |
 | /toh:ship | /toh:s | Deploy - Vercel, Production ready |
+
+## Memory System (Auto)
+
+Toh Framework has automatic memory:
+
+\`\`\`
+.toh/memory/
+├── active.md     # Current task
+├── summary.md    # Project summary  
+├── decisions.md  # Key decisions
+└── archive/      # Historical data
+\`\`\`
+
+**Auto-save** after tasks, **Auto-load** on new sessions.
 
 ## Project Structure
 
@@ -216,6 +263,7 @@ alwaysApply: true
 | Command | ชื่อย่อ | คำอธิบาย |
 |---------|--------|---------|
 | /toh:help | /toh:h | ❓ แสดงรายการ commands ทั้งหมด |
+| /toh:plan | /toh:p | 🧠 **THE BRAIN** - วิเคราะห์, วางแผน, สั่งการทุก Agent |
 | /toh:vibe | /toh:v | 🎨 สร้างโปรเจคใหม่ UI + Logic + Mock Data |
 | /toh:ui | /toh:u | 🖼️ สร้าง UI - หน้า, Components, Layouts |
 | /toh:dev | /toh:d | ⚙️ เพิ่ม Logic - TypeScript, Zustand, Forms |
@@ -226,6 +274,20 @@ alwaysApply: true
 | /toh:mobile | /toh:m | 📱 Mobile App - Expo / React Native |
 | /toh:fix | /toh:f | 🔧 แก้ Bug - Debug และ fix issues |
 | /toh:ship | /toh:s | 🚀 Deploy - Vercel, Production ready |
+
+## Memory System (อัตโนมัติ)
+
+Toh Framework มีระบบ Memory:
+
+\`\`\`
+.toh/memory/
+├── active.md     # งานปัจจุบัน
+├── summary.md    # สรุปโปรเจค
+├── decisions.md  # การตัดสินใจ
+└── archive/      # ข้อมูลเก่า
+\`\`\`
+
+**Auto-save** หลังทำงาน, **Auto-load** เมื่อเริ่ม session ใหม่
 
 ## โครงสร้าง Project
 

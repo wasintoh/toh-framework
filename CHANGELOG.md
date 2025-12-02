@@ -2,6 +2,21 @@
 
 All notable changes to Toh Framework will be documented in this file.
 
+## [1.2.1] - 2025-12-02
+
+### 📚 Documentation Update
+
+#### Updated
+- **`/toh:help` command** - Now shows v1.2.1 with all latest features
+- **Added `/toh:plan`** to help command (was missing!)
+- **Framework Stats** - Updated to 8 agents, 13 commands, 14 skills
+- **Memory System section** - Added to help output
+- **What's New section** - Added to help output
+- **README.md** - Version updated to v1.2.1
+- **README-TH.md** - Version updated to v1.2.1
+
+---
+
 ## [1.2.0] - 2025-12-01
 
 ### 🧠 Memory Enforcement Update

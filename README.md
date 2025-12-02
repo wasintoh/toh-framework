@@ -31,7 +31,7 @@ Toh Framework enables you to:
 - **💼 Production Ready** - Not a prototype, ready for real use
 - **🔧 Multi-IDE Support** - Claude Code, Cursor, Gemini CLI, Codex CLI
 
-## 🆕 What's New in v1.2.0
+## 🆕 What's New in v1.2.1
 
 ### 🧠 Memory Enforcement
 Memory system now **mandatory** - no more forgotten context!

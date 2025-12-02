@@ -4,8 +4,11 @@
 >
 > **"สั่งแล้วจบ ไม่ถาม ไม่รอ"**
 
-[![npm version](https://badge.fury.io/js/toh-framework.svg)](https://www.npmjs.com/package/toh-framework)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![npm version](https://img.shields.io/npm/v/toh-framework.svg?style=flat-square)](https://www.npmjs.com/package/toh-framework)
+[![npm downloads](https://img.shields.io/npm/dt/toh-framework.svg?style=flat-square)](https://www.npmjs.com/package/toh-framework)
+[![License](https://img.shields.io/npm/l/toh-framework.svg?style=flat-square)](https://github.com/wasintoh/toh-framework/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/wasintoh/toh-framework?style=flat-square)](https://github.com/wasintoh/toh-framework)
+
 
 > 📖 **[🇬🇧 English Documentation](../README.md)**
 

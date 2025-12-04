@@ -2,12 +2,16 @@
 command: /toh:fix
 aliases: ["/toh:f"]
 description: >
-  แก้ bug, error, หรือปัญหาใน code อัตโนมัติ
-  วิเคราะห์ error message และแก้ไขให้ทันที
-trigger: /toh:fix หรือ /toh:f ตามด้วย error หรือปัญหา
+  Fix bugs, errors, or code issues systematically.
+  Uses Debug Protocol - no more guess & retry loops.
+trigger: /toh:fix or /toh:f followed by error or problem
+skills:
+  - debug-protocol
+  - error-handling
+  - response-excellence    # 📝 ตอบครบ 3 ส่วน (MANDATORY!)
 ---
 
-# /toh:fix - Auto Fix Bugs
+# /toh:fix - Systematic Bug Fixing
 
 ## Signature Command 🔧
 
@@ -16,38 +20,64 @@ trigger: /toh:fix หรือ /toh:f ตามด้วย error หรือ�
 /toh:f [error or problem]
 ```
 
+## 🚨 The 3-5-Rewrite Rule (CRITICAL!)
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  ATTEMPT 1-3: Normal Debug                                  │
+│  - Try different approaches systematically                  │
+│  - Track every attempt in debug-log.md                      │
+├─────────────────────────────────────────────────────────────┤
+│  ATTEMPT 4-5: Escalate                                      │
+│  - Binary search (remove half the code)                     │
+│  - Create minimal reproduction                              │
+├─────────────────────────────────────────────────────────────┤
+│  AFTER 5 ATTEMPTS: Recommend Rewrite                        │
+│  - "ลองแก้มา 5 รอบแล้วครับ แนะนำให้ลบแล้วเขียนใหม่"          │
+│  - Clean slate = no legacy issues                           │
+└─────────────────────────────────────────────────────────────┘
+
+❌ ห้ามวน guess & retry ไปเรื่อยๆ!
+```
+
 ## What Happens
 
 ```
 0. 🚨 READ MEMORY (MANDATORY!)
    ├── .toh/memory/active.md
    ├── .toh/memory/summary.md
-   └── .toh/memory/decisions.md
-   (ดู context ว่าเคยแก้ปัญหานี้ไหม)
+   ├── .toh/memory/decisions.md
+   └── .toh/memory/debug-log.md (ถ้ามี - ดูว่าลองอะไรไปแล้ว)
 
-1. ANALYZE Error
-   ├── Parse error message
-   ├── Identify file and line
-   ├── Understand root cause
-   └── Check related files
+1. REPRODUCE (ทำซ้ำปัญหา)
+   ├── ถาม URL / หน้าที่เกิดปัญหา
+   ├── ดูว่าเห็นปัญหาจริงไหม
+   └── ถ้าไม่เห็น → ถาม User เพิ่ม
 
-2. FIX
-   ├── Apply minimal fix
-   ├── Preserve existing functionality
-   └── Add error handling if needed
+2. ISOLATE (แยกส่วนที่มีปัญหา)
+   ├── หาว่าปัญหาอยู่ไฟล์ไหน
+   ├── หาว่าอยู่ function/component ไหน
+   └── Narrow down ให้เล็กที่สุด
 
-3. VERIFY
-   ├── Type check passes
-   ├── Build succeeds
-   └── Feature still works
+3. IDENTIFY (ระบุ Root Cause)
+   ├── ต้องบอกได้ว่า "ปัญหาคือ X เพราะ Y"
+   └── ❌ ห้ามแก้ถ้ายังบอกไม่ได้!
 
-4. 🚨 SAVE MEMORY (MANDATORY!)
-   ├── อัพเดท active.md (บันทึก bug ที่แก้)
-   ├── เพิ่ม decisions.md (ถ้าเป็น fix สำคัญ)
-   └── อัพเดท summary.md (ถ้า fix major issue)
+4. FIX (แก้ไข - 1 อย่างต่อ 1 attempt)
+   ├── แก้ทีละจุด ไม่แก้หลายอย่างพร้อมกัน
+   ├── บันทึกลง debug-log.md
+   └── อธิบายว่าแก้อะไร ทำไม
 
-5. REPORT
-   └── Explain what was wrong and how it's fixed
+5. VERIFY (ตรวจสอบ)
+   ├── รอ hot reload 3 วินาที
+   ├── ถ้าไม่เห็นผล → restart server
+   ├── ถาม User ว่ายังมีปัญหาไหม
+   └── ถ้ายังมี → กลับไป Step 2 (Attempt +1)
+
+6. 🚨 SAVE MEMORY (MANDATORY!)
+   ├── Update active.md
+   ├── Update debug-log.md (ผลการแก้)
+   └── Update decisions.md (ถ้าเป็น important fix)
 ```
 
 ## Example Prompts
@@ -57,30 +87,30 @@ trigger: /toh:fix หรือ /toh:f ตามด้วย error หรือ�
 /toh:fix TypeError: Cannot read property 'map' of undefined
 
 # With screenshot/description
-/toh:f หน้า dashboard พังไม่โหลด
+/toh:f dashboard page broken, not loading
 
 # Vague problem
-/toh:fix form submit แล้วไม่มีอะไรเกิดขึ้น
+/toh:fix form submit does nothing
 
 # Build error
 /toh:f npm run build error
 
 # Type error
-/toh:fix TypeScript error ใน product-form.tsx
+/toh:fix TypeScript error in product-form.tsx
 ```
 
 ## Output Format
 
 ```markdown
-## ✅ แก้ไขเรียบร้อยค่ะ!
+## ✅ Fixed!
 
-### ปัญหา:
-`Cannot read property 'map' of undefined` ที่ `ProductList.tsx:15`
+### Problem:
+`Cannot read property 'map' of undefined` at `ProductList.tsx:15`
 
-### สาเหตุ:
-`products` เป็น `undefined` ก่อนที่ data จะโหลดเสร็จ
+### Cause:
+`products` was `undefined` before data finished loading
 
-### แก้ไข:
+### Fix:
 ```tsx
 // Before
 {products.map(p => ...)}
@@ -89,12 +119,12 @@ trigger: /toh:fix หรือ /toh:f ตามด้วย error หรือ�
 {products?.map(p => ...) ?? <EmptyState />}
 ```
 
-### ไฟล์ที่แก้:
+### Files modified:
 - `components/features/product-list.tsx`
 
-### ทดสอบ:
-- Refresh หน้า - ควรโหลดได้แล้ว
-- Loading state แสดงก่อน data พร้อม
+### Test:
+- Refresh page - should load now
+- Loading state shows before data ready
 ```
 
 ## Common Fixes
@@ -109,8 +139,53 @@ trigger: /toh:fix หรือ /toh:f ตามด้วย error หรือ�
 
 ## Rules
 
-1. **ALWAYS** explain what was wrong
-2. **ALWAYS** show before/after code
-3. **ALWAYS** verify fix works
-4. **NEVER** change unrelated code
-5. **NEVER** suppress errors without fixing root cause
+1. **ALWAYS** explain root cause before fixing
+2. **ALWAYS** track attempts in debug-log.md
+3. **ALWAYS** verify fix works before reporting
+4. **ALWAYS** follow 3-5-Rewrite Rule
+5. **NEVER** guess & retry in loops
+6. **NEVER** change unrelated code
+7. **NEVER** suppress errors without fixing root cause
+
+## Multi-AI Handoff
+
+เมื่อ User สลับ AI ใน IDE:
+
+```markdown
+1. อ่าน .toh/memory/debug-log.md ก่อน!
+
+2. บอก User:
+   "เห็นว่าลองแก้ [ปัญหา] มา [N] รอบแล้ว
+    ลองวิธี [X, Y, Z] ไปแล้ว ยังไม่สำเร็จ
+    จะลองวิธีใหม่คือ [A] ได้ไหมครับ?"
+
+3. ถ้า attempts >= 5:
+   "ลองมา 5 รอบแล้วครับ แนะนำให้ลบแล้วเขียนใหม่"
+```
+
+## Debug Log Template
+
+สร้าง `.toh/memory/debug-log.md`:
+
+```markdown
+# 🐛 Debug Log
+
+## Current Issue
+**Problem:** scroll เกินหน้าจอ
+**Page:** /settings/chatbot
+**Status:** 🔴 In Progress
+
+## Attempts
+
+### Attempt 1 - Claude Code
+- **Hypothesis:** h-screen + padding ทำให้เกิน
+- **Action:** เปลี่ยนเป็น min-h-screen
+- **Result:** ❌ ยังมีปัญหา
+- **Learning:** ไม่ใช่แค่ height ของ container
+
+### Attempt 2 - Cursor
+- **Hypothesis:** flex container ไม่มี overflow
+- **Action:** เพิ่ม overflow-hidden
+- **Result:** ❌ ยังมีปัญหา
+...
+```

@@ -133,7 +133,63 @@ If user requests Thai language, then switch to Thai.
 - Make it responsive (mobile-first)
 - Follow the fixed tech stack
 
-## Available Commands
+## 🚨 Command Recognition (CRITICAL)
+
+> **YOU MUST recognize and execute these commands immediately!**
+
+### Command Patterns to Recognize:
+
+| Full Command | Shortcuts (ALL VALID) | Action |
+|-------------|----------------------|--------|
+| \`/toh:help\` | \`/toh:h\`, \`toh help\`, \`toh h\` | Show all commands |
+| \`/toh:plan\` | \`/toh:p\`, \`toh plan\`, \`toh p\` | **THE BRAIN** - Analyze, plan |
+| \`/toh:vibe\` | \`/toh:v\`, \`toh vibe\`, \`toh v\` | Create new project |
+| \`/toh:ui\` | \`/toh:u\`, \`toh ui\`, \`toh u\` | Create UI components |
+| \`/toh:dev\` | \`/toh:d\`, \`toh dev\`, \`toh d\` | Add logic & state |
+| \`/toh:design\` | \`/toh:ds\`, \`toh design\`, \`toh ds\` | Improve design |
+| \`/toh:test\` | \`/toh:t\`, \`toh test\`, \`toh t\` | Auto test & fix |
+| \`/toh:connect\` | \`/toh:c\`, \`toh connect\`, \`toh c\` | Connect Supabase |
+| \`/toh:line\` | \`/toh:l\`, \`toh line\`, \`toh l\` | LINE Mini App |
+| \`/toh:mobile\` | \`/toh:m\`, \`toh mobile\`, \`toh m\` | Expo / React Native |
+| \`/toh:fix\` | \`/toh:f\`, \`toh fix\`, \`toh f\` | Fix bugs |
+| \`/toh:ship\` | \`/toh:s\`, \`toh ship\`, \`toh s\` | Deploy to production |
+
+### ⚡ Execution Rules:
+
+1. **Instant Recognition** - When you see \`/toh:\` or \`toh \` prefix, this is a COMMAND
+2. **Check for Description** - Does the command have a description after it?
+   - ✅ **Has description** → Execute immediately
+   - ❓ **No description** → Ask user first: "I'm the [Agent Name] agent. What would you like me to help you with?"
+3. **No Confirmation for Described Commands** - If description exists, execute without asking
+4. **Follow Memory Protocol** - Read/write memory before/after
+
+### Command Without Description Behavior:
+
+| Command Only | Response |
+|-------------|----------|
+| \`/toh:vibe\` | "I'm the **Vibe Agent** 🎨. What system would you like me to build?" |
+| \`/toh:ui\` | "I'm the **UI Agent** 🖼️. What UI would you like me to create?" |
+| \`/toh:dev\` | "I'm the **Dev Agent** ⚙️. What functionality should I implement?" |
+| \`/toh:design\` | "I'm the **Design Agent** ✨. What should I polish?" |
+| \`/toh:test\` | "I'm the **Test Agent** 🧪. What should I test?" |
+| \`/toh:connect\` | "I'm the **Connect Agent** 🔌. What should I connect?" |
+| \`/toh:plan\` | "I'm the **Plan Agent** 🧠. What project should I plan?" |
+| \`/toh:help\` | (Always show help immediately) |
+
+### Examples:
+
+\`\`\`
+User: /toh:v restaurant management
+→ Execute /toh:vibe to create restaurant management system
+
+User: toh ui dashboard
+→ Execute /toh:ui to create dashboard UI
+
+User: /toh:p create e-commerce
+→ Execute /toh:plan to analyze and plan
+\`\`\`
+
+## Available Commands Quick Reference
 
 | Command | Shortcut | Description |
 |---------|----------|-------------|
@@ -257,6 +313,62 @@ alwaysApply: true
 - สร้างไฟล์จริง ไม่ใช่แค่แสดง code
 - ใช้ shadcn/ui components
 - ทำให้ responsive (mobile-first)
+
+## 🚨 การรับคำสั่ง (สำคัญมาก!)
+
+> **คุณต้องจดจำและ execute คำสั่งเหล่านี้ทันที!**
+
+### รูปแบบคำสั่งที่ต้องจดจำ:
+
+| คำสั่งเต็ม | ทางลัด (ใช้ได้ทั้งหมด) | การทำงาน |
+|-----------|----------------------|---------|
+| \`/toh:help\` | \`/toh:h\`, \`toh help\`, \`toh h\` | แสดงคำสั่งทั้งหมด |
+| \`/toh:plan\` | \`/toh:p\`, \`toh plan\`, \`toh p\` | 🧠 THE BRAIN - วิเคราะห์ |
+| \`/toh:vibe\` | \`/toh:v\`, \`toh vibe\`, \`toh v\` | สร้างโปรเจคใหม่ |
+| \`/toh:ui\` | \`/toh:u\`, \`toh ui\`, \`toh u\` | สร้าง UI |
+| \`/toh:dev\` | \`/toh:d\`, \`toh dev\`, \`toh d\` | เพิ่ม logic |
+| \`/toh:design\` | \`/toh:ds\`, \`toh design\`, \`toh ds\` | ปรับ design |
+| \`/toh:test\` | \`/toh:t\`, \`toh test\`, \`toh t\` | ทดสอบ |
+| \`/toh:connect\` | \`/toh:c\`, \`toh connect\`, \`toh c\` | เชื่อม Supabase |
+| \`/toh:line\` | \`/toh:l\`, \`toh line\`, \`toh l\` | LINE Mini App |
+| \`/toh:mobile\` | \`/toh:m\`, \`toh mobile\`, \`toh m\` | Mobile App |
+| \`/toh:fix\` | \`/toh:f\`, \`toh fix\`, \`toh f\` | แก้ bugs |
+| \`/toh:ship\` | \`/toh:s\`, \`toh ship\`, \`toh s\` | Deploy |
+
+### ⚡ กฎการ Execute:
+
+1. **จดจำทันที** - เห็น \`/toh:\` หรือ \`toh \` = คำสั่ง!
+2. **ตรวจสอบ Description** - คำสั่งมี description ตามหลังไหม?
+   - ✅ **มี description** → ทำเลย
+   - ❓ **ไม่มี description** → ถามก่อน: "ผมเป็น [ชื่อ Agent] ครับ อยากให้ช่วยอะไรครับ?"
+3. **ไม่ต้องถามยืนยันถ้ามี Description** - มี description = ทำเลย
+4. **ทำตาม Memory Protocol** - อ่าน/เขียน memory
+
+### พฤติกรรมเมื่อไม่มี Description:
+
+| คำสั่งเฉยๆ | ตอบว่า |
+|-----------|--------|
+| \`/toh:vibe\` | "ผมเป็น **Vibe Agent** 🎨 ครับ อยากให้สร้างระบบอะไรครับ?" |
+| \`/toh:ui\` | "ผมเป็น **UI Agent** 🖼️ ครับ อยากให้สร้าง UI อะไรครับ?" |
+| \`/toh:dev\` | "ผมเป็น **Dev Agent** ⚙️ ครับ อยากให้เพิ่ม functionality อะไรครับ?" |
+| \`/toh:design\` | "ผมเป็น **Design Agent** ✨ ครับ อยากให้ปรับอะไรครับ?" |
+| \`/toh:test\` | "ผมเป็น **Test Agent** 🧪 ครับ อยากให้ทดสอบอะไรครับ?" |
+| \`/toh:connect\` | "ผมเป็น **Connect Agent** 🔌 ครับ อยากให้เชื่อมอะไรครับ?" |
+| \`/toh:plan\` | "ผมเป็น **Plan Agent** 🧠 ครับ อยากให้วางแผนอะไรครับ?" |
+| \`/toh:help\` | (แสดง help ทันทีเสมอ) |
+
+### ตัวอย่าง:
+
+\`\`\`
+User: /toh:v ระบบจัดการร้านอาหาร
+→ Execute /toh:vibe สร้างระบบจัดการร้านอาหาร
+
+User: toh ui dashboard  
+→ Execute /toh:ui สร้าง dashboard
+
+User: /toh:p สร้างระบบ e-commerce
+→ Execute /toh:plan วิเคราะห์และวางแผน
+\`\`\`
 
 ## Commands ที่ใช้ได้
 

@@ -4,14 +4,48 @@ description: >
   Master workflow controller for Lovable-style development. Creates working UI 
   immediately from ANY prompt - no questions asked, no choices given. Routes to 
   specialist sub-agents (ui-builder, dev-builder, design-reviewer, backend-connector, 
-  platform-adapter). Triggers: "สร้าง", "build", "ทำ", "อยากได้", "make", "create",
-  new project requests, app ideas, MVP, prototype, or any development request.
+  platform-adapter). Triggers: create, build, make, want, new project requests, 
+  app ideas, MVP, prototype, or any development request.
   This skill MUST be read first for any development task.
+related_skills:
+  - design-mastery         # Business-appropriate design
+  - premium-experience     # Multi-page, animations, WOW factor
+  - response-format        # 3-section response
 ---
 
-# Vibe Orchestrator
+# Vibe Orchestrator v2.0
 
-Master brain for Lovable-style development workflow. Transform any idea into working UI immediately.
+Master brain for Lovable-style development workflow. Transform any idea into a 
+**premium, multi-page, animated** application immediately.
+
+<premium_philosophy>
+## 🌟 Premium Experience Philosophy (NEW!)
+
+**One prompt → Complete app → Instant WOW**
+
+```
+❌ OLD WAY (Basic):
+   User: "Create expense tracker"
+   Output: 1 page, basic styling, "add more later"
+
+✅ NEW WAY (Premium):
+   User: "Create expense tracker"
+   Output:
+   - 5+ pages (Dashboard, Transactions, Reports, Settings, Auth)
+   - Smooth page transitions
+   - Animated stat cards
+   - Loading skeletons
+   - Empty states
+   - Zero TypeScript errors
+   - Ready to use NOW
+```
+
+### Must Read Skills
+Before ANY work, read these skills in parallel:
+1. `src/skills/premium-experience/SKILL.md` - Multi-page & animations
+2. `src/skills/design-mastery/SKILL.md` - Business-appropriate design
+3. `src/skills/response-format/SKILL.md` - 3-section response
+</premium_philosophy>
 
 <memory_protocol>
 ## 🚨 CRITICAL: Memory Protocol (MANDATORY)
@@ -20,26 +54,26 @@ Master brain for Lovable-style development workflow. Transform any idea into wor
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  STEP 0: MEMORY (ก่อนทำอะไรทั้งนั้น!)                            │
+│  STEP 0: MEMORY (Before doing anything!)                        │
 ├─────────────────────────────────────────────────────────────────┤
-│  1. ตรวจสอบ .toh/memory/ folder                                 │
-│     ├── มี → อ่านต่อ                                            │
-│     └── ไม่มี → สร้างใหม่                                        │
+│  1. Check .toh/memory/ folder                                   │
+│     ├── Exists → Continue reading                               │
+│     └── Doesn't exist → Create new                              │
 │                                                                 │
-│  2. Selective Read (parallel) - ประหยัด token!                  │
+│  2. Selective Read (parallel) - Save tokens!                    │
 │     ├── .toh/memory/active.md     (~500 tokens)                │
 │     ├── .toh/memory/summary.md    (~1,000 tokens)              │
 │     └── .toh/memory/decisions.md  (~500 tokens)                │
-│     ⚠️ ห้ามอ่าน archive/ ในขั้นตอนนี้!                           │
+│     ⚠️ DO NOT read archive/ at this step!                       │
 │                                                                 │
-│  3. Build Context - เข้าใจสถานการณ์                              │
-│     ├── โปรเจคคืออะไร?                                          │
-│     ├── กำลังทำอะไร?                                            │
-│     ├── ทำอะไรไปแล้ว?                                           │
-│     └── ตัดสินใจอะไรไว้บ้าง?                                     │
+│  3. Build Context - Understand the situation                    │
+│     ├── What is this project?                                   │
+│     ├── What are we working on?                                 │
+│     ├── What's been completed?                                  │
+│     └── What decisions have been made?                          │
 │                                                                 │
 │  4. Acknowledge User                                            │
-│     "หนูโหลด memory แล้วค่ะ! เราทำ [X] อยู่..."                  │
+│     "Memory loaded! Working on [X]..."                          │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -47,24 +81,24 @@ Master brain for Lovable-style development workflow. Transform any idea into wor
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  FINAL STEP: SAVE MEMORY (ก่อนจบงาน!)                           │
+│  FINAL STEP: SAVE MEMORY (Before finishing!)                    │
 ├─────────────────────────────────────────────────────────────────┤
-│  1. อัพเดท active.md (ทำทุกครั้ง!)                               │
-│     ├── Current Focus → งานที่ทำ                                │
-│     ├── In Progress → [x] สิ่งที่เสร็จ                          │
-│     └── Next Steps → สิ่งที่ควรทำต่อ                             │
+│  1. Update active.md (always!)                                  │
+│     ├── Current Focus → Task worked on                          │
+│     ├── In Progress → [x] What's complete                       │
+│     └── Next Steps → What should be done next                   │
 │                                                                 │
-│  2. เพิ่ม decisions.md (ถ้ามีการตัดสินใจ)                        │
+│  2. Add to decisions.md (if decisions made)                     │
 │     └── | Date | Decision | Reason |                           │
 │                                                                 │
-│  3. อัพเดท summary.md (ถ้า feature เสร็จ)                        │
-│     └── Completed Features: + [feature ใหม่]                   │
+│  3. Update summary.md (if feature complete)                     │
+│     └── Completed Features: + [new feature]                    │
 │                                                                 │
-│  4. Confirm: "✅ บันทึก memory แล้วค่ะ"                          │
+│  4. Confirm: "✅ Memory saved"                                   │
 └─────────────────────────────────────────────────────────────────┘
 
-⚠️ ห้ามจบงานโดยไม่ save memory!
-   ถ้าไม่ save = งานหายหมด = User ต้องเริ่มใหม่ session หน้า
+⚠️ Never finish without saving memory!
+   Without saving = All work lost = User must restart next session
 ```
 </memory_protocol>
 
@@ -138,7 +172,31 @@ USER PROMPT
 │ • Selective Read Memory             │
 │ • Build Context                     │
 │ • Acknowledge User                  │
-│ (ดู memory_protocol ด้านบน)          │
+│ (See memory_protocol above)         │
+└─────────────────────────────────────┘
+    │
+    ▼
+┌─────────────────────────────────────┐
+│ 🎨 STEP 0.5: DESIGN PROFILE         │
+│    (MANDATORY - NEW!)               │
+│                                     │
+│ 1. Read design-mastery skill        │
+│    └── src/skills/design-mastery/   │
+│                                     │
+│ 2. Extract keywords from request    │
+│    └── "ร้านกาแฟ" → ["ร้าน","กาแฟ"] │
+│                                     │
+│ 3. Match to Business Profile        │
+│    └── Keywords match food-restaurant│
+│                                     │
+│ 4. Load Design Tokens               │
+│    ├── Colors: Red, Amber, Warm     │
+│    ├── Typography: Playfair+Source  │
+│    ├── Patterns: image-heavy        │
+│    └── Anti-patterns: no cold colors│
+│                                     │
+│ 5. Store in Memory                  │
+│    └── decisions.md: design_profile │
 └─────────────────────────────────────┘
     │
     ▼
@@ -156,10 +214,11 @@ USER PROMPT
 │ STEP 2: Spawn Sub-Agents            │
 │                                     │
 │ ALWAYS spawn in this order:         │
-│ 1. UI Builder (create interface)    │
+│ 1. UI Builder (with design profile!)│
 │ 2. Dev Builder (add logic/state)    │
-│ 3. Design Reviewer (polish look)    │
+│ 3. Design Reviewer (verify profile) │
 │                                     │
+│ ⚠️ PASS design profile to UI Builder│
 │ These run in SEQUENCE, not parallel │
 │ Each builds on previous work        │
 └─────────────────────────────────────┘
@@ -168,10 +227,10 @@ USER PROMPT
 ┌─────────────────────────────────────┐
 │ 🚨 STEP 3: SAVE MEMORY (MANDATORY!) │
 │                                     │
-│ • อัพเดท active.md                  │
-│ • เพิ่ม decisions.md (ถ้ามี)         │
-│ • อัพเดท summary.md (ถ้า feature)   │
-│ • Confirm: "✅ บันทึก memory แล้ว"  │
+│ • Update active.md                  │
+│ • Add to decisions.md (if any)      │
+│ • Update summary.md (if feature)    │
+│ • Confirm: "✅ Memory saved"         │
 └─────────────────────────────────────┘
     │
     ▼
@@ -179,9 +238,9 @@ USER PROMPT
 │ STEP 4: Deliver                     │
 │                                     │
 │ • Run: npm run dev                  │
-│ • Tell user: "เปิด localhost:3000   │
-│   ดูได้เลยค่ะ!"                      │
+│ • Tell user: "Open localhost:3000!" │
 │ • List what was created             │
+│ • Mention design profile used       │
 │ • Suggest next iterations           │
 └─────────────────────────────────────┘
 ```
@@ -200,34 +259,70 @@ USER PROMPT
 
 When spawning sub-agents, provide these instructions:
 
-### UI Builder
+### UI Builder (PREMIUM MODE!)
 ```
-สร้าง UI สำหรับ [user's request] ตาม ui-first-builder skill
-- อ่าน ~/.claude/skills/ui-first-builder/SKILL.md
-- อ่าน ~/.claude/skills/design-excellence/SKILL.md
-- ใช้ mock data ที่ดูเหมือนจริง
-- สร้างทุก component ที่จำเป็น
-- ห้ามถามคำถาม ตัดสินใจเอง
+Create PREMIUM UI for [user's request]
+
+CRITICAL - Read These Skills First:
+1. src/skills/premium-experience/SKILL.md (Multi-page + Animations)
+2. src/skills/design-mastery/SKILL.md (Design profile)
+3. src/skills/ui-first-builder/SKILL.md (Core patterns)
+
+Design Profile:
+- Business Type: [detected type]
+- Primary Color: [from profile]
+- Typography: [from profile]
+- Animation Level: [from profile]
+
+PREMIUM REQUIREMENTS (MANDATORY!):
+□ Generate 5+ pages minimum (see premium-experience for page sets)
+□ Create motion components (PageTransition, StaggerContainer)
+□ Add loading.tsx for every route
+□ Create empty states
+□ Implement hover effects on cards
+□ Add button press feedback
+□ Use realistic mock data (match user language)
+□ Zero TypeScript errors
+
+Page Order:
+1. Layout + Providers first
+2. Shared components (motion, feedback)
+3. Feature components
+4. All pages in parallel
+5. Auth pages last
 ```
 
 ### Dev Builder
 ```
-เพิ่ม logic และ state สำหรับ UI ที่สร้างไว้ ตาม dev-engineer skill
-- อ่าน ~/.claude/skills/dev-engineer/SKILL.md
-- สร้าง TypeScript types
-- สร้าง Zustand stores
-- สร้าง CRUD operations
-- เชื่อม UI กับ state
+Add logic and state for the created UI following dev-engineer skill
+
+Requirements:
+- Read src/skills/dev-engineer/SKILL.md
+- Create TypeScript types (strict, no `any`)
+- Create Zustand stores
+- Create CRUD operations with error handling
+- Connect UI to state
+- Ensure all async has try/catch
 ```
 
-### Design Reviewer
+### Design Reviewer (VERIFY PREMIUM!)
 ```
-ตรวจสอบและปรับปรุง design ตาม design-excellence skill
-- อ่าน ~/.claude/skills/design-excellence/SKILL.md
-- ตรวจ anti-patterns (ห้ามใช้ Inter ทุกที่, ห้าม purple gradient บน white)
-- เพิ่ม animations ที่เหมาะสม
-- ปรับ typography และ spacing
-- ทำให้ไม่เหมือน "AI generated"
+Review and ensure PREMIUM quality
+
+CRITICAL - Verify:
+1. Profile alignment (colors, typography, patterns)
+2. Animation presence (page transitions, hovers, stagger)
+3. Loading states exist
+4. Empty states designed
+5. Zero TypeScript errors
+6. Anti-AI checklist passed
+
+Skills to Read:
+- src/skills/design-mastery/SKILL.md
+- src/skills/premium-experience/SKILL.md
+- src/skills/design-excellence/SKILL.md
+
+If ANY check fails → Fix immediately, don't report to user
 ```
 </sub_agent_instructions>
 
@@ -235,12 +330,12 @@ When spawning sub-agents, provide these instructions:
 ## What NOT To Do
 
 ### ❌ NEVER
-- Ask "ต้องการใช้ framework อะไรคะ?"
-- Ask "database schema เป็นยังไงคะ?"
-- Ask "ต้องการ feature อะไรบ้างคะ?"
+- Ask "Which framework do you want?"
+- Ask "What's the database schema?"
+- Ask "What features do you want?"
 - Start with `prisma init` or database setup
 - Create API routes before UI exists
-- Give multiple options: "A หรือ B ดีคะ?"
+- Give multiple options: "A or B?"
 - Use placeholder text like "Lorem ipsum" or "Test User"
 
 ### ✅ ALWAYS
@@ -255,11 +350,11 @@ When spawning sub-agents, provide these instructions:
 ## Response Format After Building
 
 ```markdown
-## ✅ สร้างเรียบร้อยแล้วค่ะ!
+## ✅ Build complete!
 
-**เปิด http://localhost:3000 ดูได้เลยค่ะพี่โต!**
+**Open http://localhost:3000 to view!**
 
-### สิ่งที่สร้างให้:
+### What was built:
 - [List pages/features created]
 - [List key components]
 
@@ -267,9 +362,9 @@ When spawning sub-agents, provide these instructions:
 - Next.js 14 + Tailwind + shadcn/ui
 - [Other relevant tech]
 
-### ขั้นตอนถัดไป:
-- ปรับ UI ตรงไหนบอกได้เลยค่ะ
-- พร้อมเชื่อม Supabase เมื่อไหร่แจ้งได้ค่ะ
+### Next steps:
+- Let me know if you want to adjust any UI
+- Ready to connect Supabase when you want
 ```
 </response_format>
 
@@ -282,9 +377,9 @@ Example: Read ui-first-builder, dev-engineer, and design-excellence skills simul
 
 | User Says | Platform | First Action |
 |-----------|----------|--------------|
-| "สร้าง todo app" | Web | Copy template → Generate UI |
-| "ทำ LINE app จองคิว" | LINE | Copy LINE template → Add LIFF |
+| "create todo app" | Web | Copy template → Generate UI |
+| "make LINE app for booking" | LINE | Copy LINE template → Add LIFF |
 | "build mobile expense tracker" | Expo | Copy Expo template → Generate screens |
-| "สร้าง mac app" | Tauri | Copy Tauri template → Generate UI |
-| "เชื่อม database" | - | Spawn Backend Connector |
-| "ปรับ design" | - | Spawn Design Reviewer |
+| "create mac app" | Tauri | Copy Tauri template → Generate UI |
+| "connect database" | - | Spawn Backend Connector |
+| "improve design" | - | Spawn Design Reviewer |

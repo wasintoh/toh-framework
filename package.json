@@ -1,6 +1,6 @@
 {
   "name": "toh-framework",
-  "version": "1.2.2",
+  "version": "1.4.0",
   "type": "module",
   "description": "AI-Orchestration Driven Development Framework - สั่งแล้วจบ ไม่ถาม ไม่รอ",
   "author": {
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "https://github.com/wasintoh/toh-framework.git"
   },
-  "homepage": "https://github.com/wasintoh/toh-framework#readme",
+  "homepage": "https://tohframework.dev",
   "bugs": {
     "url": "https://github.com/wasintoh/toh-framework/issues"
   },

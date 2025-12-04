@@ -410,7 +410,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'หน้าแรก',
+          title: 'Home',
           tabBarIcon: ({ color, size }) => (
             <Home size={size} color={color} />
           ),
@@ -419,7 +419,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'ค้นหา',
+          title: 'Search',
           tabBarIcon: ({ color, size }) => (
             <Search size={size} color={color} />
           ),
@@ -428,7 +428,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'โปรไฟล์',
+          title: 'Profile',
           tabBarIcon: ({ color, size }) => (
             <User size={size} color={color} />
           ),

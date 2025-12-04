@@ -4,8 +4,8 @@ description: >
   Design system and anti-patterns for professional UI. Ensures apps don't look 
   "AI generated". Defines color palettes, typography, spacing, animations, and 
   common anti-patterns to avoid. Used by Design Reviewer sub-agent to polish UI.
-  Triggers: "ปรับ design", "ทำให้สวย", design review, polish UI, improve aesthetics,
-  "ดูเหมือน AI", design system, style guide.
+  Triggers: design review, polish UI, improve aesthetics, looks like AI made it,
+  design system, style guide, make it beautiful.
 ---
 
 # Design Excellence
@@ -119,7 +119,7 @@ Use Tailwind's default scale consistently:
 // Standard page container
 <div className="p-4 md:p-6 lg:p-8">
   {/* Page title */}
-  <h1 className="text-2xl font-semibold mb-6">หน้าหลัก</h1>
+  <h1 className="text-2xl font-semibold mb-6">Dashboard</h1>
   
   {/* Content sections with consistent spacing */}
   <section className="mb-8">
@@ -241,13 +241,13 @@ Animation should:
 ### Buttons
 ```tsx
 // Primary action
-<Button>บันทึก</Button>
+<Button>Save</Button>
 
 // Secondary action
-<Button variant="outline">ยกเลิก</Button>
+<Button variant="outline">Cancel</Button>
 
 // Destructive action
-<Button variant="destructive">ลบ</Button>
+<Button variant="destructive">Delete</Button>
 
 // Icon button
 <Button variant="ghost" size="icon">
@@ -262,12 +262,12 @@ Animation should:
 // Clean form layout
 <div className="space-y-4">
   <div className="space-y-2">
-    <Label>ชื่อ</Label>
-    <Input placeholder="กรอกชื่อ" />
+    <Label>Name</Label>
+    <Input placeholder="Enter name" />
   </div>
   
   <div className="space-y-2">
-    <Label>อีเมล</Label>
+    <Label>Email</Label>
     <Input type="email" placeholder="email@example.com" />
   </div>
 </div>
@@ -281,17 +281,17 @@ Animation should:
 <Table>
   <TableHeader>
     <TableRow className="bg-slate-50">
-      <TableHead>ชื่อ</TableHead>
-      <TableHead>สถานะ</TableHead>
-      <TableHead className="text-right">จัดการ</TableHead>
+      <TableHead>Name</TableHead>
+      <TableHead>Status</TableHead>
+      <TableHead className="text-right">Actions</TableHead>
     </TableRow>
   </TableHeader>
   <TableBody>
     <TableRow className="hover:bg-slate-50">
-      <TableCell>สมชาย</TableCell>
+      <TableCell>John Smith</TableCell>
       <TableCell><Badge>Active</Badge></TableCell>
       <TableCell className="text-right">
-        <Button variant="ghost" size="sm">แก้ไข</Button>
+        <Button variant="ghost" size="sm">Edit</Button>
       </TableCell>
     </TableRow>
   </TableBody>

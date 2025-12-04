@@ -1,96 +1,164 @@
-# /toh: Templates
+# Premium Templates for Toh Framework
 
-Starter templates สำหรับ `/toh:vibe` command
+Ready-to-use page and component templates with:
+- ✨ Smooth animations (Framer Motion)
+- 🎨 Premium design
+- 📱 Fully responsive
+- 🔒 TypeScript strict mode
+- ♿ Accessible
 
-## Available Templates
-
-| Template | Description | Status |
-|----------|-------------|--------|
-| **nextjs-pro** | Production-ready Next.js 14 + shadcn/ui + Zustand | ✅ Ready |
-
-## Template: nextjs-pro
-
-### Features
-
-- ✅ Next.js 14 (App Router)
-- ✅ TypeScript (strict mode)
-- ✅ Tailwind CSS + shadcn/ui
-- ✅ Zustand (state management)
-- ✅ React Hook Form + Zod
-- ✅ Supabase ready
-- ✅ Thai mock data
-- ✅ Professional design system
-
-### Files Included
+## Directory Structure
 
 ```
-nextjs-pro/
-├── README.md              # Template documentation
-├── USAGE-GUIDE.md         # Step-by-step usage guide
-├── package.json           # Dependencies
-│
-├── app/
-│   ├── globals.css        # Design tokens & styles
-│   ├── layout.tsx         # Root layout
-│   └── page.tsx           # Home page (Dashboard)
-│
+templates/
 ├── components/
-│   ├── layout/
-│   │   └── header.tsx     # Navigation header
-│   └── features/
-│       └── product-card.tsx  # Example component
+│   ├── motion/        # Animation components
+│   │   ├── PageTransition.tsx
+│   │   ├── StaggerContainer.tsx
+│   │   ├── FadeIn.tsx
+│   │   └── CountUp.tsx
+│   │
+│   ├── feedback/      # Loading, empty, error states
+│   │   ├── LoadingSpinner.tsx
+│   │   ├── Skeleton.tsx
+│   │   └── EmptyState.tsx
+│   │
+│   ├── interactive/   # Animated cards & buttons
+│   │   ├── AnimatedCard.tsx
+│   │   └── AnimatedButton.tsx
+│   │
+│   └── layout/        # Navigation & structure
+│       ├── Navbar.tsx
+│       ├── Sidebar.tsx
+│       └── Footer.tsx
 │
-├── lib/
-│   ├── utils.ts           # Utility functions
-│   ├── supabase.ts        # Supabase client
-│   ├── mock-data.ts       # Thai mock data
-│   ├── api/
-│   │   └── products.ts    # API functions
-│   └── validations/
-│       └── product.ts     # Zod schemas
-│
-├── types/
-│   └── index.ts           # TypeScript types
-│
-├── stores/
-│   └── product-store.ts   # Zustand store
-│
-└── providers/
-    └── app-provider.tsx   # Context providers
+└── pages/
+    ├── landing-page.tsx    # Full marketing landing page
+    ├── dashboard-page.tsx  # Dashboard with stats & charts
+    └── auth-pages.tsx      # Login & Register pages
 ```
 
-### Usage
+## Usage
+
+### Copy Components to Your Project
 
 ```bash
-# Method 1: Copy template manually
-cp -r ~/.claude/templates/nextjs-pro my-app
-cd my-app
-npm install
-npm run dev
+# Copy motion components
+cp -r templates/components/motion/* your-project/components/motion/
 
-# Method 2: Use /toh:vibe (recommended)
-# Claude Code will use this template automatically
-/toh:vibe expense tracker app
+# Copy feedback components  
+cp -r templates/components/feedback/* your-project/components/feedback/
+
+# Copy page template
+cp templates/pages/landing-page.tsx your-project/app/page.tsx
 ```
 
-## Future Templates
+### Dependencies Required
 
-| Template | Description | Status |
-|----------|-------------|--------|
-| line-mini-app | LINE LIFF starter | 🔜 Planned |
-| expo-app | Expo React Native starter | 🔜 Planned |
-| tauri-app | Tauri desktop starter | 🔜 Planned |
-| supabase-auth | Full auth boilerplate | 🔜 Planned |
+```bash
+# Install framer-motion
+npm install framer-motion
+
+# Install lucide-react icons
+npm install lucide-react
+
+# Install class-variance-authority (for buttons)
+npm install class-variance-authority
+```
+
+### shadcn/ui Components Needed
+
+```bash
+npx shadcn@latest add button input label
+```
+
+## Component Examples
+
+### PageTransition
+```tsx
+import { PageTransition } from "@/components/motion";
+
+export default function MyPage() {
+  return (
+    <PageTransition>
+      <h1>My Page</h1>
+    </PageTransition>
+  );
+}
+```
+
+### Stagger Animation
+```tsx
+import { StaggerContainer, StaggerItem } from "@/components/motion";
+
+<StaggerContainer>
+  {items.map(item => (
+    <StaggerItem key={item.id}>
+      <Card>{item.title}</Card>
+    </StaggerItem>
+  ))}
+</StaggerContainer>
+```
+
+### Animated Card
+```tsx
+import { AnimatedCard, StatCard } from "@/components/interactive";
+
+<AnimatedCard hoverEffect="lift">
+  <h3>Card Title</h3>
+  <p>Card content</p>
+</AnimatedCard>
+
+<StatCard 
+  title="Total Revenue"
+  value="$45,231"
+  trend={{ value: 20.1, isPositive: true }}
+/>
+```
+
+### CountUp Animation
+```tsx
+import { CountUp } from "@/components/motion";
+
+<CountUp end={1000} prefix="$" suffix="+" duration={2} />
+```
+
+### Loading States
+```tsx
+import { SkeletonDashboard, PageLoading } from "@/components/feedback";
+
+// While loading
+if (isLoading) return <SkeletonDashboard />;
+
+// Full page loading
+if (!data) return <PageLoading label="Loading data..." />;
+```
+
+### Empty States
+```tsx
+import { NoDataEmpty, SearchEmpty } from "@/components/feedback";
+
+if (items.length === 0) {
+  return (
+    <NoDataEmpty
+      title="No items yet"
+      description="Create your first item to get started"
+      actionLabel="Create New"
+      onAction={() => router.push("/new")}
+    />
+  );
+}
+```
+
+## Best Practices
+
+1. **Always use PageTransition** for page-level components
+2. **Use StaggerContainer** for lists and grids
+3. **Add loading.tsx** for every route
+4. **Design empty states** for all lists
+5. **Keep animations subtle** (y: 20 max, scale: 1.02 max)
+6. **Test on mobile** first
 
 ---
 
-## Contributing
-
-To add a new template:
-
-1. Create folder in `~/.claude/templates/[template-name]/`
-2. Include:
-   - `README.md` - Template documentation
-   - `package.json` - Dependencies
-   - Source files with Thai mock data
-3. Update this README
+*Part of Toh Framework - Premium Experience v1.0*

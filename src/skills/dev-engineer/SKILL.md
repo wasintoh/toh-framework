@@ -4,7 +4,7 @@ description: >
   Adds logic, state management, TypeScript types, and CRUD operations to UI.
   Works AFTER ui-first-builder creates the interface. Implements Zustand stores,
   form handling with React Hook Form + Zod, and prepares for backend connection.
-  Triggers: "เพิ่ม logic", "add functionality", "ทำให้ใช้งานได้", state management,
+  Triggers: add logic, add functionality, make it work, state management,
   form validation, data operations, TypeScript types.
 ---
 
@@ -22,9 +22,9 @@ We don't create UI. We make existing UI work.
 
 <default_to_action>
 NEVER ask:
-- "ใช้ state management อะไรดีคะ?" → Use Zustand (our standard)
-- "validation library ไหนคะ?" → Use Zod (our standard)
-- "form library ไหนคะ?" → Use React Hook Form (our standard)
+- "What state management should I use?" → Use Zustand (our standard)
+- "What validation library?" → Use Zod (our standard)
+- "What form library?" → Use React Hook Form (our standard)
 
 ALWAYS do:
 - Create TypeScript types FIRST
@@ -218,6 +218,8 @@ export function ProductList() {
 <form_patterns>
 ## Forms with React Hook Form + Zod
 
+Validation messages should match the project's language setting in CLAUDE.md.
+
 ### Schema Definition
 ```typescript
 // src/lib/validations/product.ts
@@ -225,18 +227,18 @@ import { z } from 'zod'
 
 export const createProductSchema = z.object({
   name: z.string()
-    .min(2, 'ชื่อสินค้าต้องมีอย่างน้อย 2 ตัวอักษร')
-    .max(100, 'ชื่อสินค้าต้องไม่เกิน 100 ตัวอักษร'),
+    .min(2, 'Product name must be at least 2 characters')
+    .max(100, 'Product name must not exceed 100 characters'),
   description: z.string()
-    .min(10, 'รายละเอียดต้องมีอย่างน้อย 10 ตัวอักษร')
+    .min(10, 'Description must be at least 10 characters')
     .optional(),
   price: z.number()
-    .min(0, 'ราคาต้องไม่ติดลบ')
-    .max(1000000, 'ราคาต้องไม่เกิน 1,000,000'),
+    .min(0, 'Price cannot be negative')
+    .max(1000000, 'Price cannot exceed 1,000,000'),
   stock: z.number()
-    .int('จำนวนต้องเป็นจำนวนเต็ม')
-    .min(0, 'จำนวนต้องไม่ติดลบ'),
-  category: z.string().min(1, 'กรุณาเลือกหมวดหมู่'),
+    .int('Quantity must be an integer')
+    .min(0, 'Quantity cannot be negative'),
+  category: z.string().min(1, 'Please select a category'),
   isActive: z.boolean().default(true),
 })
 
@@ -293,11 +295,11 @@ export function ProductForm({ onSuccess }: ProductFormProps) {
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="name">ชื่อสินค้า</Label>
+        <Label htmlFor="name">Product Name</Label>
         <Input
           id="name"
           {...form.register('name')}
-          placeholder="ใส่ชื่อสินค้า"
+          placeholder="Enter product name"
         />
         {form.formState.errors.name && (
           <p className="text-sm text-red-500">
@@ -307,7 +309,7 @@ export function ProductForm({ onSuccess }: ProductFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="price">ราคา (บาท)</Label>
+        <Label htmlFor="price">Price</Label>
         <Input
           id="price"
           type="number"
@@ -322,15 +324,15 @@ export function ProductForm({ onSuccess }: ProductFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="category">หมวดหมู่</Label>
+        <Label htmlFor="category">Category</Label>
         <Select onValueChange={(value) => form.setValue('category', value)}>
           <SelectTrigger>
-            <SelectValue placeholder="เลือกหมวดหมู่" />
+            <SelectValue placeholder="Select category" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="food">อาหาร</SelectItem>
-            <SelectItem value="drink">เครื่องดื่ม</SelectItem>
-            <SelectItem value="dessert">ของหวาน</SelectItem>
+            <SelectItem value="food">Food</SelectItem>
+            <SelectItem value="drink">Drinks</SelectItem>
+            <SelectItem value="dessert">Desserts</SelectItem>
           </SelectContent>
         </Select>
         {form.formState.errors.category && (
@@ -341,7 +343,7 @@ export function ProductForm({ onSuccess }: ProductFormProps) {
       </div>
 
       <Button type="submit" disabled={isLoading} className="w-full">
-        {isLoading ? 'กำลังบันทึก...' : 'บันทึก'}
+        {isLoading ? 'Saving...' : 'Save'}
       </Button>
     </form>
   )
@@ -501,31 +503,86 @@ export function useDebouncedSearch<T>(
   useEffect(() => {
     if (!debouncedQuery) {
       setResults(items)
-    } else {
-      const filtered = items.filter(item =>
-        String(item[searchKey])
-          .toLowerCase()
-          .includes(debouncedQuery.toLowerCase())
-      )
-      setResults(filtered)
+      return
     }
+    
+    const filtered = items.filter(item => {
+      const value = String(item[searchKey]).toLowerCase()
+      return value.includes(debouncedQuery.toLowerCase())
+    })
+    
+    setResults(filtered)
   }, [debouncedQuery, items, searchKey])
 
-  return { query, setQuery, results, isSearching: query !== debouncedQuery }
+  return { query, setQuery, results }
+}
+```
+
+### Form Dialog Hook
+```typescript
+// src/hooks/use-form-dialog.ts
+import { useState } from 'react'
+
+export function useFormDialog<T>() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [editingItem, setEditingItem] = useState<T | null>(null)
+
+  const openCreate = () => {
+    setEditingItem(null)
+    setIsOpen(true)
+  }
+
+  const openEdit = (item: T) => {
+    setEditingItem(item)
+    setIsOpen(true)
+  }
+
+  const close = () => {
+    setIsOpen(false)
+    setEditingItem(null)
+  }
+
+  return {
+    isOpen,
+    isEditing: editingItem !== null,
+    editingItem,
+    openCreate,
+    openEdit,
+    close,
+  }
 }
 ```
 </hooks_patterns>
 
-<output_checklist>
+<integration_checklist>
 ## Before Completing, Verify:
 
 - [ ] TypeScript types defined for all entities
-- [ ] Zustand store created with proper actions
-- [ ] Zod schemas for form validation
-- [ ] React Hook Form integrated with components
-- [ ] CRUD operations work with mock data
-- [ ] Loading and error states handled
-- [ ] Custom hooks for common patterns
-- [ ] Code follows naming conventions
-- [ ] // TODO comments mark where to add real API
-</output_checklist>
+- [ ] Zustand store created with CRUD actions
+- [ ] Zod schemas match form requirements
+- [ ] React Hook Form integrated with Zod resolver
+- [ ] Mock data functions have realistic delays
+- [ ] Error states handled in store
+- [ ] Loading states handled in store
+- [ ] Components connected to store correctly
+- [ ] No `any` types used
+- [ ] All functions have return type annotations
+</integration_checklist>
+
+<anti_patterns>
+## What NOT To Do
+
+### ❌ Don't
+- Use `any` type to escape TypeScript
+- Create complex store before simple one works
+- Skip loading/error states
+- Hardcode mock data in components
+- Mix real API calls with mock data
+- Create custom state management (use Zustand)
+
+### ❌ Don't Assume
+- Backend exists (work with mock first)
+- Specific validation rules (infer from context)
+- Complex state needs (start simple)
+- User wants to see internal architecture
+</anti_patterns>

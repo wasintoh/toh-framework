@@ -2,9 +2,9 @@
 command: /toh:line
 aliases: ["/toh:l"]
 description: >
-  แปลง web app เป็น LINE Mini App
-  หรือสร้าง LINE Mini App ใหม่พร้อม LIFF integration
-trigger: /toh:line หรือ /toh:l
+  Convert web app to LINE Mini App
+  or create new LINE Mini App with LIFF integration.
+trigger: /toh:line or /toh:l
 ---
 
 # /toh:line - LINE Mini App
@@ -23,7 +23,7 @@ trigger: /toh:line หรือ /toh:l
    ├── .toh/memory/active.md
    ├── .toh/memory/summary.md
    └── .toh/memory/decisions.md
-   (ดู context โปรเจคปัจจุบัน)
+   (Check current project context)
 
 1. READ Skills
    └── ~/.claude/skills/platform-specialist/SKILL.md (LINE section)
@@ -50,79 +50,79 @@ trigger: /toh:line หรือ /toh:l
    └── LIFF → Supabase custom auth
 
 6. 🚨 SAVE MEMORY (MANDATORY!)
-   ├── อัพเดท active.md
-   ├── เพิ่ม decisions.md (LINE config)
-   └── อัพเดท summary.md (LINE integration)
+   ├── Update active.md
+   ├── Add to decisions.md (LINE config)
+   └── Update summary.md (LINE integration)
 ```
 
 ## Example Prompts
 
 ```bash
 # Convert existing app
-/toh:line แปลงเป็น LINE Mini App
+/toh:line convert to LINE Mini App
 
 # With specific features
-/toh:l เพิ่ม LINE login และ share feature
+/toh:l add LINE login and share feature
 
 # New LINE app
-/toh:line สร้างระบบจองคิวสำหรับ LINE OA
+/toh:line create queue booking system for LINE OA
 
 # Share functionality
-/toh:l เพิ่มปุ่ม share ไป LINE
+/toh:l add share to LINE button
 ```
 
 ## Output Format
 
 ```markdown
-## ✅ LINE Mini App พร้อมแล้วค่ะ!
+## ✅ LINE Mini App ready!
 
-### สร้าง/แก้ไข:
+### Created/Modified:
 - `lib/liff.ts` - LIFF utilities
 - `providers/liff-provider.tsx` - Context provider
-- `app/layout.tsx` - เพิ่ม LiffProvider
+- `app/layout.tsx` - Added LiffProvider
 
-### Features พร้อมใช้:
+### Features ready:
 - 🔐 LINE Login (getProfile)
 - 💬 Send Message
 - 🔗 Share to friends
 - ❌ Close LIFF window
 
-### ขั้นตอน Setup:
+### Setup Steps:
 
-1. **สร้าง LINE Login Channel**
-   - ไป LINE Developers Console
+1. **Create LINE Login Channel**
+   - Go to LINE Developers Console
    - Create LINE Login channel
 
-2. **สร้าง LIFF App**
-   - ไปที่ LINE Login channel
+2. **Create LIFF App**
+   - Go to LINE Login channel
    - Add LIFF app
    - Endpoint URL: `https://your-domain.com`
 
-3. **เพิ่ม Environment Variable**
+3. **Add Environment Variable**
    ```env
    NEXT_PUBLIC_LIFF_ID=1234567890-abcdefgh
    ```
 
-4. **ทดสอบ**
-   - Deploy ไป Vercel ก่อน
-   - เปิดผ่าน LINE app (ไม่ใช่ browser)
+4. **Test**
+   - Deploy to Vercel first
+   - Open via LINE app (not browser)
 
-### หมายเหตุ:
-- LIFF ต้องเปิดผ่าน LINE app เท่านั้น
-- ทดสอบบน localhost ได้แต่ features บางอย่างจะไม่ทำงาน
+### Notes:
+- LIFF must be opened via LINE app only
+- Can test on localhost but some features won't work
 ```
 
 ## LINE-Specific Components
 
 ```tsx
 // LINE Button (green style)
-<LineButton onClick={login}>เข้าสู่ระบบด้วย LINE</LineButton>
+<LineButton onClick={login}>Login with LINE</LineButton>
 
 // LINE Profile Card
 <LineProfileCard profile={profile} />
 
 // Share Button
-<ShareButton message="ลองใช้ app นี้สิ!" />
+<ShareButton message="Try this app!" />
 ```
 
 ## Rules

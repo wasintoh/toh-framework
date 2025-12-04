@@ -2,9 +2,9 @@
 command: /toh:connect
 aliases: ["/toh:c"]
 description: >
-  เชื่อมต่อ app กับ Supabase backend
-  สร้าง schema, RLS policies, และ replace mock API
-trigger: /toh:connect หรือ /toh:c
+  Connect app to Supabase backend.
+  Creates schema, RLS policies, and replaces mock API.
+trigger: /toh:connect or /toh:c
 ---
 
 # /toh:connect - Connect Backend
@@ -23,7 +23,7 @@ trigger: /toh:connect หรือ /toh:c
    ├── .toh/memory/active.md
    ├── .toh/memory/summary.md
    └── .toh/memory/decisions.md
-   (ถ้าไม่มี → สร้างใหม่)
+   (If doesn't exist → Create new)
 
 1. READ Skills
    └── ~/.claude/skills/backend-engineer/SKILL.md
@@ -50,9 +50,9 @@ trigger: /toh:connect หรือ /toh:c
    └── .env.example with required vars
 
 6. 🚨 SAVE MEMORY (MANDATORY!)
-   ├── อัพเดท active.md
-   ├── เพิ่ม decisions.md (backend decisions)
-   └── อัพเดท summary.md
+   ├── Update active.md
+   ├── Add to decisions.md (backend decisions)
+   └── Update summary.md
 ```
 
 ## Example Prompts
@@ -62,45 +62,45 @@ trigger: /toh:connect หรือ /toh:c
 /toh:connect supabase
 
 # Specific tables
-/toh:c เชื่อม products และ orders
+/toh:c connect products and orders
 
 # With auth
-/toh:connect supabase พร้อม auth
+/toh:connect supabase with auth
 
 # With storage
-/toh:c เพิ่ม image upload ไป Supabase Storage
+/toh:c add image upload to Supabase Storage
 ```
 
 ## Output Format
 
 ```markdown
-## ✅ เชื่อม Supabase เรียบร้อยค่ะ!
+## ✅ Supabase connected successfully!
 
-### สร้างไฟล์:
+### Files created:
 - `lib/supabase.ts` - Client configuration
 - `lib/api/products.ts` - Updated with real queries
-- `supabase/schema.sql` - Copy ไป SQL Editor
+- `supabase/schema.sql` - Copy to SQL Editor
 
-### ขั้นตอนถัดไป:
+### Next steps:
 
-1. **สร้าง Supabase Project**
-   - ไปที่ https://supabase.com/dashboard
+1. **Create Supabase Project**
+   - Go to https://supabase.com/dashboard
    - Create new project
 
-2. **รัน Schema**
-   - ไป SQL Editor
-   - Paste เนื้อหาจาก `supabase/schema.sql`
+2. **Run Schema**
+   - Go to SQL Editor
+   - Paste content from `supabase/schema.sql`
    - Run
 
-3. **เพิ่ม Environment Variables**
+3. **Add Environment Variables**
    ```env
    NEXT_PUBLIC_SUPABASE_URL=https://xxx.supabase.co
    NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
    ```
 
-4. **ทดสอบ**
+4. **Test**
    - Refresh app
-   - CRUD ควรทำงานกับ database จริงแล้ว
+   - CRUD should work with real database now
 ```
 
 ## Supported Services

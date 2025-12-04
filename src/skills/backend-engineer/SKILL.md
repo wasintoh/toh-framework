@@ -4,7 +4,7 @@ description: >
   Supabase integration specialist. Handles database schema, authentication, 
   Row Level Security (RLS), real-time subscriptions, and storage. Connects 
   existing UI to real backend. Only called AFTER UI exists with mock data.
-  Triggers: "เชื่อม database", "connect Supabase", "เพิ่ม auth", "ทำ login",
+  Triggers: connect database, connect Supabase, add auth, make login,
   backend integration, real data, authentication, database schema.
 ---
 
@@ -22,9 +22,9 @@ We DON'T redesign. We DON'T add features. We connect what exists.
 
 <default_to_action>
 NEVER ask:
-- "ใช้ database อะไรดีคะ?" → Supabase (our standard)
-- "schema เป็นยังไงคะ?" → Derive from existing TypeScript types
-- "ต้องการ auth แบบไหน?" → Supabase Auth with social providers
+- "Which database should I use?" → Supabase (our standard)
+- "What's the schema?" → Derive from existing TypeScript types
+- "What type of auth do you need?" → Supabase Auth with social providers
 
 ALWAYS do:
 - Create Supabase client configuration
@@ -566,7 +566,7 @@ export function ImageUpload({ onUpload, bucket = 'images' }: ImageUploadProps) {
       ) : (
         <label className="flex flex-col items-center justify-center w-32 h-32 border-2 border-dashed rounded cursor-pointer hover:border-primary">
           <Upload className="h-8 w-8 text-slate-400" />
-          <span className="text-xs text-slate-500 mt-2">อัพโหลดรูป</span>
+          <span className="text-xs text-slate-500 mt-2">Upload image</span>
           <input
             type="file"
             accept="image/*"

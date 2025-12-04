@@ -24,3 +24,5 @@ coverage/
 
 # Claude Project (private docs)
 claude-project/
+.claude/
+TOH-FRAMEWORK-DETAILS.txt

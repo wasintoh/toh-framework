@@ -2,9 +2,9 @@
 command: /toh:ui
 aliases: ["/toh:u"]
 description: >
-  สร้างหรือแก้ไข UI components, pages, หรือ layouts
-  ทำให้เห็นผลทันที ไม่ต้องรอ logic
-trigger: /toh:ui หรือ /toh:u ตามด้วย description
+  Create or edit UI components, pages, or layouts.
+  See results immediately, no need to wait for logic.
+trigger: /toh:ui or /toh:u followed by description
 ---
 
 # /toh:ui - Create/Edit UI
@@ -23,7 +23,7 @@ trigger: /toh:ui หรือ /toh:u ตามด้วย description
    ├── .toh/memory/active.md
    ├── .toh/memory/summary.md
    └── .toh/memory/decisions.md
-   (ถ้าไม่มี → สร้างใหม่)
+   (If doesn't exist → Create new)
 
 1. READ Skills
    ├── ~/.claude/skills/ui-first-builder/SKILL.md
@@ -45,53 +45,53 @@ trigger: /toh:ui หรือ /toh:u ตามด้วย description
    └── Dev server shows changes (HMR)
 
 5. 🚨 SAVE MEMORY (MANDATORY!)
-   ├── อัพเดท active.md
-   ├── เพิ่ม decisions.md (ถ้ามี)
-   └── อัพเดท summary.md (ถ้า feature เสร็จ)
+   ├── Update active.md
+   ├── Add to decisions.md (if any)
+   └── Update summary.md (if feature complete)
 ```
 
 ## Example Prompts
 
 ```bash
 # New page
-/toh:ui หน้า settings พร้อม form แก้ไขโปรไฟล์
+/toh:ui settings page with profile edit form
 
 # New component
-/toh:u product card component แสดงรูป ชื่อ ราคา ปุ่มเพิ่มลงตะกร้า
+/toh:u product card component showing image, name, price, add to cart button
 
 # Edit existing
-/toh:ui เพิ่ม sidebar ในหน้า dashboard
+/toh:ui add sidebar to dashboard page
 
 # Layout change
-/toh:u เปลี่ยน layout เป็น 2 columns บน desktop
+/toh:u change layout to 2 columns on desktop
 
 # Complex UI
-/toh:ui modal สำหรับ edit product พร้อม image upload
+/toh:ui modal for edit product with image upload
 ```
 
 ## Output Format
 
 ```markdown
-## ✅ UI พร้อมแล้วค่ะ!
+## ✅ UI ready!
 
-### สร้าง/แก้ไข:
-- `app/settings/page.tsx` - หน้า Settings
+### Created/Modified:
+- `app/settings/page.tsx` - Settings page
 - `components/features/profile-form.tsx` - Form component
 
 ### Preview:
-ดูได้ที่ http://localhost:3000/settings
+View at http://localhost:3000/settings
 
 ### Memory:
-✅ บันทึก memory แล้วค่ะ
+✅ Memory saved
 
-### ถัดไป:
-- `/toh:dev` เพิ่ม logic ให้ form ทำงานได้
+### Next:
+- `/toh:dev` add logic to make form functional
 ```
 
 ## Rules
 
 1. **ALWAYS** use shadcn/ui components
-2. **ALWAYS** add mock data (ภาษาไทย)
+2. **ALWAYS** add realistic mock data
 3. **ALWAYS** make responsive (mobile-first)
-4. **NEVER** ask "ต้องการ style แบบไหน?"
+4. **NEVER** ask "what style do you want?"
 5. **NEVER** create empty placeholder UI

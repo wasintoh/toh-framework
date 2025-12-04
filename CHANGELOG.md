@@ -2,6 +2,124 @@
 
 All notable changes to Toh Framework will be documented in this file.
 
+## [1.4.0] - 2025-12-04
+
+### ✨ Smart Single Command & Premium Experience
+
+#### Added - `/toh` Smart Command v3.0 (MAJOR!)
+
+```
+/toh [พิมพ์อะไรก็ได้]
+```
+
+- **Natural Language Routing** - AI วิเคราะห์ request → เลือก Agent ที่เหมาะสม
+- **No Memorization Required** - ไม่ต้องจำ commands อีกต่อไป
+- **Intelligent Routing** - Fix bugs → Fix Agent, Design → Design Agent, etc.
+- **Complexity Detection** - Auto-route complex tasks to Plan Agent
+- **Premium by Default** - New projects get 5+ pages with animations
+
+#### Added - Premium Experience Skill (NEW!)
+
+- **Multi-Page Generation** - 5+ pages per project (Home, Dashboard, Feature, Settings, Auth)
+- **Animation System** - PageTransition, StaggerContainer, FadeIn, CountUp
+- **Component Templates** - 15 ready-to-use premium components
+- **Zero TypeScript Errors** - Build verification before delivery
+- **WOW Factor** - Instant professional-looking results
+
+#### Added - Design Mastery Extended
+
+- **13 Business Profiles** - SaaS, E-commerce, Food, Healthcare, Finance, Education, Travel, Real-estate, Gaming, Social-media, AI-Chatbot, Creative, Enterprise
+- **Auto Profile Detection** - AI detects business type from request keywords
+- **Design Tokens** - Colors, typography, patterns per profile
+- **Trend Registry** - 2024-2025 design trends with suitability matrix
+
+#### Added - 4 New Skills
+
+| Skill | Description |
+|-------|-------------|
+| **premium-experience** | Multi-page apps with animations and WOW factor |
+| **prompt-optimizer** | สำหรับ AI SaaS - สร้าง system prompts ที่ดี |
+| **design-mastery** | Smart design ตาม business type (13 profiles) |
+| **response-format** | Response Excellence - ตอบครบ ไม่ต้องถามซ้ำ |
+
+#### Added - Component Templates (15 files)
+
+```
+src/templates/components/
+├── motion/        (4 files) - PageTransition, StaggerContainer, FadeIn, CountUp
+├── feedback/      (3 files) - LoadingSpinner, Skeleton, EmptyState
+├── interactive/   (2 files) - AnimatedCard, AnimatedButton
+└── layout/        (3 files) - Navbar, Sidebar, Footer
+
+src/templates/pages/
+├── landing-page.tsx
+├── dashboard-page.tsx
+└── auth-pages.tsx
+```
+
+#### Added - Response Excellence Format
+
+ทุก response จะมี 3 ส่วน:
+1. **✅ สิ่งที่ทำให้** - ไฟล์ที่สร้าง/แก้ไข
+2. **🎁 สิ่งที่คุณได้** - Features, URLs, benefits
+3. **👉 สิ่งที่คุณต้องทำ** - ขั้นตอนถัดไป (ชัดเจน!)
+
+#### Updated - Agents Enhanced
+
+- **ui-builder.md** - Premium Mode with multi-page generation
+- **design-reviewer.md** - Premium quality verification checklist
+- **vibe-orchestrator** - Premium Experience integration
+
+#### Stats Update
+
+- **Commands:** 13 → 14 (added `/toh` v3.0)
+- **Skills:** 18 → 23 (+5 new skills)
+- **Design Profiles:** 8 → 13 (+5 profiles)
+- **Component Templates:** 0 → 15 (NEW!)
+- **Page Templates:** 0 → 3 (NEW!)
+
+---
+
+## [1.3.0] - 2025-12-03
+
+### 🧠 AI Intelligence Upgrade
+
+#### Added - 8 New Skills
+
+| Skill | Description |
+|-------|-------------|
+| **business-context** | AI understands business types, auto-includes standard features |
+| **smart-suggestions** | AI suggests 2-3 next steps after every task |
+| **error-handling** | Auto-fix errors silently, user never sees raw errors |
+| **progress-tracking** | Visual progress bars and checklists |
+| **session-recovery** | Continue where you left off, even across IDEs |
+| **preview-mode** | See changes before applying |
+| **version-control** | Easy undo/rollback without knowing git |
+| **integrations** | One-click setup for Stripe, PromptPay, Email, Analytics |
+| **debug-protocol** | Systematic debugging with 3-5-Rewrite Rule |
+
+#### Updated - All Agents Enhanced
+
+- **plan-orchestrator.md** - Full skills integration, business context awareness
+- **ui-builder.md** - Preview mode, progress tracking, error handling
+- **dev-builder.md** - Error handling, smart suggestions
+- **test-runner.md** - Auto-fix loop, progress tracking
+- **backend-connector.md** - Integrations skill, version control
+- **design-reviewer.md** - Preview mode, smart suggestions
+
+#### Updated - Command Recognition
+
+- Added "Command Without Description" behavior for all IDE handlers
+- AI now asks "What would you like me to help with?" instead of executing blindly
+- Applied to Claude Code, Gemini CLI, Cursor, Codex CLI
+
+#### Stats Update
+
+- **Skills:** 14 → 17 (+7 new skills but some combined)
+- **Total files:** 45+ markdown files
+
+---
+
 ## [1.2.2] - 2025-12-02
 
 ### 📚 Documentation Update

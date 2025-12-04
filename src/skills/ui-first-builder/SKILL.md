@@ -4,8 +4,8 @@ description: >
   Creates production-ready UI immediately from any description. Generates complete 
   pages, components, and realistic mock data in FIRST response. Uses Next.js 14 + 
   Tailwind + shadcn/ui. Never asks questions - infers everything from context.
-  Triggers: UI creation, page building, component generation, "สร้างหน้า", "ทำ UI",
-  "build interface", screen design, layout requests.
+  Triggers: UI creation, page building, component generation, build interface, 
+  screen design, layout requests.
 ---
 
 # UI First Builder
@@ -22,14 +22,14 @@ This is what makes Lovable magical. We replicate it here.
 
 <default_to_action>
 NEVER ask:
-- "ต้องการกี่หน้าคะ?" → Infer from description, start with essential pages
-- "color scheme อะไรดีคะ?" → Use modern neutral (slate/zinc) + one accent
-- "ต้องการ feature อะไรบ้าง?" → Infer standard features for this app type
-- "responsive มั้ยคะ?" → ALWAYS responsive, mobile-first
+- "How many pages do you want?" → Infer from description, start with essential pages
+- "What color scheme?" → Use modern neutral (slate/zinc) + one accent
+- "What features do you need?" → Infer standard features for this app type
+- "Should it be responsive?" → ALWAYS responsive, mobile-first
 
 ALWAYS do:
 - Create complete, working pages
-- Include realistic Thai mock data
+- Include realistic mock data (based on language setting in CLAUDE.md)
 - Add hover states and transitions
 - Make it look professional immediately
 </default_to_action>
@@ -84,22 +84,24 @@ import { Input } from "@/components/ui/input"
 <mock_data_rules>
 ## Mock Data Guidelines
 
-### ✅ GOOD Mock Data (Realistic Thai)
+Mock data language depends on project language setting in CLAUDE.md.
+
+### ✅ GOOD Mock Data (English - Default)
 ```typescript
 const mockUsers = [
-  { id: 1, name: "สมชาย วงศ์สวัสดิ์", email: "somchai@company.co.th", role: "Admin" },
-  { id: 2, name: "สมหญิง รักดี", email: "somying@company.co.th", role: "User" },
-  { id: 3, name: "วิชัย เจริญสุข", email: "wichai@company.co.th", role: "Editor" },
+  { id: 1, name: "John Smith", email: "john@company.com", role: "Admin" },
+  { id: 2, name: "Sarah Johnson", email: "sarah@company.com", role: "User" },
+  { id: 3, name: "Michael Davis", email: "michael@company.com", role: "Editor" },
 ]
 
 const mockProducts = [
-  { id: 1, name: "กาแฟดริป House Blend", price: 120, stock: 45 },
-  { id: 2, name: "ชาเขียวมัทฉะลาเต้", price: 95, stock: 32 },
-  { id: 3, name: "โกโก้ร้อน", price: 85, stock: 28 },
+  { id: 1, name: "House Blend Drip Coffee", price: 4.50, stock: 45 },
+  { id: 2, name: "Matcha Green Tea Latte", price: 5.25, stock: 32 },
+  { id: 3, name: "Hot Chocolate", price: 3.75, stock: 28 },
 ]
 
 const mockStats = {
-  totalRevenue: 158420,
+  totalRevenue: 15842,
   ordersToday: 47,
   newCustomers: 12,
   conversionRate: 3.2,
@@ -170,8 +172,8 @@ export default function DashboardPage() {
     <div className="p-4 md:p-6 space-y-6">
       {/* Stats Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard title="รายได้วันนี้" value="฿12,450" change="+12%" />
-        <StatCard title="ออเดอร์" value="47" change="+5%" />
+        <StatCard title="Today's Revenue" value="$12,450" change="+12%" />
+        <StatCard title="Orders" value="47" change="+5%" />
         {/* ... */}
       </div>
       
@@ -196,10 +198,10 @@ export default function ListPage() {
     <div className="p-4 md:p-6 space-y-4">
       {/* Header with Search + Add Button */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <h1 className="text-2xl font-semibold">รายการสินค้า</h1>
+        <h1 className="text-2xl font-semibold">Products</h1>
         <div className="flex gap-2">
-          <Input placeholder="ค้นหา..." className="w-full md:w-64" />
-          <Button>เพิ่มสินค้า</Button>
+          <Input placeholder="Search..." className="w-full md:w-64" />
+          <Button>Add Product</Button>
         </div>
       </div>
       
@@ -221,14 +223,14 @@ export default function FormPage() {
     <div className="p-4 md:p-6 max-w-2xl mx-auto">
       <Card>
         <CardHeader>
-          <CardTitle>เพิ่มสินค้าใหม่</CardTitle>
+          <CardTitle>Add New Product</CardTitle>
         </CardHeader>
         <CardContent>
           <form className="space-y-4">
             {/* Form fields */}
             <div className="flex justify-end gap-2">
-              <Button variant="outline">ยกเลิก</Button>
-              <Button>บันทึก</Button>
+              <Button variant="outline">Cancel</Button>
+              <Button>Save</Button>
             </div>
           </form>
         </CardContent>
@@ -253,9 +255,9 @@ export default function FormPage() {
 ```tsx
 <div className="flex flex-col items-center justify-center py-12 text-center">
   <Package className="h-12 w-12 text-slate-300 mb-4" />
-  <h3 className="text-lg font-medium">ยังไม่มีรายการ</h3>
-  <p className="text-slate-500 mb-4">เริ่มต้นสร้างรายการแรกของคุณ</p>
-  <Button>เพิ่มรายการใหม่</Button>
+  <h3 className="text-lg font-medium">No items yet</h3>
+  <p className="text-slate-500 mb-4">Start by creating your first item</p>
+  <Button>Add New Item</Button>
 </div>
 ```
 
@@ -275,7 +277,7 @@ export default function FormPage() {
 ## Before Completing, Verify:
 
 - [ ] All pages render without errors
-- [ ] Mock data looks realistic (Thai names, realistic numbers)
+- [ ] Mock data looks realistic (per language setting)
 - [ ] Responsive design works (mobile → desktop)
 - [ ] All buttons have hover states
 - [ ] No "Lorem ipsum" or "Test" placeholder text

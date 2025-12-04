@@ -1,22 +1,22 @@
 # 🧠 Memory System Skill
 
 > Toh Framework Auto Memory - Zero Config, Seamless Context
-> **CRITICAL:** ทุก Agent ต้องใช้ Memory System นี้!
+> **CRITICAL:** Every Agent MUST use this Memory System!
 
 ---
 
 ## Overview
 
-ระบบ Memory อัตโนมัติที่ทำให้ AI จำ context ได้ตลอด โดย User ไม่ต้องทำอะไรเลย
+Automatic memory system that enables AI to maintain context throughout, requiring zero user effort.
 
 ### Key Principles
-- ✅ **Zero Config** - ไม่ต้อง setup อะไร
-- ✅ **Auto Save** - บันทึกอัตโนมัติทุกครั้งที่ทำงานเสร็จ
-- ✅ **Auto Load** - โหลดอัตโนมัติทุกครั้งที่เริ่ม session
-- ✅ **Low Token** - ใช้ ~2,000 tokens เท่านั้น
-- ✅ **Selective Read** - อ่านเฉพาะที่จำเป็น
-- ✅ **IDE Agnostic** - ใช้ได้ทุก IDE
-- ✅ **Model Agnostic** - ย้าย model ได้
+- ✅ **Zero Config** - No setup required
+- ✅ **Auto Save** - Automatically saves after every task completion
+- ✅ **Auto Load** - Automatically loads at session start
+- ✅ **Low Token** - Uses only ~2,000 tokens
+- ✅ **Selective Read** - Reads only essential files
+- ✅ **IDE Agnostic** - Works with any IDE
+- ✅ **Model Agnostic** - Portable across AI models
 
 ---
 
@@ -25,14 +25,14 @@
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │  🚨 RULE 1: MUST READ before working                            │
-│     - ห้ามเริ่มงานโดยไม่อ่าน Memory                              │
-│     - อ่านเฉพาะ 3 ไฟล์หลัก (selective read)                     │
+│     - Never start work without reading Memory                   │
+│     - Read only 3 main files (selective read)                   │
 └─────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────┐
 │  🚨 RULE 2: MUST SAVE after completing work                     │
-│     - ห้ามจบงานโดยไม่ save                                      │
-│     - ไม่ต้องถาม User → ทำอัตโนมัติ                              │
+│     - Never finish without saving                               │
+│     - Don't ask User → Do it automatically                      │
 └─────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────┐
@@ -50,10 +50,10 @@
 .toh/
 ├── config.json              # Toh configuration
 └── memory/
-    ├── active.md            # 🔥 งานปัจจุบัน (~500 tokens) - โหลดเสมอ
-    ├── summary.md           # 📋 สรุปโปรเจค (~1,000 tokens) - โหลดเสมอ
-    ├── decisions.md         # 🧠 การตัดสินใจ (~500 tokens) - โหลดเสมอ
-    └── archive/             # 📦 ประวัติเก่า - โหลดเมื่อต้องการเท่านั้น
+    ├── active.md            # 🔥 Current task (~500 tokens) - Always load
+    ├── summary.md           # 📋 Project summary (~1,000 tokens) - Always load
+    ├── decisions.md         # 🧠 Key decisions (~500 tokens) - Always load
+    └── archive/             # 📦 Historical data - Load only when needed
         ├── 2024-11-27.md
         └── ...
 ```
@@ -62,70 +62,70 @@
 
 ## 🔄 Selective Read Protocol
 
-### เมื่อเริ่ม Session (MANDATORY)
+### At Session Start (MANDATORY)
 
 ```
-STEP 1: ตรวจสอบ Memory
-        ├── มี .toh/memory/ ? → อ่านต่อ
-        └── ไม่มี ? → สร้างใหม่
+STEP 1: Check Memory
+        ├── .toh/memory/ exists? → Continue reading
+        └── Doesn't exist? → Create new
 
 STEP 2: Selective Read (parallel)
-        ├── อ่าน active.md
-        ├── อ่าน summary.md
-        └── อ่าน decisions.md
+        ├── Read active.md
+        ├── Read summary.md
+        └── Read decisions.md
         
-        ⚠️ ห้ามอ่าน archive/ ในขั้นตอนนี้!
+        ⚠️ DO NOT read archive/ at this step!
 
 STEP 3: Build Context
-        ├── โปรเจคคืออะไร?
-        ├── กำลังทำอะไร?
-        ├── ทำอะไรไปแล้ว?
-        └── ต้องทำอะไรต่อ?
+        ├── What is this project?
+        ├── What are we working on?
+        ├── What's been completed?
+        └── What's next?
 
-STEP 4: Acknowledge (แจ้ง User สั้นๆ)
-        "หนูโหลด memory แล้วค่ะ! เราทำ [X] อยู่
-         เมื่อกี้ทำ [Y] เสร็จแล้ว พร้อมทำต่อค่ะ!"
+STEP 4: Acknowledge (brief message to User)
+        "Memory loaded! Working on [X].
+         Just completed [Y]. Ready to continue!"
 ```
 
-### เมื่อไหร่ต้องอ่าน archive/?
+### When to Read archive/?
 
 ```
-✅ อ่านเมื่อ:
-   - User ถามเรื่องเก่า
-   - ต้องการ context เพิ่ม
-   - Debug ปัญหาที่เคยแก้
-   - User สั่ง /toh:memory history
+✅ Read when:
+   - User asks about past work
+   - Need additional context
+   - Debugging previously solved issues
+   - User runs /toh:memory history
 
-❌ ไม่อ่านเมื่อ:
-   - ทำงานปกติ
-   - สร้าง feature ใหม่
-   - มี context พอจาก 3 ไฟล์หลัก
+❌ Don't read when:
+   - Normal work
+   - Creating new features
+   - Have sufficient context from 3 main files
 ```
 
 ---
 
 ## 💾 Auto-Save Protocol
 
-### เมื่อทำงานเสร็จ (MANDATORY)
+### After Completing Work (MANDATORY)
 
 ```
-STEP 1: อัพเดท active.md (ทำทุกครั้ง!)
-        ├── Current Focus → งานที่ทำ
-        ├── In Progress → สิ่งที่เสร็จ/ค้าง
-        └── Next Steps → สิ่งที่ควรทำต่อ
+STEP 1: Update active.md (always!)
+        ├── Current Focus → Task just worked on
+        ├── In Progress → What's done/pending
+        └── Next Steps → What should be done next
 
-STEP 2: เพิ่ม decisions.md (ถ้ามีการตัดสินใจ)
+STEP 2: Add to decisions.md (if decisions made)
         └── | Date | Decision | Reason |
 
-STEP 3: อัพเดท summary.md (ถ้า feature เสร็จ)
-        └── Completed Features: + [feature ใหม่]
+STEP 3: Update summary.md (if feature complete)
+        └── Completed Features: + [new feature]
 
-STEP 4: Auto-Archive (ถ้า active.md > 50 lines)
-        ├── ย้ายไป archive/YYYY-MM-DD.md
-        └── เคลียร์ active.md
+STEP 4: Auto-Archive (if active.md > 50 lines)
+        ├── Move to archive/YYYY-MM-DD.md
+        └── Clear active.md
 
 STEP 5: Confirm
-        └── "✅ บันทึก memory แล้วค่ะ"
+        └── "✅ Memory saved"
 ```
 
 ---
@@ -137,7 +137,7 @@ STEP 5: Confirm
 | active.md | 30 | ~500 | **Always** |
 | summary.md | 60 | ~1,000 | **Always** |
 | decisions.md | 30 | ~500 | **Always** |
-| archive/ | ไม่จำกัด | varies | **On-demand** |
+| archive/ | Unlimited | varies | **On-demand** |
 | **Total** | 120 | **~2,000** | - |
 
 ---
@@ -149,13 +149,13 @@ STEP 5: Confirm
 # 🔥 Active Task
 
 ## Current Focus
-[รอคำสั่งจากผู้ใช้]
+[Awaiting user instructions]
 
 ## In Progress
-- (ยังไม่มี)
+- (None yet)
 
 ## Next Steps
-- รอคำสั่งจากผู้ใช้
+- Awaiting user instructions
 
 ---
 *Last updated: YYYY-MM-DD*
@@ -166,14 +166,14 @@ STEP 5: Confirm
 # 📋 Project Summary
 
 ## Project Overview
-- Name: [ชื่อโปรเจค]
+- Name: [Project Name]
 - Tech Stack: Next.js 14, Tailwind, shadcn/ui, Zustand, Supabase
 
 ## Completed Features
-- (ยังไม่มี)
+- (None yet)
 
 ## Important Notes
-- ใช้ Toh Framework v1.1.0
+- Using Toh Framework v1.2.x
 
 ---
 *Last updated: YYYY-MM-DD*
@@ -186,7 +186,7 @@ STEP 5: Confirm
 ## Architecture Decisions
 | Date | Decision | Reason |
 |------|----------|--------|
-| YYYY-MM-DD | ใช้ Toh Framework | AI-Orchestration Driven Development |
+| YYYY-MM-DD | Use Toh Framework | AI-Orchestration Driven Development |
 
 ---
 *Last updated: YYYY-MM-DD*
@@ -196,15 +196,15 @@ STEP 5: Confirm
 
 ## 🔗 Agent Integration
 
-### ทุก Agent ต้องทำ:
+### Every Agent MUST:
 
 ```typescript
-// Pseudo-code สำหรับทุก Agent
+// Pseudo-code for all Agents
 
 async function executeTask(userRequest) {
   // 1. 🚨 MANDATORY: Read Memory First
   const memory = await selectiveReadMemory()
-  // อ่านเฉพาะ: active.md, summary.md, decisions.md
+  // Read only: active.md, summary.md, decisions.md
   
   // 2. Build Context
   const context = buildContext(memory)
@@ -220,7 +220,7 @@ async function executeTask(userRequest) {
   })
   
   // 5. Report with Memory Status
-  return report(result, "✅ บันทึก memory แล้วค่ะ")
+  return report(result, "✅ Memory saved")
 }
 ```
 
@@ -228,13 +228,13 @@ async function executeTask(userRequest) {
 
 ## ⚠️ Anti-Patterns
 
-| ❌ ห้ามทำ | ✅ ทำแบบนี้ |
+| ❌ Don't | ✅ Do This |
 |----------|-----------|
-| อ่าน archive/ ทุกครั้ง | อ่านเฉพาะ 3 ไฟล์หลัก |
-| ลืม save memory | Save ทุกครั้งหลังจบงาน |
-| ถาม User ว่าจะ save ไหม | ทำอัตโนมัติ |
-| เขียน verbose | เขียนกระชับ 1-2 บรรทัด |
-| เก็บ sensitive data | เก็บแค่ project context |
+| Read archive/ every time | Read only 3 main files |
+| Forget to save memory | Save after every task |
+| Ask User whether to save | Do it automatically |
+| Write verbose content | Write concise 1-2 lines |
+| Store sensitive data | Store only project context |
 
 ---
 
@@ -242,7 +242,7 @@ async function executeTask(userRequest) {
 
 ### Selective Read (Start)
 ```
-อ่าน parallel:
+Read in parallel:
 - .toh/memory/active.md
 - .toh/memory/summary.md
 - .toh/memory/decisions.md
@@ -250,21 +250,21 @@ async function executeTask(userRequest) {
 
 ### Auto-Save (End)
 ```
-อัพเดท:
-1. active.md ← ทำทุกครั้ง
-2. decisions.md ← ถ้ามี
-3. summary.md ← ถ้า feature เสร็จ
+Update:
+1. active.md ← Always
+2. decisions.md ← If any
+3. summary.md ← If feature complete
 ```
 
 ### Acknowledge Format
 ```
-"หนูโหลด memory แล้วค่ะ! 📚
-เราทำ [project] อยู่
-เมื่อกี้ทำ [last task] เสร็จ
-ต่อไปจะทำ [next step] ค่ะ"
+"Memory loaded! 📚
+Working on [project].
+Just completed [last task].
+Next up: [next step]"
 ```
 
 ### Save Confirm Format
 ```
-"✅ บันทึก memory แล้วค่ะ"
+"✅ Memory saved"
 ```

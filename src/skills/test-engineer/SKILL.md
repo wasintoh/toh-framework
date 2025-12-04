@@ -2,16 +2,16 @@
 
 ## Overview
 
-Skill สำหรับการทดสอบระบบอัตโนมัติด้วย Playwright พร้อม auto-fix loop
+Skill for automated testing with Playwright, including auto-fix loop capability.
 
 ## Core Philosophy
 
-> **"Test จนผ่าน ไม่ใช่แค่ Test แล้วรายงาน"**
+> **"Test until it passes, not just test and report"**
 
-1. **Auto-Generate Tests** - สร้าง test cases จาก UI อัตโนมัติ
-2. **Auto-Fix Loop** - ถ้า fail ก็แก้แล้ว test ใหม่จนผ่าน
-3. **Human-Readable Reports** - รายงานที่อ่านเข้าใจง่าย
-4. **Thai-First** - Error messages และ reports เป็นภาษาไทย
+1. **Auto-Generate Tests** - Generate test cases from UI automatically
+2. **Auto-Fix Loop** - If fails, fix and re-test until passing
+3. **Human-Readable Reports** - Easy to understand reports
+4. **Language-Adaptive** - Error messages adapt to project language setting
 
 ## Tech Stack
 
@@ -32,7 +32,7 @@ npx playwright install
 
 ### 2. Config File
 
-สร้าง `playwright.config.ts`:
+Create `playwright.config.ts`:
 
 ```typescript
 import { defineConfig, devices } from '@playwright/test'
@@ -94,7 +94,7 @@ tests/
 
 ### Pattern 1: Page Render Test
 
-ทุกหน้าต้องมี test ว่า render ได้ถูกต้อง:
+Every page must have a test to verify correct rendering:
 
 ```typescript
 import { test, expect } from '@playwright/test'
@@ -104,11 +104,11 @@ test.describe('Products Page', () => {
     await page.goto('/products')
     
     // Check title
-    await expect(page).toHaveTitle(/สินค้า/)
+    await expect(page).toHaveTitle(/Products/)
     
     // Check main heading
     await expect(
-      page.getByRole('heading', { name: 'สินค้าทั้งหมด' })
+      page.getByRole('heading', { name: 'All Products' })
     ).toBeVisible()
     
     // Check key elements exist
@@ -120,7 +120,7 @@ test.describe('Products Page', () => {
 
 ### Pattern 2: Form Validation Test
 
-ทุก form ต้อง test validation:
+Every form must have validation tests:
 
 ```typescript
 test.describe('Register Form', () => {
@@ -130,26 +130,26 @@ test.describe('Register Form', () => {
 
   test('should show validation errors for empty fields', async ({ page }) => {
     // Click submit without filling
-    await page.getByRole('button', { name: 'สมัครสมาชิก' }).click()
+    await page.getByRole('button', { name: 'Register' }).click()
     
     // Check error messages
-    await expect(page.getByText('กรุณากรอกชื่อ')).toBeVisible()
-    await expect(page.getByText('กรุณากรอกอีเมล')).toBeVisible()
-    await expect(page.getByText('กรุณากรอกรหัสผ่าน')).toBeVisible()
+    await expect(page.getByText('Name is required')).toBeVisible()
+    await expect(page.getByText('Email is required')).toBeVisible()
+    await expect(page.getByText('Password is required')).toBeVisible()
   })
 
   test('should validate email format', async ({ page }) => {
-    await page.getByLabel('อีเมล').fill('invalid-email')
-    await page.getByRole('button', { name: 'สมัครสมาชิก' }).click()
+    await page.getByLabel('Email').fill('invalid-email')
+    await page.getByRole('button', { name: 'Register' }).click()
     
-    await expect(page.getByText('รูปแบบอีเมลไม่ถูกต้อง')).toBeVisible()
+    await expect(page.getByText('Invalid email format')).toBeVisible()
   })
 
   test('should validate password strength', async ({ page }) => {
-    await page.getByLabel('รหัสผ่าน').fill('123')
-    await page.getByRole('button', { name: 'สมัครสมาชิก' }).click()
+    await page.getByLabel('Password').fill('123')
+    await page.getByRole('button', { name: 'Register' }).click()
     
-    await expect(page.getByText('รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร')).toBeVisible()
+    await expect(page.getByText('Password must be at least 8 characters')).toBeVisible()
   })
 })
 ```
@@ -167,7 +167,7 @@ test.describe('Checkout Flow', () => {
     
     // Step 2: Add to cart
     await page.getByTestId('product-card').first().click()
-    await page.getByRole('button', { name: 'เพิ่มลงตะกร้า' }).click()
+    await page.getByRole('button', { name: 'Add to Cart' }).click()
     await expect(page.getByTestId('cart-count')).toHaveText('1')
     
     // Step 3: Go to cart
@@ -176,27 +176,27 @@ test.describe('Checkout Flow', () => {
     await expect(page.getByTestId('cart-item')).toHaveCount(1)
     
     // Step 4: Checkout
-    await page.getByRole('button', { name: 'ชำระเงิน' }).click()
+    await page.getByRole('button', { name: 'Checkout' }).click()
     await expect(page).toHaveURL('/checkout')
     
     // Step 5: Fill shipping info
-    await page.getByLabel('ชื่อ-นามสกุล').fill('สมชาย ใจดี')
-    await page.getByLabel('ที่อยู่').fill('123 ถ.สุขุมวิท')
-    await page.getByLabel('เบอร์โทร').fill('0812345678')
+    await page.getByLabel('Full Name').fill('John Smith')
+    await page.getByLabel('Address').fill('123 Main Street')
+    await page.getByLabel('Phone').fill('555-123-4567')
     
     // Step 6: Confirm order
-    await page.getByRole('button', { name: 'ยืนยันการสั่งซื้อ' }).click()
+    await page.getByRole('button', { name: 'Confirm Order' }).click()
     
     // Step 7: Success
     await expect(page).toHaveURL(/\/order\//)
-    await expect(page.getByText('สั่งซื้อสำเร็จ')).toBeVisible()
+    await expect(page.getByText('Order Successful')).toBeVisible()
   })
 })
 ```
 
 ### Pattern 4: Responsive Test
 
-Test บน multiple viewports:
+Test on multiple viewports:
 
 ```typescript
 test.describe('Responsive Design', () => {
@@ -284,16 +284,16 @@ test.describe('Responsive Design', () => {
 
 | Error Pattern | Root Cause | Auto-Fix Strategy |
 |---------------|------------|-------------------|
-| `strict mode violation` | Multiple elements match selector | เปลี่ยนเป็น specific selector |
-| `Timeout waiting for selector` | Element ไม่ appear | เพิ่ม wait หรือ check condition |
-| `expect.toBeVisible failed` | Element hidden/not rendered | ตรวจสอบ state/condition |
-| `Navigation timeout` | Page load ช้า | เพิ่ม timeout หรือ optimize |
-| `net::ERR_CONNECTION_REFUSED` | Server ไม่ start | ตรวจสอบ webServer config |
-| `Element is not clickable` | Element ถูก overlay | Scroll into view หรือ wait |
+| `strict mode violation` | Multiple elements match selector | Use more specific selector |
+| `Timeout waiting for selector` | Element doesn't appear | Add wait or check condition |
+| `expect.toBeVisible failed` | Element hidden/not rendered | Check state/condition |
+| `Navigation timeout` | Page loads slowly | Increase timeout or optimize |
+| `net::ERR_CONNECTION_REFUSED` | Server not started | Check webServer config |
+| `Element is not clickable` | Element is overlaid | Scroll into view or wait |
 
 ### Fix Context Template
 
-เมื่อเรียก `/toh:fix` ส่ง context นี้:
+When calling `/toh:fix`, send this context:
 
 ```markdown
 ## Test Failure Report
@@ -305,14 +305,14 @@ test.describe('Responsive Design', () => {
 ### Error Message
 ```
 Error: locator.click: Error: strict mode violation: 
-getByRole('button', { name: 'เข้าสู่ระบบ' }) resolved to 2 elements
+getByRole('button', { name: 'Login' }) resolved to 2 elements
 ```
 
 ### Code Context
 ```typescript
 // Line 23-27
-await page.getByLabel('รหัสผ่าน').fill('password123')
-await page.getByRole('button', { name: 'เข้าสู่ระบบ' }).click() // ← Error here
+await page.getByLabel('Password').fill('password123')
+await page.getByRole('button', { name: 'Login' }).click() // ← Error here
 await expect(page).toHaveURL('/dashboard')
 ```
 
@@ -320,14 +320,14 @@ await expect(page).toHaveURL('/dashboard')
 ![failure](test-results/login-failure.png)
 
 ### Suggested Fixes
-1. ใช้ `getByRole('button', { name: 'เข้าสู่ระบบ', exact: true })`
-2. ใช้ `getByTestId('login-submit-button')`
-3. ใช้ `.first()` หรือ `.nth(0)`
+1. Use `getByRole('button', { name: 'Login', exact: true })`
+2. Use `getByTestId('login-submit-button')`
+3. Use `.first()` or `.nth(0)`
 ```
 
 ## Report Format
 
-### Console Output (สั้น กระชับ)
+### Console Output (Short & Concise)
 
 ```
 🧪 Running tests...
@@ -350,10 +350,10 @@ await expect(page).toHaveURL('/dashboard')
 
 ### Full Report (HTML)
 
-สร้าง HTML report ที่:
+Generate HTML report at:
 - `playwright-report/index.html`
 
-เปิดดูด้วย:
+View with:
 ```bash
 npx playwright show-report
 ```
@@ -362,19 +362,19 @@ npx playwright show-report
 
 ### 1. Use data-testid
 
-เพิ่ม `data-testid` ให้ elements สำคัญ:
+Add `data-testid` to important elements:
 
 ```tsx
 // ✅ Good
-<button data-testid="submit-order">สั่งซื้อ</button>
+<button data-testid="submit-order">Order Now</button>
 
-// ❌ Bad - อาจเปลี่ยน text ได้
-<button>สั่งซื้อ</button>
+// ❌ Bad - text might change
+<button>Order Now</button>
 ```
 
 ### 2. Wait for Network Idle
 
-สำหรับหน้าที่ load data:
+For pages that load data:
 
 ```typescript
 await page.goto('/products', { waitUntil: 'networkidle' })
@@ -384,11 +384,11 @@ await page.goto('/products', { waitUntil: 'networkidle' })
 
 ```typescript
 // ✅ Good - Auto-retry
-await expect(page.getByText('สำเร็จ')).toBeVisible()
+await expect(page.getByText('Success')).toBeVisible()
 
 // ❌ Bad - No retry
 const text = await page.textContent('.message')
-expect(text).toBe('สำเร็จ')
+expect(text).toBe('Success')
 ```
 
 ### 4. Group Related Tests
@@ -418,13 +418,13 @@ test.describe('Product Management', () => {
 export const testUser = {
   email: 'test@example.com',
   password: 'TestPassword123!',
-  name: 'ทดสอบ ระบบ',
+  name: 'Test User',
 }
 
 export const testProduct = {
-  name: 'กาแฟดริป',
-  price: 120,
-  category: 'เครื่องดื่ม',
+  name: 'Drip Coffee',
+  price: 4.50,
+  category: 'Beverages',
 }
 ```
 
@@ -449,7 +449,7 @@ export const testProduct = {
 
 ## MCP Integration
 
-ใช้ Playwright MCP สำหรับ:
+Use Playwright MCP for:
 - Browser automation
 - Screenshot capture
 - Network interception

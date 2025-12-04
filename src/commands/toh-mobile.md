@@ -2,9 +2,9 @@
 command: /toh:mobile
 aliases: ["/toh:m"]
 description: >
-  สร้าง mobile app ด้วย Expo (React Native)
-  ใช้ NativeWind (Tailwind for RN) และ Zustand
-trigger: /toh:mobile หรือ /toh:m
+  Create mobile app with Expo (React Native).
+  Uses NativeWind (Tailwind for RN) and Zustand.
+trigger: /toh:mobile or /toh:m
 ---
 
 # /toh:mobile - Expo Mobile App
@@ -23,7 +23,7 @@ trigger: /toh:mobile หรือ /toh:m
    ├── .toh/memory/active.md
    ├── .toh/memory/summary.md
    └── .toh/memory/decisions.md
-   (ถ้าไม่มี → จะสร้างใหม่หลังจบ)
+   (If doesn't exist → Will create after completion)
 
 1. READ Skills
    └── ~/.claude/skills/platform-specialist/SKILL.md (Expo section)
@@ -47,9 +47,9 @@ trigger: /toh:mobile หรือ /toh:m
    └── npx expo start
 
 6. 🚨 SAVE MEMORY (MANDATORY!)
-   ├── สร้าง .toh/memory/ folder (ถ้าไม่มี)
-   ├── อัพเดท active.md, summary.md, decisions.md
-   └── บันทึก project info + features ที่สร้าง
+   ├── Create .toh/memory/ folder (if doesn't exist)
+   ├── Update active.md, summary.md, decisions.md
+   └── Record project info + features created
 ```
 
 ## Example Prompts
@@ -59,41 +59,41 @@ trigger: /toh:mobile หรือ /toh:m
 /toh:mobile expense tracker app
 
 # Specific features
-/toh:m app บันทึกรายจ่าย มี tabs: หน้าแรก, เพิ่มรายการ, รายงาน
+/toh:m expense tracking app with tabs: Home, Add Entry, Reports
 
 # Convert from web concept
-/toh:mobile แปลง concept จาก web app เป็น mobile
+/toh:mobile convert concept from web app to mobile
 ```
 
 ## Output Format
 
 ```markdown
-## ✅ Mobile App พร้อมแล้วค่ะ!
+## ✅ Mobile App ready!
 
-### สร้าง:
+### Created:
 - Expo project with tabs template
 - NativeWind configured
 - Zustand store ready
 
 ### Screens:
-- `app/(tabs)/index.tsx` - หน้าแรก
-- `app/(tabs)/add.tsx` - เพิ่มรายการ
-- `app/(tabs)/reports.tsx` - รายงาน
+- `app/(tabs)/index.tsx` - Home
+- `app/(tabs)/add.tsx` - Add Entry
+- `app/(tabs)/reports.tsx` - Reports
 
-### รัน:
+### Run:
 ```bash
 cd [project-name]
 npx expo start
 ```
 
-### ทดสอบ:
-- iOS: กด `i` (ต้องมี Xcode)
-- Android: กด `a` (ต้องมี Android Studio)
+### Test:
+- iOS: Press `i` (requires Xcode)
+- Android: Press `a` (requires Android Studio)
 - Expo Go: Scan QR code
 
-### ถัดไป:
-- `/toh:ui` เพิ่มหน้าจอ
-- `/toh:connect` เชื่อม Supabase
+### Next:
+- `/toh:ui` add screens
+- `/toh:connect` connect Supabase
 ```
 
 ## Mobile Stack

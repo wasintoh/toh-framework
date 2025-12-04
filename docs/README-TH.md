@@ -9,6 +9,7 @@
 [![License](https://img.shields.io/npm/l/toh-framework.svg?style=flat-square)](https://github.com/wasintoh/toh-framework/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/wasintoh/toh-framework?style=flat-square)](https://github.com/wasintoh/toh-framework)
 
+🌐 **เว็บไซต์หลัก:** [tohframework.dev](https://tohframework.dev)
 
 > 📖 **[🇬🇧 English Documentation](../README.md)**
 
@@ -36,23 +37,34 @@ Toh Framework ทำให้คุณ:
 - **💼 พร้อมใช้งานจริง** - ไม่ใช่ prototype แต่ใช้งานได้จริง
 - **🔧 รองรับหลาย IDE** - Claude Code, Cursor, Gemini CLI, Codex CLI
 
-## 🆕 มีอะไรใหม่ใน v1.2.2
+## 🆕 มีอะไรใหม่ใน v1.4.0
 
-### 🧠 Memory Enforcement
-Memory system ตอนนี้ **บังคับใช้** - ไม่มีลืม context อีกต่อไป!
-- ทุก commands อ่าน memory ก่อนเริ่มงาน
-- ทุก commands บันทึก memory ก่อนจบงาน
-- ต้อง confirm: "✅ บันทึก memory แล้วครับ"
+### ✨ Smart Single Command & Premium Experience
 
-### 📊 Selective Read Protocol (ประหยัด Token)
-โหลด memory อย่างฉลาดเพื่อประหยัด tokens:
+| Feature | Description |
+|---------|-------------|
+| **`/toh` Smart Command** | พิมพ์อะไรก็ได้ AI เลือก Agent ให้! |
+| **Premium Experience** | สร้างแอพ 5+ หน้า พร้อม animations ในคำสั่งเดียว |
+| **Design Mastery** | Smart design ตาม business type (13 profiles) |
+| **Prompt Optimizer** | สำหรับ AI SaaS - สร้าง system prompts ที่ดี |
+| **Response Format** | ตอบครบ 3 ส่วน: ทำอะไร / ได้อะไร / ต้องทำอะไร |
+
+### 🌟 Premium by Default
+เมื่อสร้างแอพใหม่ จะได้:
+- ✅ 5+ หน้าอัตโนมัติ (Home, Dashboard, Feature, Settings, Auth)
+- ✅ Animations ครบ (Page transitions, hover effects, stagger)
+- ✅ Loading states ทุกหน้า
+- ✅ Empty states ออกแบบแล้ว
+- ✅ Zero TypeScript errors
+
+### 🎨 Design Mastery (13 Business Profiles)
+AI เลือก design ให้เหมาะกับ business:
 ```
-โหลดเสมอ (~2,000 tokens):
-├── active.md     (~500 tokens)  - งานปัจจุบัน
-├── summary.md    (~1,000 tokens) - ภาพรวมโปรเจค
-└── decisions.md  (~500 tokens)  - decisions ที่ผ่านมา
-
-❌ archive/ - โหลดเมื่อ user ถามถึง history เท่านั้น
+ร้านอาหาร → สี warm, font Playfair
+SaaS → สี professional blue
+E-commerce → สี trust emerald
+Gaming → Dark mode, neon accents
+...และอื่นๆ อีก 9 profiles
 ```
 
 ### 🧠 `/toh:plan` - The Brain

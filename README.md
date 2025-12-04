@@ -7,6 +7,7 @@
 [![License](https://img.shields.io/npm/l/toh-framework.svg?style=flat-square)](https://github.com/wasintoh/toh-framework/blob/main/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/wasintoh/toh-framework?style=flat-square)](https://github.com/wasintoh/toh-framework)
 
+🌐 **Official Website:** [tohframework.dev](https://tohframework.dev)
 
 > 📖 **[🇹🇭 Thai Documentation](docs/README-TH.md)**
 
@@ -34,23 +35,77 @@ Toh Framework enables you to:
 - **💼 Production Ready** - Not a prototype, ready for real use
 - **🔧 Multi-IDE Support** - Claude Code, Cursor, Gemini CLI, Codex CLI
 
-## 🆕 What's New in v1.2.2
+## 🆕 What's New in v1.4.0
 
-### 🧠 Memory Enforcement
-Memory system now **mandatory** - no more forgotten context!
-- All commands read memory before starting
-- All commands save memory before finishing
-- Confirmation required: "✅ Memory saved"
+### ✨ Smart Single Command & Premium Experience
 
-### 📊 Selective Read Protocol (Token-Optimized)
-Smart memory loading to save tokens:
+| Feature | Description |
+|---------|-------------|
+| **`/toh` Smart Command** | Type anything, AI picks the right agent! |
+| **Premium Experience** | 5+ pages with animations in one prompt |
+| **Design Mastery** | 13 business profiles for smart design |
+| **Prompt Optimizer** | For AI SaaS - create excellent system prompts |
+| **Response Format** | 3-section responses - no follow-up questions needed |
+
+### 🌟 Premium by Default
+
+When creating new apps, you get:
+- ✅ 5+ pages automatically (Home, Dashboard, Feature, Settings, Auth)
+- ✅ Animations everywhere (Page transitions, hover effects, stagger)
+- ✅ Loading states on every page
+- ✅ Empty states designed
+- ✅ Zero TypeScript errors guaranteed
+
+### 🎨 Design Mastery (13 Business Profiles)
+
+AI auto-detects your business type and applies appropriate design:
 ```
-Always load (~2,000 tokens):
-├── active.md     (~500 tokens)  - Current task
-├── summary.md    (~1,000 tokens) - Project overview
-└── decisions.md  (~500 tokens)  - Past decisions
+Food/Restaurant → Warm colors, appetizing feel
+SaaS/Dashboard → Professional blue, clean
+E-commerce → Trust emerald, conversion-focused
+Gaming → Dark mode, neon accents
+Healthcare → Calm teal, trustworthy
+...and 8 more profiles
+```
 
-❌ archive/ - Only loaded when user asks for history
+### 🧠 AI Intelligence Upgrade (v1.3.0)
+
+| Feature | Description |
+|---------|-------------|
+| 🏢 **Business Context** | AI understands business types, auto-includes standard features |
+| 💡 **Smart Suggestions** | AI suggests 2-3 next steps after every task |
+| 🔧 **Auto-fix Silent** | Errors fixed automatically, user never sees them |
+| 📊 **Progress Tracking** | Visual progress bars and checklists |
+| 🔄 **Session Recovery** | Continue where you left off, even across IDEs |
+| 👁️ **Preview Mode** | See changes before applying |
+| ⏪ **Version Control** | Easy undo/rollback without knowing git |
+| 🔌 **Integrations** | One-click setup for Stripe, PromptPay, Email, Analytics |
+
+### Example: Business Context
+
+```bash
+/toh:vibe coffee shop
+
+# AI understands this means:
+# ✅ POS System
+# ✅ Menu Management
+# ✅ Order Management
+# ✅ Inventory
+# ✅ Sales Reports
+# No need to specify each feature!
+```
+
+### Example: Smart Suggestions
+
+```
+✅ Dashboard created!
+
+💡 Recommended next steps:
+1. /toh:design - Polish the UI
+2. /toh:dev - Add logic
+3. /toh:connect - Connect database
+
+Type a number or tell me what you want to do.
 ```
 
 ### 🧠 `/toh:plan` - The Brain
@@ -376,14 +431,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Wasin Treesinthuros** (Innovation Vantage)
 
+- 🌐 Website: [tohframework.dev](https://tohframework.dev)
 - GitHub: [@wasintoh](https://github.com/wasintoh)
 - Email: dr.wasin@gmail.com
-- LINE OA [TH]: [@dr.wasin.official](https://line.me/R/ti/p/@dr.wasin.offcial)
 
 ---
 
 <p align="center">
-  Made with ❤️ done you you Na Ja.
+  Made with ❤️ for you.
 </p>
 
 <p align="center">

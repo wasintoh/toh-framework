@@ -1,8 +1,8 @@
 ---
 name: toh-test
 description: >
-  ทดสอบระบบอัตโนมัติด้วย Playwright
-  และ auto-fix จนผ่าน
+  Automated testing with Playwright
+  and auto-fix until passing.
 shortcuts:
   - /toh:test
   - /toh:t
@@ -12,12 +12,12 @@ shortcuts:
 
 ## Purpose
 
-ทดสอบระบบอัตโนมัติ และถ้าเจอ error จะเรียก `/toh:fix` มาแก้ไขแล้ว test ใหม่จนผ่าน
+Automated system testing, and if errors are found, will call `/toh:fix` to fix and re-test until passing.
 
 ## Workflow
 
 ```
-User: /toh:test ทดสอบหน้า login
+User: /toh:test test login page
 
 ┌─────────────────────────────────────────────────────┐
 │  🧪 Test Runner                                     │
@@ -27,52 +27,52 @@ User: /toh:test ทดสอบหน้า login
 │     ├── .toh/memory/summary.md                      │
 │     └── .toh/memory/decisions.md                    │
 │                                                     │
-│  1. Setup Playwright (ถ้ายังไม่มี)                   │
-│  2. สร้าง test cases จาก UI ที่มี                    │
+│  1. Setup Playwright (if not exists)                │
+│  2. Generate test cases from existing UI            │
 │  3. Run tests                                       │
-│  4. ถ้า PASS → รายงานผล ✅                          │
-│  5. ถ้า FAIL → วิเคราะห์ error                       │
-│     └── เรียก /toh:fix แก้ไข                        │
-│     └── Run tests ใหม่                              │
-│     └── Loop จนผ่าน (max 3 รอบ)                     │
+│  4. If PASS → Report results ✅                     │
+│  5. If FAIL → Analyze error                         │
+│     └── Call /toh:fix to fix                        │
+│     └── Run tests again                             │
+│     └── Loop until passing (max 3 rounds)           │
 │                                                     │
 │  6. 🚨 SAVE MEMORY (MANDATORY!)                     │
-│     ├── อัพเดท active.md (test results)             │
-│     ├── เพิ่ม decisions.md (ถ้ามี fixes)            │
-│     └── อัพเดท summary.md                           │
+│     ├── Update active.md (test results)             │
+│     ├── Add to decisions.md (if fixes made)         │
+│     └── Update summary.md                           │
 │                                                     │
-│  7. สรุปผลการทดสอบ                                  │
+│  7. Summary of test results                         │
 └─────────────────────────────────────────────────────┘
 ```
 
 ## Usage Examples
 
 ```bash
-# ทดสอบทั้งระบบ
+# Test entire system
 /toh:test
 
-# ทดสอบเฉพาะหน้า
-/toh:test หน้า login และ register
+# Test specific pages
+/toh:test login and register pages
 
-# ทดสอบ flow
-/toh:test flow การสั่งซื้อสินค้า
+# Test flow
+/toh:test order purchase flow
 
-# ทดสอบ responsive
-/toh:test responsive ทุกหน้า
+# Test responsive
+/toh:test responsive all pages
 ```
 
 ## Behavior
 
 ### 1. Setup Playwright
 
-ถ้ายังไม่มี Playwright ในโปรเจค:
+If Playwright not in project:
 
 ```bash
 npm install -D @playwright/test
 npx playwright install
 ```
 
-สร้าง `playwright.config.ts`:
+Create `playwright.config.ts`:
 
 ```typescript
 import { defineConfig, devices } from '@playwright/test'
@@ -102,7 +102,7 @@ export default defineConfig({
 
 ### 2. Generate Test Cases
 
-วิเคราะห์ UI ที่มีแล้วสร้าง test cases:
+Analyze existing UI and generate test cases:
 
 ```typescript
 // tests/login.spec.ts
@@ -111,24 +111,24 @@ import { test, expect } from '@playwright/test'
 test.describe('Login Page', () => {
   test('should display login form', async ({ page }) => {
     await page.goto('/login')
-    await expect(page.getByRole('heading', { name: 'เข้าสู่ระบบ' })).toBeVisible()
-    await expect(page.getByLabel('อีเมล')).toBeVisible()
-    await expect(page.getByLabel('รหัสผ่าน')).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Login' })).toBeVisible()
+    await expect(page.getByLabel('Email')).toBeVisible()
+    await expect(page.getByLabel('Password')).toBeVisible()
   })
 
   test('should show error on invalid credentials', async ({ page }) => {
     await page.goto('/login')
-    await page.getByLabel('อีเมล').fill('invalid@test.com')
-    await page.getByLabel('รหัสผ่าน').fill('wrongpassword')
-    await page.getByRole('button', { name: 'เข้าสู่ระบบ' }).click()
-    await expect(page.getByText('อีเมลหรือรหัสผ่านไม่ถูกต้อง')).toBeVisible()
+    await page.getByLabel('Email').fill('invalid@test.com')
+    await page.getByLabel('Password').fill('wrongpassword')
+    await page.getByRole('button', { name: 'Login' }).click()
+    await expect(page.getByText('Invalid email or password')).toBeVisible()
   })
 
   test('should login successfully', async ({ page }) => {
     await page.goto('/login')
-    await page.getByLabel('อีเมล').fill('test@example.com')
-    await page.getByLabel('รหัสผ่าน').fill('password123')
-    await page.getByRole('button', { name: 'เข้าสู่ระบบ' }).click()
+    await page.getByLabel('Email').fill('test@example.com')
+    await page.getByLabel('Password').fill('password123')
+    await page.getByRole('button', { name: 'Login' }).click()
     await expect(page).toHaveURL('/dashboard')
   })
 })
@@ -142,26 +142,26 @@ npx playwright test
 
 ### 4. Auto-Fix Loop
 
-ถ้า test fail:
+If test fails:
 
-1. **วิเคราะห์ error message**
-2. **เรียก `/toh:fix`** พร้อม context ของ error
-3. **Run test ใหม่**
-4. **Loop จนผ่าน** (max 3 รอบ)
+1. **Analyze error message**
+2. **Call `/toh:fix`** with error context
+3. **Run test again**
+4. **Loop until passing** (max 3 rounds)
 
 ```
 ❌ Test Failed: login.spec.ts
    Error: locator.click: Error: strict mode violation
    
-🔧 เรียก /toh:fix...
-   → แก้ไข button selector
+🔧 Calling /toh:fix...
+   → Fixed button selector
    
-🔄 Run test ใหม่...
+🔄 Running test again...
 
 ✅ Test Passed!
 ```
 
-### 5. รายงานผล
+### 5. Report Results
 
 ```
 ╔════════════════════════════════════════════════════════════╗
@@ -170,7 +170,7 @@ npx playwright test
 ║  Total:   15 tests                                         ║
 ║  Passed:  15 ✅                                             ║
 ║  Failed:  0                                                ║
-║  Fixed:   3 (auto-fixed และ passed)                       ║
+║  Fixed:   3 (auto-fixed and passed)                        ║
 ║  Time:    45s                                              ║
 ╠════════════════════════════════════════════════════════════╣
 ║  📊 Coverage:                                              ║
@@ -186,27 +186,27 @@ npx playwright test
 |------|-------------|---------|
 | **Unit** | Component tests | `/toh:test components` |
 | **Integration** | Page tests | `/toh:test pages` |
-| **E2E** | User flow tests | `/toh:test flow สั่งซื้อ` |
+| **E2E** | User flow tests | `/toh:test order flow` |
 | **Visual** | Screenshot comparison | `/toh:test visual` |
 | **Responsive** | Mobile/tablet/desktop | `/toh:test responsive` |
 
 ## Integration with Other Commands
 
 ```bash
-# สร้าง UI แล้ว test เลย
-/toh:ui หน้า checkout
-/toh:test หน้า checkout
+# Create UI then test immediately
+/toh:ui checkout page
+/toh:test checkout page
 
-# Design แล้ว test visual
-/toh:design ปรับสีและ spacing
+# Design then visual test
+/toh:design adjust colors and spacing
 /toh:test visual
 
 # Full flow
-/toh:vibe ระบบจองห้องประชุม
-/toh:test ทุกหน้า
+/toh:vibe meeting room booking system
+/toh:test all pages
 /toh:ship
 ```
 
 ## Agent Reference
 
-อ่าน skill เพิ่มเติมที่: `.claude/skills/test-engineer/SKILL.md`
+Read more skills at: `.claude/skills/test-engineer/SKILL.md`

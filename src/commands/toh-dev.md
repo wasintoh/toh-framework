@@ -2,9 +2,9 @@
 command: /toh:dev
 aliases: ["/toh:d"]
 description: >
-  เพิ่ม logic, state management, TypeScript types, form validation,
-  และ CRUD operations ให้กับ UI ที่มีอยู่แล้ว
-trigger: /toh:dev หรือ /toh:d ตามด้วย description
+  Add logic, state management, TypeScript types, form validation,
+  and CRUD operations to existing UI.
+trigger: /toh:dev or /toh:d followed by description
 ---
 
 # /toh:dev - Add Logic & State
@@ -23,7 +23,7 @@ trigger: /toh:dev หรือ /toh:d ตามด้วย description
    ├── .toh/memory/active.md
    ├── .toh/memory/summary.md
    └── .toh/memory/decisions.md
-   (ถ้าไม่มี → สร้างใหม่)
+   (If doesn't exist → Create new)
 
 1. READ Skills
    └── ~/.claude/skills/dev-engineer/SKILL.md
@@ -45,53 +45,53 @@ trigger: /toh:dev หรือ /toh:d ตามด้วย description
    └── Wire up components to stores/forms
 
 5. 🚨 SAVE MEMORY (MANDATORY!)
-   ├── อัพเดท active.md
-   ├── เพิ่ม decisions.md (ถ้ามี technical decisions)
-   └── อัพเดท summary.md (ถ้า feature เสร็จ)
+   ├── Update active.md
+   ├── Add to decisions.md (if technical decisions made)
+   └── Update summary.md (if feature complete)
 ```
 
 ## Example Prompts
 
 ```bash
 # Add state management
-/toh:dev เพิ่ม state สำหรับจัดการ cart
+/toh:dev add state for cart management
 
 # Add form logic
-/toh:d form validation สำหรับ product form
+/toh:d form validation for product form
 
 # Add CRUD
-/toh:dev CRUD operations สำหรับ orders
+/toh:dev CRUD operations for orders
 
 # Add specific function
-/toh:d function คำนวณราคารวมพร้อมส่วนลด
+/toh:d function to calculate total with discount
 
 # Add custom hook
-/toh:dev hook สำหรับ debounced search
+/toh:dev hook for debounced search
 ```
 
 ## Output Format
 
 ```markdown
-## ✅ Logic พร้อมแล้วค่ะ!
+## ✅ Logic ready!
 
-### สร้าง:
+### Created:
 - `types/cart.ts` - TypeScript types
 - `stores/cart-store.ts` - Zustand store
 - `lib/validations/cart.ts` - Zod schemas
 
-### เชื่อมกับ UI:
-- `components/features/cart-drawer.tsx` - ใช้ store แล้ว
+### Connected to UI:
+- `components/features/cart-drawer.tsx` - Now using store
 
-### ทดสอบ:
-- เพิ่มสินค้าลงตะกร้าได้
-- อัพเดทจำนวนได้
-- ลบสินค้าได้
+### Test:
+- Can add products to cart
+- Can update quantities
+- Can remove products
 
 ### Memory:
-✅ บันทึก memory แล้วค่ะ
+✅ Memory saved
 
-### ถัดไป:
-- `/toh:connect` เชื่อม database จริง
+### Next:
+- `/toh:connect` to connect real database
 ```
 
 ## Standard Stack
@@ -111,4 +111,4 @@ trigger: /toh:dev หรือ /toh:d ตามด้วย description
 3. **ALWAYS** validate with Zod
 4. **ALWAYS** mock API calls (with realistic delay)
 5. **NEVER** use `any` type
-6. **NEVER** ask "ใช้ state management อะไรดี?"
+6. **NEVER** ask "which state management should I use?"

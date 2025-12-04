@@ -2,9 +2,9 @@
 command: /toh:ship
 aliases: ["/toh:s"]
 description: >
-  Deploy app ไป production
-  รองรับ Vercel, Netlify, และอื่นๆ
-trigger: /toh:ship หรือ /toh:s
+  Deploy app to production.
+  Supports Vercel, Netlify, and others.
+trigger: /toh:ship or /toh:s
 ---
 
 # /toh:ship - Deploy to Production
@@ -23,7 +23,7 @@ trigger: /toh:ship หรือ /toh:s
    ├── .toh/memory/active.md
    ├── .toh/memory/summary.md
    └── .toh/memory/decisions.md
-   (ดู project info + env vars ที่ต้องใช้)
+   (Check project info + required env vars)
 
 1. PRE-FLIGHT Checks
    ├── npm run build (must pass)
@@ -47,9 +47,9 @@ trigger: /toh:ship หรือ /toh:s
    └── Test critical flows
 
 5. 🚨 SAVE MEMORY (MANDATORY!)
-   ├── อัพเดท active.md (deployed URL)
-   ├── เพิ่ม decisions.md (deployment config)
-   └── อัพเดท summary.md (production URL)
+   ├── Update active.md (deployed URL)
+   ├── Add to decisions.md (deployment config)
+   └── Update summary.md (production URL)
 ```
 
 ## Example Prompts
@@ -63,13 +63,13 @@ trigger: /toh:ship หรือ /toh:s
 /toh:ship netlify
 
 # With checks
-/toh:s deploy พร้อม check ทุกอย่างก่อน
+/toh:s deploy with full checks first
 ```
 
 ## Output Format
 
 ```markdown
-## 🚀 Deploy เรียบร้อยค่ะ!
+## 🚀 Deployed successfully!
 
 ### Pre-flight:
 - ✅ Build passed
@@ -79,27 +79,27 @@ trigger: /toh:ship หรือ /toh:s
 ### Deployed to:
 **https://your-app.vercel.app**
 
-### Environment Variables ที่ต้องตั้งใน Vercel:
+### Environment Variables to set in Vercel:
 ```
 NEXT_PUBLIC_SUPABASE_URL=xxx
 NEXT_PUBLIC_SUPABASE_ANON_KEY=xxx
-NEXT_PUBLIC_LIFF_ID=xxx (ถ้าใช้ LINE)
+NEXT_PUBLIC_LIFF_ID=xxx (if using LINE)
 ```
 
-### ขั้นตอนถัดไป:
+### Next Steps:
 
-1. **ตั้ง Environment Variables**
-   - ไป Vercel Dashboard → Settings → Environment Variables
-   - เพิ่ม variables ด้านบน
+1. **Set Environment Variables**
+   - Go to Vercel Dashboard → Settings → Environment Variables
+   - Add the variables above
 
 2. **Custom Domain (optional)**
-   - ไป Settings → Domains
-   - เพิ่ม domain ของคุณ
+   - Go to Settings → Domains
+   - Add your domain
 
-3. **ทดสอบ**
-   - เปิด production URL
-   - ทดสอบ features หลัก
-   - ตรวจสอบ mobile view
+3. **Test**
+   - Open production URL
+   - Test main features
+   - Check mobile view
 ```
 
 ## Supported Platforms

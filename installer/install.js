@@ -300,7 +300,7 @@ async function generateManifest(config) {
   const spinner = ora('Generating manifest...').start();
   
   const manifest = {
-    version: '1.1.0',
+    version: '1.4.0',
     installedAt: new Date().toISOString(),
     targetDir: config.targetDir,
     ides: config.ides,

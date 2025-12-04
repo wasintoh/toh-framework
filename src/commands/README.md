@@ -1,58 +1,109 @@
 # /toh: Command Suite
 # Signature commands by Aj. Wasin Toh
-# Lovable-style development with Thai soul 🇹🇭
+# Lovable-style development with precision 🎯
 
-## Command Overview
+## 🌟 Main Command (NEW!)
 
-All commands use the `/toh:` prefix - a signature mark of quality.
+| Command | Description | Status |
+|---------|-------------|--------|
+| **`/toh [anything]`** | Smart command - AI routes to the right agent | 🧪 Beta |
+
+```bash
+# Just type naturally!
+/toh create login page
+/toh fix the scroll issue
+/toh make it prettier
+/toh connect Supabase
+/toh build coffee shop chatbot
+```
+
+**No need to remember specific commands** - AI understands your intent and routes accordingly.
+
+---
+
+## 📋 Specific Commands (Power Users)
+
+For users who know exactly which agent they need:
 
 | Command | Shortcut | Description |
 |---------|----------|-------------|
-| `/toh:vibe` | `/toh:v` | สร้าง project ใหม่ ได้ working UI ทันที |
-| `/toh:ui` | `/toh:u` | สร้าง/แก้ไข UI components |
-| `/toh:dev` | `/toh:d` | เพิ่ม logic, state, functions |
-| `/toh:connect` | `/toh:c` | เชื่อม Supabase backend |
-| `/toh:design` | `/toh:ds` | ปรับ design ให้สวยขึ้น |
-| `/toh:line` | `/toh:l` | สร้าง LINE Mini App |
-| `/toh:mobile` | `/toh:m` | สร้าง Expo mobile app |
-| `/toh:fix` | `/toh:f` | แก้ bug อัตโนมัติ |
+| `/toh:plan` | `/toh:p` | THE BRAIN - Analyze, plan, orchestrate |
+| `/toh:vibe` | `/toh:v` | Create new project, get working UI immediately |
+| `/toh:ui` | `/toh:u` | Create/edit UI components |
+| `/toh:dev` | `/toh:d` | Add logic, state, functions |
+| `/toh:connect` | `/toh:c` | Connect Supabase backend |
+| `/toh:design` | `/toh:ds` | Polish design |
+| `/toh:test` | `/toh:t` | Auto test & fix |
+| `/toh:line` | `/toh:l` | Create LINE Mini App |
+| `/toh:mobile` | `/toh:m` | Create Expo mobile app |
+| `/toh:fix` | `/toh:f` | Auto fix bugs |
 | `/toh:ship` | `/toh:s` | Deploy to production |
+| `/toh:help` | `/toh:h` | Show all commands |
+
+---
+
+## 🧠 How `/toh` Routes
+
+```
+/toh [your request]
+        │
+        ▼
+┌───────────────────────────────────────┐
+│  1. Check Memory (context)            │
+│  2. Analyze Intent                    │
+│  3. Assess Confidence                 │
+│     ├── HIGH → Execute directly       │
+│     ├── MEDIUM → Plan first           │
+│     └── LOW → Ask for clarity         │
+│  4. Detect IDE (Parallel/Sequential)  │
+│  5. Execute & Report                  │
+│  6. Save Memory                       │
+└───────────────────────────────────────┘
+```
 
 ---
 
 ## Philosophy
 
 ```
-"ไม่ถาม ไม่รอ ทำเลย"
+"No questions, no waiting, just do it"
  - Aj. Toh's Vibe Coding Principle
 ```
 
 Every `/toh:` command follows these rules:
-1. **Zero Questions** - ตัดสินใจแทน user ทุกเรื่อง
-2. **UI First** - เห็น UI ก่อนเสมอ
-3. **Real Mock Data** - ข้อมูลจำลองที่ดูเหมือนจริง (ภาษาไทย)
-4. **Production Ready** - ไม่ใช่ prototype แต่คือ production code
+1. **Zero Questions** - Make decisions for user on everything
+2. **UI First** - Always show UI first
+3. **Real Mock Data** - Realistic-looking mock data
+4. **Production Ready** - Not prototype, but production code
+5. **Memory First** - Always check context before acting
 
 ---
 
 ## Usage Examples
 
 ```bash
-# สร้าง expense tracker app
-/toh:vibe expense tracker สำหรับบันทึกรายรับรายจ่าย
+# Using /toh (recommended)
+/toh expense tracker app
+/toh dashboard with stats and charts
+/toh add product CRUD
+/toh connect database
+/toh convert to LINE Mini App
 
-# สร้างหน้า dashboard
-/toh:ui dashboard page พร้อม stats cards และ chart
-
-# เพิ่ม CRUD สำหรับ products
-/toh:dev CRUD operations สำหรับจัดการสินค้า
-
-# เชื่อม Supabase
+# Using specific commands (power users)
+/toh:vibe expense tracker for recording income and expenses
+/toh:ui dashboard page with stats cards and chart
+/toh:dev CRUD operations for product management
 /toh:connect supabase
-
-# ทำเป็น LINE Mini App
-/toh:line เพิ่ม LIFF login และ share feature
-
-# Deploy
+/toh:line add LIFF login and share feature
 /toh:ship vercel
 ```
+
+---
+
+## Command Count
+
+| Category | Count |
+|----------|-------|
+| Main Command | 1 (`/toh`) |
+| Specific Commands | 12 |
+| **Total** | **13** |

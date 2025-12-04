@@ -2,9 +2,9 @@
 command: /toh:design
 aliases: ["/toh:ds"]
 description: >
-  ปรับปรุง design ให้ดูเป็นมืออาชีพมากขึ้น
-  ไม่ให้ดูเหมือน "AI generated"
-trigger: /toh:design หรือ /toh:ds
+  Improve design to look more professional.
+  Ensure it doesn't look "AI generated".
+trigger: /toh:design or /toh:ds
 ---
 
 # /toh:design - Polish Design
@@ -23,7 +23,7 @@ trigger: /toh:design หรือ /toh:ds
    ├── .toh/memory/active.md
    ├── .toh/memory/summary.md
    └── .toh/memory/decisions.md
-   (ถ้าไม่มี → สร้างใหม่)
+   (If doesn't exist → Create new)
 
 1. READ Skills
    └── ~/.claude/skills/design-excellence/SKILL.md
@@ -45,64 +45,64 @@ trigger: /toh:design หรือ /toh:ds
 4. REPORT Changes
 
 5. 🚨 SAVE MEMORY (MANDATORY!)
-   ├── อัพเดท active.md
-   ├── เพิ่ม decisions.md (design decisions)
-   └── อัพเดท summary.md
+   ├── Update active.md
+   ├── Add to decisions.md (design decisions)
+   └── Update summary.md
 ```
 
 ## Example Prompts
 
 ```bash
 # General polish
-/toh:design ทำให้ดูเป็นมืออาชีพขึ้น
+/toh:design make it look more professional
 
 # Specific area
-/toh:ds ปรับ dashboard cards ให้สวยขึ้น
+/toh:ds improve dashboard cards
 
 # Animation
-/toh:design เพิ่ม animation ที่เหมาะสม
+/toh:design add appropriate animations
 
 # Fix specific issue
-/toh:ds สี accent ดูไม่เข้ากัน ช่วยปรับหน่อย
+/toh:ds accent color doesn't match, please adjust
 ```
 
 ## Output Format
 
 ```markdown
-## ✅ ปรับ Design เรียบร้อยค่ะ!
+## ✅ Design polished successfully!
 
-### สิ่งที่ปรับ:
+### What was improved:
 
 **🎨 Colors**
-- เปลี่ยน accent จาก violet เป็น blue (professional)
-- ปรับ text จาก black เป็น slate-900 (softer)
+- Changed accent from violet to blue (professional)
+- Adjusted text from black to slate-900 (softer)
 
 **📝 Typography**
-- ลด font-bold ที่ใช้มากเกินไป
-- เพิ่ม line-height ให้อ่านง่ายขึ้น
+- Reduced excessive font-bold usage
+- Increased line-height for better readability
 
 **📐 Spacing**
-- ปรับ padding ให้ consistent (p-4 ทุกที่)
-- เพิ่ม gap ระหว่าง sections
+- Made padding consistent (p-4 throughout)
+- Added gap between sections
 
 **🎬 Animation**
-- เพิ่ม hover:shadow-md บน cards
-- เพิ่ม transition-colors บน buttons
+- Added hover:shadow-md on cards
+- Added transition-colors on buttons
 
 ### Before/After:
-ดู diff ใน git หรือ refresh หน้าเว็บค่ะ
+Check the diff in git or refresh the page
 ```
 
 ## Anti-Patterns Checklist
 
-หนูจะตรวจและแก้ไขสิ่งเหล่านี้:
+Will check and fix these issues:
 
 - [ ] Purple/violet gradients → Solid blue
 - [ ] Pure black text → Slate-900
 - [ ] Inconsistent padding → Unified scale
 - [ ] Too many font weights → Max 2-3
 - [ ] Bounce animations → Subtle ease
-- [ ] Generic placeholder → Real Thai content
+- [ ] Generic placeholder → Realistic content
 - [ ] Round-3xl everything → Contextual radius
 
 ## Rules

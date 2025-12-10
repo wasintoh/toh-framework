@@ -405,7 +405,7 @@ function printNextSteps(config) {
   const isEN = config.language === 'en';
   
   console.log(chalk.cyan('┌────────────────────────────────────────────────────────────┐'));
-  console.log(chalk.cyan('│') + chalk.bold.white('  🎉 Toh Framework v1.5.1 Installed!                       ') + chalk.cyan('│'));
+  console.log(chalk.cyan('│') + chalk.bold.white('  🎉 Toh Framework v1.5.2 Installed!                       ') + chalk.cyan('│'));
   console.log(chalk.cyan('├────────────────────────────────────────────────────────────┤'));
   
   if (config.ides.includes('claude') || config.ides.includes('claude-code')) {
@@ -459,7 +459,7 @@ function printNextSteps(config) {
   console.log(chalk.cyan('│') + chalk.white('  Documentation:                                           ') + chalk.cyan('│'));
   console.log(chalk.cyan('│') + chalk.blue('    https://github.com/wasintoh/toh-framework             ') + chalk.cyan('│'));
   console.log(chalk.cyan('├────────────────────────────────────────────────────────────┤'));
-  console.log(chalk.cyan('│') + chalk.bold.yellow('  ✨ New in v1.5.0:                                        ') + chalk.cyan('│'));
+  console.log(chalk.cyan('│') + chalk.bold.yellow('  ✨ What\'s New:                                           ') + chalk.cyan('│'));
   if (isEN) {
     console.log(chalk.cyan('│') + chalk.white('  • 🌌 Google Antigravity - Full Support!                 ') + chalk.cyan('│'));
     console.log(chalk.cyan('│') + chalk.white('  • 🔒 Memory Protocol - Mandatory load/save              ') + chalk.cyan('│'));

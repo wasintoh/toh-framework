@@ -2,6 +2,15 @@
 
 All notable changes to Toh Framework will be documented in this file.
 
+## [1.5.2] - 2025-12-10
+
+### Fixed
+
+- Install finish message now shows "What's New:" instead of "New in v1.5.0:" to avoid version confusion
+- Version display consistency across all files
+
+---
+
 ## [1.5.1] - 2025-12-05
 
 ### Fixed

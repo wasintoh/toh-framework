@@ -1,23 +1,21 @@
 ---
-command: /toh:fix
-aliases: ["/toh:f"]
-description: >
-  Fix bugs, errors, or code issues systematically.
-  Uses Debug Protocol - no more guess & retry loops.
-trigger: /toh:fix or /toh:f followed by error or problem
+command: /toh-fix
+aliases: ["/toh-f"]
+description: Fix bugs systematically with Debug Protocol - no guess & retry
+trigger: /toh-fix or /toh-f followed by error or problem
 skills:
   - debug-protocol
   - error-handling
   - response-excellence    # 📝 ตอบครบ 3 ส่วน (MANDATORY!)
 ---
 
-# /toh:fix - Systematic Bug Fixing
+# /toh-fix - Systematic Bug Fixing
 
 ## Signature Command 🔧
 
 ```
-/toh:fix [error or problem]
-/toh:f [error or problem]
+/toh-fix [error or problem]
+/toh-f [error or problem]
 ```
 
 ## 🚨 The 3-5-Rewrite Rule (CRITICAL!)
@@ -84,19 +82,19 @@ skills:
 
 ```bash
 # With error message
-/toh:fix TypeError: Cannot read property 'map' of undefined
+/toh-fix TypeError: Cannot read property 'map' of undefined
 
 # With screenshot/description
-/toh:f dashboard page broken, not loading
+/toh-f dashboard page broken, not loading
 
 # Vague problem
-/toh:fix form submit does nothing
+/toh-fix form submit does nothing
 
 # Build error
-/toh:f npm run build error
+/toh-f npm run build error
 
 # Type error
-/toh:fix TypeScript error in product-form.tsx
+/toh-fix TypeScript error in product-form.tsx
 ```
 
 ## Output Format

@@ -1,19 +1,17 @@
 ---
-command: /toh:dev
-aliases: ["/toh:d"]
-description: >
-  Add logic, state management, TypeScript types, form validation,
-  and CRUD operations to existing UI.
-trigger: /toh:dev or /toh:d followed by description
+command: /toh-dev
+aliases: ["/toh-d"]
+description: Add logic, state management, TypeScript types, and CRUD operations
+trigger: /toh-dev or /toh-d followed by description
 ---
 
-# /toh:dev - Add Logic & State
+# /toh-dev - Add Logic & State
 
 ## Signature Command ⚙️
 
 ```
-/toh:dev [description]
-/toh:d [description]
+/toh-dev [description]
+/toh-d [description]
 ```
 
 ## What Happens
@@ -54,19 +52,19 @@ trigger: /toh:dev or /toh:d followed by description
 
 ```bash
 # Add state management
-/toh:dev add state for cart management
+/toh-dev add state for cart management
 
 # Add form logic
-/toh:d form validation for product form
+/toh-d form validation for product form
 
 # Add CRUD
-/toh:dev CRUD operations for orders
+/toh-dev CRUD operations for orders
 
 # Add specific function
-/toh:d function to calculate total with discount
+/toh-d function to calculate total with discount
 
 # Add custom hook
-/toh:dev hook for debounced search
+/toh-dev hook for debounced search
 ```
 
 ## Output Format
@@ -91,7 +89,7 @@ trigger: /toh:dev or /toh:d followed by description
 ✅ Memory saved
 
 ### Next:
-- `/toh:connect` to connect real database
+- `/toh-connect` to connect real database
 ```
 
 ## Standard Stack

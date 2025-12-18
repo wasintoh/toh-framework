@@ -1,23 +1,19 @@
 ---
-name: toh-test
-description: >
-  Automated testing with Playwright
-  and auto-fix until passing.
-shortcuts:
-  - /toh:test
-  - /toh:t
+command: /toh-test
+aliases: ["/toh-t"]
+description: Auto test with Playwright and fix until all tests pass
 ---
 
-# /toh:test - Auto Test & Fix
+# /toh-test - Auto Test & Fix
 
 ## Purpose
 
-Automated system testing, and if errors are found, will call `/toh:fix` to fix and re-test until passing.
+Automated system testing, and if errors are found, will call `/toh-fix` to fix and re-test until passing.
 
 ## Workflow
 
 ```
-User: /toh:test test login page
+User: /toh-test test login page
 
 ┌─────────────────────────────────────────────────────┐
 │  🧪 Test Runner                                     │
@@ -32,7 +28,7 @@ User: /toh:test test login page
 │  3. Run tests                                       │
 │  4. If PASS → Report results ✅                     │
 │  5. If FAIL → Analyze error                         │
-│     └── Call /toh:fix to fix                        │
+│     └── Call /toh-fix to fix                        │
 │     └── Run tests again                             │
 │     └── Loop until passing (max 3 rounds)           │
 │                                                     │
@@ -49,16 +45,16 @@ User: /toh:test test login page
 
 ```bash
 # Test entire system
-/toh:test
+/toh-test
 
 # Test specific pages
-/toh:test login and register pages
+/toh-test login and register pages
 
 # Test flow
-/toh:test order purchase flow
+/toh-test order purchase flow
 
 # Test responsive
-/toh:test responsive all pages
+/toh-test responsive all pages
 ```
 
 ## Behavior
@@ -145,7 +141,7 @@ npx playwright test
 If test fails:
 
 1. **Analyze error message**
-2. **Call `/toh:fix`** with error context
+2. **Call `/toh-fix`** with error context
 3. **Run test again**
 4. **Loop until passing** (max 3 rounds)
 
@@ -153,7 +149,7 @@ If test fails:
 ❌ Test Failed: login.spec.ts
    Error: locator.click: Error: strict mode violation
    
-🔧 Calling /toh:fix...
+🔧 Calling /toh-fix...
    → Fixed button selector
    
 🔄 Running test again...
@@ -184,27 +180,27 @@ If test fails:
 
 | Type | Description | Command |
 |------|-------------|---------|
-| **Unit** | Component tests | `/toh:test components` |
-| **Integration** | Page tests | `/toh:test pages` |
-| **E2E** | User flow tests | `/toh:test order flow` |
-| **Visual** | Screenshot comparison | `/toh:test visual` |
-| **Responsive** | Mobile/tablet/desktop | `/toh:test responsive` |
+| **Unit** | Component tests | `/toh-test components` |
+| **Integration** | Page tests | `/toh-test pages` |
+| **E2E** | User flow tests | `/toh-test order flow` |
+| **Visual** | Screenshot comparison | `/toh-test visual` |
+| **Responsive** | Mobile/tablet/desktop | `/toh-test responsive` |
 
 ## Integration with Other Commands
 
 ```bash
 # Create UI then test immediately
-/toh:ui checkout page
-/toh:test checkout page
+/toh-ui checkout page
+/toh-test checkout page
 
 # Design then visual test
-/toh:design adjust colors and spacing
-/toh:test visual
+/toh-design adjust colors and spacing
+/toh-test visual
 
 # Full flow
-/toh:vibe meeting room booking system
-/toh:test all pages
-/toh:ship
+/toh-vibe meeting room booking system
+/toh-test all pages
+/toh-ship
 ```
 
 ## Agent Reference

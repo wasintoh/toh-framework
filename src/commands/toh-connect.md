@@ -1,19 +1,17 @@
 ---
-command: /toh:connect
-aliases: ["/toh:c"]
-description: >
-  Connect app to Supabase backend.
-  Creates schema, RLS policies, and replaces mock API.
-trigger: /toh:connect or /toh:c
+command: /toh-connect
+aliases: ["/toh-c"]
+description: Connect app to Supabase backend with schema and RLS policies
+trigger: /toh-connect or /toh-c
 ---
 
-# /toh:connect - Connect Backend
+# /toh-connect - Connect Backend
 
 ## Signature Command 🔌
 
 ```
-/toh:connect [service]
-/toh:c [service]
+/toh-connect [service]
+/toh-c [service]
 ```
 
 ## What Happens
@@ -59,16 +57,16 @@ trigger: /toh:connect or /toh:c
 
 ```bash
 # Basic connection
-/toh:connect supabase
+/toh-connect supabase
 
 # Specific tables
-/toh:c connect products and orders
+/toh-c connect products and orders
 
 # With auth
-/toh:connect supabase with auth
+/toh-connect supabase with auth
 
 # With storage
-/toh:c add image upload to Supabase Storage
+/toh-c add image upload to Supabase Storage
 ```
 
 ## Output Format
@@ -107,10 +105,10 @@ trigger: /toh:connect or /toh:c
 
 | Service | Command |
 |---------|---------|
-| Supabase (default) | `/toh:c` or `/toh:c supabase` |
-| Supabase Auth | `/toh:c auth` |
-| Supabase Storage | `/toh:c storage` |
-| Supabase Realtime | `/toh:c realtime` |
+| Supabase (default) | `/toh-c` or `/toh-c supabase` |
+| Supabase Auth | `/toh-c auth` |
+| Supabase Storage | `/toh-c storage` |
+| Supabase Realtime | `/toh-c realtime` |
 
 ## Rules
 

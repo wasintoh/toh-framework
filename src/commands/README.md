@@ -1,4 +1,4 @@
-# /toh: Command Suite
+# /toh- Command Suite
 # Signature commands by Aj. Wasin Toh
 # Lovable-style development with precision 🎯
 
@@ -27,18 +27,18 @@ For users who know exactly which agent they need:
 
 | Command | Shortcut | Description |
 |---------|----------|-------------|
-| `/toh:plan` | `/toh:p` | THE BRAIN - Analyze, plan, orchestrate |
-| `/toh:vibe` | `/toh:v` | Create new project, get working UI immediately |
-| `/toh:ui` | `/toh:u` | Create/edit UI components |
-| `/toh:dev` | `/toh:d` | Add logic, state, functions |
-| `/toh:connect` | `/toh:c` | Connect Supabase backend |
-| `/toh:design` | `/toh:ds` | Polish design |
-| `/toh:test` | `/toh:t` | Auto test & fix |
-| `/toh:line` | `/toh:l` | Create LINE Mini App |
-| `/toh:mobile` | `/toh:m` | Create Expo mobile app |
-| `/toh:fix` | `/toh:f` | Auto fix bugs |
-| `/toh:ship` | `/toh:s` | Deploy to production |
-| `/toh:help` | `/toh:h` | Show all commands |
+| `/toh-plan` | `/toh-p` | THE BRAIN - Analyze, plan, orchestrate |
+| `/toh-vibe` | `/toh-v` | Create new project, get working UI immediately |
+| `/toh-ui` | `/toh-u` | Create/edit UI components |
+| `/toh-dev` | `/toh-d` | Add logic, state, functions |
+| `/toh-connect` | `/toh-c` | Connect Supabase backend |
+| `/toh-design` | `/toh-ds` | Polish design |
+| `/toh-test` | `/toh-t` | Auto test & fix |
+| `/toh-line` | `/toh-l` | Create LINE Mini App |
+| `/toh-mobile` | `/toh-m` | Create Expo mobile app |
+| `/toh-fix` | `/toh-f` | Auto fix bugs |
+| `/toh-ship` | `/toh-s` | Deploy to production |
+| `/toh-help` | `/toh-h` | Show all commands |
 
 ---
 
@@ -70,7 +70,7 @@ For users who know exactly which agent they need:
  - Aj. Toh's Vibe Coding Principle
 ```
 
-Every `/toh:` command follows these rules:
+Every `/toh-` command follows these rules:
 1. **Zero Questions** - Make decisions for user on everything
 2. **UI First** - Always show UI first
 3. **Real Mock Data** - Realistic-looking mock data
@@ -90,12 +90,12 @@ Every `/toh:` command follows these rules:
 /toh convert to LINE Mini App
 
 # Using specific commands (power users)
-/toh:vibe expense tracker for recording income and expenses
-/toh:ui dashboard page with stats cards and chart
-/toh:dev CRUD operations for product management
-/toh:connect supabase
-/toh:line add LIFF login and share feature
-/toh:ship vercel
+/toh-vibe expense tracker for recording income and expenses
+/toh-ui dashboard page with stats cards and chart
+/toh-dev CRUD operations for product management
+/toh-connect supabase
+/toh-line add LIFF login and share feature
+/toh-ship vercel
 ```
 
 ---

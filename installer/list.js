@@ -9,17 +9,17 @@ export async function list() {
   console.log(chalk.cyan('\n📋 Toh Framework - Available Commands\n'));
   
   const commands = [
-    { cmd: '/toh:help', short: '/toh:h', desc: 'แสดงรายการ commands ทั้งหมด', icon: '❓' },
-    { cmd: '/toh:vibe', short: '/toh:v', desc: 'สร้างโปรเจคใหม่ UI + Logic + Mock Data', icon: '🎨' },
-    { cmd: '/toh:ui', short: '/toh:u', desc: 'สร้าง UI - Pages, Components, Layouts', icon: '🖼️' },
-    { cmd: '/toh:dev', short: '/toh:d', desc: 'เพิ่ม Logic - TypeScript, Zustand, Forms', icon: '⚙️' },
-    { cmd: '/toh:design', short: '/toh:ds', desc: 'ปรับ Design - ทำให้สวย ไม่ดูเหมือน AI', icon: '✨' },
-    { cmd: '/toh:test', short: '/toh:t', desc: 'ทดสอบระบบ - Auto test & fix จนผ่าน', icon: '🧪' },
-    { cmd: '/toh:connect', short: '/toh:c', desc: 'เชื่อม Backend - Supabase, Auth, RLS', icon: '🔌' },
-    { cmd: '/toh:line', short: '/toh:l', desc: 'LINE Mini App - LIFF integration', icon: '💚' },
-    { cmd: '/toh:mobile', short: '/toh:m', desc: 'Mobile App - Expo / React Native', icon: '📱' },
-    { cmd: '/toh:fix', short: '/toh:f', desc: 'แก้ Bug - Debug และ fix issues', icon: '🔧' },
-    { cmd: '/toh:ship', short: '/toh:s', desc: 'Deploy - Vercel, Production ready', icon: '🚀' }
+    { cmd: '/toh-help', short: '/toh-h', desc: 'แสดงรายการ commands ทั้งหมด', icon: '❓' },
+    { cmd: '/toh-vibe', short: '/toh-v', desc: 'สร้างโปรเจคใหม่ UI + Logic + Mock Data', icon: '🎨' },
+    { cmd: '/toh-ui', short: '/toh-u', desc: 'สร้าง UI - Pages, Components, Layouts', icon: '🖼️' },
+    { cmd: '/toh-dev', short: '/toh-d', desc: 'เพิ่ม Logic - TypeScript, Zustand, Forms', icon: '⚙️' },
+    { cmd: '/toh-design', short: '/toh-ds', desc: 'ปรับ Design - ทำให้สวย ไม่ดูเหมือน AI', icon: '✨' },
+    { cmd: '/toh-test', short: '/toh-t', desc: 'ทดสอบระบบ - Auto test & fix จนผ่าน', icon: '🧪' },
+    { cmd: '/toh-connect', short: '/toh-c', desc: 'เชื่อม Backend - Supabase, Auth, RLS', icon: '🔌' },
+    { cmd: '/toh-line', short: '/toh-l', desc: 'LINE Mini App - LIFF integration', icon: '💚' },
+    { cmd: '/toh-mobile', short: '/toh-m', desc: 'Mobile App - Expo / React Native', icon: '📱' },
+    { cmd: '/toh-fix', short: '/toh-f', desc: 'แก้ Bug - Debug และ fix issues', icon: '🔧' },
+    { cmd: '/toh-ship', short: '/toh-s', desc: 'Deploy - Vercel, Production ready', icon: '🚀' }
   ];
 
   console.log(chalk.white('  Commands:'));

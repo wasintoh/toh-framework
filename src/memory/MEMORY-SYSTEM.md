@@ -177,10 +177,10 @@ STEP 4: Confirm to user
 
 | Command | Action |
 |---------|--------|
-| `/toh:memory` | Show current memory status |
-| `/toh:memory save` | Force save all memory files |
-| `/toh:memory load` | Force reload all memory files |
-| `/toh:memory clear` | Archive and reset memory |
+| `/toh-memory` | Show current memory status |
+| `/toh-memory save` | Force save all memory files |
+| `/toh-memory load` | Force reload all memory files |
+| `/toh-memory clear` | Archive and reset memory |
 
 ---
 
@@ -195,7 +195,7 @@ STEP 4: Confirm to user
 ### For Users
 - Trust the system - it works automatically
 - Check `.toh/memory/` if something seems wrong
-- Use `/toh:memory` to see current state
+- Use `/toh-memory` to see current state
 
 ---
 

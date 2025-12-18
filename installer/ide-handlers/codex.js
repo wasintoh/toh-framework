@@ -7,6 +7,13 @@
 
 import fs from 'fs-extra';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Read version from package.json
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../../package.json'), 'utf-8'));
+const VERSION = pkg.version;
 
 /**
  * Create memory template files for the Memory System (v1.1.0)
@@ -19,8 +26,8 @@ async function createMemoryFiles(memoryDir, language = 'en') {
     : `# 🔥 Active Task\n\n## Current Focus\n[Waiting for user command]\n\n## In Progress\n- (none)\n\n## Next Steps\n- Waiting for user command\n\n---\n*Last updated: ${timestamp}*\n`;
 
   const summaryContent = language === 'th'
-    ? `# 📋 Project Summary\n\n## Project Overview\n- Name: [ชื่อโปรเจค]\n- Tech Stack: Next.js 14, Tailwind, shadcn/ui, Zustand, Supabase\n\n## Completed Features\n- (ยังไม่มี)\n\n## Important Notes\n- ใช้ Toh Framework v1.1.0\n\n---\n*Last updated: ${timestamp}*\n`
-    : `# 📋 Project Summary\n\n## Project Overview\n- Name: [Project Name]\n- Tech Stack: Next.js 14, Tailwind, shadcn/ui, Zustand, Supabase\n\n## Completed Features\n- (none)\n\n## Important Notes\n- Using Toh Framework v1.1.0\n\n---\n*Last updated: ${timestamp}*\n`;
+    ? `# 📋 Project Summary\n\n## Project Overview\n- Name: [ชื่อโปรเจค]\n- Tech Stack: Next.js 14, Tailwind, shadcn/ui, Zustand, Supabase\n\n## Completed Features\n- (ยังไม่มี)\n\n## Important Notes\n- ใช้ Toh Framework v${VERSION}\n\n---\n*Last updated: ${timestamp}*\n`
+    : `# 📋 Project Summary\n\n## Project Overview\n- Name: [Project Name]\n- Tech Stack: Next.js 14, Tailwind, shadcn/ui, Zustand, Supabase\n\n## Completed Features\n- (none)\n\n## Important Notes\n- Using Toh Framework v${VERSION}\n\n---\n*Last updated: ${timestamp}*\n`;
 
   const decisionsContent = language === 'th'
     ? `# 🧠 Key Decisions\n\n## Architecture Decisions\n| Date | Decision | Reason |\n|------|----------|--------|\n| ${timestamp} | ใช้ Toh Framework | AI-Orchestration Driven Development |\n\n---\n*Last updated: ${timestamp}*\n`
@@ -70,7 +77,7 @@ ${content}
     const commandFiles = await fs.readdir(srcCommandsDir);
     for (const file of commandFiles) {
       if (file.endsWith('.md') && file !== 'README.md') {
-        const cmdName = file.replace('.md', '').replace('toh-', '/toh:');
+        const cmdName = file.replace('.md', '').replace('toh-', '/toh-');
         commandsList += `- \`${cmdName}\`\n`;
       }
     }
@@ -156,22 +163,22 @@ If user writes in Thai, respond in Thai.
 
 | Full Command | Shortcuts (ALL VALID) | Action |
 |-------------|----------------------|--------|
-| \`/toh:help\` | \`/toh:h\`, \`toh help\`, \`toh h\` | Show all commands |
-| \`/toh:plan\` | \`/toh:p\`, \`toh plan\`, \`toh p\` | **THE BRAIN** - Analyze, plan |
-| \`/toh:vibe\` | \`/toh:v\`, \`toh vibe\`, \`toh v\` | Create new project |
-| \`/toh:ui\` | \`/toh:u\`, \`toh ui\`, \`toh u\` | Create UI components |
-| \`/toh:dev\` | \`/toh:d\`, \`toh dev\`, \`toh d\` | Add logic & state |
-| \`/toh:design\` | \`/toh:ds\`, \`toh design\`, \`toh ds\` | Improve design |
-| \`/toh:test\` | \`/toh:t\`, \`toh test\`, \`toh t\` | Auto test & fix |
-| \`/toh:connect\` | \`/toh:c\`, \`toh connect\`, \`toh c\` | Connect Supabase |
-| \`/toh:line\` | \`/toh:l\`, \`toh line\`, \`toh l\` | LINE Mini App |
-| \`/toh:mobile\` | \`/toh:m\`, \`toh mobile\`, \`toh m\` | Expo / React Native |
-| \`/toh:fix\` | \`/toh:f\`, \`toh fix\`, \`toh f\` | Fix bugs |
-| \`/toh:ship\` | \`/toh:s\`, \`toh ship\`, \`toh s\` | Deploy to production |
+| \`/toh-help\` | \`/toh-h\`, \`toh help\`, \`toh h\` | Show all commands |
+| \`/toh-plan\` | \`/toh-p\`, \`toh plan\`, \`toh p\` | **THE BRAIN** - Analyze, plan |
+| \`/toh-vibe\` | \`/toh-v\`, \`toh vibe\`, \`toh v\` | Create new project |
+| \`/toh-ui\` | \`/toh-u\`, \`toh ui\`, \`toh u\` | Create UI components |
+| \`/toh-dev\` | \`/toh-d\`, \`toh dev\`, \`toh d\` | Add logic & state |
+| \`/toh-design\` | \`/toh-ds\`, \`toh design\`, \`toh ds\` | Improve design |
+| \`/toh-test\` | \`/toh-t\`, \`toh test\`, \`toh t\` | Auto test & fix |
+| \`/toh-connect\` | \`/toh-c\`, \`toh connect\`, \`toh c\` | Connect Supabase |
+| \`/toh-line\` | \`/toh-l\`, \`toh line\`, \`toh l\` | LINE Mini App |
+| \`/toh-mobile\` | \`/toh-m\`, \`toh mobile\`, \`toh m\` | Expo / React Native |
+| \`/toh-fix\` | \`/toh-f\`, \`toh fix\`, \`toh f\` | Fix bugs |
+| \`/toh-ship\` | \`/toh-s\`, \`toh ship\`, \`toh s\` | Deploy to production |
 
 ### ⚡ Execution Rules:
 
-1. **Instant Recognition** - When you see \`/toh:\` or \`toh \` prefix, this is a COMMAND
+1. **Instant Recognition** - When you see \`/toh-\` or \`toh \` prefix, this is a COMMAND
 2. **Check for Description** - Does the command have a description after it?
    - ✅ **Has description** → Execute immediately
    - ❓ **No description** → Ask user first: "I'm the [Agent Name] agent. What would you like me to help you with?"
@@ -182,41 +189,41 @@ If user writes in Thai, respond in Thai.
 
 | Command Only | Response |
 |-------------|----------|
-| \`/toh:vibe\` | "I'm the **Vibe Agent** 🎨. What system would you like me to build?" |
-| \`/toh:ui\` | "I'm the **UI Agent** 🖼️. What UI would you like me to create?" |
-| \`/toh:dev\` | "I'm the **Dev Agent** ⚙️. What functionality should I implement?" |
-| \`/toh:design\` | "I'm the **Design Agent** ✨. What should I polish?" |
-| \`/toh:test\` | "I'm the **Test Agent** 🧪. What should I test?" |
-| \`/toh:connect\` | "I'm the **Connect Agent** 🔌. What should I connect?" |
-| \`/toh:plan\` | "I'm the **Plan Agent** 🧠. What project should I plan?" |
-| \`/toh:help\` | (Always show help immediately) |
+| \`/toh-vibe\` | "I'm the **Vibe Agent** 🎨. What system would you like me to build?" |
+| \`/toh-ui\` | "I'm the **UI Agent** 🖼️. What UI would you like me to create?" |
+| \`/toh-dev\` | "I'm the **Dev Agent** ⚙️. What functionality should I implement?" |
+| \`/toh-design\` | "I'm the **Design Agent** ✨. What should I polish?" |
+| \`/toh-test\` | "I'm the **Test Agent** 🧪. What should I test?" |
+| \`/toh-connect\` | "I'm the **Connect Agent** 🔌. What should I connect?" |
+| \`/toh-plan\` | "I'm the **Plan Agent** 🧠. What project should I plan?" |
+| \`/toh-help\` | (Always show help immediately) |
 
 ### Examples:
 
 \`\`\`
-User: /toh:v restaurant management
-→ Execute /toh:vibe to create restaurant management system
+User: /toh-v restaurant management
+→ Execute /toh-vibe to create restaurant management system
 
 User: toh ui dashboard
-→ Execute /toh:ui to create dashboard UI
+→ Execute /toh-ui to create dashboard UI
 \`\`\`
 
 ## Available Commands
 
 | Command | Description |
 |---------|-------------|
-| \`/toh:help\` | Show all available commands |
-| \`/toh:plan\` | **THE BRAIN** - Analyze, plan, orchestrate all agents |
-| \`/toh:vibe\` | Create new project with UI + Logic + Mock Data |
-| \`/toh:ui\` | Create UI - Pages, Components, Layouts |
-| \`/toh:dev\` | Add Logic - TypeScript, Zustand, Forms |
-| \`/toh:design\` | Improve Design - Make it look professional |
-| \`/toh:test\` | Test system - Auto test & fix until passing |
-| \`/toh:connect\` | Connect Backend - Supabase, Auth, RLS |
-| \`/toh:line\` | LINE Mini App - LIFF integration |
-| \`/toh:mobile\` | Mobile App - Expo / React Native |
-| \`/toh:fix\` | Fix bugs - Debug and fix issues |
-| \`/toh:ship\` | Deploy - Vercel, Production ready |
+| \`/toh-help\` | Show all available commands |
+| \`/toh-plan\` | **THE BRAIN** - Analyze, plan, orchestrate all agents |
+| \`/toh-vibe\` | Create new project with UI + Logic + Mock Data |
+| \`/toh-ui\` | Create UI - Pages, Components, Layouts |
+| \`/toh-dev\` | Add Logic - TypeScript, Zustand, Forms |
+| \`/toh-design\` | Improve Design - Make it look professional |
+| \`/toh-test\` | Test system - Auto test & fix until passing |
+| \`/toh-connect\` | Connect Backend - Supabase, Auth, RLS |
+| \`/toh-line\` | LINE Mini App - LIFF integration |
+| \`/toh-mobile\` | Mobile App - Expo / React Native |
+| \`/toh-fix\` | Fix bugs - Debug and fix issues |
+| \`/toh-ship\` | Deploy - Vercel, Production ready |
 
 ## Memory System (Auto)
 
@@ -251,37 +258,37 @@ Toh Framework has automatic memory at \`.toh/memory/\`:
 
 ### Create New Project
 \`\`\`
-/toh:vibe A coffee shop management system with POS, inventory, and sales reports
+/toh-vibe A coffee shop management system with POS, inventory, and sales reports
 \`\`\`
 
 ### Add UI
 \`\`\`
-/toh:ui Add a dashboard page showing daily sales
+/toh-ui Add a dashboard page showing daily sales
 \`\`\`
 
 ### Add Logic
 \`\`\`
-/toh:dev Make the date filter work properly
+/toh-dev Make the date filter work properly
 \`\`\`
 
 ### Improve Design
 \`\`\`
-/toh:design Make it look professional, not like AI-generated
+/toh-design Make it look professional, not like AI-generated
 \`\`\`
 
 ### Test System
 \`\`\`
-/toh:test Test all pages
+/toh-test Test all pages
 \`\`\`
 
 ### Connect Backend
 \`\`\`
-/toh:connect Connect to Supabase with auth
+/toh-connect Connect to Supabase with auth
 \`\`\`
 
 ### Deploy
 \`\`\`
-/toh:ship Deploy to Vercel
+/toh-ship Deploy to Vercel
 \`\`\`
 
 ## Behavior Rules
@@ -308,23 +315,23 @@ ${agentSections}
 
 ## 🚨 MANDATORY: Skills & Agents Loading
 
-> **CRITICAL:** Before executing ANY /toh: command, you MUST load the required skills!
+> **CRITICAL:** Before executing ANY /toh- command, you MUST load the required skills!
 
 ### Command → Skills Map
 
 | Command | Load These Skills (from \`.toh/skills/\`) |
 |---------|------------------------------------------|
-| \`/toh:vibe\` | \`vibe-orchestrator\`, \`premium-experience\`, \`design-mastery\`, \`ui-first-builder\` |
-| \`/toh:ui\` | \`ui-first-builder\`, \`design-excellence\`, \`response-format\` |
-| \`/toh:dev\` | \`dev-engineer\`, \`backend-engineer\`, \`response-format\` |
-| \`/toh:design\` | \`design-mastery\`, \`design-excellence\`, \`premium-experience\` |
-| \`/toh:test\` | \`test-engineer\`, \`debug-protocol\`, \`error-handling\` |
-| \`/toh:connect\` | \`backend-engineer\`, \`integrations\` |
-| \`/toh:plan\` | \`plan-orchestrator\`, \`business-context\`, \`smart-routing\` |
-| \`/toh:fix\` | \`debug-protocol\`, \`error-handling\`, \`test-engineer\` |
-| \`/toh:line\` | \`platform-specialist\`, \`integrations\` |
-| \`/toh:mobile\` | \`platform-specialist\`, \`ui-first-builder\` |
-| \`/toh:ship\` | \`version-control\`, \`progress-tracking\` |
+| \`/toh-vibe\` | \`vibe-orchestrator\`, \`premium-experience\`, \`design-mastery\`, \`ui-first-builder\` |
+| \`/toh-ui\` | \`ui-first-builder\`, \`design-excellence\`, \`response-format\` |
+| \`/toh-dev\` | \`dev-engineer\`, \`backend-engineer\`, \`response-format\` |
+| \`/toh-design\` | \`design-mastery\`, \`design-excellence\`, \`premium-experience\` |
+| \`/toh-test\` | \`test-engineer\`, \`debug-protocol\`, \`error-handling\` |
+| \`/toh-connect\` | \`backend-engineer\`, \`integrations\` |
+| \`/toh-plan\` | \`plan-orchestrator\`, \`business-context\`, \`smart-routing\` |
+| \`/toh-fix\` | \`debug-protocol\`, \`error-handling\`, \`test-engineer\` |
+| \`/toh-line\` | \`platform-specialist\`, \`integrations\` |
+| \`/toh-mobile\` | \`platform-specialist\`, \`ui-first-builder\` |
+| \`/toh-ship\` | \`version-control\`, \`progress-tracking\` |
 
 ### Core Skills (Always Available)
 - \`memory-system\` - Memory read/write protocol
@@ -332,7 +339,7 @@ ${agentSections}
 - \`smart-routing\` - Command routing logic
 
 ### Loading Protocol:
-1. User types /toh:[command]
+1. User types /toh-[command]
 2. Read required skill files from \`.toh/skills/[skill-name]/SKILL.md\`
 3. Execute following skill instructions
 4. Save memory after completion
@@ -387,7 +394,7 @@ All skills are in \`.toh/skills/\` (Central Resources):
 
 Start with:
 \`\`\`
-/toh:vibe [describe what system you want]
+/toh-vibe [describe what system you want]
 \`\`\`
 
 The AI will:
@@ -460,22 +467,22 @@ function generateAgentsMdTH(commandsList, agentSections) {
 
 | คำสั่งเต็ม | ทางลัด (ใช้ได้ทั้งหมด) | การทำงาน |
 |-----------|----------------------|---------|
-| \`/toh:help\` | \`/toh:h\`, \`toh help\`, \`toh h\` | แสดงคำสั่งทั้งหมด |
-| \`/toh:plan\` | \`/toh:p\`, \`toh plan\`, \`toh p\` | 🧠 THE BRAIN - วิเคราะห์ |
-| \`/toh:vibe\` | \`/toh:v\`, \`toh vibe\`, \`toh v\` | สร้างโปรเจคใหม่ |
-| \`/toh:ui\` | \`/toh:u\`, \`toh ui\`, \`toh u\` | สร้าง UI |
-| \`/toh:dev\` | \`/toh:d\`, \`toh dev\`, \`toh d\` | เพิ่ม logic |
-| \`/toh:design\` | \`/toh:ds\`, \`toh design\`, \`toh ds\` | ปรับ design |
-| \`/toh:test\` | \`/toh:t\`, \`toh test\`, \`toh t\` | ทดสอบ |
-| \`/toh:connect\` | \`/toh:c\`, \`toh connect\`, \`toh c\` | เชื่อม Supabase |
-| \`/toh:line\` | \`/toh:l\`, \`toh line\`, \`toh l\` | LINE Mini App |
-| \`/toh:mobile\` | \`/toh:m\`, \`toh mobile\`, \`toh m\` | Mobile App |
-| \`/toh:fix\` | \`/toh:f\`, \`toh fix\`, \`toh f\` | แก้ bugs |
-| \`/toh:ship\` | \`/toh:s\`, \`toh ship\`, \`toh s\` | Deploy |
+| \`/toh-help\` | \`/toh-h\`, \`toh help\`, \`toh h\` | แสดงคำสั่งทั้งหมด |
+| \`/toh-plan\` | \`/toh-p\`, \`toh plan\`, \`toh p\` | 🧠 THE BRAIN - วิเคราะห์ |
+| \`/toh-vibe\` | \`/toh-v\`, \`toh vibe\`, \`toh v\` | สร้างโปรเจคใหม่ |
+| \`/toh-ui\` | \`/toh-u\`, \`toh ui\`, \`toh u\` | สร้าง UI |
+| \`/toh-dev\` | \`/toh-d\`, \`toh dev\`, \`toh d\` | เพิ่ม logic |
+| \`/toh-design\` | \`/toh-ds\`, \`toh design\`, \`toh ds\` | ปรับ design |
+| \`/toh-test\` | \`/toh-t\`, \`toh test\`, \`toh t\` | ทดสอบ |
+| \`/toh-connect\` | \`/toh-c\`, \`toh connect\`, \`toh c\` | เชื่อม Supabase |
+| \`/toh-line\` | \`/toh-l\`, \`toh line\`, \`toh l\` | LINE Mini App |
+| \`/toh-mobile\` | \`/toh-m\`, \`toh mobile\`, \`toh m\` | Mobile App |
+| \`/toh-fix\` | \`/toh-f\`, \`toh fix\`, \`toh f\` | แก้ bugs |
+| \`/toh-ship\` | \`/toh-s\`, \`toh ship\`, \`toh s\` | Deploy |
 
 ### ⚡ กฎการ Execute:
 
-1. **จดจำทันที** - เห็น \`/toh:\` หรือ \`toh \` = คำสั่ง!
+1. **จดจำทันที** - เห็น \`/toh-\` หรือ \`toh \` = คำสั่ง!
 2. **ตรวจสอบ Description** - คำสั่งมี description ตามหลังไหม?
    - ✅ **มี description** → ทำเลย
    - ❓ **ไม่มี description** → ถามก่อน: "ผมเป็น [ชื่อ Agent] ครับ อยากให้ช่วยอะไรครับ?"
@@ -486,41 +493,41 @@ function generateAgentsMdTH(commandsList, agentSections) {
 
 | คำสั่งเฉยๆ | ตอบว่า |
 |-----------|--------|
-| \`/toh:vibe\` | "ผมเป็น **Vibe Agent** 🎨 ครับ อยากให้สร้างระบบอะไรครับ?" |
-| \`/toh:ui\` | "ผมเป็น **UI Agent** 🖼️ ครับ อยากให้สร้าง UI อะไรครับ?" |
-| \`/toh:dev\` | "ผมเป็น **Dev Agent** ⚙️ ครับ อยากให้เพิ่ม functionality อะไรครับ?" |
-| \`/toh:design\` | "ผมเป็น **Design Agent** ✨ ครับ อยากให้ปรับอะไรครับ?" |
-| \`/toh:test\` | "ผมเป็น **Test Agent** 🧪 ครับ อยากให้ทดสอบอะไรครับ?" |
-| \`/toh:connect\` | "ผมเป็น **Connect Agent** 🔌 ครับ อยากให้เชื่อมอะไรครับ?" |
-| \`/toh:plan\` | "ผมเป็น **Plan Agent** 🧠 ครับ อยากให้วางแผนอะไรครับ?" |
-| \`/toh:help\` | (แสดง help ทันทีเสมอ) |
+| \`/toh-vibe\` | "ผมเป็น **Vibe Agent** 🎨 ครับ อยากให้สร้างระบบอะไรครับ?" |
+| \`/toh-ui\` | "ผมเป็น **UI Agent** 🖼️ ครับ อยากให้สร้าง UI อะไรครับ?" |
+| \`/toh-dev\` | "ผมเป็น **Dev Agent** ⚙️ ครับ อยากให้เพิ่ม functionality อะไรครับ?" |
+| \`/toh-design\` | "ผมเป็น **Design Agent** ✨ ครับ อยากให้ปรับอะไรครับ?" |
+| \`/toh-test\` | "ผมเป็น **Test Agent** 🧪 ครับ อยากให้ทดสอบอะไรครับ?" |
+| \`/toh-connect\` | "ผมเป็น **Connect Agent** 🔌 ครับ อยากให้เชื่อมอะไรครับ?" |
+| \`/toh-plan\` | "ผมเป็น **Plan Agent** 🧠 ครับ อยากให้วางแผนอะไรครับ?" |
+| \`/toh-help\` | (แสดง help ทันทีเสมอ) |
 
 ### ตัวอย่าง:
 
 \`\`\`
-User: /toh:v ระบบจัดการร้านอาหาร
-→ Execute /toh:vibe สร้างระบบจัดการร้านอาหาร
+User: /toh-v ระบบจัดการร้านอาหาร
+→ Execute /toh-vibe สร้างระบบจัดการร้านอาหาร
 
 User: toh ui dashboard
-→ Execute /toh:ui สร้าง dashboard
+→ Execute /toh-ui สร้าง dashboard
 \`\`\`
 
 ## Commands ที่ใช้ได้
 
 | Command | คำอธิบาย |
 |---------|----------|
-| \`/toh:help\` | แสดงรายการ commands ทั้งหมด |
-| \`/toh:plan\` | 🧠 **THE BRAIN** - วิเคราะห์, วางแผน, สั่งการทุก Agent |
-| \`/toh:vibe\` | สร้างโปรเจคใหม่ UI + Logic + Mock Data |
-| \`/toh:ui\` | สร้าง UI - หน้า, Components, Layouts |
-| \`/toh:dev\` | เพิ่ม Logic - TypeScript, Zustand, Forms |
-| \`/toh:design\` | ปรับ Design - ทำให้สวย ไม่ดูเหมือน AI |
-| \`/toh:test\` | ทดสอบระบบ - Auto test & fix จนผ่าน |
-| \`/toh:connect\` | เชื่อม Backend - Supabase, Auth, RLS |
-| \`/toh:line\` | LINE Mini App - LIFF integration |
-| \`/toh:mobile\` | Mobile App - Expo / React Native |
-| \`/toh:fix\` | แก้ Bug - Debug และ fix issues |
-| \`/toh:ship\` | Deploy - Vercel, Production ready |
+| \`/toh-help\` | แสดงรายการ commands ทั้งหมด |
+| \`/toh-plan\` | 🧠 **THE BRAIN** - วิเคราะห์, วางแผน, สั่งการทุก Agent |
+| \`/toh-vibe\` | สร้างโปรเจคใหม่ UI + Logic + Mock Data |
+| \`/toh-ui\` | สร้าง UI - หน้า, Components, Layouts |
+| \`/toh-dev\` | เพิ่ม Logic - TypeScript, Zustand, Forms |
+| \`/toh-design\` | ปรับ Design - ทำให้สวย ไม่ดูเหมือน AI |
+| \`/toh-test\` | ทดสอบระบบ - Auto test & fix จนผ่าน |
+| \`/toh-connect\` | เชื่อม Backend - Supabase, Auth, RLS |
+| \`/toh-line\` | LINE Mini App - LIFF integration |
+| \`/toh-mobile\` | Mobile App - Expo / React Native |
+| \`/toh-fix\` | แก้ Bug - Debug และ fix issues |
+| \`/toh-ship\` | Deploy - Vercel, Production ready |
 
 ## Memory System (อัตโนมัติ)
 
@@ -555,37 +562,37 @@ Toh Framework มีระบบ Memory ที่ \`.toh/memory/\`:
 
 ### สร้างโปรเจคใหม่
 \`\`\`
-/toh:vibe ระบบจัดการร้านกาแฟ มี POS สต็อก รายงานยอดขาย
+/toh-vibe ระบบจัดการร้านกาแฟ มี POS สต็อก รายงานยอดขาย
 \`\`\`
 
 ### เพิ่ม UI
 \`\`\`
-/toh:ui เพิ่มหน้า dashboard แสดงยอดขายรายวัน
+/toh-ui เพิ่มหน้า dashboard แสดงยอดขายรายวัน
 \`\`\`
 
 ### เพิ่ม Logic
 \`\`\`
-/toh:dev ทำให้ filter วันที่ทำงานได้จริง
+/toh-dev ทำให้ filter วันที่ทำงานได้จริง
 \`\`\`
 
 ### ปรับ Design
 \`\`\`
-/toh:design ทำให้ดูเป็นมืออาชีพ ไม่ดูเหมือน AI สร้าง
+/toh-design ทำให้ดูเป็นมืออาชีพ ไม่ดูเหมือน AI สร้าง
 \`\`\`
 
 ### ทดสอบระบบ
 \`\`\`
-/toh:test ทดสอบทุกหน้า
+/toh-test ทดสอบทุกหน้า
 \`\`\`
 
 ### เชื่อม Backend
 \`\`\`
-/toh:connect เชื่อม Supabase พร้อม auth
+/toh-connect เชื่อม Supabase พร้อม auth
 \`\`\`
 
 ### Deploy
 \`\`\`
-/toh:ship deploy to Vercel
+/toh-ship deploy to Vercel
 \`\`\`
 
 ## กฎที่ต้องปฏิบัติ
@@ -612,23 +619,23 @@ ${agentSections}
 
 ## 🚨 บังคับ: โหลด Skills & Agents
 
-> **สำคัญมาก:** ก่อน execute คำสั่ง /toh: ใดๆ ต้องโหลด skills ที่เกี่ยวข้อง!
+> **สำคัญมาก:** ก่อน execute คำสั่ง /toh- ใดๆ ต้องโหลด skills ที่เกี่ยวข้อง!
 
 ### คำสั่ง → Skills Map
 
 | คำสั่ง | โหลด Skills เหล่านี้ (จาก \`.toh/skills/\`) |
 |--------|-------------------------------------------|
-| \`/toh:vibe\` | \`vibe-orchestrator\`, \`premium-experience\`, \`design-mastery\`, \`ui-first-builder\` |
-| \`/toh:ui\` | \`ui-first-builder\`, \`design-excellence\`, \`response-format\` |
-| \`/toh:dev\` | \`dev-engineer\`, \`backend-engineer\`, \`response-format\` |
-| \`/toh:design\` | \`design-mastery\`, \`design-excellence\`, \`premium-experience\` |
-| \`/toh:test\` | \`test-engineer\`, \`debug-protocol\`, \`error-handling\` |
-| \`/toh:connect\` | \`backend-engineer\`, \`integrations\` |
-| \`/toh:plan\` | \`plan-orchestrator\`, \`business-context\`, \`smart-routing\` |
-| \`/toh:fix\` | \`debug-protocol\`, \`error-handling\`, \`test-engineer\` |
-| \`/toh:line\` | \`platform-specialist\`, \`integrations\` |
-| \`/toh:mobile\` | \`platform-specialist\`, \`ui-first-builder\` |
-| \`/toh:ship\` | \`version-control\`, \`progress-tracking\` |
+| \`/toh-vibe\` | \`vibe-orchestrator\`, \`premium-experience\`, \`design-mastery\`, \`ui-first-builder\` |
+| \`/toh-ui\` | \`ui-first-builder\`, \`design-excellence\`, \`response-format\` |
+| \`/toh-dev\` | \`dev-engineer\`, \`backend-engineer\`, \`response-format\` |
+| \`/toh-design\` | \`design-mastery\`, \`design-excellence\`, \`premium-experience\` |
+| \`/toh-test\` | \`test-engineer\`, \`debug-protocol\`, \`error-handling\` |
+| \`/toh-connect\` | \`backend-engineer\`, \`integrations\` |
+| \`/toh-plan\` | \`plan-orchestrator\`, \`business-context\`, \`smart-routing\` |
+| \`/toh-fix\` | \`debug-protocol\`, \`error-handling\`, \`test-engineer\` |
+| \`/toh-line\` | \`platform-specialist\`, \`integrations\` |
+| \`/toh-mobile\` | \`platform-specialist\`, \`ui-first-builder\` |
+| \`/toh-ship\` | \`version-control\`, \`progress-tracking\` |
 
 ### Core Skills (ใช้ได้เสมอ)
 - \`memory-system\` - ระบบ Memory
@@ -636,7 +643,7 @@ ${agentSections}
 - \`smart-routing\` - การ route คำสั่ง
 
 ### ขั้นตอนการโหลด:
-1. ผู้ใช้พิมพ์ /toh:[command]
+1. ผู้ใช้พิมพ์ /toh-[command]
 2. อ่าน skill files จาก \`.toh/skills/[skill-name]/SKILL.md\`
 3. ทำงานตามคำสั่งใน skill
 4. บันทึก memory หลังเสร็จ
@@ -689,7 +696,7 @@ Skills ทั้งหมดอยู่ที่ \`.toh/skills/\` (Central Reso
 
 เริ่มต้นด้วย:
 \`\`\`
-/toh:vibe [อธิบายระบบที่ต้องการ]
+/toh-vibe [อธิบายระบบที่ต้องการ]
 \`\`\`
 
 AI จะ:

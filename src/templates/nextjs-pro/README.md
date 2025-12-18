@@ -1,6 +1,6 @@
 # Next.js Pro Template
 
-> 🚀 Production-ready Next.js 14 starter template optimized for /toh: workflow
+> 🚀 Production-ready Next.js 14 starter template optimized for /toh- workflow
 
 ## Tech Stack
 
@@ -150,23 +150,23 @@ p-6 (24px)   - page padding
 ### Add a New Feature
 
 ```bash
-# Use /toh: commands in Claude Code
-/toh:ui หน้า products พร้อม card grid และ search
-/toh:dev เพิ่ม CRUD และ filter functionality  
-/toh:design polish ให้ดู professional
-/toh:connect เชื่อม Supabase
+# Use /toh- commands in Claude Code
+/toh-ui หน้า products พร้อม card grid และ search
+/toh-dev เพิ่ม CRUD และ filter functionality  
+/toh-design polish ให้ดู professional
+/toh-connect เชื่อม Supabase
 ```
 
 ### Add Authentication
 
 ```bash
-/toh:connect เพิ่ม auth ด้วย email/password
+/toh-connect เพิ่ม auth ด้วย email/password
 ```
 
 ### Convert to LINE Mini App
 
 ```bash
-/toh:line แปลงเป็น LINE Mini App
+/toh-line แปลงเป็น LINE Mini App
 ```
 
 ## License

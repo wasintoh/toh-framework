@@ -7,9 +7,9 @@ description: >
   Anti-AI detection, trend-aware, production-ready design decisions.
   CRITICAL: Must be read before any UI creation task.
 triggers:
-  - /toh:vibe (new projects)
-  - /toh:ui (new components)
-  - /toh:design (polish)
+  - /toh-vibe (new projects)
+  - /toh-ui (new components)
+  - /toh-design (polish)
   - Any UI creation request
 ---
 

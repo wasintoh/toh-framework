@@ -1,4 +1,4 @@
-# 🧠 /toh:plan - The Brain Command v2.0
+# 🧠 /toh-plan - The Brain Command v2.0
 
 > Command for planning + conversing with User + orchestrating Agents
 > The smartest among all Commands
@@ -9,8 +9,8 @@
 
 | Property | Value |
 |----------|-------|
-| Command | `/toh:plan` |
-| Shortcut | `/toh:p` |
+| Command | `/toh-plan` |
+| Shortcut | `/toh-p` |
 | Agent | `plan-orchestrator` |
 | Role | THE BRAIN - Assistant + Planner + Orchestrator |
 
@@ -18,7 +18,7 @@
 
 ## 🎯 Purpose
 
-`/toh:plan` is **THE BRAIN** of Toh Framework:
+`/toh-plan` is **THE BRAIN** of Toh Framework:
 
 1. **Assistant** - Can converse with User, answer questions, adjust plans
 2. **Planner** - Analyze, plan, divide into phases
@@ -31,7 +31,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│  User: /toh:plan [request or PRD]                       │
+│  User: /toh-plan [request or PRD]                       │
 └─────────────────────────────────────────────────────────┘
                          │
                          ▼
@@ -83,7 +83,7 @@
 
 ### Example 1: From PRD
 ```
-User: /toh:plan read this PRD and build it [PRD content]
+User: /toh-plan read this PRD and build it [PRD content]
 
 AI:
 ┌─────────────────────────────────────────────────────────┐
@@ -121,7 +121,7 @@ AI:
 
 ### Example 2: Add Feature
 ```
-User: /toh:plan add notification system
+User: /toh-plan add notification system
 
 AI:
 ┌─────────────────────────────────────────────────────────┐
@@ -151,7 +151,7 @@ AI:
 
 ### Example 3: Adjust Plan
 ```
-User: /toh:plan create todo app
+User: /toh-plan create todo app
 
 AI: [shows plan...]
 
@@ -229,8 +229,8 @@ AI:
 ## 🎯 Trigger Phrases
 
 ### Start Plan Mode
-- `/toh:plan [description]`
-- `/toh:p [description]`
+- `/toh-plan [description]`
+- `/toh-p [description]`
 - "plan..."
 
 ### Confirm Execute

@@ -1,19 +1,17 @@
 ---
-command: /toh:mobile
-aliases: ["/toh:m"]
-description: >
-  Create mobile app with Expo (React Native).
-  Uses NativeWind (Tailwind for RN) and Zustand.
-trigger: /toh:mobile or /toh:m
+command: /toh-mobile
+aliases: ["/toh-m"]
+description: Create mobile app with Expo, NativeWind (Tailwind) and Zustand
+trigger: /toh-mobile or /toh-m
 ---
 
-# /toh:mobile - Expo Mobile App
+# /toh-mobile - Expo Mobile App
 
 ## Signature Command 📱
 
 ```
-/toh:mobile [description]
-/toh:m [description]
+/toh-mobile [description]
+/toh-m [description]
 ```
 
 ## What Happens
@@ -56,13 +54,13 @@ trigger: /toh:mobile or /toh:m
 
 ```bash
 # New mobile app
-/toh:mobile expense tracker app
+/toh-mobile expense tracker app
 
 # Specific features
-/toh:m expense tracking app with tabs: Home, Add Entry, Reports
+/toh-m expense tracking app with tabs: Home, Add Entry, Reports
 
 # Convert from web concept
-/toh:mobile convert concept from web app to mobile
+/toh-mobile convert concept from web app to mobile
 ```
 
 ## Output Format
@@ -92,8 +90,8 @@ npx expo start
 - Expo Go: Scan QR code
 
 ### Next:
-- `/toh:ui` add screens
-- `/toh:connect` connect Supabase
+- `/toh-ui` add screens
+- `/toh-connect` connect Supabase
 ```
 
 ## Mobile Stack

@@ -40,7 +40,7 @@ When `.toh/memory/` is empty or doesn't exist:
 - "สร้างเว็บขายของออนไลน์"
 - "สร้างระบบจองคิว"
 
-หรือพิมพ์ `/toh:help` เพื่อดูคำสั่งทั้งหมดครับ
+หรือพิมพ์ `/toh-help` เพื่อดูคำสั่งทั้งหมดครับ
 ```
 
 ### Returning User (Has Memory)

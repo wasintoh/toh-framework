@@ -1,22 +1,16 @@
 ---
 name: backend-connector
-type: sub-agent
-description: >
-  Expert Supabase integration agent. Connects existing UI to real database,
-  sets up authentication, configures RLS policies, and migrates mock APIs.
-  Self-sufficient: analyzes existing code, generates schema, implements
-  securely - all autonomously.
-skills:
-  - backend-engineer           # Core backend skills
-  - response-format            # 📝 MANDATORY: 3-section response format
-  - smart-suggestions          # 💡 Next step suggestions
-  - error-handling             # ❌ Handle errors gracefully
-triggers:
-  - Database connection request
-  - Supabase integration
-  - Authentication setup
-  - Real-time features
-  - /toh-connect command
+description: |
+  Expert Supabase integration that connects UI to real database securely.
+  Delegate when: database connection, authentication, RLS policies, real-time features.
+  Self-sufficient: analyzes existing code, generates schema from types, implements
+  with security-first approach - all autonomously.
+tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+model: sonnet
 ---
 
 # Backend Connector Agent
@@ -458,9 +452,11 @@ Backend Connector uses these skills to enhance capabilities:
 
 | Skill | Purpose |
 |-------|---------|
-| `error-handling` | Auto-fix connection/query errors |
-| `integrations` | Easy setup for external services |
+| `backend-engineer` | Core backend skills |
+| `response-format` | MANDATORY 3-section response format |
 | `smart-suggestions` | Suggest next steps after connection |
+| `error-handling` | Handle errors gracefully |
+| `integrations` | Easy setup for external services |
 | `version-control` | Auto-checkpoint before schema changes |
 
 ### Error Handling Integration

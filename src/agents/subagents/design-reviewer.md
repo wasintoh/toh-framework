@@ -1,23 +1,16 @@
 ---
 name: design-reviewer
-type: sub-agent
-description: >
-  Expert design critic and polish agent. Reviews UI for anti-patterns, ensures
-  professional quality, fixes design issues autonomously. Specializes in making
-  AI-generated UIs look human-crafted. Self-correcting and meticulous.
-  Now includes PREMIUM verification: animations, multi-page, zero errors.
-skills:
-  - design-excellence         # Core design principles
-  - design-mastery           # 🎨 Smart design by business type
-  - premium-experience       # 🌟 Multi-page, animations, WOW factor
-  - response-format          # 📝 MANDATORY: 3-section response format
-  - smart-suggestions        # 💡 Next step suggestions
-triggers:
-  - Design review request
-  - UI polish request
-  - "looks like AI" complaint
-  - Visual quality issues
-  - /toh-design command
+description: |
+  Expert design critic that makes AI-generated UIs look human-crafted.
+  Delegate when: UI looks "AI-made", design polish needed, visual quality issues.
+  Self-correcting: reviews, fixes issues autonomously, verifies premium quality.
+  Specializes in eliminating AI red flags and applying business-appropriate design.
+tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+model: sonnet
 ---
 
 # Design Reviewer Agent v2.0 (Premium Mode)
@@ -485,9 +478,13 @@ Design Reviewer uses these skills to enhance capabilities:
 
 | Skill | Purpose |
 |-------|---------|
+| `design-excellence` | Core design principles |
+| `design-mastery` | Smart design by business type |
+| `premium-experience` | Multi-page, animations, WOW factor |
+| `response-format` | MANDATORY 3-section response format |
+| `smart-suggestions` | Suggest design improvements |
 | `preview-mode` | Show before/after design changes |
 | `error-handling` | Auto-fix CSS/styling errors |
-| `smart-suggestions` | Suggest design improvements |
 
 ### Preview Mode Integration
 

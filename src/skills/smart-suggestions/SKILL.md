@@ -45,7 +45,7 @@ User picks one (or asks for something else)
 
 ## Suggestion Rules by Phase
 
-### Phase 1: Project Creation (`/toh:vibe`)
+### Phase 1: Project Creation (`/toh-vibe`)
 
 **After creating new project:**
 
@@ -59,14 +59,14 @@ User picks one (or asks for something else)
 - lib/mock-data.ts (Mock data)
 
 💡 **แนะนำขั้นตอนถัดไป:**
-1. `/toh:design` ปรับ UI ให้สวยขึ้น ← แนะนำ
-2. `/toh:dev` เพิ่ม logic ให้ทำงานได้จริง
-3. `/toh:connect` เชื่อม Supabase database
+1. `/toh-design` ปรับ UI ให้สวยขึ้น ← แนะนำ
+2. `/toh-dev` เพิ่ม logic ให้ทำงานได้จริง
+3. `/toh-connect` เชื่อม Supabase database
 
 พิมพ์ตัวเลข หรือบอกว่าอยากทำอะไรต่อครับ
 ```
 
-### Phase 2: UI Creation (`/toh:ui`)
+### Phase 2: UI Creation (`/toh-ui`)
 
 **After creating UI components:**
 
@@ -77,14 +77,14 @@ User picks one (or asks for something else)
 - [file list]
 
 💡 **แนะนำขั้นตอนถัดไป:**
-1. `/toh:dev` เพิ่ม logic ให้ [component] ทำงานได้ ← แนะนำ
-2. `/toh:ui` สร้างหน้า [related page] ต่อ
-3. `/toh:design` ปรับ design ให้ดูดีขึ้น
+1. `/toh-dev` เพิ่ม logic ให้ [component] ทำงานได้ ← แนะนำ
+2. `/toh-ui` สร้างหน้า [related page] ต่อ
+3. `/toh-design` ปรับ design ให้ดูดีขึ้น
 
 พิมพ์ตัวเลข หรือบอกว่าอยากทำอะไรต่อครับ
 ```
 
-### Phase 3: Logic Implementation (`/toh:dev`)
+### Phase 3: Logic Implementation (`/toh-dev`)
 
 **After adding logic:**
 
@@ -95,14 +95,14 @@ User picks one (or asks for something else)
 - [what was implemented]
 
 💡 **แนะนำขั้นตอนถัดไป:**
-1. `/toh:test` ทดสอบว่าทำงานถูกต้อง ← แนะนำ
-2. `/toh:connect` เชื่อมกับ database จริง
-3. `/toh:dev` เพิ่ม feature [next feature]
+1. `/toh-test` ทดสอบว่าทำงานถูกต้อง ← แนะนำ
+2. `/toh-connect` เชื่อมกับ database จริง
+3. `/toh-dev` เพิ่ม feature [next feature]
 
 พิมพ์ตัวเลข หรือบอกว่าอยากทำอะไรต่อครับ
 ```
 
-### Phase 4: Design Polish (`/toh:design`)
+### Phase 4: Design Polish (`/toh-design`)
 
 **After design improvements:**
 
@@ -113,14 +113,14 @@ User picks one (or asks for something else)
 - [design changes]
 
 💡 **แนะนำขั้นตอนถัดไป:**
-1. `/toh:test` ทดสอบ responsive ทุก breakpoint ← แนะนำ
-2. `/toh:ui` สร้างหน้าถัดไป
-3. `/toh:connect` เชื่อม database
+1. `/toh-test` ทดสอบ responsive ทุก breakpoint ← แนะนำ
+2. `/toh-ui` สร้างหน้าถัดไป
+3. `/toh-connect` เชื่อม database
 
 พิมพ์ตัวเลข หรือบอกว่าอยากทำอะไรต่อครับ
 ```
 
-### Phase 5: Testing (`/toh:test`)
+### Phase 5: Testing (`/toh-test`)
 
 **After running tests:**
 
@@ -132,14 +132,14 @@ User picks one (or asks for something else)
 - (หรือ) 🔧 พบ error และแก้ไขแล้ว [count] จุด
 
 💡 **แนะนำขั้นตอนถัดไป:**
-1. `/toh:connect` เชื่อม Supabase ← แนะนำ (ถ้ายังไม่ได้เชื่อม)
-2. `/toh:ship` deploy ขึ้น production
-3. `/toh:ui` เพิ่ม feature ใหม่
+1. `/toh-connect` เชื่อม Supabase ← แนะนำ (ถ้ายังไม่ได้เชื่อม)
+2. `/toh-ship` deploy ขึ้น production
+3. `/toh-ui` เพิ่ม feature ใหม่
 
 พิมพ์ตัวเลข หรือบอกว่าอยากทำอะไรต่อครับ
 ```
 
-### Phase 6: Backend Connection (`/toh:connect`)
+### Phase 6: Backend Connection (`/toh-connect`)
 
 **After connecting backend:**
 
@@ -150,14 +150,14 @@ User picks one (or asks for something else)
 - [tables, auth, RLS]
 
 💡 **แนะนำขั้นตอนถัดไป:**
-1. `/toh:test` ทดสอบกับข้อมูลจริง ← แนะนำ
-2. `/toh:ship` deploy ขึ้น production
+1. `/toh-test` ทดสอบกับข้อมูลจริง ← แนะนำ
+2. `/toh-ship` deploy ขึ้น production
 3. เพิ่ม integration อื่นๆ (payment, email)
 
 พิมพ์ตัวเลข หรือบอกว่าอยากทำอะไรต่อครับ
 ```
 
-### Phase 7: Deployment (`/toh:ship`)
+### Phase 7: Deployment (`/toh-ship`)
 
 **After deployment:**
 
@@ -259,7 +259,7 @@ Good: (After creating UI) "เพิ่ม logic ให้ทำงานได�
 
 ❌ **Don't repeat same suggestions**
 ```
-Bad: Keep suggesting "/toh:design" after user already polished design
+Bad: Keep suggesting "/toh-design" after user already polished design
 Good: Track what's done and suggest new things
 ```
 
@@ -268,26 +268,26 @@ Good: Track what's done and suggest new things
 ## Example Flow
 
 ```
-User: /toh:vibe ร้านกาแฟ
+User: /toh-vibe ร้านกาแฟ
 
 AI: ✅ สร้างระบบร้านกาแฟเสร็จแล้วครับ!
     [shows what was created]
     
     💡 แนะนำขั้นตอนถัดไป:
-    1. /toh:design ปรับ UI ให้สวยขึ้น ← แนะนำ
-    2. /toh:dev เพิ่ม logic POS
-    3. /toh:connect เชื่อม Supabase
+    1. /toh-design ปรับ UI ให้สวยขึ้น ← แนะนำ
+    2. /toh-dev เพิ่ม logic POS
+    3. /toh-connect เชื่อม Supabase
 
 User: 1
 
-AI: (executes /toh:design)
+AI: (executes /toh-design)
     ✅ ปรับ design เสร็จแล้วครับ!
     [shows changes]
     
     💡 แนะนำขั้นตอนถัดไป:
-    1. /toh:dev เพิ่ม logic POS ← แนะนำ
-    2. /toh:test ทดสอบ responsive
-    3. /toh:ui เพิ่มหน้า inventory
+    1. /toh-dev เพิ่ม logic POS ← แนะนำ
+    2. /toh-test ทดสอบ responsive
+    3. /toh-ui เพิ่มหน้า inventory
 
 User: 1
 

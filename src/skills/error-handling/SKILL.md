@@ -223,7 +223,7 @@ When error MUST be shown to user:
 ## Example: Complete Error Handling Flow
 
 ```
-User: /toh:dev ทำให้ปุ่ม save ทำงาน
+User: /toh-dev ทำให้ปุ่ม save ทำงาน
 
 AI: (Internal - user doesn't see)
     → Writing save function
@@ -244,16 +244,16 @@ AI: (User sees)
     - Validation ก่อนบันทึก
     
     💡 แนะนำขั้นตอนถัดไป:
-    1. /toh:connect เชื่อม database จริง
-    2. /toh:test ทดสอบการทำงาน
-    3. /toh:ui เพิ่มฟอร์มแก้ไข"
+    1. /toh-connect เชื่อม database จริง
+    2. /toh-test ทดสอบการทำงาน
+    3. /toh-ui เพิ่มฟอร์มแก้ไข"
 ```
 
 ---
 
 ## Integration with Test Agent
 
-When `/toh:test` runs:
+When `/toh-test` runs:
 
 ```
 Test fails

@@ -1,16 +1,105 @@
-# /toh: Sub-Agents
+# /toh- Agents v4.0
 
-Expert agents that power the `/toh:` command suite. Each agent is **self-sufficient**, **self-correcting**, and **expert-level**.
+Expert agents that power the `/toh-` command suite. Each agent is **self-sufficient**, **self-correcting**, and **expert-level**.
+
+## 🏗️ Dual Architecture (v4.0)
+
+Toh Framework supports **two agent formats** for different IDEs:
+
+```
+src/agents/
+├── *.md              ← Original format (for Cursor, Gemini, Codex)
+└── subagents/
+    └── *.md          ← Claude Code native format
+```
+
+### Format Comparison
+
+| Feature | Original (`.toh/agents/`) | Subagent (`.claude/agents/`) |
+|---------|---------------------------|------------------------------|
+| **For IDE** | Cursor, Gemini CLI, Codex | Claude Code |
+| **YAML** | `type`, `skills`, `triggers` | `tools`, `model` |
+| **Invocation** | `@.toh/agents/` reference | Native Task delegation |
+| **Content** | Same expert content | Same expert content |
+
+### Original Format (for Cursor, Gemini, Codex)
+```yaml
+name: ui-builder
+type: sub-agent
+description: >
+  Expert UI builder...
+skills:
+  - ui-first-builder
+  - design-excellence
+triggers:
+  - /toh-ui command
+```
+
+### Claude Code Format (for Claude Code)
+```yaml
+name: ui-builder
+description: |
+  Expert UI builder that creates production-ready UIs...
+  Delegate when: creating pages, components, layouts...
+tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+model: sonnet
+```
+
+---
 
 ## Agent Overview
 
 | Agent | Lines | Expertise | Triggered By |
 |-------|-------|-----------|--------------|
-| **ui-builder** | 278 | UI/Components/Mock Data | `/toh:vibe`, `/toh:ui` |
-| **dev-builder** | 396 | Logic/State/TypeScript/Forms | `/toh:dev` |
-| **design-reviewer** | 364 | Design Polish/Anti-patterns | `/toh:design` |
-| **backend-connector** | 408 | Supabase/Auth/RLS | `/toh:connect` |
-| **platform-adapter** | 500 | LINE/Expo/Tauri | `/toh:line`, `/toh:mobile` |
+| **ui-builder** | 525 | UI/Components/Mock Data | `/toh-vibe`, `/toh-ui` |
+| **dev-builder** | 712 | Logic/State/TypeScript/Forms | `/toh-dev` |
+| **design-reviewer** | 577 | Design Polish/Anti-patterns | `/toh-design` |
+| **backend-connector** | 550 | Supabase/Auth/RLS | `/toh-connect` |
+| **test-runner** | 362 | Testing/Auto-fix Loop | `/toh-test`, `/toh-fix` |
+| **plan-orchestrator** | 636 | Analysis/Planning/Coordination | `/toh-plan`, `/toh-ship` |
+| **platform-adapter** | 603 | LINE/Expo/Tauri | `/toh-line`, `/toh-mobile` |
+
+**Total: 7 Agents, ~3,965 lines**
+
+## 📦 Installation Paths
+
+When installed, agents are copied to:
+
+| IDE | Agent Location | Format Used |
+|-----|----------------|-------------|
+| Claude Code | `.claude/agents/*.md` | Claude native (from `subagents/`) |
+| Cursor | `.toh/agents/*.md` | Original (from root) |
+| Gemini CLI | `.toh/agents/*.md` | Original (from root) |
+| Codex CLI | `.toh/agents/*.md` | Original (from root) |
+
+### Claude Code Installation
+```
+.claude/agents/
+├── ui-builder.md         ← Claude native format
+├── dev-builder.md
+├── backend-connector.md
+├── design-reviewer.md
+├── test-runner.md
+├── plan-orchestrator.md
+└── platform-adapter.md
+```
+
+### Other IDEs Installation
+```
+.toh/agents/
+├── ui-builder.md         ← Original format
+├── dev-builder.md
+├── backend-connector.md
+├── design-reviewer.md
+├── test-runner.md
+├── plan-orchestrator.md
+├── platform-adapter.md
+└── subagents/            ← Also available
+```
 
 ---
 
@@ -67,7 +156,7 @@ Never speculate - read actual code before making changes.
 ## Workflow Diagram
 
 ```
-USER: /toh:vibe expense tracker
+USER: /toh-vibe expense tracker
            │
            ▼
 ┌──────────────────────┐
@@ -179,19 +268,19 @@ Adapt web app สำหรับ LINE, Mobile, Desktop
 
 ## Usage
 
-Agents ถูกเรียกใช้ผ่าน `/toh:` commands หรือ โดย vibe-orchestrator skill
+Agents ถูกเรียกใช้ผ่าน `/toh-` commands หรือ โดย vibe-orchestrator skill
 
 ```bash
 # Direct command → triggers specific agent
-/toh:ui → ui-builder
-/toh:dev → dev-builder
-/toh:design → design-reviewer
-/toh:connect → backend-connector
-/toh:line → platform-adapter (LINE mode)
-/toh:mobile → platform-adapter (Expo mode)
+/toh-ui → ui-builder
+/toh-dev → dev-builder
+/toh-design → design-reviewer
+/toh-connect → backend-connector
+/toh-line → platform-adapter (LINE mode)
+/toh-mobile → platform-adapter (Expo mode)
 
 # Compound command → orchestrates multiple agents
-/toh:vibe → ui-builder + dev-builder + design-reviewer
+/toh-vibe → ui-builder + dev-builder + design-reviewer
 ```
 
 ---
@@ -200,12 +289,14 @@ Agents ถูกเรียกใช้ผ่าน `/toh:` commands หรื�
 
 | Agent | Lines |
 |-------|-------|
-| ui-builder | 278 |
-| dev-builder | 396 |
-| design-reviewer | 364 |
-| backend-connector | 408 |
-| platform-adapter | 500 |
-| **Total** | **1,946** |
+| ui-builder | 525 |
+| dev-builder | 712 |
+| design-reviewer | 577 |
+| backend-connector | 550 |
+| test-runner | 362 |
+| plan-orchestrator | 636 |
+| platform-adapter | 603 |
+| **Total** | **3,965** |
 
 Combined with Skills (~2,720 lines) and Commands (~966 lines):
-**Grand Total: ~5,632 lines** of expert-level documentation
+**Grand Total: ~7,651 lines** of expert-level documentation

@@ -1,19 +1,17 @@
 ---
-command: /toh:design
-aliases: ["/toh:ds"]
-description: >
-  Improve design to look more professional.
-  Ensure it doesn't look "AI generated".
-trigger: /toh:design or /toh:ds
+command: /toh-design
+aliases: ["/toh-ds"]
+description: Polish design to look professional, eliminate AI-generated look
+trigger: /toh-design or /toh-ds
 ---
 
-# /toh:design - Polish Design
+# /toh-design - Polish Design
 
 ## Signature Command ✨
 
 ```
-/toh:design [specific area]
-/toh:ds [specific area]
+/toh-design [specific area]
+/toh-ds [specific area]
 ```
 
 ## What Happens
@@ -54,16 +52,16 @@ trigger: /toh:design or /toh:ds
 
 ```bash
 # General polish
-/toh:design make it look more professional
+/toh-design make it look more professional
 
 # Specific area
-/toh:ds improve dashboard cards
+/toh-ds improve dashboard cards
 
 # Animation
-/toh:design add appropriate animations
+/toh-design add appropriate animations
 
 # Fix specific issue
-/toh:ds accent color doesn't match, please adjust
+/toh-ds accent color doesn't match, please adjust
 ```
 
 ## Output Format

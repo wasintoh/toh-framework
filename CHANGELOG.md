@@ -2,6 +2,51 @@
 
 All notable changes to Toh Framework will be documented in this file.
 
+## [1.6.0] - 2025-12-18
+
+### 🤖 Claude Code Sub-Agents & Multi-Agent Orchestration
+
+#### Added - Claude Code Native Sub-Agents
+
+- **7 Sub-Agents** in Claude Code native format (YAML frontmatter with `tools`, `model`)
+- **Dual Architecture** - Original format for Cursor/Gemini, Subagent format for Claude Code
+- **Sub-Agent Files:**
+  - `ui-builder.md` - Create pages, components, layouts
+  - `dev-builder.md` - Add logic, state, API integration
+  - `backend-connector.md` - Supabase, Auth, Database
+  - `design-reviewer.md` - Polish design, eliminate AI red flags
+  - `test-runner.md` - Auto test & fix loop
+  - `plan-orchestrator.md` - Analyze, plan, coordinate
+  - `platform-adapter.md` - LINE, Mobile, Desktop adaptation
+
+#### Added - `/toh` v4.0 Multi-Agent Orchestration
+
+- **Workflow Planning** - Shows agent assignments before execution
+- **Parallel Execution** - Run independent agents simultaneously
+- **Quality Gates** - Verify between agent handoffs
+- **Full Visibility** - User sees which agent does what
+
+#### Added - Vibe Mode Orchestration
+
+- **Vibe Mode** is now an orchestration pattern (not an agent)
+- Coordinates 5 sub-agents: plan → ui → dev → design → test
+- CLAUDE.md is the Core Orchestrator
+- `/toh-vibe` triggers full project creation workflow
+
+#### Changed - Installer Updates
+
+- Claude Code: copies `subagents/` to `.claude/agents/` (native format)
+- Other IDEs: copies `agents/` to `.toh/agents/` (original format)
+- CLAUDE.md template includes Vibe Mode workflow documentation
+
+#### Updated - Documentation
+
+- `src/agents/README.md` - Dual Architecture explanation
+- `src/commands/toh.md` - v4.0 Multi-Agent spec
+- `src/commands/toh-vibe.md` - Sub-Agent Orchestration workflow
+
+---
+
 ## [1.5.2] - 2025-12-10
 
 ### Fixed
@@ -220,8 +265,8 @@ src/templates/pages/
 ### 📚 Documentation Update
 
 #### Updated
-- **`/toh:help` command** - Now shows v1.2.2 with all latest features
-- **Added `/toh:plan`** to help command (was missing!)
+- **`/toh-help` command** - Now shows v1.2.2 with all latest features
+- **Added `/toh-plan`** to help command (was missing!)
 - **Framework Stats** - Updated to 8 agents, 13 commands, 14 skills
 - **Memory System section** - Added to help output
 - **What's New section** - Added to help output
@@ -273,7 +318,7 @@ src/templates/pages/
 
 #### Added
 
-**Plan Orchestrator (`/toh:plan`)**
+**Plan Orchestrator (`/toh-plan`)**
 - New command that acts as "The Brain" of the framework
 - Analyzes complex requests and creates execution plans
 - Delegates work to specialized agents (ui, dev, design, test, etc.)
@@ -307,7 +352,7 @@ src/templates/pages/
 #### Features
 - **Core Orchestrator** - AI-Orchestration Driven Development (AODD)
 - **7 Specialized Agents** - ui-builder, dev-builder, design-reviewer, test-runner, backend-connector, platform-adapter
-- **12 Commands** - /toh:vibe, /toh:ui, /toh:dev, /toh:design, /toh:test, /toh:connect, /toh:line, /toh:mobile, /toh:fix, /toh:ship, /toh:help
+- **12 Commands** - /toh-vibe, /toh-ui, /toh-dev, /toh-design, /toh-test, /toh-connect, /toh-line, /toh-mobile, /toh-fix, /toh-ship, /toh-help
 - **Multi-IDE Support** - Claude Code, Cursor, Gemini CLI, Codex CLI
 - **Bilingual** - English and Thai support
 

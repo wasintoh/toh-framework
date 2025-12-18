@@ -1,13 +1,11 @@
 ---
-command: /toh:vibe
-aliases: ["/toh:v"]
-description: >
-  Create new project Lovable-style, get working UI immediately from first prompt.
-  No questions asked, makes all decisions for user. Design ที่สวยและเหมาะกับธุรกิจตั้งแต่แรก!
-trigger: /toh:vibe or /toh:v followed by app description
+command: /toh-vibe
+aliases: ["/toh-v"]
+description: Create new project with UI + Logic + Mock Data in one command
+trigger: /toh-vibe or /toh-v followed by app description
 ---
 
-# /toh:vibe - Create New Project ✨
+# /toh-vibe - Create New Project ✨
 
 ## 🎯 Philosophy
 
@@ -23,16 +21,30 @@ trigger: /toh:vibe or /toh:v followed by app description
 ## Signature Command
 
 ```
-/toh:vibe [app description]
-/toh:v [app description]
+/toh-vibe [app description]
+/toh-v [app description]
 ```
 
-## Skills Required
+## 🤖 Sub-Agent Orchestration (v4.0)
+
+> **Vibe Mode** is an orchestration pattern that coordinates multiple sub-agents
+
+### Sub-Agents Used
+
+| Phase | Agent | File | Task |
+|-------|-------|------|------|
+| 1 | 🧠 Plan | `plan-orchestrator.md` | Analyze & plan |
+| 2 | 🎨 UI | `ui-builder.md` | Create 5-7 pages |
+| 3 | ⚙️ Dev | `dev-builder.md` | Add logic & state |
+| 4 | ✨ Design | `design-reviewer.md` | Polish & animate |
+| 5 | 🧪 Test | `test-runner.md` | Verify build |
+
+### Skills Required
 
 ```yaml
 skills:
-  - design-mastery       # 🎨 Smart design ตาม business type (NEW!)
-  - response-excellence  # 📝 ตอบครบ ไม่ต้องถามซ้ำ (NEW!)
+  - design-mastery       # 🎨 Smart design ตาม business type
+  - premium-experience   # 🌟 Multi-page, animations, WOW factor
   - business-context     # 💼 เข้าใจธุรกิจ
   - smart-suggestions    # 💡 แนะนำขั้นตอน
   - prompt-optimizer     # 🎯 สำหรับ AI SaaS projects
@@ -40,148 +52,103 @@ skills:
 
 ---
 
-## 🔄 Workflow
+## 🔄 Workflow (Sub-Agent Orchestration)
 
-### Phase 0: Memory & Business Analysis
+### Phase 0: Memory Check
 
 ```
 0. 🚨 READ MEMORY (MANDATORY!)
    ├── .toh/memory/active.md (if exists)
    ├── .toh/memory/summary.md (if exists)
    └── .toh/memory/decisions.md (if exists)
-
-1. 🧠 ANALYZE BUSINESS TYPE (CRITICAL!)
-   ├── What type? E-commerce? SaaS? Chatbot? Restaurant?
-   ├── Target Audience? B2B? B2C? Gen Z? Professionals?
-   └── Select Design Pattern → (see design-mastery skill)
-   
-   ⚠️ ห้ามข้ามขั้นตอนนี้! Design ต้องเหมาะกับธุรกิจ
 ```
 
-### Phase 1: Project Setup
+### Phase 1: Plan (plan-orchestrator.md)
 
 ```
-2. DECIDE Platform (no asking)
-   └── Default: Next.js 14 Web App
+📋 DELEGATE TO: plan-orchestrator.md
 
-3. CREATE Project
-   ├── npx create-next-app@latest [name] --typescript --tailwind --eslint --app
-   ├── cd [name]
-   └── npx shadcn@latest init -d
+Task: Analyze business requirements
+├── Identify business type (E-commerce? SaaS? Restaurant?)
+├── Define target audience (B2B? B2C? Gen Z?)
+├── Select Design Pattern (see design-mastery skill)
+├── Plan pages & features
+└── Create execution roadmap
+
+Output: Execution plan with page list & design decisions
 ```
 
-### Phase 2: Design Setup (Anti AI-Looking!)
+### Phase 2: Build UI (ui-builder.md)
 
 ```
-4. 🎨 APPLY DESIGN PATTERN (CRITICAL!)
-   
-   ❌ ห้ามใช้ (AI Default Patterns):
-   - Gradient ม่วง-ฟ้า (ทุก AI ใช้!)
-   - Rounded-full ทุก element
-   - Shadow-md เหมือนกันทุกที่
-   - Layout เหมือนกันทุกหน้า
-   - Hero: text left, image right (cliché!)
-   
-   ✅ ให้ทำ:
-   - เลือก color palette ตาม business type
-   - ใช้ border-radius ตาม context
-   - Shadow มี variety (sm/md/lg)
-   - Layout มี variety แต่ละ section
-   - Animation เหมาะกับ business
+🎨 DELEGATE TO: ui-builder.md
+
+Task: Create complete UI
+├── Setup Next.js 14 project
+├── Install shadcn/ui components
+├── Create 5-7 pages (Dashboard, List, Detail, Form, Settings)
+├── Apply business-appropriate design pattern
+├── Add realistic Thai mock data
+└── Ensure mobile-first responsive
+
+Output: Working UI at localhost:3000
 ```
 
-### Phase 3: Generate UI (MORE IS BETTER!)
+### Phase 3: Add Logic (dev-builder.md)
 
 ```
-5. GENERATE UI - Create 5-7 pages!
-   
-   📄 Core Pages (MANDATORY - ทุก project ต้องมี):
-   ├── / (Dashboard/Home) - Overview with stats
-   ├── /[main-feature] - Primary feature list
-   ├── /[main-feature]/new - Create form
-   ├── /[main-feature]/[id] - Detail/Edit view
-   └── /settings - Settings page
-   
-   📄 Additional Pages (based on app type):
-   ├── /analytics - Charts & insights
-   ├── /profile - User profile
-   └── /[secondary-feature] - Secondary feature
-   
-   🧩 Components (MANDATORY):
-   ├── Layout (sidebar + header + mobile nav)
-   ├── Data tables (with sort/filter)
-   ├── Forms (with validation + loading states)
-   ├── Cards & Stats (with icons)
-   ├── Empty states (not just blank!)
-   └── Loading states (skeletons)
-   
-   📊 Mock Data (REALISTIC!):
-   ├── ชื่อจริง (ไทยถ้าเป็น Thai app, อังกฤษถ้าเป็น international)
-   ├── ตัวเลขที่ make sense (ไม่ใช่ 123, 456)
-   ├── วันที่จริง (relative dates)
-   └── 10-20 items per collection (ไม่ใช่แค่ 2-3)
+⚙️ DELEGATE TO: dev-builder.md
+
+Task: Add application logic
+├── Create TypeScript types (types/*.ts)
+├── Setup Zustand stores (stores/*.ts)
+├── Add form validation (Zod schemas)
+├── Implement mock CRUD operations
+└── Create utility functions
+
+Output: Fully functional app with state management
 ```
 
-### Phase 4: Add Logic
+### Phase 4: Polish Design (design-reviewer.md)
 
 ```
-6. ADD Logic (Production-Ready!)
-   ├── Zustand stores (stores/*.ts)
-   │   └── Proper typing, actions, selectors
-   ├── Form validation (lib/validations/*.ts)
-   │   └── Zod schemas with error messages
-   ├── CRUD operations (lib/api/*.ts)
-   │   └── Mock API that looks real
-   └── Utility functions (lib/utils/*.ts)
-       └── formatDate, formatCurrency, etc.
+✨ DELEGATE TO: design-reviewer.md
+
+Task: Polish to professional quality
+├── Remove AI red flags (generic gradients, etc.)
+├── Ensure color harmony
+├── Add micro-animations
+├── Check typography hierarchy
+└── Verify spacing consistency
+
+Output: Professional-looking app (no "AI-generated" feel)
 ```
 
-### Phase 4.5: Zero Error Check (MANDATORY!) 🚨
+### Phase 5: Verify (test-runner.md)
 
 ```
-7. 🔍 BUILD & VERIFY (ห้ามข้าม!)
-   
-   ขั้นตอน:
-   ├── npm run build
-   │   ├── ✅ Pass → ไปต่อ Phase 5
-   │   └── ❌ Error → แก้ทันที! (ดูด้านล่าง)
-   │
-   └── npm run dev → VERIFY it runs!
+🧪 DELEGATE TO: test-runner.md
 
-   ⚠️ Common Errors ที่ต้องแก้:
-   
-   1. Tailwind CSS Classes ไม่ถูก:
-      ❌ className="text-primary-500" (ไม่มีใน default)
-      ✅ className="text-primary" หรือเพิ่มใน tailwind.config
-      
-   2. Import ผิด:
-      ❌ import { Button } from "@/components/ui/Button"
-      ✅ import { Button } from "@/components/ui/button"
-      
-   3. Missing dependencies:
-      → npm install [package]
-      
-   4. Type errors:
-      → แก้ types ให้ถูกต้อง
-   
-   🔄 Loop จนกว่าจะ:
-   └── npm run build → SUCCESS (exit code 0)
-   
-   ❌ ห้าม deliver ถ้ายังมี error!
-   ❌ ห้ามบอก user ให้ไป /toh:fix เอง!
+Task: Verify everything works
+├── npm run build (MUST PASS!)
+├── Fix any TypeScript errors
+├── Check all pages load correctly
+└── Verify CRUD operations work
+
+Output: Build passes with zero errors
 ```
 
-### Phase 5: Report & Save Memory
+### Phase 6: Report & Save Memory
 
 ```
-8. 🚨 SAVE MEMORY (MANDATORY!)
-   ├── Create .toh/memory/ folder
-   ├── active.md - Current state
-   ├── summary.md - Project overview
-   └── decisions.md - Design decisions made
+📝 ORCHESTRATOR TASK (Not delegated)
 
-9. 📝 REPORT (Response Excellence!)
-   └── ใช้ format ด้านล่าง ห้ามข้าม!
+├── Save memory files
+│   ├── active.md - Current state
+│   ├── summary.md - Project overview
+│   └── decisions.md - Design decisions
+│
+└── Report using Response Excellence format
 ```
 
 ---

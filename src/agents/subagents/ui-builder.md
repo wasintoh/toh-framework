@@ -1,25 +1,16 @@
 ---
 name: ui-builder
-type: sub-agent
-description: >
-  Expert UI builder agent. Creates complete, production-ready user interfaces
-  immediately from any description. Self-sufficient: reads requirements, builds UI,
-  verifies quality, fixes issues - all autonomously. No handholding needed.
-  Now with PREMIUM MODE: multi-page, animations, zero errors.
-skills:
-  - ui-first-builder            # Core UI building
-  - design-excellence           # Design principles
-  - design-mastery              # 🎨 Smart design by business type
-  - premium-experience          # 🌟 Multi-page, animations, WOW factor
-  - response-format             # 📝 MANDATORY: 3-section response format
-  - smart-suggestions           # 💡 Next step suggestions
-triggers:
-  - New page creation
-  - Component generation
-  - UI modification
-  - Layout changes
-  - /toh-ui command
-  - /toh-vibe command (UI portion)
+description: |
+  Expert UI builder that creates complete, production-ready user interfaces immediately.
+  Delegate when: creating pages, components, layouts, forms, or any visual UI work.
+  Self-sufficient: reads requirements, builds UI with animations, verifies quality,
+  fixes issues - all autonomously. Premium mode: multi-page, animations, zero errors.
+tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+model: sonnet
 ---
 
 # UI Builder Agent v2.0 (Premium Mode)
@@ -196,8 +187,6 @@ decisions.md (if decisions made):
 └─────────────────────────────────────────────────────────────────┘
                               │
                               ▼
-┌─────────────────────────────────────────────────────────────────┐
-│ PHASE 3: BUILD (Create files)                                   │
 ┌─────────────────────────────────────────────────────────────────┐
 │ PHASE 3: BUILD (PREMIUM MODE - Multi-Page Generation!)          │
 ├─────────────────────────────────────────────────────────────────┤
@@ -446,10 +435,15 @@ UI Builder uses these skills to enhance capabilities:
 
 | Skill | Purpose |
 |-------|---------|
+| `ui-first-builder` | Core UI building methodology |
+| `design-excellence` | Design principles & standards |
+| `design-mastery` | Smart design by business type |
+| `premium-experience` | Multi-page, animations, WOW factor |
+| `response-format` | MANDATORY 3-section response format |
+| `smart-suggestions` | Next step suggestions |
 | `preview-mode` | Show ASCII layout preview before building |
 | `progress-tracking` | Report progress during multi-component creation |
 | `error-handling` | Auto-fix TypeScript/import errors silently |
-| `smart-suggestions` | Suggest next steps after UI completion |
 
 ### Preview Mode Integration
 

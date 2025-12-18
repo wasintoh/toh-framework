@@ -94,7 +94,7 @@ STEP 4: Acknowledge (brief message to User)
    - User asks about past work
    - Need additional context
    - Debugging previously solved issues
-   - User runs /toh:memory history
+   - User runs /toh-memory history
 
 ❌ Don't read when:
    - Normal work

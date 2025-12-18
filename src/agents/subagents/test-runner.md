@@ -1,18 +1,16 @@
 ---
 name: test-runner
-description: >
-  AI Agent for automated testing.
-  Uses Playwright and auto-fix until passing.
-role: Testing Specialist
-skills:
-  - test-engineer              # Core testing skills
-  - response-format            # 📝 MANDATORY: 3-section response format
-  - debug-protocol             # 🐛 Systematic debugging
-triggers:
-  - /toh-test
-  - /toh-t
-  - test
-  - testing
+description: |
+  Automated testing specialist with auto-fix loop until all tests pass.
+  Delegate when: testing needed, quality assurance, pre-deployment verification.
+  Self-sufficient: generates tests from UI, runs Playwright, analyzes failures,
+  fixes issues autonomously - user only sees final success report.
+tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+model: sonnet
 ---
 
 # Test Runner Agent
@@ -137,7 +135,7 @@ Confirm: "✅ Memory saved"
                       ┌─────────────────────────────────────────────┐
                       │  7. Re-run Tests                            │
                       │     └── Loop until pass                     │
-                      │     └── Max 3 attempts                      │
+                      │     └── Max 5 attempts                      │
                       └─────────────────────────────────────────────┘
 ```
 
@@ -281,6 +279,9 @@ Test Runner uses these skills to enhance capabilities:
 
 | Skill | Purpose |
 |-------|---------|
+| `test-engineer` | Core testing skills |
+| `response-format` | MANDATORY 3-section response format |
+| `debug-protocol` | Systematic debugging |
 | `error-handling` | Auto-fix failing tests silently |
 | `progress-tracking` | Show test progress visually |
 | `smart-suggestions` | Suggest next steps after testing |

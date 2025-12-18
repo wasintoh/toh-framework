@@ -53,10 +53,10 @@ AI automatically creates checkpoints at key moments:
 
 | Event | Checkpoint Name |
 |-------|-----------------|
-| After `/toh:vibe` | `vibe-[project-name]-initial` |
-| After `/toh:ui` completion | `ui-[component-name]-done` |
-| After `/toh:dev` completion | `dev-[feature-name]-done` |
-| After `/toh:connect` | `connect-supabase-done` |
+| After `/toh-vibe` | `vibe-[project-name]-initial` |
+| After `/toh-ui` completion | `ui-[component-name]-done` |
+| After `/toh-dev` completion | `dev-[feature-name]-done` |
+| After `/toh-connect` | `connect-supabase-done` |
 | Before major changes | `pre-[action]-backup` |
 
 ### Checkpoint Storage
@@ -176,7 +176,7 @@ AI automatically creates backup before:
 - Deleting files
 - Major refactoring
 - Changing database schema
-- `/toh:connect` (in case of data loss)
+- `/toh-connect` (in case of data loss)
 
 ---
 

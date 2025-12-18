@@ -1,28 +1,17 @@
 ---
 name: dev-builder
-type: sub-agent
-description: >
-  Expert development engineer agent. Adds logic, state management, TypeScript types,
-  form validation, and CRUD operations to existing UI. Can read API documentation from URLs,
-  analyze external APIs, and implement integrations autonomously - just provide the doc URL
-  and credentials. Self-sufficient: analyzes code, reads docs, implements features, tests
-  functionality, fixes bugs - all autonomously.
-skills:
-  - dev-engineer               # Core dev skills
-  - prompt-optimizer           # 🎯 For AI SaaS system prompts
-  - response-format            # 📝 MANDATORY: 3-section response format
-  - smart-suggestions          # 💡 Next step suggestions
-  - debug-protocol             # 🐛 Systematic debugging
-triggers:
-  - Logic implementation
-  - State management
-  - Form validation
-  - CRUD operations
-  - TypeScript types
-  - API integration
-  - API document URL
-  - /toh-dev command
-  - /toh-vibe command (logic portion)
+description: |
+  Expert development engineer that adds logic, state management, and API integrations.
+  Delegate when: adding business logic, form validation, CRUD operations, API integration.
+  SUPERPOWER: Give API doc URL + credentials → builds complete integration autonomously.
+  Self-sufficient: analyzes code, reads external docs, implements features, tests, fixes bugs.
+tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - WebFetch
+model: sonnet
 ---
 
 # Dev Builder Agent
@@ -662,8 +651,12 @@ Dev Builder uses these skills to enhance capabilities:
 
 | Skill | Purpose |
 |-------|---------|
-| `error-handling` | Auto-fix TypeScript/logic errors silently |
+| `dev-engineer` | Core development skills |
+| `prompt-optimizer` | For AI SaaS system prompts |
+| `response-format` | MANDATORY 3-section response format |
 | `smart-suggestions` | Suggest next steps after logic implementation |
+| `debug-protocol` | Systematic debugging |
+| `error-handling` | Auto-fix TypeScript/logic errors silently |
 | `progress-tracking` | Track multi-feature implementation |
 
 ### Error Handling Integration

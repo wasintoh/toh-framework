@@ -11,7 +11,7 @@
 |----------|-------|
 | Skill Name | Plan Orchestrator |
 | Agent | plan-orchestrator |
-| Command | `/toh:plan` |
+| Command | `/toh-plan` |
 | Level | Expert (highest) |
 | Personality | Professional, Friendly |
 
@@ -61,7 +61,7 @@ Reasoning:
 
 ### MODE 1: PLANNING (Default)
 
-When receiving `/toh:plan`:
+When receiving `/toh-plan`:
 
 ```
 1. Read Memory (if exists)
@@ -123,12 +123,12 @@ For each Phase:
 
 | Agent | Icon | Command | When to use |
 |-------|------|---------|-------------|
-| UI Builder | 🎨 | `/toh:ui` | Create pages, components, mock data |
-| Dev Builder | ⚙️ | `/toh:dev` | stores, types, validation, API |
-| Backend Connector | 🗄️ | `/toh:connect` | Supabase schema, RLS, queries |
-| Design Reviewer | ✨ | `/toh:design` | animations, typography, polish |
-| Test Runner | 🧪 | `/toh:test` | test cases, bug fixes |
-| Platform Adapter | 📱 | `/toh:line`, `/toh:mobile` | LINE, Mobile, Desktop |
+| UI Builder | 🎨 | `/toh-ui` | Create pages, components, mock data |
+| Dev Builder | ⚙️ | `/toh-dev` | stores, types, validation, API |
+| Backend Connector | 🗄️ | `/toh-connect` | Supabase schema, RLS, queries |
+| Design Reviewer | ✨ | `/toh-design` | animations, typography, polish |
+| Test Runner | 🧪 | `/toh-test` | test cases, bug fixes |
+| Platform Adapter | 📱 | `/toh-line`, `/toh-mobile` | LINE, Mobile, Desktop |
 
 ### Agent Selection Guide
 
@@ -294,9 +294,9 @@ Continue to Phase 2? Or want to check the UI first?
 http://localhost:3000
 
 ## Next steps:
-- `/toh:connect` → Connect real Supabase
-- `/toh:design` → Polish the design
-- `/toh:test` → Test the system
+- `/toh-connect` → Connect real Supabase
+- `/toh-design` → Polish the design
+- `/toh-test` → Test the system
 
 Memory saved ✅
 ```
@@ -442,10 +442,10 @@ Update active.md:
 
 ### Rule 1: Always show plan first
 ```
-❌ User: /toh:plan create app
+❌ User: /toh-plan create app
    AI: (starts building without showing plan)
 
-✅ User: /toh:plan create app
+✅ User: /toh-plan create app
    AI: "Here's the plan: [shows plan]"
        "Ready to start?"
 ```

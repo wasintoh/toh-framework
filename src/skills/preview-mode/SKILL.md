@@ -320,7 +320,7 @@ Extra confirmation for risky operations:
 User can configure preview behavior:
 
 ```markdown
-/toh:settings preview
+/toh-settings preview
 
 **Preview Mode:**
 - [x] Always show preview (default)

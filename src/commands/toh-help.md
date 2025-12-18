@@ -1,40 +1,35 @@
 ---
-name: toh-help
-description: >
-  Display all Toh Framework commands with descriptions
-  and quick usage guide.
-shortcuts:
-  - /toh:help
-  - /toh:h
-  - /toh:?
+command: /toh-help
+aliases: ["/toh-h", "/toh-?"]
+description: Display all Toh Framework commands and quick usage guide
 ---
 
 # Toh Framework - Help
 
-When user calls `/toh:help`, display the following:
+When user calls `/toh-help`, display the following:
 
 <help_response>
-## 🎯 Toh Framework v1.4.0
+## 🎯 Toh Framework v1.6.0
 
-**"พิมพ์อะไรก็ได้ AI ทำให้เลย"** - AI-Orchestration Driven Development
+**"Type anything, AI does it for you"** - AI-Orchestration Driven Development
 
 ---
 
-### ✨ NEW! Smart Single Command (v1.4.0)
+### ✨ Smart Single Command
 
 ```
-/toh [พิมพ์อะไรก็ได้]
+/toh [type anything]
 ```
 
-**ไม่ต้องจำ commands** - AI วิเคราะห์ → เลือก Agent → ทำให้เลย!
+**No need to memorize commands** - AI analyzes → picks Agent → executes!
 
-**ตัวอย่าง:**
+**Examples:**
 ```
-/toh scroll เกิน                      → Fix Agent
-/toh ทำให้สวยขึ้น                      → Design Agent
-/toh เพิ่มหน้า login                   → UI + Dev Agent
-/toh เชื่อม Supabase                  → Connect Agent
-/toh สร้าง chatbot ร้านกาแฟ           → Plan → Vibe Agent
+/toh scroll overflow                  → Fix Agent
+/toh make it prettier                 → Design Agent
+/toh add login page                   → UI + Dev Agent
+/toh connect Supabase                 → Connect Agent
+/toh create coffee shop chatbot       → Plan → Vibe Agent
 ```
 
 ---
@@ -43,36 +38,36 @@ When user calls `/toh:help`, display the following:
 
 | Command | Shortcut | Description |
 |---------|----------|-------------|
-| `/toh` | - | 🧠 **Smart Command** - พิมพ์อะไรก็ได้ AI เลือก Agent ให้ |
-| `/toh:plan` | `/toh:p` | 📋 **Plan** - วางแผน project ใหญ่ |
-| `/toh:vibe` | `/toh:v` | 🎨 **Create Project** - UI + Logic + Mock Data ครบในคำสั่งเดียว |
-| `/toh:ui` | `/toh:u` | 🖼️ **Create UI** - Pages, Components, Layouts |
-| `/toh:dev` | `/toh:d` | ⚙️ **Add Logic** - TypeScript, Zustand, Forms |
-| `/toh:design` | `/toh:ds` | ✨ **Polish Design** - ทำให้สวย ไม่ดู AI-looking |
-| `/toh:test` | `/toh:t` | 🧪 **Test** - Auto test & fix |
-| `/toh:connect` | `/toh:c` | 🔌 **Connect Backend** - Supabase, Auth, RLS |
-| `/toh:line` | `/toh:l` | 💚 **LINE Mini App** - LIFF integration |
-| `/toh:mobile` | `/toh:m` | 📱 **Mobile App** - Expo / React Native |
-| `/toh:fix` | `/toh:f` | 🔧 **Fix Bug** - Debug with 3-5-Rewrite Rule |
-| `/toh:ship` | `/toh:s` | 🚀 **Deploy** - Vercel, Production ready |
+| `/toh` | - | 🧠 **Smart Command** - Type anything, AI picks the right Agent |
+| `/toh-plan` | `/toh-p` | 📋 **Plan** - Plan large projects |
+| `/toh-vibe` | `/toh-v` | 🎨 **Create Project** - UI + Logic + Mock Data in one command |
+| `/toh-ui` | `/toh-u` | 🖼️ **Create UI** - Pages, Components, Layouts |
+| `/toh-dev` | `/toh-d` | ⚙️ **Add Logic** - TypeScript, Zustand, Forms |
+| `/toh-design` | `/toh-ds` | ✨ **Polish Design** - Make it beautiful, not AI-looking |
+| `/toh-test` | `/toh-t` | 🧪 **Test** - Auto test & fix |
+| `/toh-connect` | `/toh-c` | 🔌 **Connect Backend** - Supabase, Auth, RLS |
+| `/toh-line` | `/toh-l` | 💚 **LINE Mini App** - LIFF integration |
+| `/toh-mobile` | `/toh-m` | 📱 **Mobile App** - Expo / React Native |
+| `/toh-fix` | `/toh-f` | 🔧 **Fix Bug** - Debug with 3-5-Rewrite Rule |
+| `/toh-ship` | `/toh-s` | 🚀 **Deploy** - Vercel, Production ready |
 
 ---
 
 ### 💡 Usage Examples
 
-**ง่ายที่สุด - ใช้ /toh:**
+**Easiest - use /toh:**
 ```
-/toh สร้าง expense tracker
-/toh เพิ่ม chart แสดงค่าใช้จ่าย
-/toh bug - ปุ่มไม่ทำงาน
-/toh เชื่อม database
+/toh create expense tracker
+/toh add expense chart
+/toh bug - button not working
+/toh connect database
 ```
 
-**Power User - ใช้ specific commands:**
+**Power User - use specific commands:**
 ```
-/toh:vibe coffee shop management system
-/toh:plan อ่าน PRD แล้วสร้างตาม spec
-/toh:design ปรับให้ professional กว่านี้
+/toh-vibe coffee shop management system
+/toh-plan read PRD and build according to spec
+/toh-design make it more professional
 ```
 
 ---
@@ -84,21 +79,21 @@ When user calls `/toh:help`, display the following:
 ├── active.md      # Current task
 ├── summary.md     # Project summary
 ├── decisions.md   # Key decisions
-├── debug-log.md   # Debug tracking (v1.3.0+)
+├── debug-log.md   # Debug tracking
 └── archive/       # Historical data
 ```
 
 ---
 
-### 📝 Response Excellence (v1.4.0)
+### 📝 Response Format
 
-ทุกคำตอบจาก Toh จะบอก:
+Every response from Toh includes:
 
-1. **✅ สิ่งที่ทำให้** - ไฟล์ที่สร้าง/แก้ไข
-2. **🎁 สิ่งที่คุณได้** - Features, URLs
-3. **👉 สิ่งที่คุณต้องทำ** - ขั้นตอนถัดไป (ถ้ามี)
+1. **✅ What was done** - Files created/modified
+2. **🎁 What you got** - Features, URLs
+3. **👉 What you need to do** - Next steps (if any)
 
-**ไม่ต้องถามซ้ำอีกต่อไป!**
+**No need to ask follow-up questions!**
 
 ---
 
@@ -113,39 +108,43 @@ When user calls `/toh:help`, display the following:
 
 ---
 
-### 📚 Skills (23 skills)
+### 🤖 Sub-Agents (v1.6.0)
 
-| Category | Skills |
-|----------|--------|
-| **Core** | business-context, smart-suggestions, error-handling |
-| **Dev** | progress-tracking, session-recovery, version-control |
-| **Design** | design-mastery, design-excellence, preview-mode |
-| **Debug** | debug-protocol |
-| **AI** | prompt-optimizer |
-| **Response** | response-format, response-excellence |
-| **Premium** | premium-experience (NEW!) |
-| **Integrations** | integrations |
+| Agent | File | Specialty |
+|-------|------|-----------|
+| 🎨 UI Builder | `ui-builder.md` | Pages, Components, Layouts |
+| ⚙️ Dev Builder | `dev-builder.md` | Logic, State, API |
+| 🔌 Backend Connector | `backend-connector.md` | Supabase, Auth, RLS |
+| ✨ Design Reviewer | `design-reviewer.md` | Polish, Animation |
+| 🧪 Test Runner | `test-runner.md` | Auto test & fix |
+| 🧠 Plan Orchestrator | `plan-orchestrator.md` | Analyze, Plan |
+| 📱 Platform Adapter | `platform-adapter.md` | LINE, Mobile, Desktop |
+
+**Vibe Mode** = Orchestration Pattern (not an agent)
+```
+/toh-vibe → plan → ui → dev → design → test → ✅ Working App
+```
 
 ---
 
 ### 📊 Framework Stats
 
-- 🤖 **8 Agents** - UI, Dev, Design, Test, Fix, Connect, LINE, Mobile
-- 🎯 **14 Commands** - Including new `/toh` smart command
+- 🤖 **7 Sub-Agents** - UI, Dev, Design, Test, Connect, Plan, Platform
+- 🎯 **14 Commands** - Including `/toh` smart command & `/toh-vibe`
 - 📚 **23 Skills** - Comprehensive AI capabilities
 - 🎨 **13 Design Profiles** - Business-appropriate design
 - 📦 **15 Component Templates** - Ready-to-use premium components
-- 🌐 **4 IDEs** - Claude, Cursor, Gemini, Codex
+- 🌐 **4 IDEs** - Claude Code, Cursor, Gemini, Codex
 
 ---
 
-### 🆕 What's New in v1.4.0
+### 🆕 What's New in v1.6.0
 
-- ✨ **Smart Single Command** `/toh` - พิมพ์อะไรก็ได้!
-- 🎨 **Design Mastery** - ออกแบบ smart ตาม business type
-- 🎯 **Prompt Optimizer** - สำหรับ AI SaaS projects
-- 📝 **Response Excellence** - ตอบครบ ไม่ต้องถามซ้ำ
-- 🐛 **Debug Protocol** - 3-5-Rewrite Rule
+- 🤖 **Claude Code Sub-Agents** - 7 agents in native format for Task delegation
+- 🔄 **Multi-Agent Orchestration** - `/toh` v4.0 with workflow planning
+- 🎨 **Vibe Mode** - Orchestration pattern: plan → ui → dev → design → test
+- 📦 **Dual Architecture** - Native format for Claude Code, Original for others
+- 👁️ **Full Visibility** - See which agent does what in real-time
 
 ---
 

@@ -1,19 +1,17 @@
 ---
-command: /toh:ship
-aliases: ["/toh:s"]
-description: >
-  Deploy app to production.
-  Supports Vercel, Netlify, and others.
-trigger: /toh:ship or /toh:s
+command: /toh-ship
+aliases: ["/toh-s"]
+description: Deploy app to production (Vercel, Netlify, and more)
+trigger: /toh-ship or /toh-s
 ---
 
-# /toh:ship - Deploy to Production
+# /toh-ship - Deploy to Production
 
 ## Signature Command 🚀
 
 ```
-/toh:ship [platform]
-/toh:s [platform]
+/toh-ship [platform]
+/toh-s [platform]
 ```
 
 ## What Happens
@@ -56,14 +54,14 @@ trigger: /toh:ship or /toh:s
 
 ```bash
 # Default (Vercel)
-/toh:ship
+/toh-ship
 
 # Specific platform
-/toh:s vercel
-/toh:ship netlify
+/toh-s vercel
+/toh-ship netlify
 
 # With checks
-/toh:s deploy with full checks first
+/toh-s deploy with full checks first
 ```
 
 ## Output Format
@@ -106,10 +104,10 @@ NEXT_PUBLIC_LIFF_ID=xxx (if using LINE)
 
 | Platform | Command | Best For |
 |----------|---------|----------|
-| Vercel (default) | `/toh:s` | Next.js apps |
-| Netlify | `/toh:s netlify` | Static sites |
-| Railway | `/toh:s railway` | Full-stack apps |
-| Cloudflare Pages | `/toh:s cloudflare` | Edge deployment |
+| Vercel (default) | `/toh-s` | Next.js apps |
+| Netlify | `/toh-s netlify` | Static sites |
+| Railway | `/toh-s railway` | Full-stack apps |
+| Cloudflare Pages | `/toh-s cloudflare` | Edge deployment |
 
 ## Pre-Deploy Checklist
 

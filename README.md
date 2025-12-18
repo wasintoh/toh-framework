@@ -44,7 +44,7 @@ Toh Framework enables you to:
 
 ## ✨ Features
 
-- **🧠 The Brain** - `/toh:plan` analyzes, plans, and orchestrates all agents
+- **🧠 The Brain** - `/toh-plan` analyzes, plans, and orchestrates all agents
 - **💾 Auto Memory** - Context persists across sessions, IDEs, and models
 - **🚀 One Command Install** - Easy setup via `npx`
 - **🎨 UI First** - See results immediately, no backend needed
@@ -143,7 +143,7 @@ Healthcare → Calm teal, trustworthy
 ### Example: Business Context
 
 ```bash
-/toh:vibe coffee shop
+/toh-vibe coffee shop
 
 # AI understands this means:
 # ✅ POS System
@@ -160,16 +160,16 @@ Healthcare → Calm teal, trustworthy
 ✅ Dashboard created!
 
 💡 Recommended next steps:
-1. /toh:design - Polish the UI
-2. /toh:dev - Add logic
-3. /toh:connect - Connect database
+1. /toh-design - Polish the UI
+2. /toh-dev - Add logic
+3. /toh-connect - Connect database
 
 Type a number or tell me what you want to do.
 ```
 
-### 🧠 `/toh:plan` - The Brain
+### 🧠 `/toh-plan` - The Brain
 ```bash
-/toh:plan Add user authentication with social login
+/toh-plan Add user authentication with social login
 ```
 The AI will analyze your project, create a plan, show you what it will do, then execute using the right agents.
 
@@ -238,22 +238,22 @@ After installation, use commands immediately:
 claude .
 
 # Show all commands
-/toh:help
+/toh-help
 
 # Create new project (natural language!)
-/toh:vibe I want a coffee shop management system with POS, inventory, and sales reports
+/toh-vibe I want a coffee shop management system with POS, inventory, and sales reports
 
 # Add UI
-/toh:ui Add a dashboard page showing daily sales
+/toh-ui Add a dashboard page showing daily sales
 
 # Improve Design
-/toh:design Make it look professional and polished
+/toh-design Make it look professional and polished
 
 # Test system (Auto fix until pass!)
-/toh:test Test all pages
+/toh-test Test all pages
 
 # Deploy
-/toh:ship
+/toh-ship
 ```
 
 ### Cursor
@@ -276,8 +276,8 @@ gemini
 gemini --model gemini-2.5-pro
 
 # Use commands like Claude Code
-/toh:help
-/toh:vibe Inventory management system
+/toh-help
+/toh-vibe Inventory management system
 ```
 
 ### Codex CLI (OpenAI)
@@ -288,25 +288,25 @@ codex
 
 # Toh Framework loads automatically from AGENTS.md
 # Use commands directly
-/toh:vibe Restaurant order management system
+/toh-vibe Restaurant order management system
 ```
 
 ## 📋 Available Commands
 
 | Command | Shortcut | Description |
 |---------|----------|-------------|
-| `/toh:help` | `/toh:h` | ❓ Show all available commands |
-| `/toh:plan` | `/toh:p` | 🧠 **THE BRAIN** - Analyze, plan, orchestrate all agents |
-| `/toh:vibe` | `/toh:v` | 🎨 Create new project with UI + Logic + Mock Data |
-| `/toh:ui` | `/toh:u` | 🖼️ Build UI - Pages, Components, Layouts |
-| `/toh:dev` | `/toh:d` | ⚙️ Add Logic - TypeScript, Zustand, Forms |
-| `/toh:design` | `/toh:ds` | ✨ Improve Design - Make it beautiful, not AI-looking |
-| `/toh:test` | `/toh:t` | 🧪 Test System - Auto test & fix until pass |
-| `/toh:connect` | `/toh:c` | 🔌 Connect Backend - Supabase, Auth, RLS |
-| `/toh:line` | `/toh:l` | 💚 LINE Mini App - LIFF integration |
-| `/toh:mobile` | `/toh:m` | 📱 Mobile App - Expo / React Native |
-| `/toh:fix` | `/toh:f` | 🔧 Fix Bugs - Debug and fix issues |
-| `/toh:ship` | `/toh:s` | 🚀 Deploy - Vercel, Production ready |
+| `/toh-help` | `/toh-h` | ❓ Show all available commands |
+| `/toh-plan` | `/toh-p` | 🧠 **THE BRAIN** - Analyze, plan, orchestrate all agents |
+| `/toh-vibe` | `/toh-v` | 🎨 Create new project with UI + Logic + Mock Data |
+| `/toh-ui` | `/toh-u` | 🖼️ Build UI - Pages, Components, Layouts |
+| `/toh-dev` | `/toh-d` | ⚙️ Add Logic - TypeScript, Zustand, Forms |
+| `/toh-design` | `/toh-ds` | ✨ Improve Design - Make it beautiful, not AI-looking |
+| `/toh-test` | `/toh-t` | 🧪 Test System - Auto test & fix until pass |
+| `/toh-connect` | `/toh-c` | 🔌 Connect Backend - Supabase, Auth, RLS |
+| `/toh-line` | `/toh-l` | 💚 LINE Mini App - LIFF integration |
+| `/toh-mobile` | `/toh-m` | 📱 Mobile App - Expo / React Native |
+| `/toh-fix` | `/toh-f` | 🔧 Fix Bugs - Debug and fix issues |
+| `/toh-ship` | `/toh-s` | 🚀 Deploy - Vercel, Production ready |
 
 ## 🧠 Philosophy (AODD)
 
@@ -345,7 +345,7 @@ Orchestrator thinks:
 When tests find errors, system will:
 1. 🧪 Run tests with Playwright
 2. 🔍 Analyze errors
-3. 🔧 Call `/toh:fix` to repair
+3. 🔧 Call `/toh-fix` to repair
 4. 🔄 Retest until pass
 
 ## 🏗️ Tech Stack (Fixed)
@@ -460,26 +460,26 @@ npx toh-framework bundle
 ### Create E-commerce System
 
 ```
-/toh:vibe Online store with product pages, cart, and checkout
+/toh-vibe Online store with product pages, cart, and checkout
 ```
 
 ### Create Employee Management
 
 ```
-/toh:vibe HR system with employee management, leave requests, approvals, reports
+/toh-vibe HR system with employee management, leave requests, approvals, reports
 ```
 
 ### Create Dashboard
 
 ```
-/toh:vibe Dashboard showing sales, charts, tables with date filters
+/toh-vibe Dashboard showing sales, charts, tables with date filters
 ```
 
 ### Test and Fix
 
 ```
-/toh:test Test all pages
-# If errors → auto call /toh:fix → retest until pass
+/toh-test Test all pages
+# If errors → auto call /toh-fix → retest until pass
 ```
 
 ## 🎯 Target Users

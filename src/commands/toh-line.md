@@ -1,19 +1,17 @@
 ---
-command: /toh:line
-aliases: ["/toh:l"]
-description: >
-  Convert web app to LINE Mini App
-  or create new LINE Mini App with LIFF integration.
-trigger: /toh:line or /toh:l
+command: /toh-line
+aliases: ["/toh-l"]
+description: Convert web app to LINE Mini App or create new LIFF integration
+trigger: /toh-line or /toh-l
 ---
 
-# /toh:line - LINE Mini App
+# /toh-line - LINE Mini App
 
 ## Signature Command 💚
 
 ```
-/toh:line [feature]
-/toh:l [feature]
+/toh-line [feature]
+/toh-l [feature]
 ```
 
 ## What Happens
@@ -59,16 +57,16 @@ trigger: /toh:line or /toh:l
 
 ```bash
 # Convert existing app
-/toh:line convert to LINE Mini App
+/toh-line convert to LINE Mini App
 
 # With specific features
-/toh:l add LINE login and share feature
+/toh-l add LINE login and share feature
 
 # New LINE app
-/toh:line create queue booking system for LINE OA
+/toh-line create queue booking system for LINE OA
 
 # Share functionality
-/toh:l add share to LINE button
+/toh-l add share to LINE button
 ```
 
 ## Output Format

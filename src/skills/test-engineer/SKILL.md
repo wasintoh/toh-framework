@@ -257,7 +257,7 @@ test.describe('Responsive Design', () => {
                                     │
                                     ▼
                             ┌──────────────────┐
-                            │  Call /toh:fix   │
+                            │  Call /toh-fix   │
                             └──────────────────┘
                                     │
                                     ▼
@@ -293,7 +293,7 @@ test.describe('Responsive Design', () => {
 
 ### Fix Context Template
 
-When calling `/toh:fix`, send this context:
+When calling `/toh-fix`, send this context:
 
 ```markdown
 ## Test Failure Report
@@ -432,19 +432,19 @@ export const testProduct = {
 
 ```bash
 # Run all tests
-/toh:test
+/toh-test
 
 # Run specific file
-/toh:test auth/login
+/toh-test auth/login
 
 # Run with UI mode (debug)
-/toh:test --debug
+/toh-test --debug
 
 # Update snapshots
-/toh:test --update-snapshots
+/toh-test --update-snapshots
 
 # Run on CI
-/toh:test --ci
+/toh-test --ci
 ```
 
 ## MCP Integration

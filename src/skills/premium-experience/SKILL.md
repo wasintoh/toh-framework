@@ -7,7 +7,7 @@ description: >
   Lovable-style experience: one prompt, complete app, instant delight.
   MUST be used alongside vibe-orchestrator for new projects.
 triggers:
-  - /toh:vibe (new projects)
+  - /toh-vibe (new projects)
   - /toh (complex app requests)
   - Any "create app" request
 ---

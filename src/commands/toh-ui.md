@@ -1,19 +1,17 @@
 ---
-command: /toh:ui
-aliases: ["/toh:u"]
-description: >
-  Create or edit UI components, pages, or layouts.
-  See results immediately, no need to wait for logic.
-trigger: /toh:ui or /toh:u followed by description
+command: /toh-ui
+aliases: ["/toh-u"]
+description: Create or edit UI components, pages, or layouts
+trigger: /toh-ui or /toh-u followed by description
 ---
 
-# /toh:ui - Create/Edit UI
+# /toh-ui - Create/Edit UI
 
 ## Signature Command 🎨
 
 ```
-/toh:ui [description]
-/toh:u [description]
+/toh-ui [description]
+/toh-u [description]
 ```
 
 ## What Happens
@@ -54,19 +52,19 @@ trigger: /toh:ui or /toh:u followed by description
 
 ```bash
 # New page
-/toh:ui settings page with profile edit form
+/toh-ui settings page with profile edit form
 
 # New component
-/toh:u product card component showing image, name, price, add to cart button
+/toh-u product card component showing image, name, price, add to cart button
 
 # Edit existing
-/toh:ui add sidebar to dashboard page
+/toh-ui add sidebar to dashboard page
 
 # Layout change
-/toh:u change layout to 2 columns on desktop
+/toh-u change layout to 2 columns on desktop
 
 # Complex UI
-/toh:ui modal for edit product with image upload
+/toh-ui modal for edit product with image upload
 ```
 
 ## Output Format
@@ -85,7 +83,7 @@ View at http://localhost:3000/settings
 ✅ Memory saved
 
 ### Next:
-- `/toh:dev` add logic to make form functional
+- `/toh-dev` add logic to make form functional
 ```
 
 ## Rules

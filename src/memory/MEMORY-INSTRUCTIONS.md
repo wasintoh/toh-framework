@@ -110,7 +110,7 @@
 อ่าน archive/ เฉพาะเมื่อ:
 ├── User ถามเรื่องเก่าๆ ("เมื่อวานทำอะไรไป?")
 ├── ต้องการ context เพิ่มเติมจาก summary.md
-├── User สั่ง /toh:memory history
+├── User สั่ง /toh-memory history
 └── ต้อง debug ปัญหาที่เคยแก้ไปแล้ว
 
 ไม่ต้องอ่าน archive/ เมื่อ:

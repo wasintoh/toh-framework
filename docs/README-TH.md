@@ -1,208 +1,186 @@
 # 🎯 Toh Framework
 
-> **"Type Once, Have it all!"** - AI-Orchestration Driven Development
->
-> **"สั่งแล้วจบ ไม่ถาม ไม่รอ"**
+> **"พิมพ์ครั้งเดียว ได้ครบ!"** - AI-Orchestration Driven Development
 
 [![npm version](https://img.shields.io/npm/v/toh-framework.svg?style=flat-square)](https://www.npmjs.com/package/toh-framework)
 [![npm downloads](https://img.shields.io/npm/dt/toh-framework.svg?style=flat-square)](https://www.npmjs.com/package/toh-framework)
 [![License](https://img.shields.io/npm/l/toh-framework.svg?style=flat-square)](https://github.com/wasintoh/toh-framework/blob/main/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/wasintoh/toh-framework?style=flat-square)](https://github.com/wasintoh/toh-framework)
 
-🌐 **เว็บไซต์หลัก:** [tohframework.dev](https://tohframework.dev)
+🌐 **เว็บไซต์:** [tohframework.dev](https://tohframework.dev)
 
 > 📖 **[🇬🇧 English Documentation](../README.md)**
 
-## 🤖 รองรับ IDEs
+## 🤖 IDE ที่รองรับ
 
 | IDE | สถานะ | หมายเหตุ |
-|-----|--------|-------|
-| 🧠 **Claude Code** | ✅ รองรับเต็มที่ | Slash commands, Memory system |
-| 📝 **Cursor** | ✅ รองรับเต็มที่ | @ file references |
-| 🌌 **Google Antigravity** | ✅ **ใหม่!** รองรับเต็มที่ | Gemini integration ล่าสุด |
-| 💎 **Gemini CLI** | ✅ รองรับเต็มที่ | Context files auto-loaded |
+|-----|--------|----------|
+| 🧠 **Claude Code** | ✅ รองรับเต็ม | Native Sub-Agents, Slash commands |
+| 📝 **Cursor** | ✅ รองรับเต็ม | @ file references |
+| 🌌 **Google Antigravity** | ✅ รองรับเต็ม | Gemini integration |
+| 💎 **Gemini CLI** | ✅ รองรับเต็ม | Context files auto-loaded |
 | 🤖 **Codex CLI** | ✅ รองรับ | OpenAI agents |
 
 ## 💡 ทำไมต้อง Toh?
 
 **Toh** = **T**ype **O**nce, **H**ave it all!
 
-เราเชื่อว่า **Solo Developer** และ **Solopreneur** ควรสามารถสร้างระบบ SaaS ได้ด้วยตัวคนเดียว โดยไม่ต้องเป็น expert ทุกด้าน
+เราเชื่อว่า **Solo Developers** และ **Solopreneurs** ควรสามารถสร้างระบบ SaaS ได้ด้วยตัวเอง โดยไม่ต้องเป็น expert ทุกด้าน
 
-Toh Framework ทำให้คุณ:
-- 💬 **สั่งงานแบบภาษาคน** - ไม่ต้องเขียน prompt แบบซับซ้อน
-- 🤖 **AI จัดการให้หมด** - แตก tasks, เรียก agents, ทำงานจนเสร็จ
-- 👀 **เห็นผลลัพธ์ทันที** - ไม่ต้องรอ, ไม่ต้องตอบคำถาม
+Toh Framework ช่วยให้คุณ:
+- 💬 **สั่งด้วยภาษาธรรมชาติ** - ไม่ต้องเขียน prompt ซับซ้อน
+- 🤖 **AI ทำให้ทุกอย่าง** - แบ่งงาน เรียก agent ทำจนเสร็จ
+- 👀 **เห็นผลทันที** - ไม่ต้องรอ ไม่ต้องตอบคำถาม
 - 🚀 **พร้อมใช้งานจริง** - ไม่ใช่แค่ prototype
 
-## ✨ คุณสมบัติหลัก
+## 🆕 มีอะไรใหม่ใน v1.6.0
 
-- **🧠 The Brain** - `/toh-plan` วิเคราะห์, วางแผน, สั่งการทุก agents
-- **💾 Auto Memory** - จำ context ได้ข้าม sessions, IDEs, และ models
-- **🚀 ติดตั้งง่าย** - แค่คำสั่งเดียวผ่าน `npx`
-- **🎨 UI First** - เห็นผลลัพธ์ทันที ไม่ต้องรอ backend
-- **🤖 ไม่ถามคำถาม** - AI ตัดสินใจให้เลย ไม่ถามคำถามพื้นฐาน
-- **🇹🇭 ข้อมูลภาษาไทย** - Mock data ภาษาไทย ดูเหมือนข้อมูลจริง
-- **🧪 ทดสอบอัตโนมัติ** - ทดสอบอัตโนมัติ แก้ไขจนผ่าน
-- **💼 พร้อมใช้งานจริง** - ไม่ใช่ prototype แต่ใช้งานได้จริง
-- **🔧 รองรับหลาย IDE** - Claude Code, Cursor, Gemini CLI, Codex CLI
+### 🤖 Claude Code Sub-Agents
 
-## 🆕 มีอะไรใหม่ใน v1.5.0
+7 sub-agents สำหรับ Claude Code's Task delegation:
 
-### 🌌 Google Antigravity - รองรับเต็มรูปแบบ!
+| Agent | ความเชี่ยวชาญ |
+|-------|---------------|
+| 🎨 **ui-builder** | Pages, Components, Layouts |
+| ⚙️ **dev-builder** | Logic, State, API |
+| 🔌 **backend-connector** | Supabase, Auth, RLS |
+| ✨ **design-reviewer** | ขัดเกลา, Animation |
+| 🧪 **test-runner** | Auto test & fix |
+| 🧠 **plan-orchestrator** | วิเคราะห์, วางแผน |
+| 📱 **platform-adapter** | LINE, Mobile, Desktop |
 
-รองรับ **Antigravity** (Gemini IDE) ของ Google แล้ว! ติดตั้งครั้งเดียว ใช้ได้ทุก IDE:
+### 🔄 Multi-Agent Orchestration
+
+**`/toh` v4.0** - Smart Command พร้อมความโปร่งใส:
 
 ```bash
-npx toh-framework install
-# เลือก: Claude Code ✅, Cursor ✅, Gemini CLI / Antigravity ✅
+/toh สร้างระบบจัดการร้านกาแฟ
+
+# AI แสดงแผน:
+📋 Workflow Plan:
+├── 1. plan-orchestrator → วิเคราะห์ requirements
+├── 2. ui-builder → สร้างหน้าทั้งหมด + components
+├── 3. dev-builder → เพิ่ม state + forms + API
+├── 4. design-reviewer → ขัดเกลาให้สวย
+└── 5. test-runner → Test จนผ่าน
+
+🚀 กำลังทำ...
 ```
 
-### 🏗️ Dual Folder Architecture
+### 🎨 Vibe Mode
 
-| IDE | Folder | เหตุผล |
-|-----|--------|-----|
-| Claude Code | `.claude/` | จำเป็นสำหรับ slash commands |
-| อื่นๆ | `.toh/` | Central resources |
+**`/toh-vibe`** - สร้าง project ครบในคำสั่งเดียว:
 
-ทั้งสอง folder มี skills, agents, commands เหมือนกัน - sync ตอน install!
+```
+/toh-vibe → plan → ui → dev → design → test → ✅ แอปพร้อมใช้งาน
+```
 
-### 🔒 Memory Protocol Enforcement
+คำสั่งเดียว ได้แอปครบ:
+- ✅ 5+ หน้า (Home, Dashboard, Feature, Settings, Auth)
+- ✅ Logic และ state management ครบ
+- ✅ Mock data สมจริง
+- ✅ Design professional พร้อม animations
+- ✅ Test ผ่านหมด
 
-- ✅ บังคับ load/save memory ทุกครั้ง
-- ✅ Skills checkpoint - AI ต้องรายงาน skills ที่โหลด
-- ✅ Memory files เป็นภาษาอังกฤษเพื่อความสม่ำเสมอ
-- ✅ ใช้ได้ข้าม IDE
+### 📦 Dual Architecture
 
-### 📋 Skills Loading Checkpoint
+| IDE | Folder | Format |
+|-----|--------|--------|
+| Claude Code | `.claude/` | Native (tools, model) |
+| อื่นๆ | `.toh/` | Original (type, skills) |
 
-AI ต้องรายงาน skills ที่โหลดตอนเริ่มต้นทุกครั้ง:
-```markdown
-📚 **Skills Loaded:**
-- design-mastery ✅ (13 business profiles)
-- premium-experience ✅ (5+ pages, animations)
+ทั้งสองมีความสามารถเหมือนกัน - sync ตอน install!
 
-🤖 **Agent:** vibe-agent
+### 👁️ Full Visibility
 
-💾 **Memory:** Loaded ✅
+เห็นว่า agent ไหนทำอะไร:
+
+```
+🤖 Agent: ui-builder
+📚 Skills: ui-first-builder, design-mastery, premium-experience
+💾 Memory: Loaded ✅
+
+✅ Created: src/app/dashboard/page.tsx
+✅ Created: src/components/stats-card.tsx
 ```
 
 ---
 
-## ✨ Features จาก v1.4.0 (ยังใช้ได้!)
+## ✨ Features
 
-### ✨ Smart Single Command & Premium Experience
+| Feature | รายละเอียด |
+|---------|------------|
+| **`/toh` Smart Command** | พิมพ์อะไรก็ได้ AI เลือก agent ให้ |
+| **Sub-Agents** | 7 agents เชี่ยวชาญเฉพาะทาง |
+| **Multi-Agent Orchestration** | Workflow ซับซ้อนพร้อมความโปร่งใส |
+| **Premium Experience** | 5+ หน้าพร้อม animations ในคำสั่งเดียว |
+| **Design Mastery** | 13 business profiles สำหรับ design อัจฉริยะ |
+| **Auto Memory** | Context คงอยู่ข้าม sessions และ IDEs |
+| **Auto Testing** | Test & fix loop จนผ่านหมด |
 
-| Feature | Description |
-|---------|-------------|
-| **`/toh` Smart Command** | พิมพ์อะไรก็ได้ AI เลือก Agent ให้! |
-| **Premium Experience** | สร้างแอพ 5+ หน้า พร้อม animations ในคำสั่งเดียว |
-| **Design Mastery** | Smart design ตาม business type (13 profiles) |
-| **Prompt Optimizer** | สำหรับ AI SaaS - สร้าง system prompts ที่ดี |
-| **Response Format** | ตอบครบ 3 ส่วน: ทำอะไร / ได้อะไร / ต้องทำอะไร |
-
-### 🌟 Premium by Default
-เมื่อสร้างแอพใหม่ จะได้:
-- ✅ 5+ หน้าอัตโนมัติ (Home, Dashboard, Feature, Settings, Auth)
-- ✅ Animations ครบ (Page transitions, hover effects, stagger)
-- ✅ Loading states ทุกหน้า
-- ✅ Empty states ออกแบบแล้ว
-- ✅ Zero TypeScript errors
-
-### 🎨 Design Mastery (13 Business Profiles)
-AI เลือก design ให้เหมาะกับ business:
-```
-ร้านอาหาร → สี warm, font Playfair
-SaaS → สี professional blue
-E-commerce → สี trust emerald
-Gaming → Dark mode, neon accents
-...และอื่นๆ อีก 9 profiles
-```
-
-### 🧠 `/toh-plan` - The Brain
-```bash
-/toh-plan อยากเพิ่มระบบ login แบบ social login
-```
-AI จะวิเคราะห์โปรเจค สร้างแผน แสดงให้เห็นว่าจะทำอะไรบ้าง แล้วค่อยลงมือทำโดยใช้ agents ที่เหมาะสม
-
-### 💾 Auto Memory System
-AI จำทุกอย่างข้าม sessions:
-- เปลี่ยน IDE (Claude → Cursor) - context ยังอยู่
-- Token เต็ม - เปิด chat ใหม่ได้ context ยังอยู่
-- พรุ่งนี้มาทำต่อ - context ยังอยู่
-
-ไฟล์เก็บที่ `.toh/memory/` - ไม่ต้อง config อะไร ใช้ได้เลย!
+---
 
 ## 📦 การติดตั้ง
 
 ```bash
-# ติดตั้งแบบ Interactive (เลือก IDEs และภาษาได้)
+# ติดตั้งแบบ interactive (เลือก IDE และภาษา)
 npx toh-framework install
 
-# ติดตั้งแบบด่วน (Claude Code + Cursor, ภาษาอังกฤษ)
+# ติดตั้งแบบรวดเร็ว (Claude Code + Cursor, English)
 npx toh-framework install --quick
 
-# ติดตั้งเฉพาะ IDE ที่ต้องการ
+# ติดตั้งเฉพาะ IDE
 npx toh-framework install --ide claude
 npx toh-framework install --ide cursor
 npx toh-framework install --ide gemini
 npx toh-framework install --ide codex
 
-# ติดตั้งหลาย IDEs
+# หลาย IDEs
 npx toh-framework install --ide "claude,cursor,gemini,codex"
 ```
 
-## 🔄 อัพเดทเป็น Version ใหม่
-
-ถ้าติดตั้งไว้แล้ว อยากอัพเดทเป็น version ใหม่:
+## 🔄 อัพเดทเป็นเวอร์ชันล่าสุด
 
 ```bash
-# วิธีที่ 1: ใช้ npx (แนะนำ - ได้ version ล่าสุดเสมอ)
+# วิธีที่ 1: ใช้ npx (แนะนำ - ได้เวอร์ชันล่าสุดเสมอ)
 npx toh-framework@latest install
 
-# วิธีที่ 2: ถ้าติดตั้ง global ไว้
+# วิธีที่ 2: ถ้าติดตั้ง globally
 npm update -g toh-framework
 toh install
-
-# วิธีที่ 3: ติดตั้งใหม่ทับได้เลย
-npx toh-framework install
 ```
 
-> 💡 **Tip:** การ install ซ้ำจะอัพเดท skills, agents, commands ให้ใหม่โดยไม่ลบ memory ที่มีอยู่!
+> 💡 **Tip:** การติดตั้งใหม่จะอัพเดท skills, agents, และ commands โดยไม่ลบ memory ที่มีอยู่!
 
-## 🛠️ IDEs และ CLI Tools ที่รองรับ
-
-| Tool | บริษัท | ไฟล์ Config | สถานะ |
-|------|--------|-------------|-------|
-| **Claude Code** | Anthropic | `.claude/` + `CLAUDE.md` | ✅ รองรับเต็มที่ |
-| **Cursor** | Cursor | `.cursor/rules/` | ✅ รองรับเต็มที่ |
-| **Gemini CLI** | Google | `.gemini/` | ✅ รองรับเต็มที่ |
-| **Codex CLI** | OpenAI | `AGENTS.md` | ✅ รองรับเต็มที่ |
+---
 
 ## 🚀 เริ่มต้นใช้งาน
 
-### Claude Code (Anthropic)
-
-หลังติดตั้งแล้ว ใช้ commands ได้ทันที:
+### Claude Code
 
 ```bash
 # เปิด project ด้วย Claude Code
 claude .
 
-# ดู commands ทั้งหมด
+# แสดงคำสั่งทั้งหมด
 /toh-help
 
-# สร้างโปรเจคใหม่ (สั่งแบบภาษาคนได้เลย!)
-/toh-vibe อยากได้ระบบจัดการร้านกาแฟ มี POS สต็อก รายงานยอดขาย
+# Smart command - AI เลือก agent ให้
+/toh สร้าง landing page พร้อมส่วน pricing
+
+# สร้าง project ครบ
+/toh-vibe ระบบจัดการร้านกาแฟ
 
 # เพิ่ม UI
-/toh-ui เพิ่มหน้า dashboard แสดงยอดขายรายวัน
+/toh-ui เพิ่ม dashboard แสดงยอดขาย
 
-# ปรับ Design ให้สวย
-/toh-design ทำให้ดูเป็นมืออาชีพ สวยงาม
+# เพิ่ม Logic
+/toh-dev เพิ่ม form validation และ API calls
 
-# ทดสอบระบบ (Auto fix จนผ่าน!)
-/toh-test ทดสอบทุกหน้า
+# ปรับ Design
+/toh-design ทำให้ดูเป็น professional
+
+# Test ระบบ
+/toh-test
 
 # Deploy
 /toh-ship
@@ -214,95 +192,45 @@ claude .
 # เรียก Toh agent
 @toh สร้างระบบจองห้องประชุม
 
-# หรือใช้ command เฉพาะ
+# หรือใช้คำสั่งเฉพาะ
 @toh:ui สร้างหน้า calendar สำหรับจองห้อง
 ```
 
-### Gemini CLI (Google)
+### Gemini CLI / Antigravity
 
 ```bash
-# Start Gemini CLI ใน project directory
+# เริ่ม Gemini CLI
 gemini
 
-# หรือใช้ model ที่ต้องการ
-gemini --model gemini-2.5-pro
-
-# ใช้ commands เหมือน Claude Code
-/toh-help
-/toh-vibe ระบบจัดการสต็อกสินค้า
+# ใช้คำสั่ง
+/toh-vibe ระบบจัดการ inventory
 ```
 
-### Codex CLI (OpenAI)
+---
 
-```bash
-# Start Codex CLI ใน project directory
-codex
+## 📋 คำสั่งทั้งหมด
 
-# Toh Framework จะ load อัตโนมัติจาก AGENTS.md
-# ใช้ commands ได้เลย
-/toh-vibe ระบบจัดการออเดอร์ร้านอาหาร
-```
+| คำสั่ง | ทางลัด | รายละเอียด |
+|--------|--------|------------|
+| `/toh` | - | 🧠 **Smart Command** - พิมพ์อะไรก็ได้ AI เลือก agent |
+| `/toh-plan` | `/toh-p` | 📋 **วางแผน** - วิเคราะห์, วางแผน, orchestrate |
+| `/toh-vibe` | `/toh-v` | 🎨 **สร้าง Project** - แอปครบในคำสั่งเดียว |
+| `/toh-ui` | `/toh-u` | 🖼️ **สร้าง UI** - Pages, Components, Layouts |
+| `/toh-dev` | `/toh-d` | ⚙️ **เพิ่ม Logic** - TypeScript, Zustand, Forms |
+| `/toh-design` | `/toh-ds` | ✨ **ขัดเกลา Design** - Professional ไม่ดู AI |
+| `/toh-test` | `/toh-t` | 🧪 **Test** - Auto test & fix จนผ่าน |
+| `/toh-connect` | `/toh-c` | 🔌 **เชื่อม Backend** - Supabase, Auth, RLS |
+| `/toh-line` | `/toh-l` | 💚 **LINE Mini App** - LIFF integration |
+| `/toh-mobile` | `/toh-m` | 📱 **Mobile App** - Expo / React Native |
+| `/toh-fix` | `/toh-f` | 🔧 **แก้ Bug** - Debug อย่างเป็นระบบ |
+| `/toh-ship` | `/toh-s` | 🚀 **Deploy** - Vercel, พร้อม Production |
+| `/toh-help` | `/toh-h` | ❓ **Help** - แสดงคำสั่งทั้งหมด |
 
-## 📋 Commands ทั้งหมด
+---
 
-| Command | Shortcut | คำอธิบาย |
-|---------|----------|----------|
-| `/toh-help` | `/toh-h` | ❓ แสดงรายการ commands ทั้งหมด |
-| `/toh-plan` | `/toh-p` | 🧠 **THE BRAIN** - วิเคราะห์, วางแผน, สั่งการทุก Agent |
-| `/toh-vibe` | `/toh-v` | 🎨 สร้างโปรเจคใหม่ UI + Logic + Mock Data |
-| `/toh-ui` | `/toh-u` | 🖼️ สร้าง UI - Pages, Components, Layouts |
-| `/toh-dev` | `/toh-d` | ⚙️ เพิ่ม Logic - TypeScript, Zustand, Forms |
-| `/toh-design` | `/toh-ds` | ✨ ปรับ Design - ทำให้สวย ไม่ดูเหมือน AI |
-| `/toh-test` | `/toh-t` | 🧪 ทดสอบระบบ - Auto test & fix จนผ่าน |
-| `/toh-connect` | `/toh-c` | 🔌 เชื่อม Backend - Supabase, Auth, RLS |
-| `/toh-line` | `/toh-l` | 💚 LINE Mini App - LIFF integration |
-| `/toh-mobile` | `/toh-m` | 📱 Mobile App - Expo / React Native |
-| `/toh-fix` | `/toh-f` | 🔧 แก้ Bug - Debug และ fix issues |
-| `/toh-ship` | `/toh-s` | 🚀 Deploy - Vercel, Production ready |
+## 🏗️ Tech Stack (Fixed)
 
-## 🧠 หลักการ AODD
-
-Toh Framework ใช้หลักการ **AI-Orchestration Driven Development (AODD)**:
-
-### 1. ภาษาคน → Tasks
-ผู้ใช้สั่งงานแบบภาษาธรรมชาติ ระบบจะแตกออกเป็น tasks อัตโนมัติ
-
-```
-❌ "สร้าง Next.js project ที่มี Zustand store สำหรับ products 
-    พร้อม React Hook Form และ Zod validation..."
-
-✅ "อยากได้ระบบขายของออนไลน์"
-```
-
-### 2. Orchestrator → Agents
-ระบบจะเรียก AI-Agents ที่เกี่ยวข้องมาทำงานโดยอัตโนมัติ
-
-```
-User: "สร้างหน้าจัดการสินค้า"
-
-Orchestrator คิด:
-├── 📐 เรียก ui-builder สร้าง UI
-├── ⚙️ เรียก dev-builder เพิ่ม logic
-├── ✨ เรียก design-reviewer ปรับให้สวย
-└── ✅ ส่งมอบผลลัพธ์
-```
-
-### 3. ผู้ใช้ไม่ต้องยุ่งกับกระบวนการ
-- ไม่ต้องเลือก framework
-- ไม่ต้องตอบคำถาม
-- ไม่ต้องรู้ว่า agent ไหนทำอะไร
-- แค่รอรับผลลัพธ์
-
-### 4. Test → Fix → Loop
-เมื่อทดสอบแล้วพบ error ระบบจะ:
-1. 🧪 Run tests ด้วย Playwright
-2. 🔍 วิเคราะห์ error
-3. 🔧 เรียก `/toh-fix` แก้ไข
-4. 🔄 Test ใหม่จนผ่าน
-
-## 🏗️ Tech Stack (ตายตัว)
-
-Toh Framework ใช้ tech stack ที่ตายตัว ไม่ต้องเลือก:
+ไม่ต้องเลือก - stack ที่ optimize แล้วพร้อมใช้:
 
 | หมวด | เทคโนโลยี |
 |------|-----------|
@@ -314,148 +242,93 @@ Toh Framework ใช้ tech stack ที่ตายตัว ไม่ต้�
 | Testing | Playwright |
 | Language | TypeScript (strict) |
 
-## 🤖 Agents
+---
 
-| Agent | คำอธิบาย |
-|-------|----------|
-| `ui-builder` | สร้าง UI และ Components |
-| `dev-builder` | เพิ่ม Logic และ State Management |
-| `design-reviewer` | ปรับปรุง Design ให้เป็นมืออาชีพ |
-| `test-runner` | ทดสอบระบบและ auto-fix |
-| `backend-connector` | เชื่อมต่อ Supabase |
-| `platform-adapter` | Adapt สำหรับ LINE, Mobile, Desktop |
+## 🧠 ปรัชญา (AODD)
 
-## 📚 Skills
+**AI-Orchestration Driven Development:**
 
-| Skill | คำอธิบาย |
-|-------|----------|
-| `vibe-orchestrator` | Core methodology และ workflow |
-| `ui-first-builder` | UI patterns และ component library |
-| `dev-engineer` | TypeScript, Zustand, Forms |
-| `design-excellence` | Design system และ anti-patterns |
-| `test-engineer` | Testing strategy และ Playwright |
-| `backend-engineer` | Supabase, RLS, Auth |
-| `platform-specialist` | LINE, Expo, Tauri |
-
-## 🔄 ตัวอย่าง Workflow
+1. **ภาษาธรรมชาติ → Tasks** - แค่บอกว่าอยากได้อะไร
+2. **Orchestrator → Agents** - ระบบเรียก specialist ที่เหมาะสม
+3. **ไม่ต้องจัดการ Process** - คุณแค่รับผลลัพธ์
+4. **Test → Fix → Loop** - Auto-fix จนทุกอย่างผ่าน
 
 ```
-พี่โต: "สร้างระบบจัดการร้านกาแฟ"
+User: "สร้างระบบจัดการร้านกาแฟ"
 
-┌─────────────────────────────────────────────────────┐
-│  🎯 Toh Orchestrator                                │
-├─────────────────────────────────────────────────────┤
-│  1. วิเคราะห์ความต้องการ                              │
-│     → ระบบ POS, จัดการสต็อก, รายงาน                   │
-│                                                     │
-│  2. เรียก ui-builder                                │
-│     → สร้าง UI ทุกหน้า + Mock data ไทย               │
-│                                                     │
-│  3. เรียก dev-builder                               │
-│     → เพิ่ม state management + forms                │
-│                                                     │
-│  4. เรียก design-reviewer                           │
-│     → ปรับ UI ให้สวยงาม professional                 │
-│                                                     │
-│  5. เรียก test-runner                               │
-│     → ทดสอบทุกหน้า auto-fix จนผ่าน                   │
-│                                                     │
-│  ✅ ส่งมอบระบบที่พร้อมใช้งาน!                          │
-└─────────────────────────────────────────────────────┘
+Orchestrator:
+├── 📐 plan-orchestrator → วิเคราะห์ & วางแผน
+├── 🎨 ui-builder → สร้าง UI ทั้งหมด
+├── ⚙️ dev-builder → เพิ่ม logic
+├── ✨ design-reviewer → ขัดเกลา design
+├── 🧪 test-runner → Test & fix
+└── ✅ ส่งมอบระบบพร้อมใช้!
 ```
 
-## 📖 ตัวอย่างการใช้งาน
+---
 
-### สร้างระบบ E-commerce
+## 📖 ตัวอย่าง
 
+### สร้าง E-commerce
 ```
-/toh-vibe ระบบขายของออนไลน์ มีหน้าสินค้า ตะกร้า ชำระเงิน
-```
-
-### สร้างระบบจัดการพนักงาน
-
-```
-/toh-vibe ระบบ HR มีจัดการพนักงาน ลางาน อนุมัติ รายงาน
+/toh-vibe ร้านค้าออนไลน์ มีสินค้า ตะกร้า และ checkout
 ```
 
 ### สร้าง Dashboard
+```
+/toh-vibe Dashboard แสดงยอดขาย มี charts และ date filters
+```
 
+### สร้าง SaaS
 ```
-/toh-vibe Dashboard แสดงยอดขาย กราฟ ตาราง filter ตามวันที่
+/toh-vibe ระบบจัดการ project มี teams และ tasks
 ```
 
-### ทดสอบและแก้ไข
-
-```
-/toh-test ทดสอบทุกหน้า
-# ถ้ามี error → auto เรียก /toh-fix → test ใหม่จนผ่าน
-```
+---
 
 ## 🎯 กลุ่มเป้าหมาย
 
-- **Solo Developers** - สร้าง SaaS ด้วยตัวคนเดียว
-- **Solopreneurs** - ทำ MVP ไว้ test ตลาด
-- **Startup Founders** - Prototype ให้นักลงทุนดู
-- **Freelancers** - ส่งมอบงานลูกค้าเร็วขึ้น
-- **Students** - เรียนรู้ modern web development
+- **Solo Developers** - สร้าง SaaS ด้วยตัวเอง
+- **Solopreneurs** - สร้าง MVP ทดสอบตลาด
+- **Startup Founders** - Prototype สำหรับ investors
+- **Freelancers** - ส่งงานลูกค้าเร็วขึ้น
+- **นักศึกษา** - เรียนรู้ modern web development
 
-## 🆚 เปรียบเทียบ
+---
 
-| Feature | แบบเดิม | Toh Framework |
-|---------|---------|---------------|
-| เวลา Setup | 30+ นาที | 2 นาที |
-| คำถามที่ต้องตอบ | 10+ | 0 |
-| เวลาจนเห็น UI แรก | หลายชั่วโมง | ไม่กี่นาที |
-| Mock Data | Lorem ipsum | ภาษาไทยสมจริง |
-| เลือก Tech Stack | ทุกครั้ง | ตายตัว, optimized |
-| Auto Testing | ต้อง setup เอง | มีให้พร้อม |
-| แก้ Error | ทำเอง | Auto loop |
+## 📊 สถิติ Framework
 
-## 🔧 CLI Commands
+- 🤖 **7 Sub-Agents** - เชี่ยวชาญเฉพาะทาง
+- 🎯 **14 Commands** - ตั้งแต่วางแผนถึง deployment
+- 📚 **23 Skills** - ความสามารถ AI ครบครัน
+- 🎨 **13 Design Profiles** - Design เหมาะกับธุรกิจ
+- 📦 **15 Component Templates** - Premium components พร้อมใช้
+- 🌐 **5 IDEs** - Claude Code, Cursor, Antigravity, Gemini, Codex
 
-```bash
-# ติดตั้ง framework
-npx toh-framework install
-
-# ดู commands ที่มี
-npx toh-framework list
-
-# เช็คสถานะการติดตั้ง
-npx toh-framework status
-
-# สร้าง web bundles
-npx toh-framework bundle
-```
+---
 
 ## 🤝 ร่วมพัฒนา
 
-ยินดีรับ contributions! สามารถส่ง Pull Request ได้เลย
-
-1. Fork project
-2. สร้าง feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. เปิด Pull Request
+ยินดีรับ Pull Request!
 
 ## 📝 License
 
-โปรเจคนี้ใช้ MIT License - ดูรายละเอียดใน [LICENSE](../LICENSE)
+MIT License - ดู [LICENSE](../LICENSE)
 
 ## 👨‍💻 ผู้พัฒนา
 
-**Wasin Treesinthuros** (Innovation Vantage)
+**วศิน ตรีสินธุรส** (Innovation Vantage)
 
+- 🌐 เว็บไซต์: [tohframework.dev](https://tohframework.dev)
 - GitHub: [@wasintoh](https://github.com/wasintoh)
 - Email: dr.wasin@gmail.com
-- LINE OA: [@dr.wasin.official](https://line.me/R/ti/p/@dr.wasin.official)
 
 ---
 
 <p align="center">
-  Made with ❤️ Naja. Grow Together. 🚀
+  สร้างด้วย ❤️ เพื่อ Solo Developers ทุกคน
 </p>
 
 <p align="center">
-  <strong>"Type Once, Have it all!"</strong><br>
-  <em>"สั่งแล้วจบ ไม่ถาม ไม่รอ"</em>
+  <strong>"พิมพ์ครั้งเดียว ได้ครบ!"</strong>
 </p>

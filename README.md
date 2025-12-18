@@ -1,12 +1,5 @@
 # 🎯 Toh Framework
 
-<!-- Logo - พี่โตใส่รูป logo ได้ที่นี่ -->
-<!--
-<p align="center">
-  <img src="./assets/logo.png" alt="Toh Framework" width="200">
-</p>
--->
-
 > **"Type Once, Have it all!"** - AI-Orchestration Driven Development
 
 [![npm version](https://img.shields.io/npm/v/toh-framework.svg?style=flat-square)](https://www.npmjs.com/package/toh-framework)
@@ -22,13 +15,11 @@
 
 | IDE | Status | Notes |
 |-----|--------|-------|
-| 🧠 **Claude Code** | ✅ Full Support | Slash commands, Memory system |
+| 🧠 **Claude Code** | ✅ Full Support | Native Sub-Agents, Slash commands |
 | 📝 **Cursor** | ✅ Full Support | @ file references |
-| 🌌 **Google Antigravity** | ✅ **NEW!** Full Support | Latest Gemini integration |
+| 🌌 **Google Antigravity** | ✅ Full Support | Gemini integration |
 | 💎 **Gemini CLI** | ✅ Full Support | Context files auto-loaded |
 | 🤖 **Codex CLI** | ✅ Supported | OpenAI agents |
-
-> 📖 **[🇹🇭 Thai Documentation](docs/README-TH.md)**
 
 ## 💡 Why Toh?
 
@@ -42,144 +33,92 @@ Toh Framework enables you to:
 - 👀 **See results instantly** - No waiting, no answering questions
 - 🚀 **Production-ready** - Not just a prototype
 
-## ✨ Features
+## 🆕 What's New in v1.6.0
 
-- **🧠 The Brain** - `/toh-plan` analyzes, plans, and orchestrates all agents
-- **💾 Auto Memory** - Context persists across sessions, IDEs, and models
-- **🚀 One Command Install** - Easy setup via `npx`
-- **🎨 UI First** - See results immediately, no backend needed
-- **🤖 No Questions** - AI makes decisions, doesn't ask basic questions
-- **🌍 Multi-language** - Thai or English mock data and UI
-- **🧪 Auto Testing** - Automatic testing with auto-fix loop
-- **💼 Production Ready** - Not a prototype, ready for real use
-- **🔧 Multi-IDE Support** - Claude Code, Cursor, Gemini CLI, Codex CLI
+### 🤖 Claude Code Sub-Agents
 
-## 🆕 What's New in v1.5.0
+7 native sub-agents for Claude Code's Task delegation feature:
 
-### 🌌 Google Antigravity - Full Support!
+| Agent | Specialty |
+|-------|-----------|
+| 🎨 **ui-builder** | Pages, Components, Layouts |
+| ⚙️ **dev-builder** | Logic, State, API |
+| 🔌 **backend-connector** | Supabase, Auth, RLS |
+| ✨ **design-reviewer** | Polish, Animation |
+| 🧪 **test-runner** | Auto test & fix |
+| 🧠 **plan-orchestrator** | Analyze, Plan |
+| 📱 **platform-adapter** | LINE, Mobile, Desktop |
 
-Now fully supports Google's **Antigravity** (Gemini IDE)! Install once, use everywhere:
+### 🔄 Multi-Agent Orchestration
+
+**`/toh` v4.0** - The Smart Command with full visibility:
 
 ```bash
-npx toh-framework install
-# Select: Claude Code ✅, Cursor ✅, Gemini CLI / Antigravity ✅
+/toh create a coffee shop management system
+
+# AI shows you the plan:
+📋 Workflow Plan:
+├── 1. plan-orchestrator → Analyze requirements
+├── 2. ui-builder → Create all pages + components
+├── 3. dev-builder → Add state + forms + API
+├── 4. design-reviewer → Polish to professional
+└── 5. test-runner → Test until pass
+
+🚀 Executing...
 ```
 
-### 🏗️ Dual Folder Architecture
+### 🎨 Vibe Mode
 
-| IDE | Folder | Why |
-|-----|--------|-----|
-| Claude Code | `.claude/` | Required for slash commands |
-| Others | `.toh/` | Central resources |
+**`/toh-vibe`** - Full project creation as orchestration pattern:
 
-Both contain identical skills, agents, and commands - fully synced on install!
+```
+/toh-vibe → plan → ui → dev → design → test → ✅ Working App
+```
 
-### 🔒 Memory Protocol Enforcement
+One command, complete application with:
+- ✅ 5+ pages (Home, Dashboard, Feature, Settings, Auth)
+- ✅ Full logic and state management
+- ✅ Realistic mock data
+- ✅ Professional design with animations
+- ✅ All tests passing
 
-- ✅ Mandatory memory load/save on EVERY task
-- ✅ Skills loading checkpoint - AI must report what it loaded
-- ✅ English-only memory files for consistency
-- ✅ Cross-IDE memory compatibility
+### 📦 Dual Architecture
 
-### 📋 Skills Loading Checkpoint
+| IDE | Folder | Format |
+|-----|--------|--------|
+| Claude Code | `.claude/` | Native (tools, model) |
+| Others | `.toh/` | Original (type, skills) |
 
-AI now MUST report skills at the start of every response:
-```markdown
-📚 **Skills Loaded:**
-- design-mastery ✅ (13 business profiles)
-- premium-experience ✅ (5+ pages, animations)
+Both contain identical capabilities - fully synced on install!
 
-🤖 **Agent:** vibe-agent
+### 👁️ Full Visibility
 
-💾 **Memory:** Loaded ✅
+See exactly which agent does what:
+
+```
+🤖 Agent: ui-builder
+📚 Skills: ui-first-builder, design-mastery, premium-experience
+💾 Memory: Loaded ✅
+
+✅ Created: src/app/dashboard/page.tsx
+✅ Created: src/components/stats-card.tsx
 ```
 
 ---
 
-## ✨ v1.4.0 Features (Still Available!)
+## ✨ Features
 
 | Feature | Description |
 |---------|-------------|
-| **`/toh` Smart Command** | Type anything, AI picks the right agent! |
+| **`/toh` Smart Command** | Type anything, AI picks the right agent |
+| **Sub-Agents** | 7 specialized agents for different tasks |
+| **Multi-Agent Orchestration** | Complex workflows with full visibility |
 | **Premium Experience** | 5+ pages with animations in one prompt |
 | **Design Mastery** | 13 business profiles for smart design |
-| **Prompt Optimizer** | For AI SaaS - create excellent system prompts |
-| **Response Format** | 3-section responses - no follow-up questions needed |
+| **Auto Memory** | Context persists across sessions and IDEs |
+| **Auto Testing** | Test & fix loop until all pass |
 
-### 🌟 Premium by Default
-
-When creating new apps, you get:
-- ✅ 5+ pages automatically (Home, Dashboard, Feature, Settings, Auth)
-- ✅ Animations everywhere (Page transitions, hover effects, stagger)
-- ✅ Loading states on every page
-- ✅ Empty states designed
-- ✅ Zero TypeScript errors guaranteed
-
-### 🎨 Design Mastery (13 Business Profiles)
-
-AI auto-detects your business type and applies appropriate design:
-```
-Food/Restaurant → Warm colors, appetizing feel
-SaaS/Dashboard → Professional blue, clean
-E-commerce → Trust emerald, conversion-focused
-Gaming → Dark mode, neon accents
-Healthcare → Calm teal, trustworthy
-...and 8 more profiles
-```
-
-### 🧠 AI Intelligence Upgrade (v1.3.0)
-
-| Feature | Description |
-|---------|-------------|
-| 🏢 **Business Context** | AI understands business types, auto-includes standard features |
-| 💡 **Smart Suggestions** | AI suggests 2-3 next steps after every task |
-| 🔧 **Auto-fix Silent** | Errors fixed automatically, user never sees them |
-| 📊 **Progress Tracking** | Visual progress bars and checklists |
-| 🔄 **Session Recovery** | Continue where you left off, even across IDEs |
-| 👁️ **Preview Mode** | See changes before applying |
-| ⏪ **Version Control** | Easy undo/rollback without knowing git |
-| 🔌 **Integrations** | One-click setup for Stripe, PromptPay, Email, Analytics |
-
-### Example: Business Context
-
-```bash
-/toh-vibe coffee shop
-
-# AI understands this means:
-# ✅ POS System
-# ✅ Menu Management
-# ✅ Order Management
-# ✅ Inventory
-# ✅ Sales Reports
-# No need to specify each feature!
-```
-
-### Example: Smart Suggestions
-
-```
-✅ Dashboard created!
-
-💡 Recommended next steps:
-1. /toh-design - Polish the UI
-2. /toh-dev - Add logic
-3. /toh-connect - Connect database
-
-Type a number or tell me what you want to do.
-```
-
-### 🧠 `/toh-plan` - The Brain
-```bash
-/toh-plan Add user authentication with social login
-```
-The AI will analyze your project, create a plan, show you what it will do, then execute using the right agents.
-
-### 💾 Auto Memory System
-Your AI remembers everything across sessions:
-- Switch IDEs (Claude → Cursor) - context preserved
-- Token limit reached - start new chat, context preserved
-- Come back tomorrow - context preserved
-
-Files stored in `.toh/memory/` - zero config, just works!
+---
 
 ## 📦 Installation
 
@@ -202,8 +141,6 @@ npx toh-framework install --ide "claude,cursor,gemini,codex"
 
 ## 🔄 Update to Latest Version
 
-If you already have Toh installed and want to update:
-
 ```bash
 # Method 1: Use npx (recommended - always gets latest)
 npx toh-framework@latest install
@@ -211,27 +148,15 @@ npx toh-framework@latest install
 # Method 2: If installed globally
 npm update -g toh-framework
 toh install
-
-# Method 3: Just reinstall (overwrites safely)
-npx toh-framework install
 ```
 
 > 💡 **Tip:** Reinstalling updates skills, agents, and commands without deleting your existing memory!
 
-## 🛠️ Supported IDEs & CLI Tools
-
-| Tool | Company | Config Location | Status |
-|------|---------|-----------------|--------|
-| **Claude Code** | Anthropic | `.claude/` + `CLAUDE.md` | ✅ Full Support |
-| **Cursor** | Cursor | `.cursor/rules/` | ✅ Full Support |
-| **Gemini CLI** | Google | `.gemini/` | ✅ Full Support |
-| **Codex CLI** | OpenAI | `AGENTS.md` | ✅ Full Support |
+---
 
 ## 🚀 Quick Start
 
-### Claude Code (Anthropic)
-
-After installation, use commands immediately:
+### Claude Code
 
 ```bash
 # Open project with Claude Code
@@ -240,17 +165,23 @@ claude .
 # Show all commands
 /toh-help
 
-# Create new project (natural language!)
-/toh-vibe I want a coffee shop management system with POS, inventory, and sales reports
+# Smart command - AI picks the right agent
+/toh create a landing page with pricing section
+
+# Create complete project
+/toh-vibe coffee shop management system
 
 # Add UI
-/toh-ui Add a dashboard page showing daily sales
+/toh-ui Add a dashboard with sales charts
+
+# Add Logic
+/toh-dev Add form validation and API calls
 
 # Improve Design
-/toh-design Make it look professional and polished
+/toh-design Make it look professional
 
-# Test system (Auto fix until pass!)
-/toh-test Test all pages
+# Test system
+/toh-test
 
 # Deploy
 /toh-ship
@@ -266,91 +197,41 @@ claude .
 @toh:ui Create a calendar page for room booking
 ```
 
-### Gemini CLI (Google)
+### Gemini CLI / Antigravity
 
 ```bash
-# Start Gemini CLI in project directory
+# Start Gemini CLI
 gemini
 
-# Or use specific model
-gemini --model gemini-2.5-pro
-
-# Use commands like Claude Code
-/toh-help
+# Use commands
 /toh-vibe Inventory management system
 ```
 
-### Codex CLI (OpenAI)
-
-```bash
-# Start Codex CLI in project directory
-codex
-
-# Toh Framework loads automatically from AGENTS.md
-# Use commands directly
-/toh-vibe Restaurant order management system
-```
+---
 
 ## 📋 Available Commands
 
 | Command | Shortcut | Description |
 |---------|----------|-------------|
-| `/toh-help` | `/toh-h` | ❓ Show all available commands |
-| `/toh-plan` | `/toh-p` | 🧠 **THE BRAIN** - Analyze, plan, orchestrate all agents |
-| `/toh-vibe` | `/toh-v` | 🎨 Create new project with UI + Logic + Mock Data |
-| `/toh-ui` | `/toh-u` | 🖼️ Build UI - Pages, Components, Layouts |
-| `/toh-dev` | `/toh-d` | ⚙️ Add Logic - TypeScript, Zustand, Forms |
-| `/toh-design` | `/toh-ds` | ✨ Improve Design - Make it beautiful, not AI-looking |
-| `/toh-test` | `/toh-t` | 🧪 Test System - Auto test & fix until pass |
-| `/toh-connect` | `/toh-c` | 🔌 Connect Backend - Supabase, Auth, RLS |
-| `/toh-line` | `/toh-l` | 💚 LINE Mini App - LIFF integration |
-| `/toh-mobile` | `/toh-m` | 📱 Mobile App - Expo / React Native |
-| `/toh-fix` | `/toh-f` | 🔧 Fix Bugs - Debug and fix issues |
-| `/toh-ship` | `/toh-s` | 🚀 Deploy - Vercel, Production ready |
+| `/toh` | - | 🧠 **Smart Command** - Type anything, AI picks agent |
+| `/toh-plan` | `/toh-p` | 📋 **Plan** - Analyze, plan, orchestrate |
+| `/toh-vibe` | `/toh-v` | 🎨 **Create Project** - Complete app in one command |
+| `/toh-ui` | `/toh-u` | 🖼️ **Create UI** - Pages, Components, Layouts |
+| `/toh-dev` | `/toh-d` | ⚙️ **Add Logic** - TypeScript, Zustand, Forms |
+| `/toh-design` | `/toh-ds` | ✨ **Polish Design** - Professional, not AI-looking |
+| `/toh-test` | `/toh-t` | 🧪 **Test** - Auto test & fix until pass |
+| `/toh-connect` | `/toh-c` | 🔌 **Connect Backend** - Supabase, Auth, RLS |
+| `/toh-line` | `/toh-l` | 💚 **LINE Mini App** - LIFF integration |
+| `/toh-mobile` | `/toh-m` | 📱 **Mobile App** - Expo / React Native |
+| `/toh-fix` | `/toh-f` | 🔧 **Fix Bugs** - Systematic debugging |
+| `/toh-ship` | `/toh-s` | 🚀 **Deploy** - Vercel, Production ready |
+| `/toh-help` | `/toh-h` | ❓ **Help** - Show all commands |
 
-## 🧠 Philosophy (AODD)
-
-Toh Framework uses **AI-Orchestration Driven Development (AODD)** principles:
-
-### 1. Natural Language → Tasks
-Users command in natural language, system breaks it down into tasks automatically.
-
-```
-❌ "Create a Next.js project with Zustand store for products 
-    with React Hook Form and Zod validation..."
-
-✅ "I want an online store"
-```
-
-### 2. Orchestrator → Agents
-System automatically calls relevant AI-Agents to work.
-
-```
-User: "Create a product management page"
-
-Orchestrator thinks:
-├── 📐 Call ui-builder to create UI
-├── ⚙️ Call dev-builder to add logic
-├── ✨ Call design-reviewer to polish
-└── ✅ Deliver results
-```
-
-### 3. Users Don't Manage the Process
-- No framework selection needed
-- No questions to answer
-- No need to know which agent does what
-- Just receive results
-
-### 4. Test → Fix → Loop
-When tests find errors, system will:
-1. 🧪 Run tests with Playwright
-2. 🔍 Analyze errors
-3. 🔧 Call `/toh-fix` to repair
-4. 🔄 Retest until pass
+---
 
 ## 🏗️ Tech Stack (Fixed)
 
-Toh Framework uses a fixed tech stack - no decisions needed:
+No decisions needed - optimized stack ready to go:
 
 | Category | Technology |
 |----------|------------|
@@ -362,125 +243,49 @@ Toh Framework uses a fixed tech stack - no decisions needed:
 | Testing | Playwright |
 | Language | TypeScript (strict) |
 
-## 🤖 Agents
+---
 
-| Agent | Description |
-|-------|-------------|
-| `ui-builder` | Creates UI and Components |
-| `dev-builder` | Adds Logic and State Management |
-| `design-reviewer` | Improves Design to professional level |
-| `test-runner` | Tests system with auto-fix |
-| `backend-connector` | Connects to Supabase |
-| `platform-adapter` | Adapts for LINE, Mobile, Desktop |
+## 🧠 Philosophy (AODD)
 
-## 📚 Skills
+**AI-Orchestration Driven Development:**
 
-| Skill | Description |
-|-------|-------------|
-| `vibe-orchestrator` | Core methodology and workflow |
-| `ui-first-builder` | UI patterns and component library |
-| `dev-engineer` | TypeScript, Zustand, Forms |
-| `design-excellence` | Design system and anti-patterns |
-| `test-engineer` | Testing strategy and Playwright |
-| `backend-engineer` | Supabase, RLS, Auth |
-| `platform-specialist` | LINE, Expo, Tauri |
-
-## 🔄 Workflow Example
+1. **Natural Language → Tasks** - Just describe what you want
+2. **Orchestrator → Agents** - System calls the right specialists
+3. **No Process Management** - You just receive results
+4. **Test → Fix → Loop** - Auto-fix until everything passes
 
 ```
 User: "Create a coffee shop management system"
 
-┌─────────────────────────────────────────────────────┐
-│  🎯 Toh Orchestrator                                │
-├─────────────────────────────────────────────────────┤
-│  1. Analyze requirements                            │
-│     → POS system, inventory, reports                │
-│                                                     │
-│  2. Call ui-builder                                 │
-│     → Create all UI pages + Mock data               │
-│                                                     │
-│  3. Call dev-builder                                │
-│     → Add state management + forms                  │
-│                                                     │
-│  4. Call design-reviewer                            │
-│     → Polish UI to professional look                │
-│                                                     │
-│  5. Call test-runner                                │
-│     → Test all pages, auto-fix until pass           │
-│                                                     │
-│  ✅ Deliver ready-to-use system!                    │
-└─────────────────────────────────────────────────────┘
+Orchestrator:
+├── 📐 plan-orchestrator → Analyze & plan
+├── 🎨 ui-builder → Create all UI
+├── ⚙️ dev-builder → Add logic
+├── ✨ design-reviewer → Polish design
+├── 🧪 test-runner → Test & fix
+└── ✅ Deliver working system!
 ```
 
-## 🌐 Web Bundles
-
-For use with ChatGPT, Claude.ai, or Gemini:
-
-```bash
-npx toh-framework bundle
-```
-
-Generated files:
-- `toh-full-bundle.txt` - All features
-- `toh-ui-bundle.txt` - UI only
-- `toh-dev-bundle.txt` - Logic only
-
-Copy and paste into Custom Instructions or System Prompt.
-
-## 🔧 CLI Commands
-
-```bash
-# Install framework
-npx toh-framework install
-
-# List available commands
-npx toh-framework list
-
-# Check installation status
-npx toh-framework status
-
-# Generate web bundles
-npx toh-framework bundle
-```
-
-## 🆚 Comparison
-
-| Feature | Traditional | Toh Framework |
-|---------|-------------|---------------|
-| Setup Time | 30+ min | 2 min |
-| Questions Asked | 10+ | 0 |
-| Time to First UI | Hours | Minutes |
-| Mock Data | Lorem ipsum | Realistic data |
-| Tech Stack Decision | Every time | Fixed, optimized |
-| Auto Testing | Manual setup | Built-in |
-| Error Fixing | Manual | Auto loop |
+---
 
 ## 📖 Examples
 
-### Create E-commerce System
-
+### Create E-commerce
 ```
-/toh-vibe Online store with product pages, cart, and checkout
-```
-
-### Create Employee Management
-
-```
-/toh-vibe HR system with employee management, leave requests, approvals, reports
+/toh-vibe Online store with products, cart, and checkout
 ```
 
 ### Create Dashboard
+```
+/toh-vibe Analytics dashboard with charts and date filters
+```
 
+### Create SaaS
 ```
-/toh-vibe Dashboard showing sales, charts, tables with date filters
+/toh-vibe Project management tool with teams and tasks
 ```
 
-### Test and Fix
-
-```
-/toh-test Test all pages
-# If errors → auto call /toh-fix → retest until pass
-```
+---
 
 ## 🎯 Target Users
 
@@ -490,19 +295,26 @@ npx toh-framework bundle
 - **Freelancers** - Deliver client work faster
 - **Students** - Learn modern web development
 
+---
+
+## 📊 Framework Stats
+
+- 🤖 **7 Sub-Agents** - Specialized for different tasks
+- 🎯 **14 Commands** - From planning to deployment
+- 📚 **23 Skills** - Comprehensive AI capabilities
+- 🎨 **13 Design Profiles** - Business-appropriate design
+- 📦 **15 Component Templates** - Ready-to-use premium components
+- 🌐 **5 IDEs** - Claude Code, Cursor, Antigravity, Gemini, Codex
+
+---
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License - see [LICENSE](LICENSE) for details.
 
 ## 👨‍💻 Author
 
@@ -515,7 +327,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <p align="center">
-  Made with ❤️ for you.
+  Made with ❤️ for Solo Developers everywhere.
 </p>
 
 <p align="center">

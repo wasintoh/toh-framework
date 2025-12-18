@@ -9,7 +9,7 @@ description: Display all Toh Framework commands and quick usage guide
 When user calls `/toh-help`, display the following:
 
 <help_response>
-## 🎯 Toh Framework v1.6.0
+## 🎯 Toh Framework v1.6.1
 
 **"Type anything, AI does it for you"** - AI-Orchestration Driven Development
 

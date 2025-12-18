@@ -2,6 +2,28 @@
 
 All notable changes to Toh Framework will be documented in this file.
 
+## [1.6.1] - 2025-12-18
+
+### 📝 Documentation & Command Description Update
+
+#### Changed - README Complete Rewrite
+- **README.md** - Complete rewrite for v1.6.0 features (English)
+- **docs/README-TH.md** - Complete rewrite for v1.6.0 features (Thai)
+- Focused on Sub-Agents, Multi-Agent Orchestration, and Vibe Mode
+- Cleaner structure with better examples
+
+#### Fixed - Command Descriptions
+- All commands now have **single-line descriptions** in YAML frontmatter
+- Claude Code can now display descriptions in slash command picker
+- Standardized format across all 14 command files
+
+#### Changed - toh-help.md
+- Converted to **English only** for consistency
+- Updated to v1.6.0 feature set
+- Added Sub-Agents table
+
+---
+
 ## [1.6.0] - 2025-12-18
 
 ### 🤖 Claude Code Sub-Agents & Multi-Agent Orchestration

@@ -9,7 +9,7 @@ description: Display all Toh Framework commands and quick usage guide
 When user calls `/toh-help`, display the following:
 
 <help_response>
-## 🎯 Toh Framework v1.6.1
+## 🎯 Toh Framework v1.7.0
 
 **"Type anything, AI does it for you"** - AI-Orchestration Driven Development
 
@@ -50,6 +50,7 @@ When user calls `/toh-help`, display the following:
 | `/toh-mobile` | `/toh-m` | 📱 **Mobile App** - Expo / React Native |
 | `/toh-fix` | `/toh-f` | 🔧 **Fix Bug** - Debug with 3-5-Rewrite Rule |
 | `/toh-ship` | `/toh-s` | 🚀 **Deploy** - Vercel, Production ready |
+| `/toh-protect` | `/toh-pr` | 🔐 **Security Audit** - Full security check |
 
 ---
 
@@ -130,21 +131,21 @@ Every response from Toh includes:
 ### 📊 Framework Stats
 
 - 🤖 **7 Sub-Agents** - UI, Dev, Design, Test, Connect, Plan, Platform
-- 🎯 **14 Commands** - Including `/toh` smart command & `/toh-vibe`
-- 📚 **23 Skills** - Comprehensive AI capabilities
+- 🎯 **15 Commands** - Including `/toh` smart command & `/toh-protect`
+- 📚 **24 Skills** - Including Security Engineer
 - 🎨 **13 Design Profiles** - Business-appropriate design
 - 📦 **15 Component Templates** - Ready-to-use premium components
-- 🌐 **4 IDEs** - Claude Code, Cursor, Gemini, Codex
+- 🌐 **5 IDEs** - Claude Code, Cursor, Gemini, Antigravity, Codex
 
 ---
 
-### 🆕 What's New in v1.6.0
+### 🆕 What's New in v1.7.0
 
-- 🤖 **Claude Code Sub-Agents** - 7 agents in native format for Task delegation
-- 🔄 **Multi-Agent Orchestration** - `/toh` v4.0 with workflow planning
-- 🎨 **Vibe Mode** - Orchestration pattern: plan → ui → dev → design → test
-- 📦 **Dual Architecture** - Native format for Claude Code, Original for others
-- 👁️ **Full Visibility** - See which agent does what in real-time
+- 🏗️ **Code Architecture Tracking** - `architecture.md` + `components.md` for instant context
+- 🔐 **Security Engineer System** - `/toh-protect` for full security audit
+- 🔒 **Quick Security Checks** - Built into `/toh-dev` and `/toh-test`
+- 📚 **5 Memory Files** - Architecture tracking (was 3 files)
+- 🛡️ **Security Levels** - Quick (L1) + Full Audit (L2)
 
 ---
 
@@ -155,6 +156,7 @@ Every response from Toh includes:
 | Claude Code | `CLAUDE.md` |
 | Cursor | `.cursor/rules/*.mdc` |
 | Gemini CLI | `.gemini/GEMINI.md` |
+| Google Antigravity | `.gemini/GEMINI.md` |
 | Codex CLI | `AGENTS.md` |
 
 ---

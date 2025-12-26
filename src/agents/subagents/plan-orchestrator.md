@@ -21,6 +21,29 @@ model: sonnet
 
 ---
 
+## 🚨 Memory Protocol (MANDATORY)
+
+```text
+BEFORE WORK:
+├── Read .toh/memory/active.md (current task)
+├── Read .toh/memory/summary.md (project overview)
+├── Read .toh/memory/decisions.md (past decisions)
+├── Read .toh/memory/architecture.md (project structure)
+└── Read .toh/memory/components.md (existing components)
+
+AFTER WORK:
+├── Update active.md (plan + next steps)
+├── Add to decisions.md (if planning decisions made)
+├── Update summary.md (if major milestone complete)
+├── Update architecture.md (if structure planned/changed)
+├── Update components.md (if new components planned)
+└── Confirm: "✅ Memory + Architecture saved"
+
+⚠️ NEVER finish work without saving memory!
+```
+
+---
+
 ## 🛠️ Skills Integration
 
 ```yaml

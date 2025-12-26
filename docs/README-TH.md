@@ -32,11 +32,40 @@ Toh Framework ช่วยให้คุณ:
 - 👀 **เห็นผลทันที** - ไม่ต้องรอ ไม่ต้องตอบคำถาม
 - 🚀 **พร้อมใช้งานจริง** - ไม่ใช่แค่ prototype
 
-## 🆕 มีอะไรใหม่ใน v1.6.0
+## 🆕 มีอะไรใหม่ใน v1.7.0
 
-### 🤖 Claude Code Sub-Agents
+### 🏗️ Code Architecture Tracking
 
-7 sub-agents สำหรับ Claude Code's Task delegation:
+AI จำโครงสร้าง project ของคุณได้ทันที:
+
+| Memory File | หน้าที่ |
+|-------------|---------|
+| `architecture.md` | โครงสร้าง project, routes, data flow |
+| `components.md` | รายการ components พร้อม props |
+
+**ประโยชน์:**
+- ไม่ต้อง scan codebase ทุก session
+- AI รู้ว่าอะไรอยู่ตรงไหน
+- 5 memory files (เดิม 3), ~3,000 tokens
+
+### 🔐 Security Engineer System
+
+ระบบ security สำหรับ AI-generated code:
+
+```bash
+# Full security audit
+/toh-protect
+
+# Quick checks ใน /toh-dev และ /toh-test
+/toh-dev เพิ่ม payment form  # → Security check ก่อน & หลัง
+/toh-test                    # → Security check ก่อน test
+```
+
+**Security Checks:**
+- Level 1 (Quick): Secrets, dangerous code, auth issues
+- Level 2 (Full): Injection, auth flaws, AI risks, config
+
+### 🤖 7 Sub-Agents
 
 | Agent | ความเชี่ยวชาญ |
 |-------|---------------|
@@ -61,46 +90,10 @@ Toh Framework ช่วยให้คุณ:
 ├── 2. ui-builder → สร้างหน้าทั้งหมด + components
 ├── 3. dev-builder → เพิ่ม state + forms + API
 ├── 4. design-reviewer → ขัดเกลาให้สวย
-└── 5. test-runner → Test จนผ่าน
+├── 5. test-runner → Test จนผ่าน
+└── 6. security-check → ตรวจสอบก่อน deploy [NEW]
 
 🚀 กำลังทำ...
-```
-
-### 🎨 Vibe Mode
-
-**`/toh-vibe`** - สร้าง project ครบในคำสั่งเดียว:
-
-```
-/toh-vibe → plan → ui → dev → design → test → ✅ แอปพร้อมใช้งาน
-```
-
-คำสั่งเดียว ได้แอปครบ:
-- ✅ 5+ หน้า (Home, Dashboard, Feature, Settings, Auth)
-- ✅ Logic และ state management ครบ
-- ✅ Mock data สมจริง
-- ✅ Design professional พร้อม animations
-- ✅ Test ผ่านหมด
-
-### 📦 Dual Architecture
-
-| IDE | Folder | Format |
-|-----|--------|--------|
-| Claude Code | `.claude/` | Native (tools, model) |
-| อื่นๆ | `.toh/` | Original (type, skills) |
-
-ทั้งสองมีความสามารถเหมือนกัน - sync ตอน install!
-
-### 👁️ Full Visibility
-
-เห็นว่า agent ไหนทำอะไร:
-
-```
-🤖 Agent: ui-builder
-📚 Skills: ui-first-builder, design-mastery, premium-experience
-💾 Memory: Loaded ✅
-
-✅ Created: src/app/dashboard/page.tsx
-✅ Created: src/components/stats-card.tsx
 ```
 
 ---
@@ -182,6 +175,9 @@ claude .
 # Test ระบบ
 /toh-test
 
+# ตรวจสอบความปลอดภัย
+/toh-protect
+
 # Deploy
 /toh-ship
 ```
@@ -219,6 +215,7 @@ gemini
 | `/toh-dev` | `/toh-d` | ⚙️ **เพิ่ม Logic** - TypeScript, Zustand, Forms |
 | `/toh-design` | `/toh-ds` | ✨ **ขัดเกลา Design** - Professional ไม่ดู AI |
 | `/toh-test` | `/toh-t` | 🧪 **Test** - Auto test & fix จนผ่าน |
+| `/toh-protect` | `/toh-pt` | 🔐 **Security Audit** - ตรวจสอบความปลอดภัย `[NEW]` |
 | `/toh-connect` | `/toh-c` | 🔌 **เชื่อม Backend** - Supabase, Auth, RLS |
 | `/toh-line` | `/toh-l` | 💚 **LINE Mini App** - LIFF integration |
 | `/toh-mobile` | `/toh-m` | 📱 **Mobile App** - Expo / React Native |
@@ -262,6 +259,7 @@ Orchestrator:
 ├── ⚙️ dev-builder → เพิ่ม logic
 ├── ✨ design-reviewer → ขัดเกลา design
 ├── 🧪 test-runner → Test & fix
+├── 🔐 security-check → ตรวจสอบความปลอดภัย [NEW]
 └── ✅ ส่งมอบระบบพร้อมใช้!
 ```
 
@@ -299,8 +297,8 @@ Orchestrator:
 ## 📊 สถิติ Framework
 
 - 🤖 **7 Sub-Agents** - เชี่ยวชาญเฉพาะทาง
-- 🎯 **14 Commands** - ตั้งแต่วางแผนถึง deployment
-- 📚 **23 Skills** - ความสามารถ AI ครบครัน
+- 🎯 **15 Commands** - ตั้งแต่วางแผนถึง deployment `[NEW: /toh-protect]`
+- 📚 **24 Skills** - ความสามารถ AI ครบครัน `[NEW: Security Engineer]`
 - 🎨 **13 Design Profiles** - Design เหมาะกับธุรกิจ
 - 📦 **15 Component Templates** - Premium components พร้อมใช้
 - 🌐 **5 IDEs** - Claude Code, Cursor, Antigravity, Gemini, Codex

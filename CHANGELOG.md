@@ -2,6 +2,72 @@
 
 All notable changes to Toh Framework will be documented in this file.
 
+## [1.7.0] - 2025-12-26
+
+### 🏗️ Code Architecture Tracking & 🔐 Security Engineer System
+
+#### Added - Code Architecture Tracking (Phase 1)
+
+Two new memory files for instant codebase understanding:
+
+- **`architecture.md`** - Project structure overview
+  - Entry Points (pages, routes, API)
+  - Core Modules organization
+  - Data Flow patterns
+  - External Services integration
+
+- **`components.md`** - Component registry
+  - Pages inventory
+  - Components with props summary
+  - Custom hooks registry
+  - Zustand stores tracking
+  - Utility functions
+
+**Benefits:**
+- AI no longer needs to scan codebase every session
+- Token budget: ~3,000 tokens (was ~2,000)
+- Memory now has 5 files instead of 3
+
+#### Added - Security Engineer System (Phase 2)
+
+New security-first approach for AI-generated code:
+
+- **`security-engineer/SKILL.md`** - Security skill with:
+  - Level 1: Quick checks (secrets, dangerous code, auth)
+  - Level 2: Full audit (injection, auth flaws, AI risks, config)
+
+- **`/toh-protect`** command - Full security audit
+  - Aliases: `/toh-p`, `/toh-security`, `/toh-audit`
+  - Scans for vulnerabilities before deployment
+  - Generates detailed report with fixes
+  - Supports auto-fix for common issues
+
+- **`/toh-dev`** & **`/toh-test`** - Quick security checks
+  - Pre-coding security scan
+  - Post-implementation verification
+  - Blocks on critical issues
+
+#### Changed - Memory System v2.0
+
+- **5 memory files** instead of 3 (added architecture.md, components.md)
+- **Token budget** increased to ~3,000 tokens
+- **All 14 agents** updated with new Memory Protocol
+- **All 4 IDE handlers** create all 5 memory files on install
+
+#### Updated - Commands
+
+- `/toh-dev` - Added pre and post security checks
+- `/toh-test` - Added quick security check before testing
+- Memory read/save now includes architecture.md and components.md
+
+#### Stats Update
+
+- **Commands:** 14 → 15 (added `/toh-protect`)
+- **Skills:** 23 → 24 (added `security-engineer`)
+- **Memory Files:** 3 → 5 (added architecture, components)
+
+---
+
 ## [1.6.1] - 2025-12-18
 
 ### 📝 Documentation & Command Description Update

@@ -21,6 +21,27 @@ triggers:
 
 # Backend Connector Agent
 
+## 🚨 Memory Protocol (MANDATORY)
+
+```text
+BEFORE WORK:
+├── Read .toh/memory/active.md (current task)
+├── Read .toh/memory/summary.md (project overview)
+├── Read .toh/memory/decisions.md (backend decisions)
+├── Read .toh/memory/architecture.md (project structure, services)
+└── Read .toh/memory/components.md (existing types, stores)
+
+AFTER WORK:
+├── Update active.md (backend changes + next steps)
+├── Add to decisions.md (if backend decisions made)
+├── Update summary.md (if backend feature complete)
+├── Update architecture.md (if services/data flow changed)
+├── Update components.md (if new types/stores/APIs created)
+└── Confirm: "✅ Memory + Architecture saved"
+
+⚠️ NEVER finish work without saving memory!
+```
+
 ## Identity
 
 ```

@@ -109,8 +109,7 @@ export async function install(options) {
     await installComponent('templates', config.targetDir);
   }
 
-  // Install Memory System (v1.1.0)
-  await installComponent('memory', config.targetDir);
+  // Setup Memory folder (v1.7.0 - 5 files)
   await setupMemoryFolder(config.targetDir);
 
   // Setup IDEs
@@ -268,9 +267,6 @@ async function installComponent(componentName, targetDir) {
       break;
     case 'templates':
       destPath = join(targetDir, '.toh', 'templates');
-      break;
-    case 'memory':
-      destPath = join(targetDir, '.toh', 'memory-docs');
       break;
     default:
       destPath = join(targetDir, '.toh', componentName);

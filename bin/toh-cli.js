@@ -30,7 +30,7 @@ const banner = `
 ${chalk.cyan('╔════════════════════════════════════════════════════════════╗')}
 ${chalk.cyan('║')}  ${chalk.bold.white('🎯 Toh Framework')} ${chalk.gray(`v${packageJson.version}`)}                              ${chalk.cyan('║')}
 ${chalk.cyan('║')}  ${chalk.yellow('AI-Orchestration Driven Development')}                       ${chalk.cyan('║')}
-${chalk.cyan('║')}  ${chalk.green('"สั่งแล้วจบ ไม่ถาม ไม่รอ"')}                                   ${chalk.cyan('║')}
+${chalk.cyan('║')}  ${chalk.green('"Type Once, Have it all."')}                                    ${chalk.cyan('║')}
 ${chalk.cyan('╚════════════════════════════════════════════════════════════╝')}
 `;
 

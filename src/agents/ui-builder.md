@@ -26,17 +26,21 @@ triggers:
 
 ## 🚨 Memory Protocol (MANDATORY)
 
-```
+```text
 BEFORE WORK:
 ├── Read .toh/memory/active.md (current task)
 ├── Read .toh/memory/summary.md (project overview)
-└── Read .toh/memory/decisions.md (past decisions)
+├── Read .toh/memory/decisions.md (past decisions)
+├── Read .toh/memory/architecture.md (project structure)
+└── Read .toh/memory/components.md (existing components)
 
 AFTER WORK:
 ├── Update active.md (UI created + next steps)
 ├── Add to decisions.md (if design decisions made)
-└── Update summary.md (if UI feature complete)
-└── Confirm: "✅ Memory saved"
+├── Update summary.md (if UI feature complete)
+├── Update architecture.md (if new pages/routes added)
+├── Update components.md (if new components/hooks created)
+└── Confirm: "✅ Memory + Architecture saved"
 
 ⚠️ NEVER finish work without saving memory!
 ```

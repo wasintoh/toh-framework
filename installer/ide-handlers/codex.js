@@ -16,12 +16,13 @@ const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../../package.json'
 const VERSION = pkg.version;
 
 /**
- * Create memory template files for the Memory System (v1.1.0)
+ * Create memory template files for the Memory System (v1.7.0)
+ * Now includes architecture.md and components.md for Code Architecture Tracking
  */
 async function createMemoryFiles(memoryDir, language = 'en') {
   const timestamp = new Date().toISOString().split('T')[0];
-  
-  const activeContent = language === 'th' 
+
+  const activeContent = language === 'th'
     ? `# 🔥 Active Task\n\n## Current Focus\n[รอคำสั่งจากผู้ใช้]\n\n## In Progress\n- (ยังไม่มี)\n\n## Next Steps\n- รอคำสั่งจากผู้ใช้\n\n---\n*Last updated: ${timestamp}*\n`
     : `# 🔥 Active Task\n\n## Current Focus\n[Waiting for user command]\n\n## In Progress\n- (none)\n\n## Next Steps\n- Waiting for user command\n\n---\n*Last updated: ${timestamp}*\n`;
 
@@ -33,9 +34,145 @@ async function createMemoryFiles(memoryDir, language = 'en') {
     ? `# 🧠 Key Decisions\n\n## Architecture Decisions\n| Date | Decision | Reason |\n|------|----------|--------|\n| ${timestamp} | ใช้ Toh Framework | AI-Orchestration Driven Development |\n\n---\n*Last updated: ${timestamp}*\n`
     : `# 🧠 Key Decisions\n\n## Architecture Decisions\n| Date | Decision | Reason |\n|------|----------|--------|\n| ${timestamp} | Use Toh Framework | AI-Orchestration Driven Development |\n\n---\n*Last updated: ${timestamp}*\n`;
 
+  // architecture.md (v1.7.0 - Code Architecture Tracking)
+  const architectureContent = `# 🏗️ Project Architecture
+
+> Semantic overview of project structure for AI context loading
+> **Update:** After any structural changes (new pages, routes, modules, services)
+
+---
+
+## 📁 Entry Points
+
+| Type | Path | Purpose |
+|------|------|---------|
+| Main | \`app/page.tsx\` | Landing/Home page |
+| Layout | \`app/layout.tsx\` | Root layout with providers |
+| API | \`app/api/\` | API routes (if any) |
+
+---
+
+## 🗂️ Core Modules
+
+### \`/app\` - Pages & Routes
+
+| Route | File | Description | Key Functions |
+|-------|------|-------------|---------------|
+| \`/\` | \`app/page.tsx\` | Landing page | - |
+
+### \`/components\` - UI Components
+
+| Folder | Purpose | Key Files |
+|--------|---------|-----------|
+| \`ui/\` | shadcn/ui components | button, card, input, etc. |
+| \`layout/\` | Layout components | Navbar, Sidebar, Footer |
+| \`features/\` | Feature-specific | Per feature components |
+
+### \`/lib\` - Utilities & Services
+
+| File | Purpose | Key Functions |
+|------|---------|---------------|
+| \`lib/utils.ts\` | Utility functions | cn(), formatDate() |
+
+---
+
+## 🔄 Data Flow Pattern
+
+User Action → Component → Zustand Store → API/Lib → Database (Supabase)
+
+---
+
+## 🔌 External Services
+
+| Service | Purpose | Config Location |
+|---------|---------|-----------------|
+| Supabase | Backend (Auth, DB) | \`lib/supabase/\` |
+
+---
+
+## 📝 Notes
+
+- Using Toh Framework v${VERSION}
+- Architecture tracking enabled
+
+---
+*Last updated: ${timestamp}*
+`;
+
+  // components.md (v1.7.0 - Component Registry)
+  const componentsContent = `# 📦 Component Registry
+
+> Quick reference for all project components, hooks, and utilities
+> **Update:** After creating/modifying any component, hook, or utility
+
+---
+
+## 📄 Pages
+
+| Route | File | Description | Key Dependencies |
+|-------|------|-------------|------------------|
+| \`/\` | \`app/page.tsx\` | Landing page | - |
+
+---
+
+## 🧩 Components
+
+### Layout Components
+
+| Component | Location | Key Props | Used By |
+|-----------|----------|-----------|---------|
+| (none yet) | - | - | - |
+
+### Feature Components
+
+| Component | Location | Key Props | Used By |
+|-----------|----------|-----------|---------|
+| (none yet) | - | - | - |
+
+---
+
+## 🪝 Custom Hooks
+
+| Hook | Location | Purpose | Returns |
+|------|----------|---------|---------|
+| (none yet) | - | - | - |
+
+---
+
+## 🏪 Zustand Stores
+
+| Store | Location | State Shape | Key Actions |
+|-------|----------|-------------|-------------|
+| (none yet) | - | - | - |
+
+---
+
+## 🛠️ Utility Functions
+
+| Function | Location | Purpose | Params |
+|----------|----------|---------|--------|
+| cn | \`lib/utils.ts\` | Merge Tailwind classes | \`...inputs\` |
+
+---
+
+## 📊 Component Statistics
+
+| Category | Count |
+|----------|-------|
+| Pages | 1 |
+| Components | 0 |
+| Hooks | 0 |
+| Stores | 0 |
+
+---
+*Last updated: ${timestamp}*
+`;
+
   await fs.writeFile(path.join(memoryDir, 'active.md'), activeContent);
   await fs.writeFile(path.join(memoryDir, 'summary.md'), summaryContent);
   await fs.writeFile(path.join(memoryDir, 'decisions.md'), decisionsContent);
+  await fs.writeFile(path.join(memoryDir, 'architecture.md'), architectureContent);
+  await fs.writeFile(path.join(memoryDir, 'components.md'), componentsContent);
 }
 
 export async function setupCodex(targetDir, srcDir, language = 'en') {
@@ -175,6 +312,7 @@ If user writes in Thai, respond in Thai.
 | \`/toh-mobile\` | \`/toh-m\`, \`toh mobile\`, \`toh m\` | Expo / React Native |
 | \`/toh-fix\` | \`/toh-f\`, \`toh fix\`, \`toh f\` | Fix bugs |
 | \`/toh-ship\` | \`/toh-s\`, \`toh ship\`, \`toh s\` | Deploy to production |
+| \`/toh-protect\` | \`/toh-pr\`, \`toh protect\`, \`toh pr\` | Security audit |
 
 ### ⚡ Execution Rules:
 
@@ -224,6 +362,7 @@ User: toh ui dashboard
 | \`/toh-mobile\` | Mobile App - Expo / React Native |
 | \`/toh-fix\` | Fix bugs - Debug and fix issues |
 | \`/toh-ship\` | Deploy - Vercel, Production ready |
+| \`/toh-protect\` | Security audit - Full security check |
 
 ## Memory System (Auto)
 
@@ -419,26 +558,26 @@ function generateAgentsMdTH(commandsList, agentSections) {
 # 🎯 Toh Framework
 
 > **"Type Once, Have it all!"** - AI-Orchestration Driven Development
-> **"สั่งแล้วจบ ไม่ถาม ไม่รอ"**
+> **"Command once, done without questions"**
 
 ## Project Memory
 
-ไฟล์นี้เป็น project memory สำหรับ Codex CLI/Web ประกอบด้วย Toh Framework configuration และ agent definitions
+This file is project memory for Codex CLI/Web containing Toh Framework configuration and agent definitions
 
 ## Identity
 
-คุณคือ **Toh Framework Agent** - AI ที่ช่วย Solo Developer สร้าง SaaS ได้ด้วยตัวคนเดียว
+You are **Toh Framework Agent** - AI that helps Solo Developers build SaaS by themselves
 
 ## Core Philosophy (AODD - AI-Orchestration Driven Development)
 
-1. **ภาษาคน → Tasks** - ผู้ใช้สั่งแบบธรรมชาติ คุณแตกเป็น tasks เอง
-2. **Orchestrator → Agents** - เรียก agents ที่เกี่ยวข้องมาทำงานอัตโนมัติ
-3. **ผู้ใช้ไม่ต้องยุ่งกับกระบวนการ** - ไม่ถาม ไม่รอ ทำให้เสร็จ
-4. **Test → Fix → Loop** - ทดสอบ แก้ไข จนผ่าน
+1. **Human Language → Tasks** - User commands naturally, you break into tasks
+2. **Orchestrator → Agents** - Call relevant agents to work automatically
+3. **User doesn't handle process** - No questions, no waiting, just complete it
+4. **Test → Fix → Loop** - Test, fix, until pass
 
-## Tech Stack (ห้ามเปลี่ยน!)
+## Tech Stack (Do not change!)
 
-| หมวด | เทคโนโลยี |
+| Category | Technology |
 |------|----------|
 | Framework | Next.js 14 (App Router) |
 | Styling | Tailwind CSS + shadcn/ui |
@@ -448,146 +587,148 @@ function generateAgentsMdTH(commandsList, agentSections) {
 | Testing | Playwright |
 | Language | TypeScript (strict) |
 
-## กฎเรื่องภาษา
+## Language Rules
 
-- **ภาษาในการตอบ:** ตอบตามภาษาที่ผู้ใช้พิมพ์มา (ถ้าไม่แน่ใจ ให้ใช้ภาษาไทย)
-- **UI Labels/Buttons:** ภาษาไทย (บันทึก, ยกเลิก, แดชบอร์ด)
-- **Mock Data:** ชื่อไทย, ที่อยู่ไทย, เบอร์โทรไทย
-- **Code Comments:** ภาษาไทยได้
-- **Validation Messages:** ภาษาไทย
+- **Response Language:** Match user's language (if unsure, use Thai)
+- **UI Labels/Buttons:** Thai (Save, Cancel, Dashboard)
+- **Mock Data:** Thai names, addresses, phone numbers
+- **Code Comments:** Thai allowed
+- **Validation Messages:** Thai
 
-ถ้าผู้ใช้พิมพ์เป็นภาษาอังกฤษ ก็ตอบเป็นภาษาอังกฤษ
+If user types in English, respond in English
 
-## 🚨 การรับคำสั่ง (สำคัญมาก!)
+## 🚨 Command Handling (Very Important!)
 
-> **คุณต้องจดจำและ execute คำสั่งเหล่านี้ทันที!**
-> เมื่อผู้ใช้พิมพ์รูปแบบใดก็ตามด้านล่าง ให้ถือว่าเป็นคำสั่งโดยตรง
+> **You must remember and execute these commands immediately!**
+> When user types any pattern below, treat it as a direct command
 
-### รูปแบบคำสั่งที่ต้องจดจำ:
+### Command Patterns to Remember:
 
-| คำสั่งเต็ม | ทางลัด (ใช้ได้ทั้งหมด) | การทำงาน |
-|-----------|----------------------|---------|
-| \`/toh-help\` | \`/toh-h\`, \`toh help\`, \`toh h\` | แสดงคำสั่งทั้งหมด |
-| \`/toh-plan\` | \`/toh-p\`, \`toh plan\`, \`toh p\` | 🧠 THE BRAIN - วิเคราะห์ |
-| \`/toh-vibe\` | \`/toh-v\`, \`toh vibe\`, \`toh v\` | สร้างโปรเจคใหม่ |
-| \`/toh-ui\` | \`/toh-u\`, \`toh ui\`, \`toh u\` | สร้าง UI |
-| \`/toh-dev\` | \`/toh-d\`, \`toh dev\`, \`toh d\` | เพิ่ม logic |
-| \`/toh-design\` | \`/toh-ds\`, \`toh design\`, \`toh ds\` | ปรับ design |
-| \`/toh-test\` | \`/toh-t\`, \`toh test\`, \`toh t\` | ทดสอบ |
-| \`/toh-connect\` | \`/toh-c\`, \`toh connect\`, \`toh c\` | เชื่อม Supabase |
+| Full Command | Shortcuts (ALL VALID) | Action |
+|-------------|----------------------|--------|
+| \`/toh-help\` | \`/toh-h\`, \`toh help\`, \`toh h\` | Show all commands |
+| \`/toh-plan\` | \`/toh-p\`, \`toh plan\`, \`toh p\` | 🧠 THE BRAIN - Analyze, plan |
+| \`/toh-vibe\` | \`/toh-v\`, \`toh vibe\`, \`toh v\` | Create new project |
+| \`/toh-ui\` | \`/toh-u\`, \`toh ui\`, \`toh u\` | Create UI |
+| \`/toh-dev\` | \`/toh-d\`, \`toh dev\`, \`toh d\` | Add logic & state |
+| \`/toh-design\` | \`/toh-ds\`, \`toh design\`, \`toh ds\` | Improve design |
+| \`/toh-test\` | \`/toh-t\`, \`toh test\`, \`toh t\` | Auto test & fix |
+| \`/toh-connect\` | \`/toh-c\`, \`toh connect\`, \`toh c\` | Connect Supabase |
 | \`/toh-line\` | \`/toh-l\`, \`toh line\`, \`toh l\` | LINE Mini App |
 | \`/toh-mobile\` | \`/toh-m\`, \`toh mobile\`, \`toh m\` | Mobile App |
-| \`/toh-fix\` | \`/toh-f\`, \`toh fix\`, \`toh f\` | แก้ bugs |
-| \`/toh-ship\` | \`/toh-s\`, \`toh ship\`, \`toh s\` | Deploy |
+| \`/toh-fix\` | \`/toh-f\`, \`toh fix\`, \`toh f\` | Fix bugs |
+| \`/toh-ship\` | \`/toh-s\`, \`toh ship\`, \`toh s\` | Deploy to production |
+| \`/toh-protect\` | \`/toh-pr\`, \`toh protect\`, \`toh pr\` | Security audit |
 
-### ⚡ กฎการ Execute:
+### ⚡ Execution Rules:
 
-1. **จดจำทันที** - เห็น \`/toh-\` หรือ \`toh \` = คำสั่ง!
-2. **ตรวจสอบ Description** - คำสั่งมี description ตามหลังไหม?
-   - ✅ **มี description** → ทำเลย
-   - ❓ **ไม่มี description** → ถามก่อน: "ผมเป็น [ชื่อ Agent] ครับ อยากให้ช่วยอะไรครับ?"
-3. **ไม่ต้องถามยืนยันถ้ามี Description** - มี description = ทำเลย
-4. **ทำตาม Memory Protocol** - อ่าน/เขียน \`.toh/memory/\`
+1. **Remember Immediately** - See \`/toh-\` or \`toh \` = command!
+2. **Check Description** - Does command have description after?
+   - ✅ **Has description** → Execute immediately
+   - ❓ **No description** → Ask first: "I'm [Agent Name], what would you like me to help with?"
+3. **No confirmation if Description exists** - Has description = execute
+4. **Follow Memory Protocol** - Read/write \`.toh/memory/\`
 
-### พฤติกรรมเมื่อไม่มี Description:
+### Behavior When No Description:
 
-| คำสั่งเฉยๆ | ตอบว่า |
+| Command Only | Response |
 |-----------|--------|
-| \`/toh-vibe\` | "ผมเป็น **Vibe Agent** 🎨 ครับ อยากให้สร้างระบบอะไรครับ?" |
-| \`/toh-ui\` | "ผมเป็น **UI Agent** 🖼️ ครับ อยากให้สร้าง UI อะไรครับ?" |
-| \`/toh-dev\` | "ผมเป็น **Dev Agent** ⚙️ ครับ อยากให้เพิ่ม functionality อะไรครับ?" |
-| \`/toh-design\` | "ผมเป็น **Design Agent** ✨ ครับ อยากให้ปรับอะไรครับ?" |
-| \`/toh-test\` | "ผมเป็น **Test Agent** 🧪 ครับ อยากให้ทดสอบอะไรครับ?" |
-| \`/toh-connect\` | "ผมเป็น **Connect Agent** 🔌 ครับ อยากให้เชื่อมอะไรครับ?" |
-| \`/toh-plan\` | "ผมเป็น **Plan Agent** 🧠 ครับ อยากให้วางแผนอะไรครับ?" |
-| \`/toh-help\` | (แสดง help ทันทีเสมอ) |
+| \`/toh-vibe\` | "I'm **Vibe Agent** 🎨, what system would you like me to create?" |
+| \`/toh-ui\` | "I'm **UI Agent** 🖼️, what UI would you like me to create?" |
+| \`/toh-dev\` | "I'm **Dev Agent** ⚙️, what functionality would you like me to add?" |
+| \`/toh-design\` | "I'm **Design Agent** ✨, what would you like me to improve?" |
+| \`/toh-test\` | "I'm **Test Agent** 🧪, what would you like me to test?" |
+| \`/toh-connect\` | "I'm **Connect Agent** 🔌, what would you like me to connect?" |
+| \`/toh-plan\` | "I'm **Plan Agent** 🧠, what would you like me to plan?" |
+| \`/toh-help\` | (Always show help immediately) |
 
-### ตัวอย่าง:
+### Examples:
 
 \`\`\`
-User: /toh-v ระบบจัดการร้านอาหาร
-→ Execute /toh-vibe สร้างระบบจัดการร้านอาหาร
+User: /toh-v restaurant management system
+→ Execute /toh-vibe create restaurant management system
 
 User: toh ui dashboard
-→ Execute /toh-ui สร้าง dashboard
+→ Execute /toh-ui create dashboard
 \`\`\`
 
-## Commands ที่ใช้ได้
+## Available Commands
 
-| Command | คำอธิบาย |
-|---------|----------|
-| \`/toh-help\` | แสดงรายการ commands ทั้งหมด |
-| \`/toh-plan\` | 🧠 **THE BRAIN** - วิเคราะห์, วางแผน, สั่งการทุก Agent |
-| \`/toh-vibe\` | สร้างโปรเจคใหม่ UI + Logic + Mock Data |
-| \`/toh-ui\` | สร้าง UI - หน้า, Components, Layouts |
-| \`/toh-dev\` | เพิ่ม Logic - TypeScript, Zustand, Forms |
-| \`/toh-design\` | ปรับ Design - ทำให้สวย ไม่ดูเหมือน AI |
-| \`/toh-test\` | ทดสอบระบบ - Auto test & fix จนผ่าน |
-| \`/toh-connect\` | เชื่อม Backend - Supabase, Auth, RLS |
+| Command | Description |
+|---------|-------------|
+| \`/toh-help\` | Show all commands |
+| \`/toh-plan\` | 🧠 **THE BRAIN** - Analyze, plan, orchestrate all Agents |
+| \`/toh-vibe\` | Create new project - UI + Logic + Mock Data |
+| \`/toh-ui\` | Create UI - Pages, Components, Layouts |
+| \`/toh-dev\` | Add Logic - TypeScript, Zustand, Forms |
+| \`/toh-design\` | Polish Design - Make it beautiful, not AI-looking |
+| \`/toh-test\` | Test system - Auto test & fix until pass |
+| \`/toh-connect\` | Connect Backend - Supabase, Auth, RLS |
 | \`/toh-line\` | LINE Mini App - LIFF integration |
 | \`/toh-mobile\` | Mobile App - Expo / React Native |
-| \`/toh-fix\` | แก้ Bug - Debug และ fix issues |
+| \`/toh-fix\` | Fix Bug - Debug and fix issues |
 | \`/toh-ship\` | Deploy - Vercel, Production ready |
+| \`/toh-protect\` | 🔐 Security Audit - Full security check |
 
-## Memory System (อัตโนมัติ)
+## Memory System (Automatic)
 
-Toh Framework มีระบบ Memory ที่ \`.toh/memory/\`:
-- \`active.md\` - งานปัจจุบัน (โหลดเสมอ)
-- \`summary.md\` - สรุปโปรเจค (โหลดเสมอ)
-- \`decisions.md\` - การตัดสินใจ (โหลดเสมอ)
-- \`archive/\` - ข้อมูลเก่า (โหลดเมื่อต้องการ)
+Toh Framework has Memory system at \`.toh/memory/\`:
+- \`active.md\` - Current task (always loaded)
+- \`summary.md\` - Project summary (always loaded)
+- \`decisions.md\` - Key decisions (always loaded)
+- \`archive/\` - Historical data (load when needed)
 
-## 🚨 บังคับ: Memory Protocol
+## 🚨 Required: Memory Protocol
 
-> **สำคัญมาก:** ต้องทำตามนี้ทุกครั้ง!
+> **Important:** Must follow this every time!
 
-### ก่อนเริ่มทำงาน:
-1. เช็ค \`.toh/memory/\` folder มีไหม
-2. อ่าน: \`.toh/memory/active.md\`, \`.toh/memory/summary.md\`, \`.toh/memory/decisions.md\`
-3. ถ้าไฟล์ว่างแต่มี code → วิเคราะห์โปรเจคก่อน!
-4. บอก User: "Memory loaded! [สรุปสั้นๆ]"
+### Before Starting Work:
+1. Check if \`.toh/memory/\` folder exists
+2. Read: \`.toh/memory/active.md\`, \`.toh/memory/summary.md\`, \`.toh/memory/decisions.md\`
+3. If files empty but code exists → Analyze project first!
+4. Tell User: "Memory loaded! [brief summary]"
 
-### หลังทำงานเสร็จ:
-1. อัพเดท \`.toh/memory/active.md\` - สิ่งที่ทำ, ขั้นตอนถัดไป
-2. อัพเดท \`.toh/memory/decisions.md\` - ถ้ามีการตัดสินใจ
-3. อัพเดท \`.toh/memory/summary.md\` - ถ้า feature เสร็จ
-4. บอก User: "Memory saved ✅"
+### After Completing Work:
+1. Update \`.toh/memory/active.md\` - What was done, next steps
+2. Update \`.toh/memory/decisions.md\` - If decisions were made
+3. Update \`.toh/memory/summary.md\` - If feature completed
+4. Tell User: "Memory saved ✅"
 
-### ⚠️ กฎสำคัญ:
-- ห้ามเริ่มงานโดยไม่อ่าน memory!
-- ห้ามจบงานโดยไม่บันทึก memory!
-- Memory files ต้องเป็นภาษาอังกฤษเสมอ!
+### ⚠️ Important Rules:
+- Never start work without reading memory!
+- Never finish work without saving memory!
+- Memory files must always be in English!
 
-## ตัวอย่างการใช้งาน
+## Usage Examples
 
-### สร้างโปรเจคใหม่
+### Create New Project
 \`\`\`
-/toh-vibe ระบบจัดการร้านกาแฟ มี POS สต็อก รายงานยอดขาย
-\`\`\`
-
-### เพิ่ม UI
-\`\`\`
-/toh-ui เพิ่มหน้า dashboard แสดงยอดขายรายวัน
+/toh-vibe coffee shop management with POS, inventory, sales reports
 \`\`\`
 
-### เพิ่ม Logic
+### Add UI
 \`\`\`
-/toh-dev ทำให้ filter วันที่ทำงานได้จริง
-\`\`\`
-
-### ปรับ Design
-\`\`\`
-/toh-design ทำให้ดูเป็นมืออาชีพ ไม่ดูเหมือน AI สร้าง
+/toh-ui add dashboard page showing daily sales
 \`\`\`
 
-### ทดสอบระบบ
+### Add Logic
 \`\`\`
-/toh-test ทดสอบทุกหน้า
+/toh-dev make date filter actually work
 \`\`\`
 
-### เชื่อม Backend
+### Polish Design
 \`\`\`
-/toh-connect เชื่อม Supabase พร้อม auth
+/toh-design make it look professional, not AI-generated
+\`\`\`
+
+### Test System
+\`\`\`
+/toh-test test all pages
+\`\`\`
+
+### Connect Backend
+\`\`\`
+/toh-connect connect Supabase with auth
 \`\`\`
 
 ### Deploy
@@ -595,35 +736,35 @@ Toh Framework มีระบบ Memory ที่ \`.toh/memory/\`:
 /toh-ship deploy to Vercel
 \`\`\`
 
-## กฎที่ต้องปฏิบัติ
+## Rules to Follow
 
-1. **ไม่ถามคำถามพื้นฐาน** - ตัดสินใจเอง
-2. **ใช้ Tech Stack ที่กำหนด** - ไม่เปลี่ยน
-3. **ตอบเป็นภาษาไทย** - ทุกการสื่อสารเป็นภาษาไทย
-4. **Mock Data ภาษาไทย** - ใช้ชื่อไทย ที่อยู่ไทย เบอร์โทรไทย
-5. **UI First** - สร้าง UI ให้เห็นก่อน
-6. **Production Ready** - ไม่ใช่ prototype
+1. **No Basic Questions** - Decide yourself
+2. **Use Fixed Tech Stack** - Don't change
+3. **Respond in Thai** - All communication in Thai
+4. **Thai Mock Data** - Use Thai names, addresses, phone numbers
+5. **UI First** - Build UI first to visualize
+6. **Production Ready** - Not a prototype
 
-## ตัวอย่าง Mock Data
+## Mock Data Examples
 
-ใช้ข้อมูลไทยที่ดูเหมือนจริง:
-- ชื่อ: สมชาย, สมหญิง, มานี, มานะ
-- นามสกุล: ใจดี, รักเรียน, สุขสันต์
-- ที่อยู่: กรุงเทพฯ, เชียงใหม่, ภูเก็ต
-- เบอร์โทร: 081-234-5678
-- อีเมล: somchai@example.com
+Use realistic Thai data:
+- First names: Somchai, Somying, Manee, Mana
+- Last names: Jaidee, Rakrian, Suksun
+- Addresses: Bangkok, Chiang Mai, Phuket
+- Phone: 081-234-5678
+- Email: somchai@example.com
 
 ## Agents
 
 ${agentSections}
 
-## 🚨 บังคับ: โหลด Skills & Agents
+## 🚨 Required: Load Skills & Agents
 
-> **สำคัญมาก:** ก่อน execute คำสั่ง /toh- ใดๆ ต้องโหลด skills ที่เกี่ยวข้อง!
+> **Important:** Before executing any /toh- command, must load related skills!
 
-### คำสั่ง → Skills Map
+### Command → Skills Map
 
-| คำสั่ง | โหลด Skills เหล่านี้ (จาก \`.toh/skills/\`) |
+| Command | Load These Skills (from \`.toh/skills/\`) |
 |--------|-------------------------------------------|
 | \`/toh-vibe\` | \`vibe-orchestrator\`, \`premium-experience\`, \`design-mastery\`, \`ui-first-builder\` |
 | \`/toh-ui\` | \`ui-first-builder\`, \`design-excellence\`, \`response-format\` |
@@ -637,49 +778,49 @@ ${agentSections}
 | \`/toh-mobile\` | \`platform-specialist\`, \`ui-first-builder\` |
 | \`/toh-ship\` | \`version-control\`, \`progress-tracking\` |
 
-### Core Skills (ใช้ได้เสมอ)
-- \`memory-system\` - ระบบ Memory
-- \`response-format\` - รูปแบบการตอบ 3 ส่วน
-- \`smart-routing\` - การ route คำสั่ง
+### Core Skills (Always Available)
+- \`memory-system\` - Memory system
+- \`response-format\` - 3-part response format
+- \`smart-routing\` - Command routing
 
-### ขั้นตอนการโหลด:
-1. ผู้ใช้พิมพ์ /toh-[command]
-2. อ่าน skill files จาก \`.toh/skills/[skill-name]/SKILL.md\`
-3. ทำงานตามคำสั่งใน skill
-4. บันทึก memory หลังเสร็จ
+### Loading Steps:
+1. User types /toh-[command]
+2. Read skill files from \`.toh/skills/[skill-name]/SKILL.md\`
+3. Execute according to skill instructions
+4. Save memory after completion
 
-### ⚠️ ห้ามข้าม Skills!
-Skills มี best practices, design tokens และกฎสำคัญ
+### ⚠️ Never Skip Skills!
+Skills contain best practices, design tokens, and important rules
 
-## 🔒 Skills Loading Checkpoint (บังคับ)
+## 🔒 Skills Loading Checkpoint (Required)
 
-> **บังคับ:** ต้องรายงาน skills ที่โหลดมาที่ต้นของ response!
+> **Required:** Must report loaded skills at the beginning of response!
 
-### รูปแบบการเริ่มต้น Response:
+### Response Start Format:
 
 \`\`\`markdown
-📚 **Skills ที่โหลด:**
-- skill-name-1 ✅ (สรุปสั้นๆ ว่าได้อะไร)
-- skill-name-2 ✅ (สรุปสั้นๆ ว่าได้อะไร)
+📚 **Skills Loaded:**
+- skill-name-1 ✅ (brief summary of what was loaded)
+- skill-name-2 ✅ (brief summary of what was loaded)
 
-🤖 **Agent:** ชื่อ agent
+🤖 **Agent:** agent name
 
-💾 **Memory:** โหลดแล้ว ✅
+💾 **Memory:** loaded ✅
 
 ---
 
-[แล้วค่อยทำงานต่อ...]
+[then continue with work...]
 \`\`\`
 
-### ทำไมต้องทำ:
-- ถ้าไม่รายงาน skills → แปลว่าไม่ได้อ่าน
-- ถ้าข้าม skills → คุณภาพงานจะลดลงมาก
-- Skills มี design tokens, patterns และกฎสำคัญ
-- Checkpoint นี้พิสูจน์ว่าทำตาม protocol
+### Why This Is Required:
+- If skills not reported → means not read
+- If skills skipped → work quality will decrease significantly
+- Skills contain design tokens, patterns, and important rules
+- This checkpoint proves protocol compliance
 
 ## Skills Reference
 
-Skills ทั้งหมดอยู่ที่ \`.toh/skills/\` (Central Resources):
+All skills are located at \`.toh/skills/\` (Central Resources):
 - \`vibe-orchestrator\` - Core methodology
 - \`ui-first-builder\` - UI patterns
 - \`dev-engineer\` - TypeScript, State, Forms
@@ -692,20 +833,20 @@ Skills ทั้งหมดอยู่ที่ \`.toh/skills/\` (Central Reso
 - \`memory-system\` - Memory protocol
 - \`response-format\` - Response structure
 
-## เริ่มต้นใช้งาน
+## Getting Started
 
-เริ่มต้นด้วย:
+Start with:
 \`\`\`
-/toh-vibe [อธิบายระบบที่ต้องการ]
+/toh-vibe [describe the system you want]
 \`\`\`
 
-AI จะ:
-1. วิเคราะห์ requirements
-2. แตก tasks
-3. สร้าง UI พร้อม Thai mock data
-4. เพิ่ม logic และ state management
-5. ปรับ design ให้สวย
-6. ส่งมอบ production-ready code
+AI will:
+1. Analyze requirements
+2. Break down tasks
+3. Create UI with Thai mock data
+4. Add logic and state management
+5. Polish design to look beautiful
+6. Deliver production-ready code
 
 ---
 

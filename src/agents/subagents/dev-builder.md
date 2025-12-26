@@ -18,17 +18,21 @@ model: sonnet
 
 ## 🚨 Memory Protocol (MANDATORY)
 
-```
+```text
 BEFORE WORK:
 ├── Read .toh/memory/active.md (current task)
 ├── Read .toh/memory/summary.md (project overview)
-└── Read .toh/memory/decisions.md (technical decisions)
+├── Read .toh/memory/decisions.md (technical decisions)
+├── Read .toh/memory/architecture.md (project structure)
+└── Read .toh/memory/components.md (existing components, hooks, stores)
 
 AFTER WORK:
 ├── Update active.md (logic created + next steps)
 ├── Add to decisions.md (if technical decisions made)
-└── Update summary.md (if feature complete)
-└── Confirm: "✅ Memory saved"
+├── Update summary.md (if feature complete)
+├── Update architecture.md (if new modules/services added)
+├── Update components.md (if new hooks/stores/utils created)
+└── Confirm: "✅ Memory + Architecture saved"
 
 ⚠️ NEVER finish work without saving memory!
 ```

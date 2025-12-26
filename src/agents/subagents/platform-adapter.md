@@ -17,17 +17,21 @@ model: sonnet
 
 ## 🚨 Memory Protocol (MANDATORY)
 
-```
+```text
 BEFORE WORK:
 ├── Read .toh/memory/active.md (current task)
 ├── Read .toh/memory/summary.md (features to adapt)
-└── Read .toh/memory/decisions.md (platform decisions)
+├── Read .toh/memory/decisions.md (platform decisions)
+├── Read .toh/memory/architecture.md (project structure)
+└── Read .toh/memory/components.md (existing components to adapt)
 
 AFTER WORK:
 ├── Update active.md (platform adaptation + next steps)
 ├── Add to decisions.md (if platform decisions made)
-└── Update summary.md (if platform setup complete)
-└── Confirm: "✅ Memory saved"
+├── Update summary.md (if platform setup complete)
+├── Update architecture.md (if platform-specific structure added)
+├── Update components.md (if platform-specific components added)
+└── Confirm: "✅ Memory + Architecture saved"
 
 ⚠️ NEVER finish work without saving memory!
 ```

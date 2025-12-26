@@ -20,30 +20,46 @@ trigger: /toh-dev or /toh-d followed by description
 0. 🚨 READ MEMORY (MANDATORY!)
    ├── .toh/memory/active.md
    ├── .toh/memory/summary.md
-   └── .toh/memory/decisions.md
+   ├── .toh/memory/decisions.md
+   ├── .toh/memory/architecture.md
+   └── .toh/memory/components.md
    (If doesn't exist → Create new)
 
 1. READ Skills
-   └── ~/.claude/skills/dev-engineer/SKILL.md
+   ├── ~/.toh/skills/dev-engineer/SKILL.md
+   └── ~/.toh/skills/security-engineer/SKILL.md
 
-2. ANALYZE Request
+2. 🔐 QUICK SECURITY CHECK (before coding)
+   ├── Scan for hardcoded secrets
+   ├── Check for dangerous patterns
+   └── If CRITICAL found → WARN before proceeding
+
+3. ANALYZE Request
    ├── Need types? → Create in types/
    ├── Need state? → Create Zustand store in stores/
    ├── Need forms? → Add React Hook Form + Zod
    └── Need CRUD? → Create in lib/api/
 
-3. IMPLEMENT
+4. IMPLEMENT
    ├── TypeScript types (strict, no any)
    ├── Zustand store with actions
    ├── Zod validation schemas
    ├── Mock CRUD operations
    └── Custom hooks if needed
 
-4. CONNECT to UI
+5. CONNECT to UI
    └── Wire up components to stores/forms
 
-5. 🚨 SAVE MEMORY (MANDATORY!)
+6. 🔐 POST-IMPLEMENTATION SECURITY CHECK
+   ├── Verify no secrets in code
+   ├── Check SQL queries are parameterized
+   ├── Ensure proper input validation
+   └── If issues found → Fix before completing
+
+7. 🚨 SAVE MEMORY (MANDATORY!)
    ├── Update active.md
+   ├── Update architecture.md (if structure changed)
+   ├── Update components.md (if new components/hooks)
    ├── Add to decisions.md (if technical decisions made)
    └── Update summary.md (if feature complete)
 ```

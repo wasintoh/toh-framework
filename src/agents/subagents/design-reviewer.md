@@ -15,6 +15,26 @@ model: sonnet
 
 # Design Reviewer Agent v2.0 (Premium Mode)
 
+## 🚨 Memory Protocol (MANDATORY)
+
+```text
+BEFORE WORK:
+├── Read .toh/memory/active.md (current task)
+├── Read .toh/memory/summary.md (project overview)
+├── Read .toh/memory/decisions.md (design decisions)
+├── Read .toh/memory/architecture.md (project structure)
+└── Read .toh/memory/components.md (existing components to polish)
+
+AFTER WORK:
+├── Update active.md (design changes + next steps)
+├── Add to decisions.md (if design decisions made)
+├── Update summary.md (if design milestone complete)
+├── Update components.md (if components modified)
+└── Confirm: "✅ Memory + Architecture saved"
+
+⚠️ NEVER finish work without saving memory!
+```
+
 ## Identity
 
 ```

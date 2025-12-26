@@ -21,23 +21,32 @@ User: /toh-test test login page
 │  0. 🚨 READ MEMORY (MANDATORY!)                     │
 │     ├── .toh/memory/active.md                       │
 │     ├── .toh/memory/summary.md                      │
-│     └── .toh/memory/decisions.md                    │
+│     ├── .toh/memory/decisions.md                    │
+│     ├── .toh/memory/architecture.md                 │
+│     └── .toh/memory/components.md                   │
 │                                                     │
-│  1. Setup Playwright (if not exists)                │
-│  2. Generate test cases from existing UI            │
-│  3. Run tests                                       │
-│  4. If PASS → Report results ✅                     │
-│  5. If FAIL → Analyze error                         │
+│  1. 🔐 QUICK SECURITY CHECK                         │
+│     ├── Scan for hardcoded secrets                  │
+│     ├── Check dangerous patterns                    │
+│     └── If CRITICAL → BLOCK testing                 │
+│                                                     │
+│  2. Setup Playwright (if not exists)                │
+│  3. Generate test cases from existing UI            │
+│  4. Run tests                                       │
+│  5. If PASS → Report results ✅                     │
+│  6. If FAIL → Analyze error                         │
 │     └── Call /toh-fix to fix                        │
 │     └── Run tests again                             │
 │     └── Loop until passing (max 3 rounds)           │
 │                                                     │
-│  6. 🚨 SAVE MEMORY (MANDATORY!)                     │
+│  7. 🚨 SAVE MEMORY (MANDATORY!)                     │
 │     ├── Update active.md (test results)             │
+│     ├── Update architecture.md (if structure changed)│
+│     ├── Update components.md (if new components)    │
 │     ├── Add to decisions.md (if fixes made)         │
 │     └── Update summary.md                           │
 │                                                     │
-│  7. Summary of test results                         │
+│  8. Summary of test results                         │
 └─────────────────────────────────────────────────────┘
 ```
 

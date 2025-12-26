@@ -171,10 +171,146 @@ Project just initialized - ready for commands
 *Last updated: ${timestamp}*
 `;
 
+  // architecture.md (v1.7.0 - Code Architecture Tracking)
+  const architectureContent = `# 🏗️ Project Architecture
+
+> Semantic overview of project structure for AI context loading
+> **Update:** After any structural changes (new pages, routes, modules, services)
+
+---
+
+## 📁 Entry Points
+
+| Type | Path | Purpose |
+|------|------|---------|
+| Main | \`app/page.tsx\` | Landing/Home page |
+| Layout | \`app/layout.tsx\` | Root layout with providers |
+| API | \`app/api/\` | API routes (if any) |
+
+---
+
+## 🗂️ Core Modules
+
+### \`/app\` - Pages & Routes
+
+| Route | File | Description | Key Functions |
+|-------|------|-------------|---------------|
+| \`/\` | \`app/page.tsx\` | Landing page | - |
+
+### \`/components\` - UI Components
+
+| Folder | Purpose | Key Files |
+|--------|---------|-----------|
+| \`ui/\` | shadcn/ui components | button, card, input, etc. |
+| \`layout/\` | Layout components | Navbar, Sidebar, Footer |
+| \`features/\` | Feature-specific | Per feature components |
+
+### \`/lib\` - Utilities & Services
+
+| File | Purpose | Key Functions |
+|------|---------|---------------|
+| \`lib/utils.ts\` | Utility functions | cn(), formatDate() |
+
+---
+
+## 🔄 Data Flow Pattern
+
+User Action → Component → Zustand Store → API/Lib → Database (Supabase)
+
+---
+
+## 🔌 External Services
+
+| Service | Purpose | Config Location |
+|---------|---------|-----------------|
+| Supabase | Backend (Auth, DB) | \`lib/supabase/\` |
+
+---
+
+## 📝 Notes
+
+- Using Toh Framework v${VERSION}
+- Architecture tracking enabled
+
+---
+*Last updated: ${timestamp}*
+`;
+
+  // components.md (v1.7.0 - Component Registry)
+  const componentsContent = `# 📦 Component Registry
+
+> Quick reference for all project components, hooks, and utilities
+> **Update:** After creating/modifying any component, hook, or utility
+
+---
+
+## 📄 Pages
+
+| Route | File | Description | Key Dependencies |
+|-------|------|-------------|------------------|
+| \`/\` | \`app/page.tsx\` | Landing page | - |
+
+---
+
+## 🧩 Components
+
+### Layout Components
+
+| Component | Location | Key Props | Used By |
+|-----------|----------|-----------|---------|
+| (none yet) | - | - | - |
+
+### Feature Components
+
+| Component | Location | Key Props | Used By |
+|-----------|----------|-----------|---------|
+| (none yet) | - | - | - |
+
+---
+
+## 🪝 Custom Hooks
+
+| Hook | Location | Purpose | Returns |
+|------|----------|---------|---------|
+| (none yet) | - | - | - |
+
+---
+
+## 🏪 Zustand Stores
+
+| Store | Location | State Shape | Key Actions |
+|-------|----------|-------------|-------------|
+| (none yet) | - | - | - |
+
+---
+
+## 🛠️ Utility Functions
+
+| Function | Location | Purpose | Params |
+|----------|----------|---------|--------|
+| cn | \`lib/utils.ts\` | Merge Tailwind classes | \`...inputs\` |
+
+---
+
+## 📊 Component Statistics
+
+| Category | Count |
+|----------|-------|
+| Pages | 1 |
+| Components | 0 |
+| Hooks | 0 |
+| Stores | 0 |
+
+---
+*Last updated: ${timestamp}*
+`;
+
   // Write files
   await fs.writeFile(join(memoryDir, 'active.md'), activeContent);
   await fs.writeFile(join(memoryDir, 'summary.md'), summaryContent);
   await fs.writeFile(join(memoryDir, 'decisions.md'), decisionsContent);
+  await fs.writeFile(join(memoryDir, 'architecture.md'), architectureContent);
+  await fs.writeFile(join(memoryDir, 'components.md'), componentsContent);
 }
 
 /**

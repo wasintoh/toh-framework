@@ -33,11 +33,40 @@ Toh Framework enables you to:
 - 👀 **See results instantly** - No waiting, no answering questions
 - 🚀 **Production-ready** - Not just a prototype
 
-## 🆕 What's New in v1.6.0
+## 🆕 What's New in v1.7.0
 
-### 🤖 Claude Code Sub-Agents
+### 🏗️ Code Architecture Tracking
 
-7 native sub-agents for Claude Code's Task delegation feature:
+AI now remembers your project structure instantly:
+
+| Memory File | Purpose |
+|-------------|---------|
+| `architecture.md` | Project structure, routes, data flow |
+| `components.md` | Component registry with props |
+
+**Benefits:**
+- No more scanning codebase every session
+- AI knows where everything is
+- 5 memory files (was 3), ~3,000 tokens
+
+### 🔐 Security Engineer System
+
+New security-first approach for AI-generated code:
+
+```bash
+# Full security audit
+/toh-protect
+
+# Quick checks built into /toh-dev and /toh-test
+/toh-dev add payment form  # → Security check before & after
+/toh-test                  # → Security check before testing
+```
+
+**Security Checks:**
+- Level 1 (Quick): Secrets, dangerous code, auth issues
+- Level 2 (Full): Injection, auth flaws, AI risks, config
+
+### 🤖 7 Sub-Agents
 
 | Agent | Specialty |
 |-------|-----------|
@@ -62,46 +91,10 @@ Toh Framework enables you to:
 ├── 2. ui-builder → Create all pages + components
 ├── 3. dev-builder → Add state + forms + API
 ├── 4. design-reviewer → Polish to professional
-└── 5. test-runner → Test until pass
+├── 5. test-runner → Test until pass
+└── 6. security-check → Audit before deploy [NEW]
 
 🚀 Executing...
-```
-
-### 🎨 Vibe Mode
-
-**`/toh-vibe`** - Full project creation as orchestration pattern:
-
-```
-/toh-vibe → plan → ui → dev → design → test → ✅ Working App
-```
-
-One command, complete application with:
-- ✅ 5+ pages (Home, Dashboard, Feature, Settings, Auth)
-- ✅ Full logic and state management
-- ✅ Realistic mock data
-- ✅ Professional design with animations
-- ✅ All tests passing
-
-### 📦 Dual Architecture
-
-| IDE | Folder | Format |
-|-----|--------|--------|
-| Claude Code | `.claude/` | Native (tools, model) |
-| Others | `.toh/` | Original (type, skills) |
-
-Both contain identical capabilities - fully synced on install!
-
-### 👁️ Full Visibility
-
-See exactly which agent does what:
-
-```
-🤖 Agent: ui-builder
-📚 Skills: ui-first-builder, design-mastery, premium-experience
-💾 Memory: Loaded ✅
-
-✅ Created: src/app/dashboard/page.tsx
-✅ Created: src/components/stats-card.tsx
 ```
 
 ---
@@ -183,6 +176,9 @@ claude .
 # Test system
 /toh-test
 
+# Security audit
+/toh-protect
+
 # Deploy
 /toh-ship
 ```
@@ -220,6 +216,7 @@ gemini
 | `/toh-dev` | `/toh-d` | ⚙️ **Add Logic** - TypeScript, Zustand, Forms |
 | `/toh-design` | `/toh-ds` | ✨ **Polish Design** - Professional, not AI-looking |
 | `/toh-test` | `/toh-t` | 🧪 **Test** - Auto test & fix until pass |
+| `/toh-protect` | `/toh-pt` | 🔐 **Security Audit** - Full security check `[NEW]` |
 | `/toh-connect` | `/toh-c` | 🔌 **Connect Backend** - Supabase, Auth, RLS |
 | `/toh-line` | `/toh-l` | 💚 **LINE Mini App** - LIFF integration |
 | `/toh-mobile` | `/toh-m` | 📱 **Mobile App** - Expo / React Native |
@@ -263,6 +260,7 @@ Orchestrator:
 ├── ⚙️ dev-builder → Add logic
 ├── ✨ design-reviewer → Polish design
 ├── 🧪 test-runner → Test & fix
+├── 🔐 security-check → Audit code [NEW]
 └── ✅ Deliver working system!
 ```
 
@@ -300,8 +298,8 @@ Orchestrator:
 ## 📊 Framework Stats
 
 - 🤖 **7 Sub-Agents** - Specialized for different tasks
-- 🎯 **14 Commands** - From planning to deployment
-- 📚 **23 Skills** - Comprehensive AI capabilities
+- 🎯 **15 Commands** - From planning to deployment `[NEW: /toh-protect]`
+- 📚 **24 Skills** - Comprehensive AI capabilities `[NEW: Security Engineer]`
 - 🎨 **13 Design Profiles** - Business-appropriate design
 - 📦 **15 Component Templates** - Ready-to-use premium components
 - 🌐 **5 IDEs** - Claude Code, Cursor, Antigravity, Gemini, Codex

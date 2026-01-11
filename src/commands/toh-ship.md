@@ -17,11 +17,14 @@ trigger: /toh-ship or /toh-s
 ## What Happens
 
 ```
-0. 🚨 READ MEMORY (MANDATORY!)
-   ├── .toh/memory/active.md
-   ├── .toh/memory/summary.md
-   └── .toh/memory/decisions.md
-   (Check project info + required env vars)
+0. 🚨 READ MEMORY (MANDATORY - ALL 7 FILES!)
+   ├── .toh/memory/active.md      (current task)
+   ├── .toh/memory/summary.md     (project overview)
+   ├── .toh/memory/decisions.md   (past decisions)
+   ├── .toh/memory/changelog.md   (session changes)
+   ├── .toh/memory/agents-log.md  (agent activity)
+   ├── .toh/memory/architecture.md (project structure)
+   └── .toh/memory/components.md  (existing components)
 
 1. PRE-FLIGHT Checks
    ├── npm run build (must pass)
@@ -46,7 +49,9 @@ trigger: /toh-ship or /toh-s
 
 5. 🚨 SAVE MEMORY (MANDATORY!)
    ├── Update active.md (deployed URL)
-   ├── Add to decisions.md (deployment config)
+   ├── Update changelog.md (deployment)
+   ├── Update agents-log.md (agent activity)
+   ├── Update decisions.md (deployment config)
    └── Update summary.md (production URL)
 ```
 

@@ -25,12 +25,14 @@ const packageJson = JSON.parse(readFileSync(packagePath, 'utf8'));
 
 const program = new Command();
 
-// ASCII Art Banner
+// ASCII Art Banner - Box width: 62 (║ + 60 content + ║)
+const versionStr = `v${packageJson.version}`;
+const line1Padding = ' '.repeat(Math.max(0, 44 - versionStr.length));
 const banner = `
 ${chalk.cyan('╔════════════════════════════════════════════════════════════╗')}
-${chalk.cyan('║')}  ${chalk.bold.white('🎯 Toh Framework')} ${chalk.gray(`v${packageJson.version}`)}                              ${chalk.cyan('║')}
+${chalk.cyan('║')}  ${chalk.bold.white('Toh Framework')} ${chalk.gray(versionStr)}${line1Padding}${chalk.cyan('║')}
 ${chalk.cyan('║')}  ${chalk.yellow('AI-Orchestration Driven Development')}                       ${chalk.cyan('║')}
-${chalk.cyan('║')}  ${chalk.green('"Type Once, Have it all."')}                                    ${chalk.cyan('║')}
+${chalk.cyan('║')}  ${chalk.green('"Type Once, Have it all."')}                                 ${chalk.cyan('║')}
 ${chalk.cyan('╚════════════════════════════════════════════════════════════╝')}
 `;
 

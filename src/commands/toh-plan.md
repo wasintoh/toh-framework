@@ -1,4 +1,4 @@
-# 🧠 /toh-plan - The Brain Command v2.0
+# 🧠 /toh-plan - The Brain Command v2.1
 
 > Command for planning + conversing with User + orchestrating Agents
 > The smartest among all Commands
@@ -264,6 +264,62 @@ AI:
 
 ---
 
+## 📊 Enhanced Planning Output Format (MUST SHOW!)
+
+When presenting a plan, use this structured format:
+
+```markdown
+## 📋 Development Plan: [Feature/Project Name]
+
+### 🎯 Analysis Summary
+
+**Request:** [User's request]
+**Business Type:** [SaaS / E-commerce / etc.]
+**Complexity:** [Low / Medium / High]
+**Estimated Time:** [X minutes]
+
+### 📊 Phase Breakdown
+
+| Phase | Agents | Type | Dependencies | Est. Time |
+|-------|--------|------|--------------|-----------|
+| 1 | 🎨 UI | Sequential | None | 3 min |
+| 2 | ⚙️ Dev + 🔌 Backend | PARALLEL | Phase 1 | 5 min |
+| 3 | ✨ Design + 🧪 Test | PARALLEL | Phase 2 | 2 min |
+
+### 🤖 Agent Assignments
+
+**Phase 1: Foundation**
+| Agent | Task | Output |
+|-------|------|--------|
+| 🎨 UI Builder | Create Dashboard + Forms | `/app/page.tsx`, `/app/[feature]/` |
+
+**Phase 2: Logic & Data**
+| Agent | Task | Output |
+|-------|------|--------|
+| ⚙️ Dev Builder | State management + Types | `/stores/`, `/types/` |
+| 🔌 Backend | Database schema | Supabase tables |
+
+**Phase 3: Polish & Verify**
+| Agent | Task | Output |
+|-------|------|--------|
+| ✨ Design | Animation + UX polish | Updated components |
+| 🧪 Test | Build verification | Zero errors |
+
+### 🔄 Execution Flow
+
+```text
+[🎨 UI] ──▶ [⚙️ Dev + 🔌 Backend] ──▶ [✨ Design + 🧪 Test]
+ Phase 1         PARALLEL               PARALLEL
+```
+
+### ⏱️ Total: 3 phases, 5 agents, ~10 minutes
+
+---
+👉 Type "Go" to start, or adjust the plan
+```
+
+---
+
 ## 🎨 UI First Priority
 
 **Very Important!** In every Phase:
@@ -281,24 +337,33 @@ AI:
 
 ---
 
-## 🔄 Memory Integration
+## 🔄 Memory Integration (7 Files)
 
-```
+```text
 🚨 MANDATORY - Must do every time!
 
-BEFORE Planning (Selective Read):
-├── Read .toh/memory/active.md (~500 tokens)
-├── Read .toh/memory/summary.md (~1,000 tokens)
-└── Read .toh/memory/decisions.md (~500 tokens)
-⚠️ Do NOT read archive/ at this stage!
+BEFORE Planning (Read ALL 7 files):
+├── .toh/memory/active.md      (current task)
+├── .toh/memory/summary.md     (project overview)
+├── .toh/memory/decisions.md   (past decisions)
+├── .toh/memory/changelog.md   (session changes)
+├── .toh/memory/agents-log.md  (agent activity)
+├── .toh/memory/architecture.md (project structure)
+└── .toh/memory/components.md  (existing components)
 
-AFTER Each Phase (Save):
+AFTER Each Phase (Save relevant files):
 ├── Update active.md (completed work)
+├── Update agents-log.md (agent activity)
+├── Update changelog.md (changes made)
 └── Confirm: "✅ Memory saved"
 
-AFTER Complete (Full Save):
+AFTER Complete (Full Save - all 7 files):
 ├── Update summary.md (features created)
 ├── Update decisions.md (new decisions)
+├── Update architecture.md (new structure)
+├── Update components.md (new components)
+├── Update changelog.md (full session log)
+├── Update agents-log.md (final agent summary)
 └── Update active.md (next steps)
 
 ⚠️ Never finish without saving memory!

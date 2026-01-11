@@ -41,11 +41,14 @@ skills:
 ## What Happens
 
 ```
-0. 🚨 READ MEMORY (MANDATORY!)
-   ├── .toh/memory/active.md
-   ├── .toh/memory/summary.md
-   ├── .toh/memory/decisions.md
-   └── .toh/memory/debug-log.md (ถ้ามี - ดูว่าลองอะไรไปแล้ว)
+0. 🚨 READ MEMORY (MANDATORY - ALL 7 FILES!)
+   ├── .toh/memory/active.md      (current task)
+   ├── .toh/memory/summary.md     (project overview)
+   ├── .toh/memory/decisions.md   (past decisions)
+   ├── .toh/memory/changelog.md   (session changes - check debug attempts)
+   ├── .toh/memory/agents-log.md  (agent activity)
+   ├── .toh/memory/architecture.md (project structure)
+   └── .toh/memory/components.md  (existing components)
 
 1. REPRODUCE (ทำซ้ำปัญหา)
    ├── ถาม URL / หน้าที่เกิดปัญหา
@@ -63,7 +66,7 @@ skills:
 
 4. FIX (แก้ไข - 1 อย่างต่อ 1 attempt)
    ├── แก้ทีละจุด ไม่แก้หลายอย่างพร้อมกัน
-   ├── บันทึกลง debug-log.md
+   ├── บันทึกลง changelog.md
    └── อธิบายว่าแก้อะไร ทำไม
 
 5. VERIFY (ตรวจสอบ)
@@ -73,9 +76,10 @@ skills:
    └── ถ้ายังมี → กลับไป Step 2 (Attempt +1)
 
 6. 🚨 SAVE MEMORY (MANDATORY!)
-   ├── Update active.md
-   ├── Update debug-log.md (ผลการแก้)
-   └── Update decisions.md (ถ้าเป็น important fix)
+   ├── Update active.md (current state)
+   ├── Update changelog.md (debug attempts + results)
+   ├── Update agents-log.md (agent activity)
+   └── Update decisions.md (if important fix)
 ```
 
 ## Example Prompts
@@ -138,7 +142,7 @@ skills:
 ## Rules
 
 1. **ALWAYS** explain root cause before fixing
-2. **ALWAYS** track attempts in debug-log.md
+2. **ALWAYS** track attempts in changelog.md
 3. **ALWAYS** verify fix works before reporting
 4. **ALWAYS** follow 3-5-Rewrite Rule
 5. **NEVER** guess & retry in loops
@@ -150,7 +154,7 @@ skills:
 เมื่อ User สลับ AI ใน IDE:
 
 ```markdown
-1. อ่าน .toh/memory/debug-log.md ก่อน!
+1. อ่าน .toh/memory/changelog.md ก่อน!
 
 2. บอก User:
    "เห็นว่าลองแก้ [ปัญหา] มา [N] รอบแล้ว
@@ -161,29 +165,25 @@ skills:
    "ลองมา 5 รอบแล้วครับ แนะนำให้ลบแล้วเขียนใหม่"
 ```
 
-## Debug Log Template
+## Debug Tracking in changelog.md
 
-สร้าง `.toh/memory/debug-log.md`:
+Track debug attempts in `.toh/memory/changelog.md`:
 
 ```markdown
-# 🐛 Debug Log
+## [Debug Session] - YYYY-MM-DD
 
-## Current Issue
-**Problem:** scroll เกินหน้าจอ
+### 🐛 Issue: [Problem description]
 **Page:** /settings/chatbot
 **Status:** 🔴 In Progress
 
-## Attempts
+### Debug Attempts
 
-### Attempt 1 - Claude Code
-- **Hypothesis:** h-screen + padding ทำให้เกิน
-- **Action:** เปลี่ยนเป็น min-h-screen
-- **Result:** ❌ ยังมีปัญหา
-- **Learning:** ไม่ใช่แค่ height ของ container
+| # | Agent | Hypothesis | Action | Result |
+|---|-------|------------|--------|--------|
+| 1 | Claude Code | h-screen + padding issue | Changed to min-h-screen | ❌ Still broken |
+| 2 | Cursor | flex container overflow | Added overflow-hidden | ❌ Still broken |
+| 3 | Gemini | ... | ... | ✅ Fixed! |
 
-### Attempt 2 - Cursor
-- **Hypothesis:** flex container ไม่มี overflow
-- **Action:** เพิ่ม overflow-hidden
-- **Result:** ❌ ยังมีปัญหา
-...
+### Resolution
+[What finally fixed it and why]
 ```

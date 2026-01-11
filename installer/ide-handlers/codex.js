@@ -168,11 +168,47 @@ User Action → Component → Zustand Store → API/Lib → Database (Supabase)
 *Last updated: ${timestamp}*
 `;
 
+  // changelog.md (v1.8.0 - Session Changelog)
+  const changelogContent = `# 📝 Session Changelog
+
+## [Current Session] - ${timestamp}
+
+### Changes Made
+| Agent | Action | File/Component |
+|-------|--------|----------------|
+| - | - | - |
+
+### Next Session TODO
+- [ ] Continue from: [last task]
+
+---
+*Auto-updated by agents after each task*
+`;
+
+  // agents-log.md (v1.8.0 - Agent Activity Log)
+  const agentsLogContent = `# 🤖 Agents Activity Log
+
+## Recent Activity
+| Time | Agent | Task | Status | Files |
+|------|-------|------|--------|-------|
+| - | - | - | - | - |
+
+## Agent Statistics
+- Total Tasks: 0
+- Success Rate: 100%
+
+---
+*Auto-updated by agents during execution*
+`;
+
+  // Write all 7 memory files (v1.8.0)
   await fs.writeFile(path.join(memoryDir, 'active.md'), activeContent);
   await fs.writeFile(path.join(memoryDir, 'summary.md'), summaryContent);
   await fs.writeFile(path.join(memoryDir, 'decisions.md'), decisionsContent);
   await fs.writeFile(path.join(memoryDir, 'architecture.md'), architectureContent);
   await fs.writeFile(path.join(memoryDir, 'components.md'), componentsContent);
+  await fs.writeFile(path.join(memoryDir, 'changelog.md'), changelogContent);
+  await fs.writeFile(path.join(memoryDir, 'agents-log.md'), agentsLogContent);
 }
 
 export async function setupCodex(targetDir, srcDir, language = 'en') {

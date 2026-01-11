@@ -28,11 +28,14 @@ User: /toh-protect
 +-------------------------------------------------------------+
 |  SECURITY AUDIT                                             |
 +-------------------------------------------------------------+
-|  0. READ MEMORY (MANDATORY!)                                |
-|     |- .toh/memory/active.md                                |
-|     |- .toh/memory/summary.md                               |
-|     |- .toh/memory/architecture.md                          |
-|     +- .toh/memory/components.md                            |
+|  0. READ MEMORY (MANDATORY - ALL 7 FILES!)                  |
+|     |- .toh/memory/active.md      (current task)            |
+|     |- .toh/memory/summary.md     (project overview)        |
+|     |- .toh/memory/decisions.md   (past decisions)          |
+|     |- .toh/memory/changelog.md   (session changes)         |
+|     |- .toh/memory/agents-log.md  (agent activity)          |
+|     |- .toh/memory/architecture.md (project structure)      |
+|     +- .toh/memory/components.md  (existing components)     |
 |                                                             |
 |  1. READ Skills                                             |
 |     +- ~/.toh/skills/security-engineer/SKILL.md             |

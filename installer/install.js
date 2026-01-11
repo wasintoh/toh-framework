@@ -109,7 +109,7 @@ export async function install(options) {
     await installComponent('templates', config.targetDir);
   }
 
-  // Setup Memory folder (v1.7.0 - 5 files)
+  // Setup Memory folder (v1.8.0 - 7 files)
   await setupMemoryFolder(config.targetDir);
 
   // Setup IDEs
@@ -323,62 +323,68 @@ async function generateManifest(config) {
 }
 
 async function setupMemoryFolder(targetDir) {
-  const spinner = ora('Setting up Memory System...').start();
-  
+  const spinner = ora('Setting up Memory System (7 files)...').start();
+
   const memoryDir = join(targetDir, '.toh', 'memory');
   const archiveDir = join(memoryDir, 'archive');
-  
+  const today = new Date().toISOString().split('T')[0];
+
   try {
     // Create memory directories
     await fs.ensureDir(memoryDir);
     await fs.ensureDir(archiveDir);
-    
-    // Create initial memory files (empty templates)
+
+    // ============================================
+    // v1.8.0: Enhanced Memory System (7 Files)
+    // ============================================
+
+    // 1. active.md - Current task status (~500 tokens)
     const activeTemplate = `# 🔥 Active Task
 
 ## Current Work
-[ยังไม่มีงาน - รอคำสั่งจาก User]
+[No active task - Waiting for user command]
 
 ## Last Action
-[ยังไม่มี]
+[None]
 
 ## Next Steps
-- รอคำสั่งจาก User
+- Waiting for user command
 
 ## Blockers
-[ไม่มี]
+[None]
 
 ---
-Updated: ${new Date().toISOString()}
+*Updated: ${new Date().toISOString()}*
 `;
 
+    // 2. summary.md - Project overview (~1,000 tokens)
     const summaryTemplate = `# 📋 Project Summary
 
 ## Project Info
-- **Name:** [ยังไม่ได้ระบุ]
-- **Type:** [ยังไม่ได้ระบุ]
+- **Name:** [Not specified]
+- **Type:** [Not specified]
 - **Stack:** Next.js 14 + Tailwind + shadcn/ui + Zustand + Supabase
-- **Language:** th
 
 ## Completed Features
-[ยังไม่มี]
+[None yet]
 
 ## In Progress
-[ยังไม่มี]
+[None yet]
 
 ## Project Structure
-[จะอัพเดทเมื่อเริ่มโปรเจค]
+[Will be updated when project starts]
 
 ---
-Updated: ${new Date().toISOString()}
+*Updated: ${new Date().toISOString()}*
 `;
 
+    // 3. decisions.md - Key decisions (~500 tokens)
     const decisionsTemplate = `# 🧠 Key Decisions
 
 ## Architecture Decisions
 | Date | Decision | Reason |
 |------|----------|--------|
-| ${new Date().toISOString().split('T')[0]} | ใช้ Toh Framework v${VERSION} | AI-Orchestration Driven Development |
+| ${today} | Use Toh Framework v${VERSION} | AI-Orchestration Driven Development |
 
 ## Design Decisions
 | Date | Decision | Reason |
@@ -389,87 +395,167 @@ Updated: ${new Date().toISOString()}
 |------|----------|--------|
 
 ---
-Updated: ${new Date().toISOString()}
+*Updated: ${new Date().toISOString()}*
 `;
 
+    // 4. changelog.md - Session changes (~300 tokens) - NEW in v1.8.0
+    const changelogTemplate = `# 📝 Session Changelog
+
+## [Current Session] - ${today}
+
+### Changes Made
+| Agent | Action | File/Component |
+|-------|--------|----------------|
+| - | - | - |
+
+### Next Session TODO
+- [ ] Continue from: [last task]
+
+---
+*Auto-updated by agents after each task*
+`;
+
+    // 5. agents-log.md - Agent activity (~300 tokens) - NEW in v1.8.0
+    const agentsLogTemplate = `# 🤖 Agents Activity Log
+
+## Recent Activity
+| Time | Agent | Task | Status | Files |
+|------|-------|------|--------|-------|
+| - | - | - | - | - |
+
+## Agent Statistics
+- Total Tasks: 0
+- Success Rate: 100%
+
+---
+*Auto-updated by agents during execution*
+`;
+
+    // 6. architecture.md - Code structure (~500 tokens) - v1.8.0
+    const architectureTemplate = `# 🏗️ Code Architecture
+
+## Directory Structure
+\`\`\`
+[Will be auto-generated when project starts]
+\`\`\`
+
+## Key Files
+| File | Purpose | Dependencies |
+|------|---------|--------------|
+| - | - | - |
+
+## Data Flow
+[Will be documented as features are built]
+
+---
+*Last updated: ${today}*
+`;
+
+    // 7. components.md - Component registry (~500 tokens) - v1.8.0
+    const componentsTemplate = `# 🧩 Component Registry
+
+## UI Components
+| Component | Path | Props | Used In |
+|-----------|------|-------|---------|
+| - | - | - | - |
+
+## Stores (Zustand)
+| Store | Path | State Shape |
+|-------|------|-------------|
+| - | - | - |
+
+## API Routes
+| Route | Method | Purpose |
+|-------|--------|---------|
+| - | - | - |
+
+## Custom Hooks
+| Hook | Path | Purpose |
+|------|------|---------|
+| - | - | - |
+
+---
+*Last updated: ${today}*
+`;
+
+    // Write all 7 memory files
     await fs.writeFile(join(memoryDir, 'active.md'), activeTemplate);
     await fs.writeFile(join(memoryDir, 'summary.md'), summaryTemplate);
     await fs.writeFile(join(memoryDir, 'decisions.md'), decisionsTemplate);
-    
-    spinner.succeed('Memory System ready (.toh/memory/)');
+    await fs.writeFile(join(memoryDir, 'changelog.md'), changelogTemplate);
+    await fs.writeFile(join(memoryDir, 'agents-log.md'), agentsLogTemplate);
+    await fs.writeFile(join(memoryDir, 'architecture.md'), architectureTemplate);
+    await fs.writeFile(join(memoryDir, 'components.md'), componentsTemplate);
+
+    spinner.succeed('Memory System ready - 7 files (.toh/memory/)');
   } catch (error) {
     spinner.fail(`Failed to setup Memory System: ${error.message}`);
   }
 }
 
 function printNextSteps(config) {
-  const isEN = config.language === 'en';
-  
-  console.log(chalk.cyan('┌────────────────────────────────────────────────────────────┐'));
-  console.log(chalk.cyan('│') + chalk.bold.white(`  🎉 Toh Framework v${VERSION} Installed!`.padEnd(59)) + chalk.cyan('│'));
-  console.log(chalk.cyan('├────────────────────────────────────────────────────────────┤'));
-  
+  // Box width: 62 (│ + 60 content + │)
+  const W = 60;
+  const pad = (s) => s.padEnd(W);
+  const row = (content) => chalk.cyan('│') + content + chalk.cyan('│');
+  const top = chalk.cyan('┌' + '─'.repeat(W) + '┐');
+  const mid = chalk.cyan('├' + '─'.repeat(W) + '┤');
+  const bot = chalk.cyan('└' + '─'.repeat(W) + '┘');
+  const empty = row(' '.repeat(W));
+
+  console.log(top);
+  console.log(row(chalk.bold.white(pad(`  Toh Framework v${VERSION} Installed!`))));
+  console.log(mid);
+
   if (config.ides.includes('claude') || config.ides.includes('claude-code')) {
-    console.log(chalk.cyan('│') + chalk.white('  Claude Code:                                             ') + chalk.cyan('│'));
-    if (isEN) {
-      console.log(chalk.cyan('│') + chalk.green('    /toh-plan') + chalk.gray(' - 🧠 Plan and orchestrate tasks        ') + chalk.cyan('│'));
-      console.log(chalk.cyan('│') + chalk.green('    /toh-vibe') + chalk.gray(' - 🎨 Create new project                ') + chalk.cyan('│'));
-      console.log(chalk.cyan('│') + chalk.green('    /toh-help') + chalk.gray(' - 📚 Show all commands                 ') + chalk.cyan('│'));
-    } else {
-      console.log(chalk.cyan('│') + chalk.green('    /toh-plan') + chalk.gray(' - 🧠 วางแผนและ orchestrate งาน       ') + chalk.cyan('│'));
-      console.log(chalk.cyan('│') + chalk.green('    /toh-vibe') + chalk.gray(' - 🎨 เริ่มสร้างโปรเจคใหม่             ') + chalk.cyan('│'));
-      console.log(chalk.cyan('│') + chalk.green('    /toh-help') + chalk.gray(' - 📚 ดูรายการ commands ทั้งหมด       ') + chalk.cyan('│'));
-    }
-    console.log(chalk.cyan('│') + chalk.white('                                                           ') + chalk.cyan('│'));
+    console.log(row(chalk.white(pad('  Claude Code:'))));
+    // 13 chars green + 47 chars gray = 60
+    console.log(row(chalk.green('    /toh-plan') + chalk.gray(' - Plan and orchestrate tasks'.padEnd(47))));
+    console.log(row(chalk.green('    /toh-vibe') + chalk.gray(' - Create new project'.padEnd(47))));
+    console.log(row(chalk.green('    /toh-help') + chalk.gray(' - Show all commands'.padEnd(47))));
+    console.log(empty);
   }
-  
+
   if (config.ides.includes('cursor')) {
-    console.log(chalk.cyan('│') + chalk.white('  Cursor:                                                  ') + chalk.cyan('│'));
-    if (isEN) {
-      console.log(chalk.cyan('│') + chalk.green('    @toh') + chalk.gray('       - Call Toh agent                     ') + chalk.cyan('│'));
-    } else {
-      console.log(chalk.cyan('│') + chalk.green('    @toh') + chalk.gray('       - เรียก Toh agent                    ') + chalk.cyan('│'));
-    }
-    console.log(chalk.cyan('│') + chalk.white('                                                           ') + chalk.cyan('│'));
+    console.log(row(chalk.white(pad('  Cursor:'))));
+    // 13 chars green + 47 chars gray = 60
+    console.log(row(chalk.green('    /toh-plan') + chalk.gray(' - Plan and orchestrate tasks'.padEnd(47))));
+    console.log(row(chalk.green('    /toh-vibe') + chalk.gray(' - Create new project'.padEnd(47))));
+    console.log(row(chalk.green('    /toh-help') + chalk.gray(' - Show all commands'.padEnd(47))));
+    console.log(empty);
   }
-  
+
   if (config.ides.includes('gemini') || config.ides.includes('gemini-cli')) {
-    console.log(chalk.cyan('│') + chalk.white('  Gemini CLI / Google Antigravity:                         ') + chalk.cyan('│'));
-    if (isEN) {
-      console.log(chalk.cyan('│') + chalk.green('    gemini') + chalk.gray('     - Start Gemini CLI in project        ') + chalk.cyan('│'));
-      console.log(chalk.cyan('│') + chalk.green('    /toh-vibe') + chalk.gray('  - Create new project                  ') + chalk.cyan('│'));
-    } else {
-      console.log(chalk.cyan('│') + chalk.green('    gemini') + chalk.gray('     - Start Gemini CLI in project        ') + chalk.cyan('│'));
-      console.log(chalk.cyan('│') + chalk.green('    /toh-vibe') + chalk.gray('  - เริ่มสร้างโปรเจคใหม่                ') + chalk.cyan('│'));
-    }
-    console.log(chalk.cyan('│') + chalk.white('                                                           ') + chalk.cyan('│'));
+    console.log(row(chalk.white(pad('  Gemini CLI (Terminal):'))));
+    // 13 chars green + 47 chars gray = 60
+    console.log(row(chalk.green('    /toh:plan') + chalk.gray(' - Plan and orchestrate tasks'.padEnd(47))));
+    console.log(row(chalk.green('    /toh:vibe') + chalk.gray(' - Create new project'.padEnd(47))));
+    console.log(row(chalk.green('    /toh:help') + chalk.gray(' - Show all commands'.padEnd(47))));
+    console.log(empty);
+    console.log(row(chalk.white(pad('  Google Antigravity (IDE):'))));
+    // 13 chars green + 47 chars gray = 60
+    console.log(row(chalk.green('    /toh-plan') + chalk.gray(' - Plan and orchestrate tasks'.padEnd(47))));
+    console.log(row(chalk.green('    /toh-vibe') + chalk.gray(' - Create new project'.padEnd(47))));
+    console.log(row(chalk.green('    /toh-help') + chalk.gray(' - Show all commands'.padEnd(47))));
+    console.log(empty);
   }
-  
+
   if (config.ides.includes('codex') || config.ides.includes('codex-cli')) {
-    console.log(chalk.cyan('│') + chalk.white('  Codex CLI:                                               ') + chalk.cyan('│'));
-    if (isEN) {
-      console.log(chalk.cyan('│') + chalk.green('    codex') + chalk.gray('      - Start Codex CLI in project         ') + chalk.cyan('│'));
-      console.log(chalk.cyan('│') + chalk.green('    /toh-vibe') + chalk.gray('  - Create new project                  ') + chalk.cyan('│'));
-    } else {
-      console.log(chalk.cyan('│') + chalk.green('    codex') + chalk.gray('      - Start Codex CLI in project         ') + chalk.cyan('│'));
-      console.log(chalk.cyan('│') + chalk.green('    /toh-vibe') + chalk.gray('  - เริ่มสร้างโปรเจคใหม่                ') + chalk.cyan('│'));
-    }
-    console.log(chalk.cyan('│') + chalk.white('                                                           ') + chalk.cyan('│'));
+    console.log(row(chalk.white(pad('  Codex CLI:'))));
+    // 9 chars green + 51 chars gray = 60
+    console.log(row(chalk.green('    codex') + chalk.gray('     - Start Codex CLI in project'.padEnd(51))));
+    // 13 chars green + 47 chars gray = 60
+    console.log(row(chalk.green('    /toh-vibe') + chalk.gray(' - Create new project'.padEnd(47))));
+    console.log(empty);
   }
-  
-  console.log(chalk.cyan('│') + chalk.white('  Documentation:                                           ') + chalk.cyan('│'));
-  console.log(chalk.cyan('│') + chalk.blue('    https://github.com/wasintoh/toh-framework             ') + chalk.cyan('│'));
-  console.log(chalk.cyan('├────────────────────────────────────────────────────────────┤'));
-  console.log(chalk.cyan('│') + chalk.bold.yellow('  ✨ What\'s New:                                           ') + chalk.cyan('│'));
-  if (isEN) {
-    console.log(chalk.cyan('│') + chalk.white('  • 🤖 Claude Code Sub-Agents - Native Task delegation    ') + chalk.cyan('│'));
-    console.log(chalk.cyan('│') + chalk.white('  • 🔄 Multi-Agent Orchestration - /toh v4.0              ') + chalk.cyan('│'));
-    console.log(chalk.cyan('│') + chalk.white('  • 🎨 Vibe Mode - plan → ui → dev → design → test       ') + chalk.cyan('│'));
-  } else {
-    console.log(chalk.cyan('│') + chalk.white('  • 🤖 Claude Code Sub-Agents - Native delegation         ') + chalk.cyan('│'));
-    console.log(chalk.cyan('│') + chalk.white('  • 🔄 Multi-Agent Orchestration - /toh v4.0              ') + chalk.cyan('│'));
-    console.log(chalk.cyan('│') + chalk.white('  • 🎨 Vibe Mode - plan → ui → dev → design → test       ') + chalk.cyan('│'));
-  }
-  console.log(chalk.cyan('└────────────────────────────────────────────────────────────┘'));
+
+  console.log(row(chalk.white(pad('  Documentation:'))));
+  console.log(row(chalk.blue(pad('    https://github.com/wasintoh/toh-framework'))));
+  console.log(mid);
+  console.log(row(chalk.bold.yellow(pad("  What's New in v1.8.1:"))));
+  console.log(row(chalk.white(pad('  * Google Antigravity Workflows - Full support!'))));
+  console.log(row(chalk.white(pad('  * 7-File Memory System - changelog + agents-log'))));
+  console.log(row(chalk.white(pad('  * Agent Announcements - See which agent is working'))));
+  console.log(bot);
   console.log('');
 }

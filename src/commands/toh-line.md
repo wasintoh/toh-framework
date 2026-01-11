@@ -17,11 +17,14 @@ trigger: /toh-line or /toh-l
 ## What Happens
 
 ```
-0. 🚨 READ MEMORY (MANDATORY!)
-   ├── .toh/memory/active.md
-   ├── .toh/memory/summary.md
-   └── .toh/memory/decisions.md
-   (Check current project context)
+0. 🚨 READ MEMORY (MANDATORY - ALL 7 FILES!)
+   ├── .toh/memory/active.md      (current task)
+   ├── .toh/memory/summary.md     (project overview)
+   ├── .toh/memory/decisions.md   (past decisions)
+   ├── .toh/memory/changelog.md   (session changes)
+   ├── .toh/memory/agents-log.md  (agent activity)
+   ├── .toh/memory/architecture.md (project structure)
+   └── .toh/memory/components.md  (existing components)
 
 1. READ Skills
    └── ~/.claude/skills/platform-specialist/SKILL.md (LINE section)
@@ -48,9 +51,11 @@ trigger: /toh-line or /toh-l
    └── LIFF → Supabase custom auth
 
 6. 🚨 SAVE MEMORY (MANDATORY!)
-   ├── Update active.md
-   ├── Add to decisions.md (LINE config)
-   └── Update summary.md (LINE integration)
+   ├── Update active.md (current state)
+   ├── Update changelog.md (LINE setup)
+   ├── Update agents-log.md (agent activity)
+   ├── Update decisions.md (LINE config)
+   └── Update architecture.md (LIFF integration)
 ```
 
 ## Example Prompts

@@ -9,7 +9,7 @@ description: Display all Toh Framework commands and quick usage guide
 When user calls `/toh-help`, display the following:
 
 <help_response>
-## 🎯 Toh Framework v1.7.0
+## 🎯 Toh Framework v1.8.1
 
 **"Type anything, AI does it for you"** - AI-Orchestration Driven Development
 
@@ -73,15 +73,18 @@ When user calls `/toh-help`, display the following:
 
 ---
 
-### 💾 Memory System
+### 💾 Memory System (7 Files)
 
 ```
 .toh/memory/
-├── active.md      # Current task
-├── summary.md     # Project summary
-├── decisions.md   # Key decisions
-├── debug-log.md   # Debug tracking
-└── archive/       # Historical data
+├── active.md       # Current task
+├── summary.md      # Project summary
+├── decisions.md    # Key decisions
+├── changelog.md    # Session changes
+├── agents-log.md   # Agent activity
+├── architecture.md # Project structure
+├── components.md   # Component registry
+└── archive/        # Historical data
 ```
 
 ---
@@ -130,7 +133,7 @@ Every response from Toh includes:
 
 ### 📊 Framework Stats
 
-- 🤖 **7 Sub-Agents** - UI, Dev, Design, Test, Connect, Plan, Platform
+- 🤖 **7 Sub-Agents v2.1** - UI, Dev, Design, Test, Connect, Plan, Platform
 - 🎯 **15 Commands** - Including `/toh` smart command & `/toh-protect`
 - 📚 **24 Skills** - Including Security Engineer
 - 🎨 **13 Design Profiles** - Business-appropriate design
@@ -139,13 +142,13 @@ Every response from Toh includes:
 
 ---
 
-### 🆕 What's New in v1.7.0
+### 🆕 What's New in v1.8.1
 
-- 🏗️ **Code Architecture Tracking** - `architecture.md` + `components.md` for instant context
-- 🔐 **Security Engineer System** - `/toh-protect` for full security audit
-- 🔒 **Quick Security Checks** - Built into `/toh-dev` and `/toh-test`
-- 📚 **5 Memory Files** - Architecture tracking (was 3 files)
-- 🛡️ **Security Levels** - Quick (L1) + Full Audit (L2)
+- 🌐 **Google Antigravity Workflows** - Full support! Commands appear with `/` in Antigravity
+- 🧠 **7-File Memory System** - Added `changelog.md` + `agents-log.md` for better tracking
+- 📢 **Agent Announcements** - See which agent is working on what
+- ⚡ **Parallel Execution** - Agents can work simultaneously when no dependencies
+- 🎯 **Agent Selection Reasoning** - See why AI chose specific agents
 
 ---
 
@@ -156,7 +159,7 @@ Every response from Toh includes:
 | Claude Code | `CLAUDE.md` |
 | Cursor | `.cursor/rules/*.mdc` |
 | Gemini CLI | `.gemini/GEMINI.md` |
-| Google Antigravity | `.gemini/GEMINI.md` |
+| Google Antigravity | `.agent/workflows/` |
 | Codex CLI | `AGENTS.md` |
 
 ---

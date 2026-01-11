@@ -1,7 +1,7 @@
-# /toh - Smart Orchestrator v4.0
+# /toh - Smart Orchestrator v4.1
 
-> **Version:** 4.0.0  
-> **Command:** `/toh [anything]`  
+> **Version:** 4.1.0
+> **Command:** `/toh [anything]`
 > **Philosophy:** Intelligent Multi-Agent Orchestration with Full Visibility
 
 ---
@@ -86,8 +86,14 @@ Files: /app/dashboard/page.tsx, /components/StatsCard.tsx
 │                    /toh [user request]                          │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  📋 PHASE 1: MEMORY & CONTEXT                                   │
-│  ├── Read .toh/memory/*.md                                      │
+│  📋 PHASE 1: MEMORY & CONTEXT (7 Files)                         │
+│  ├── Read .toh/memory/active.md (current task)                  │
+│  ├── Read .toh/memory/summary.md (project overview)             │
+│  ├── Read .toh/memory/decisions.md (past decisions)             │
+│  ├── Read .toh/memory/changelog.md (session changes)            │
+│  ├── Read .toh/memory/agents-log.md (agent activity)            │
+│  ├── Read .toh/memory/architecture.md (project structure)       │
+│  ├── Read .toh/memory/components.md (existing components)       │
 │  └── Build full project context                                 │
 │                                                                 │
 │  🧠 PHASE 2: INTELLIGENT ANALYSIS                               │
@@ -118,17 +124,64 @@ Files: /app/dashboard/page.tsx, /components/StatsCard.tsx
 
 ---
 
+## 🎯 Agent Selection Reasoning (MUST SHOW!)
+
+Before executing, display analysis and agent selection reasoning:
+
+```markdown
+## 🔍 Analysis
+
+**Request:** "{user_request}"
+
+### 🧠 Capability Detection
+
+| Detected Need | Capability | Best Agent | Confidence |
+|---------------|------------|------------|------------|
+| Create pages | UI Creation | 🎨 ui | 95% |
+| Add charts | Data Visualization | 🎨 ui + ⚙️ dev | 90% |
+| Connect database | Backend Integration | 🔌 connect | 95% |
+| Polish look | Design Enhancement | ✨ design | 85% |
+
+### 🎯 Agent Selection
+
+| Agent | Why Selected | Tasks Assigned |
+|-------|--------------|----------------|
+| 🎨 UI Builder | Need new pages + components | Dashboard, Charts |
+| ⚙️ Dev Builder | Need data logic + state | Chart data, hooks |
+| 🔌 Backend | Database connection needed | Supabase setup |
+| ✨ Design | Polish requested implicitly | Animations, UX |
+| 🧪 Test | Always required | Build verification |
+
+### 📋 Execution Strategy
+
+**Pattern:** Full Stack (Hybrid)
+**Reasoning:** UI + Dev can run parallel (no dependency), then Backend, Design, Test sequentially
+
+```text
+┌─────────────────────────────────────────┐
+│ [Phase 1] 🎨 UI + ⚙️ Dev    ← PARALLEL  │
+│ [Phase 2] 🔌 Backend        ← SEQUENTIAL│
+│ [Phase 3] ✨ Design         ← SEQUENTIAL│
+│ [Phase 4] 🧪 Test           ← FINAL     │
+└─────────────────────────────────────────┘
+```
+
+**Proceeding with this plan...**
+```
+
+---
+
 ## 🤖 Agent Roster
 
 > **Location:** `.claude/agents/` (Claude Code native format)
 
 | Agent ID | File | Specialty | Delegates To |
 |----------|------|-----------|--------------|
-| `plan` | `plan-orchestrator.md` | วิเคราะห์ วางแผน แบ่งงาน | ทุก Agent |
-| `ui` | `ui-builder.md` | สร้าง UI, Pages, Components | dev, design |
+| `plan` | `plan-orchestrator.md` | Analyze, plan, divide tasks | All Agents |
+| `ui` | `ui-builder.md` | Create UI, Pages, Components | dev, design |
 | `dev` | `dev-builder.md` | Logic, State, API calls | ui, connect |
-| `design` | `design-reviewer.md` | ความสวยงาม, UX, Animation | ui |
-| `test` | `test-runner.md` | ทดสอบ, หา bug, auto-fix | ทุก Agent |
+| `design` | `design-reviewer.md` | Visual polish, UX, Animation | ui |
+| `test` | `test-runner.md` | Testing, bug finding, auto-fix | All Agents |
 | `connect` | `backend-connector.md` | Supabase, Auth, Database | dev |
 | `platform` | `platform-adapter.md` | LINE, Mobile, Desktop | ui, dev |
 
@@ -639,14 +692,41 @@ Flow: [plan] ──▶ [ui + dev] ──▶ [connect] ──▶ [design] ──�
 
 ## ⚠️ Critical Rules
 
-1. **ALWAYS show Workflow Plan** - User ต้องเห็นว่า Agent ไหนจะทำอะไร
-2. **ALWAYS show Agent Status** - ระหว่างทำงานต้องบอกว่าใครทำอะไรอยู่
-3. **ALWAYS show Handoffs** - เมื่อเปลี่ยน Agent ต้องบอกชัดเจน
-4. **ALWAYS end with test** - ทุก workflow จบด้วย test agent
-5. **Parallel when possible** - ถ้าไม่มี dependency ให้ทำพร้อมกัน
-6. **Quality gate** - ตรวจสอบก่อนส่งต่อทุกครั้ง
-7. **Memory protocol** - อ่านก่อนทำ, บันทึกหลังเสร็จ
+1. **ALWAYS show Workflow Plan** - User must see which Agent does what
+2. **ALWAYS show Agent Status** - Show who is doing what during execution
+3. **ALWAYS show Handoffs** - Clearly announce when switching Agents
+4. **ALWAYS end with test** - Every workflow ends with test agent
+5. **Parallel when possible** - Run agents in parallel if no dependencies
+6. **Quality gate** - Verify before handoff every time
+7. **Memory protocol** - Read all 7 files before work, update relevant files after
 
 ---
 
-*Version 4.0.0 - Intelligent Multi-Agent Orchestration with Full Visibility*
+## 📁 Memory Protocol (7 Files - MANDATORY)
+
+### BEFORE Work
+
+Read ALL 7 memory files:
+
+```text
+.toh/memory/
+├── active.md      (current task)
+├── summary.md     (project overview)
+├── decisions.md   (past decisions)
+├── changelog.md   (session changes)
+├── agents-log.md  (agent activity)
+├── architecture.md (project structure)
+└── components.md  (existing components)
+```
+
+### AFTER Work
+
+Update relevant files based on changes:
+
+- Code changes → architecture.md + components.md
+- Decisions made → decisions.md
+- Task completion → active.md + changelog.md + agents-log.md
+
+---
+
+*Version 4.1.0 - Intelligent Multi-Agent Orchestration with Full Visibility*

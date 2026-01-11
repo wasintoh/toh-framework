@@ -17,11 +17,14 @@ trigger: /toh-design or /toh-ds
 ## What Happens
 
 ```
-0. 🚨 READ MEMORY (MANDATORY!)
-   ├── .toh/memory/active.md
-   ├── .toh/memory/summary.md
-   └── .toh/memory/decisions.md
-   (If doesn't exist → Create new)
+0. 🚨 READ MEMORY (MANDATORY - ALL 7 FILES!)
+   ├── .toh/memory/active.md      (current task)
+   ├── .toh/memory/summary.md     (project overview)
+   ├── .toh/memory/decisions.md   (past decisions)
+   ├── .toh/memory/changelog.md   (session changes)
+   ├── .toh/memory/agents-log.md  (agent activity)
+   ├── .toh/memory/architecture.md (project structure)
+   └── .toh/memory/components.md  (existing components)
 
 1. READ Skills
    └── ~/.claude/skills/design-excellence/SKILL.md
@@ -43,9 +46,11 @@ trigger: /toh-design or /toh-ds
 4. REPORT Changes
 
 5. 🚨 SAVE MEMORY (MANDATORY!)
-   ├── Update active.md
-   ├── Add to decisions.md (design decisions)
-   └── Update summary.md
+   ├── Update active.md (current state)
+   ├── Update changelog.md (design changes)
+   ├── Update agents-log.md (agent activity)
+   ├── Update decisions.md (design decisions)
+   └── Update components.md (if UI changed)
 ```
 
 ## Example Prompts

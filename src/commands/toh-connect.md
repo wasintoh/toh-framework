@@ -17,11 +17,14 @@ trigger: /toh-connect or /toh-c
 ## What Happens
 
 ```
-0. 🚨 READ MEMORY (MANDATORY!)
-   ├── .toh/memory/active.md
-   ├── .toh/memory/summary.md
-   └── .toh/memory/decisions.md
-   (If doesn't exist → Create new)
+0. 🚨 READ MEMORY (MANDATORY - ALL 7 FILES!)
+   ├── .toh/memory/active.md      (current task)
+   ├── .toh/memory/summary.md     (project overview)
+   ├── .toh/memory/decisions.md   (past decisions)
+   ├── .toh/memory/changelog.md   (session changes)
+   ├── .toh/memory/agents-log.md  (agent activity)
+   ├── .toh/memory/architecture.md (project structure)
+   └── .toh/memory/components.md  (existing components)
 
 1. READ Skills
    └── ~/.claude/skills/backend-engineer/SKILL.md
@@ -48,9 +51,11 @@ trigger: /toh-connect or /toh-c
    └── .env.example with required vars
 
 6. 🚨 SAVE MEMORY (MANDATORY!)
-   ├── Update active.md
-   ├── Add to decisions.md (backend decisions)
-   └── Update summary.md
+   ├── Update active.md (current state)
+   ├── Update changelog.md (backend changes)
+   ├── Update agents-log.md (agent activity)
+   ├── Update decisions.md (backend decisions)
+   └── Update architecture.md (new services)
 ```
 
 ## Example Prompts

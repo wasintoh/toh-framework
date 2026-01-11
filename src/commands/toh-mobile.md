@@ -17,11 +17,14 @@ trigger: /toh-mobile or /toh-m
 ## What Happens
 
 ```
-0. 🚨 READ MEMORY (MANDATORY!)
-   ├── .toh/memory/active.md
-   ├── .toh/memory/summary.md
-   └── .toh/memory/decisions.md
-   (If doesn't exist → Will create after completion)
+0. 🚨 READ MEMORY (MANDATORY - ALL 7 FILES!)
+   ├── .toh/memory/active.md      (current task)
+   ├── .toh/memory/summary.md     (project overview)
+   ├── .toh/memory/decisions.md   (past decisions)
+   ├── .toh/memory/changelog.md   (session changes)
+   ├── .toh/memory/agents-log.md  (agent activity)
+   ├── .toh/memory/architecture.md (project structure)
+   └── .toh/memory/components.md  (existing components)
 
 1. READ Skills
    └── ~/.claude/skills/platform-specialist/SKILL.md (Expo section)
@@ -45,9 +48,11 @@ trigger: /toh-mobile or /toh-m
    └── npx expo start
 
 6. 🚨 SAVE MEMORY (MANDATORY!)
-   ├── Create .toh/memory/ folder (if doesn't exist)
-   ├── Update active.md, summary.md, decisions.md
-   └── Record project info + features created
+   ├── Update active.md (current state)
+   ├── Update changelog.md (mobile setup)
+   ├── Update agents-log.md (agent activity)
+   ├── Update architecture.md (Expo structure)
+   └── Update components.md (mobile screens)
 ```
 
 ## Example Prompts

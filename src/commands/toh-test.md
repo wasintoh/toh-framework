@@ -18,12 +18,14 @@ User: /toh-test test login page
 ┌─────────────────────────────────────────────────────┐
 │  🧪 Test Runner                                     │
 ├─────────────────────────────────────────────────────┤
-│  0. 🚨 READ MEMORY (MANDATORY!)                     │
-│     ├── .toh/memory/active.md                       │
-│     ├── .toh/memory/summary.md                      │
-│     ├── .toh/memory/decisions.md                    │
-│     ├── .toh/memory/architecture.md                 │
-│     └── .toh/memory/components.md                   │
+│  0. 🚨 READ MEMORY (MANDATORY - ALL 7 FILES!)       │
+│     ├── .toh/memory/active.md      (current task)   │
+│     ├── .toh/memory/summary.md     (project)        │
+│     ├── .toh/memory/decisions.md   (decisions)      │
+│     ├── .toh/memory/changelog.md   (changes)        │
+│     ├── .toh/memory/agents-log.md  (agents)         │
+│     ├── .toh/memory/architecture.md (structure)     │
+│     └── .toh/memory/components.md  (components)     │
 │                                                     │
 │  1. 🔐 QUICK SECURITY CHECK                         │
 │     ├── Scan for hardcoded secrets                  │
@@ -41,10 +43,11 @@ User: /toh-test test login page
 │                                                     │
 │  7. 🚨 SAVE MEMORY (MANDATORY!)                     │
 │     ├── Update active.md (test results)             │
-│     ├── Update architecture.md (if structure changed)│
-│     ├── Update components.md (if new components)    │
-│     ├── Add to decisions.md (if fixes made)         │
-│     └── Update summary.md                           │
+│     ├── Update changelog.md (test session)          │
+│     ├── Update agents-log.md (agent activity)       │
+│     ├── Update architecture.md (if changed)         │
+│     ├── Update components.md (if new)               │
+│     └── Update decisions.md (if fixes made)         │
 │                                                     │
 │  8. Summary of test results                         │
 └─────────────────────────────────────────────────────┘

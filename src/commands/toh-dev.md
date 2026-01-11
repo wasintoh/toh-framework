@@ -17,13 +17,14 @@ trigger: /toh-dev or /toh-d followed by description
 ## What Happens
 
 ```
-0. 🚨 READ MEMORY (MANDATORY!)
-   ├── .toh/memory/active.md
-   ├── .toh/memory/summary.md
-   ├── .toh/memory/decisions.md
-   ├── .toh/memory/architecture.md
-   └── .toh/memory/components.md
-   (If doesn't exist → Create new)
+0. 🚨 READ MEMORY (MANDATORY - ALL 7 FILES!)
+   ├── .toh/memory/active.md      (current task)
+   ├── .toh/memory/summary.md     (project overview)
+   ├── .toh/memory/decisions.md   (past decisions)
+   ├── .toh/memory/changelog.md   (session changes)
+   ├── .toh/memory/agents-log.md  (agent activity)
+   ├── .toh/memory/architecture.md (project structure)
+   └── .toh/memory/components.md  (existing components)
 
 1. READ Skills
    ├── ~/.toh/skills/dev-engineer/SKILL.md
@@ -57,11 +58,12 @@ trigger: /toh-dev or /toh-d followed by description
    └── If issues found → Fix before completing
 
 7. 🚨 SAVE MEMORY (MANDATORY!)
-   ├── Update active.md
+   ├── Update active.md (current state)
+   ├── Update changelog.md (dev changes)
+   ├── Update agents-log.md (agent activity)
    ├── Update architecture.md (if structure changed)
    ├── Update components.md (if new components/hooks)
-   ├── Add to decisions.md (if technical decisions made)
-   └── Update summary.md (if feature complete)
+   └── Update decisions.md (if technical decisions made)
 ```
 
 ## Example Prompts

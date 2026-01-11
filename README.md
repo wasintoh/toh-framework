@@ -33,40 +33,63 @@ Toh Framework enables you to:
 - 👀 **See results instantly** - No waiting, no answering questions
 - 🚀 **Production-ready** - Not just a prototype
 
-## 🆕 What's New in v1.7.0
+## 🆕 What's New in v1.8.1
 
-### 🏗️ Code Architecture Tracking
+### 🌐 Google Antigravity Workflows
 
-AI now remembers your project structure instantly:
+Full support for Google Antigravity IDE! Commands now appear when pressing `/`:
+
+- **13 workflow files** created in `.agent/workflows/`
+- Commands use **dash syntax** (`/toh-vibe`) in Antigravity
+- Separate from Gemini CLI which uses **colon syntax** (`/toh:vibe`)
+
+### 🧠 7-File Memory System
+
+Enhanced memory tracking with 2 new files:
 
 | Memory File | Purpose |
 |-------------|---------|
-| `architecture.md` | Project structure, routes, data flow |
-| `components.md` | Component registry with props |
+| `active.md` | Current task |
+| `summary.md` | Project overview |
+| `decisions.md` | Key decisions |
+| `changelog.md` | **NEW!** Session changes |
+| `agents-log.md` | **NEW!** Agent activity log |
+| `architecture.md` | Project structure |
+| `components.md` | Component registry |
 
-**Benefits:**
-- No more scanning codebase every session
-- AI knows where everything is
-- 5 memory files (was 3), ~3,000 tokens
+### 📢 Agent Announcements
 
-### 🔐 Security Engineer System
+All agents now announce themselves when working:
 
-New security-first approach for AI-generated code:
-
-```bash
-# Full security audit
-/toh-protect
-
-# Quick checks built into /toh-dev and /toh-test
-/toh-dev add payment form  # → Security check before & after
-/toh-test                  # → Security check before testing
+```
+[🎨 UI Builder] Starting: Create Dashboard Page
+[🎨 UI Builder] ✅ Complete: Dashboard with 3 components
 ```
 
-**Security Checks:**
-- Level 1 (Quick): Secrets, dangerous code, auth issues
-- Level 2 (Full): Injection, auth flaws, AI risks, config
+### ⚡ Parallel Execution
 
-### 🤖 7 Sub-Agents
+Agents can now work simultaneously when there are no dependencies:
+
+```
+Phase 1: [🎨 UI] + [⚙️ Dev]    ← PARALLEL
+Phase 2: [🔌 Backend]          ← SEQUENTIAL
+Phase 3: [✨ Design] + [🧪 Test] ← PARALLEL
+```
+
+### 🎯 Agent Selection Reasoning
+
+Before executing, see why AI chose specific agents:
+
+```
+🔍 Analysis:
+| Need | Agent | Confidence |
+|------|-------|------------|
+| Create pages | 🎨 UI | 95% |
+| Add logic | ⚙️ Dev | 90% |
+| Connect DB | 🔌 Connect | 95% |
+```
+
+### 🤖 7 Sub-Agents v2.1
 
 | Agent | Specialty |
 |-------|-----------|
@@ -78,24 +101,20 @@ New security-first approach for AI-generated code:
 | 🧠 **plan-orchestrator** | Analyze, Plan |
 | 📱 **platform-adapter** | LINE, Mobile, Desktop |
 
-### 🔄 Multi-Agent Orchestration
+### 📜 Previous Versions
 
-**`/toh` v4.0** - The Smart Command with full visibility:
+See [CHANGELOG.md](CHANGELOG.md) for complete version history.
 
-```bash
-/toh create a coffee shop management system
+**Recent highlights:**
 
-# AI shows you the plan:
-📋 Workflow Plan:
-├── 1. plan-orchestrator → Analyze requirements
-├── 2. ui-builder → Create all pages + components
-├── 3. dev-builder → Add state + forms + API
-├── 4. design-reviewer → Polish to professional
-├── 5. test-runner → Test until pass
-└── 6. security-check → Audit before deploy [NEW]
-
-🚀 Executing...
-```
+| Version | Date | Key Feature |
+|---------|------|-------------|
+| v1.8.0 | 2026-01-11 | 7-File Memory System, Agent Announcements |
+| v1.7.1 | 2026-01-11 | Gemini CLI Native Commands (TOML) |
+| v1.7.0 | 2025-12-26 | Security Engineer, `/toh-protect` command |
+| v1.6.0 | 2025-12-18 | Claude Code Sub-Agents, Multi-Agent Orchestration |
+| v1.5.0 | 2025-12-05 | Google Antigravity/Gemini Support |
+| v1.4.0 | 2025-12-04 | `/toh` Smart Command, Premium Experience |
 
 ---
 

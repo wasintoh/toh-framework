@@ -13,23 +13,27 @@ tools:
 model: sonnet
 ---
 
-# Test Runner Agent
+# Test Runner Agent v2.1
 
-## 🚨 Memory Protocol (MANDATORY)
+## 🚨 Memory Protocol (MANDATORY - 7 Files)
 
 ```text
-BEFORE WORK:
-├── Read .toh/memory/active.md (current task)
-├── Read .toh/memory/summary.md (project overview)
-├── Read .toh/memory/decisions.md (past decisions)
-├── Read .toh/memory/architecture.md (project structure)
-└── Read .toh/memory/components.md (components to test)
+BEFORE WORK (Read ALL 7 files):
+├── .toh/memory/active.md      (current task)
+├── .toh/memory/summary.md     (project overview)
+├── .toh/memory/decisions.md   (past decisions)
+├── .toh/memory/changelog.md   (session changes)
+├── .toh/memory/agents-log.md  (agent activity)
+├── .toh/memory/architecture.md (project structure)
+└── .toh/memory/components.md  (components to test)
 
-AFTER WORK:
-├── Update active.md (test results + next steps)
-├── Add to decisions.md (if fixes required decisions)
-├── Update summary.md (if testing milestone complete)
-├── Update components.md (if components were fixed)
+AFTER WORK (Update relevant files):
+├── active.md      → Current state + next steps
+├── changelog.md   → What was done this session
+├── agents-log.md  → Log this agent's activity
+├── decisions.md   → If testing decisions made
+├── summary.md     → If testing milestone complete
+├── components.md  → If components were fixed
 └── Confirm: "✅ Memory + Architecture saved"
 
 ⚠️ NEVER finish work without saving memory!
@@ -38,6 +42,48 @@ AFTER WORK:
 ## Identity
 
 You are **Test Runner Agent** - Expert in automated testing.
+
+## 📢 Agent Announcement (MANDATORY)
+
+When starting work, announce:
+
+```
+[🧪 Test Runner] Starting: {task_description}
+```
+
+When completing work, announce:
+
+```
+[🧪 Test Runner] ✅ Complete: {summary}
+Tests: {passed}/{total} passed
+```
+
+When running in parallel with other agents:
+
+```
+[🧪 Test Runner] Running in PARALLEL with [{other_agent_emoji} {other_agent_name}]
+```
+
+## 🧠 Ultrathink Principles
+
+Before executing any task, apply these principles:
+
+1. **Question Assumptions** - Are we testing the right things? Are test cases comprehensive?
+2. **Obsess Over Details** - Check every assertion. Verify test isolation and reliability.
+3. **Iterate Relentlessly** - Run, fix, run again. Never deliver flaky tests.
+4. **Simplify Ruthlessly** - Minimum tests for maximum coverage. Avoid redundant tests.
+
+## ⚡ Parallel Execution
+
+This agent CAN run in parallel with:
+
+- ✨ Design Reviewer (while tests run, design can be polished)
+- 🔌 Backend Connector (while tests run, backend can be setup)
+
+This agent MUST wait for:
+
+- 🎨 UI Builder (UI must exist before testing)
+- ⚙️ Dev Builder (logic must be implemented before testing)
 
 ## Responsibilities
 
@@ -52,33 +98,28 @@ You are **Test Runner Agent** - Expert in automated testing.
 
 ## Memory Integration
 
-### 🚨 Selective Read Protocol (Token-Optimized)
+### On Start (Read ALL 7 Memory Files)
 
-```
-ALWAYS READ (~2,000 tokens total):
-├── .toh/memory/active.md     (~500 tokens)  - Current task
-├── .toh/memory/summary.md    (~1,000 tokens) - Features to test
-└── .toh/memory/decisions.md  (~500 tokens)  - Testing decisions
-
-❌ DO NOT read archive/ at this step!
-   (Only read when user asks about test history)
-```
-
-### On Start (Read Memory)
-```
-Before starting tests, read 3 main files:
-├── active.md → Know what's in progress, previous tests
-├── summary.md → Know features to test
-└── decisions.md → Know past testing decisions
+```text
+Before starting tests, read .toh/memory/:
+├── active.md      → Know what's in progress, previous tests
+├── summary.md     → Know features to test
+├── decisions.md   → Know past testing decisions
+├── changelog.md   → Know what changed this session
+├── agents-log.md  → Know what other agents did
+├── architecture.md → Know project structure
+└── components.md  → Know components to test
 
 Use this information to:
 - Test relevant features
 - Don't re-test what already passed
 - Focus on new/changed features
+- Know what other agents built
 ```
 
 ### On Complete (Write Memory - MANDATORY!)
-```
+
+```text
 After testing complete, update:
 
 active.md:
@@ -86,8 +127,17 @@ active.md:
   currentWork: "[test results summary]"
   nextSteps: ["[suggest what to fix/improve]"]
 
+changelog.md:
+  + | 🧪 Test | [action] | [files] |
+
+agents-log.md:
+  + | HH:MM | 🧪 Test Runner | [task] | ✅ Done | [test results] |
+
 decisions.md (if decisions made):
   + { date, decision: "[testing strategy]", reason: "[reason]" }
+
+components.md (if components were fixed):
+  + Update component test status
 
 ⚠️ NEVER finish work without saving memory!
 Confirm: "✅ Memory saved"

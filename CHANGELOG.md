@@ -2,6 +2,227 @@
 
 All notable changes to Toh Framework will be documented in this file.
 
+## [1.8.1] - 2026-01-11
+
+### 🌐 Google Antigravity Workflows Support
+
+Full support for Google Antigravity IDE slash commands.
+
+#### Added
+
+- **13 Workflow Files** in `src/antigravity-workflows/`:
+  - `toh-help.md`, `toh-vibe.md`, `toh-plan.md`
+  - `toh-ui.md`, `toh-dev.md`, `toh-design.md`
+  - `toh-test.md`, `toh-connect.md`, `toh-fix.md`
+  - `toh-ship.md`, `toh-line.md`, `toh-mobile.md`, `toh-protect.md`
+
+- **Automatic Installation** - Workflows copied to `.agent/workflows/` on install
+
+#### Changed
+
+- `gemini-cli.js` - Now creates both `.gemini/commands/` (TOML) and `.agent/workflows/` (Markdown)
+- `install.js` - Updated messages to show both Gemini CLI and Antigravity commands
+- Install now shows separate sections for Gemini CLI (Terminal) and Google Antigravity (IDE)
+
+#### Technical Details
+
+| Platform | Config Location | Format | Command Syntax |
+|----------|-----------------|--------|----------------|
+| Gemini CLI | `.gemini/commands/` | TOML | `/toh:vibe` |
+| Antigravity | `.agent/workflows/` | Markdown + YAML | `/toh-vibe` |
+
+---
+
+## [1.8.0] - 2026-01-11
+
+### 🧠 Enhanced Memory & Agent Orchestration
+
+#### Added - 7-File Memory System
+
+Upgraded from 5 files to 7 files for comprehensive project tracking:
+
+| File | Purpose | Token Budget |
+|------|---------|--------------|
+| `active.md` | Current task | ~500 |
+| `summary.md` | Project overview | ~1,000 |
+| `decisions.md` | Key decisions | ~500 |
+| `changelog.md` | Session changes (NEW!) | ~300 |
+| `agents-log.md` | Agent activity (NEW!) | ~300 |
+| `architecture.md` | Project structure | ~500 |
+| `components.md` | Component registry | ~500 |
+
+**Benefits:**
+- Session changes tracked in `changelog.md`
+- Agent activity logged in `agents-log.md`
+- Better debugging and continuity across sessions
+
+#### Added - Agent Announcement Protocol
+
+All 7 agents now announce themselves when starting/completing work:
+
+```
+[🎨 UI Builder] Starting: Create Dashboard Page
+[🎨 UI Builder] ✅ Complete: Dashboard with 3 components
+```
+
+#### Added - Ultrathink Principles
+
+All agents enhanced with Ultrathink principles:
+1. **Question Assumptions** - Is this the right approach?
+2. **Obsess Over Details** - Read code thoroughly before changes
+3. **Iterate Relentlessly** - Build, verify, fix, improve
+4. **Simplify Ruthlessly** - Minimum changes for maximum impact
+
+#### Added - Parallel Execution Awareness
+
+Agents now declare compatibility for parallel execution:
+
+```markdown
+This agent CAN run in parallel with:
+- 🎨 UI Builder
+- ⚙️ Dev Builder
+
+This agent MUST wait for:
+- 📋 Plan Orchestrator
+```
+
+#### Added - Agent Selection Reasoning Display (toh.md)
+
+Before executing, `/toh` now shows:
+- **Capability Detection** - What skills are needed
+- **Agent Selection** - Which agents were chosen and why
+- **Execution Strategy** - Parallel vs sequential decisions
+
+#### Added - Execution Plan Display (toh-vibe.md)
+
+Before starting work, `/toh-vibe` now displays:
+- **Agent Workflow** - Visual phase diagram
+- **Pages to Create** - Table with routes and components
+- **Progress Updates** - Real-time agent status during execution
+
+#### Added - Enhanced Planning Output (toh-plan.md)
+
+`/toh-plan` now shows structured output:
+- **Phase Breakdown** - Table with agents, types, dependencies
+- **Agent Assignments** - Tasks and expected outputs per agent
+- **Execution Flow** - Visual parallel/sequential diagram
+
+#### Changed - All Agent Files (14 files)
+
+Both root and subagent versions updated to v2.1:
+- `ui-builder.md` - Added announcements, ultrathink, 7-file memory
+- `dev-builder.md` - Added announcements, ultrathink, 7-file memory
+- `design-reviewer.md` - Added announcements, ultrathink, 7-file memory
+- `backend-connector.md` - Added announcements, ultrathink, 7-file memory
+- `test-runner.md` - Added announcements, ultrathink, 7-file memory
+- `platform-adapter.md` - Added announcements, ultrathink, 7-file memory
+- `plan-orchestrator.md` - Added announcements, ultrathink, 7-file memory
+
+#### Changed - Command Files (3 files)
+
+- `toh.md` v4.1 - Agent selection reasoning, 7-file memory
+- `toh-vibe.md` v4.1 - Execution plan display, progress updates
+- `toh-plan.md` v2.1 - Enhanced planning output format
+
+#### Changed - Installer Updates
+
+- `install.js` - Now creates all 7 memory files on install
+- All IDE handlers sync 7-file memory system
+
+#### Changed - Language Normalization
+
+- All agent definitions now 100% English
+- All command definitions now 100% English
+- User-facing examples remain Thai for target audience
+
+#### Stats Update
+
+- **Memory Files:** 5 → 7 (added changelog.md, agents-log.md)
+- **Agent Version:** v2.0 → v2.1
+- **Command Version:** v4.0 → v4.1
+
+---
+
+## [1.7.1] - 2026-01-11
+
+### 🚀 Gemini CLI Native Commands Support
+
+#### Added - Native Slash Commands for Gemini CLI
+
+Gemini CLI / Google Antigravity now supports **native slash commands** instead of file mentions!
+
+**Before (v1.7.0):**
+```
+@.toh/commands/toh-vibe.md restaurant management
+```
+
+**After (v1.7.1):**
+```
+/toh:vibe restaurant management
+```
+
+#### Added - 14 TOML Command Files
+
+Native Gemini CLI commands in proper TOML format:
+
+| Command | Description |
+|---------|-------------|
+| `/toh` | Show all commands |
+| `/toh:help` | Show all commands with examples |
+| `/toh:vibe` | Create new project with UI + Logic + Mock Data |
+| `/toh:plan` | Analyze and plan project |
+| `/toh:ui` | Create UI components and pages |
+| `/toh:dev` | Add logic, state, and functionality |
+| `/toh:design` | Improve design to professional level |
+| `/toh:test` | Run tests and auto-fix issues |
+| `/toh:connect` | Connect to Supabase backend |
+| `/toh:fix` | Debug and fix issues |
+| `/toh:ship` | Deploy to production |
+| `/toh:line` | LINE Mini App integration |
+| `/toh:mobile` | Expo / React Native app |
+| `/toh:protect` | Security audit |
+
+**Files Location:** `src/gemini-commands/`
+
+#### Added - Skills Auto-Discovery
+
+Skills are now copied to `.gemini/skills/` for automatic discovery by Gemini CLI:
+- No more relying on `contextFiles` in settings.json
+- Skills auto-loaded when referenced in commands
+- Uses `@{.gemini/skills/...}` syntax in TOML prompts
+
+#### Changed - gemini-cli.js Handler
+
+Major update to installer handler:
+- **Copy TOML commands** to `.gemini/commands/`
+- **Copy skills** to `.gemini/skills/`
+- **Simplified GEMINI.md** (commands are now native)
+- **Simplified settings.json** (skills auto-discovered)
+
+#### Changed - Command Naming Convention
+
+| Claude Code | Gemini CLI | Note |
+|-------------|------------|------|
+| `/toh-vibe` | `/toh:vibe` | Gemini uses colon for namespaced commands |
+| `/toh-plan` | `/toh:plan` | Each IDE has its own format |
+| `/toh-ui` | `/toh:ui` | No cross-IDE conflict |
+
+#### No Impact on Other IDEs
+
+Each IDE maintains its own isolated configuration:
+- **Claude Code:** `.claude/commands/*.md` → `/toh-vibe` (unchanged)
+- **Gemini CLI:** `.gemini/commands/*.toml` → `/toh:vibe` (new!)
+- **Cursor:** `.cursor/rules/*.mdc` → `@toh` (unchanged)
+- **Codex:** `AGENTS.md` (unchanged)
+
+#### Stats Update
+
+- **TOML Commands:** 0 → 14 (NEW!)
+- **Gemini Skills Location:** `.toh/` → `.gemini/skills/`
+- **Native Command Support:** Gemini CLI now has proper slash commands
+
+---
+
 ## [1.7.0] - 2025-12-26
 
 ### 🏗️ Code Architecture Tracking & 🔐 Security Engineer System

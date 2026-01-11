@@ -25,7 +25,7 @@ trigger: /toh-vibe or /toh-v followed by app description
 /toh-v [app description]
 ```
 
-## 🤖 Sub-Agent Orchestration (v4.0)
+## 🤖 Sub-Agent Orchestration (v4.1)
 
 > **Vibe Mode** is an orchestration pattern that coordinates multiple sub-agents
 
@@ -54,13 +54,17 @@ skills:
 
 ## 🔄 Workflow (Sub-Agent Orchestration)
 
-### Phase 0: Memory Check
+### Phase 0: Memory Check (7 Files)
 
-```
-0. 🚨 READ MEMORY (MANDATORY!)
-   ├── .toh/memory/active.md (if exists)
-   ├── .toh/memory/summary.md (if exists)
-   └── .toh/memory/decisions.md (if exists)
+```text
+0. 🚨 READ MEMORY (MANDATORY - ALL 7 FILES!)
+   ├── .toh/memory/active.md      (current task)
+   ├── .toh/memory/summary.md     (project overview)
+   ├── .toh/memory/decisions.md   (past decisions)
+   ├── .toh/memory/changelog.md   (session changes)
+   ├── .toh/memory/agents-log.md  (agent activity)
+   ├── .toh/memory/architecture.md (project structure)
+   └── .toh/memory/components.md  (existing components)
 ```
 
 ### Phase 1: Plan (plan-orchestrator.md)
@@ -138,17 +142,78 @@ Task: Verify everything works
 Output: Build passes with zero errors
 ```
 
-### Phase 6: Report & Save Memory
+### Phase 6: Report & Save Memory (7 Files)
 
-```
+```text
 📝 ORCHESTRATOR TASK (Not delegated)
 
-├── Save memory files
-│   ├── active.md - Current state
-│   ├── summary.md - Project overview
-│   └── decisions.md - Design decisions
+├── Update memory files (all 7):
+│   ├── active.md       - Current state & next steps
+│   ├── summary.md      - Project overview
+│   ├── decisions.md    - Design decisions made
+│   ├── changelog.md    - What was created this session
+│   ├── agents-log.md   - Agent activity log
+│   ├── architecture.md - Project structure
+│   └── components.md   - Components created
 │
 └── Report using Response Excellence format
+```
+
+---
+
+## 📋 Execution Plan Display (MUST SHOW BEFORE WORK!)
+
+Before starting any work, display the execution plan:
+
+```markdown
+## 📋 Execution Plan: [App Name]
+
+**Business Type:** [E-commerce / SaaS / Restaurant / etc.]
+**Design Pattern:** [Pattern A/B/C/D/E]
+
+### 🔄 Agent Workflow
+
+┌─────────────────────────────────────────────────────────────┐
+│ [Phase 1] 🧠 Plan Orchestrator         ← ANALYZE           │
+│ [Phase 2] 🎨 UI Builder                ← BUILD PAGES       │
+│ [Phase 3] ⚙️ Dev Builder               ← ADD LOGIC         │
+│ [Phase 4] ✨ Design Reviewer           ← POLISH            │
+│ [Phase 5] 🧪 Test Runner               ← VERIFY            │
+└─────────────────────────────────────────────────────────────┘
+
+### 📄 Pages to Create
+
+| # | Page | Route | Components |
+|---|------|-------|------------|
+| 1 | Dashboard | `/` | StatsCard, Chart |
+| 2 | [Feature] List | `/[feature]` | Table, Filter |
+| 3 | [Feature] Detail | `/[feature]/[id]` | Card, Actions |
+| 4 | Create [Feature] | `/[feature]/new` | Form |
+| 5 | Settings | `/settings` | Tabs, Form |
+| 6 | Profile | `/profile` | Avatar, Form |
+
+### ⏳ Estimated: 6 pages, 5 agents, ~5 minutes
+
+**Starting execution...**
+```
+
+### During Execution (Status Updates)
+
+Show agent progress during work:
+
+```markdown
+## 🤖 Agent Progress
+
+| Phase | Agent | Task | Status |
+|-------|-------|------|--------|
+| 1 | 🧠 Plan | Business analysis | ✅ Done |
+| 2 | 🎨 UI | Creating 6 pages | 🔄 Working (3/6)... |
+| 3 | ⚙️ Dev | Add logic & state | ⏳ Pending |
+| 4 | ✨ Design | Polish & animate | ⏳ Pending |
+| 5 | 🧪 Test | Verify build | ⏳ Pending |
+
+[🎨 UI Builder] Creating Settings page... ✅ Done
+[🎨 UI Builder] Creating Profile page... 🔄 Working
 ```
 
 ---
@@ -365,19 +430,19 @@ design:
 
 ---
 
-## ❌ Rules (ห้ามทำเด็ดขาด!)
+## ❌ Rules (NEVER DO!)
 
-1. **NEVER** ask "what features do you want?" - ตัดสินใจเอง!
-2. **NEVER** ask "which framework?" - ใช้ Next.js 14!
-3. **NEVER** create only 1-2 pages - ต้อง 5-7 หน้า!
+1. **NEVER** ask "what features do you want?" - Decide yourself!
+2. **NEVER** ask "which framework?" - Use Next.js 14!
+3. **NEVER** create only 1-2 pages - Must have 5-7 pages!
 4. **NEVER** use generic purple-blue gradient - Anti AI-looking!
-5. **NEVER** use Lorem ipsum - ใช้ mock data จริง!
-6. **NEVER** skip business analysis - วิเคราะห์ก่อนทำ!
+5. **NEVER** use Lorem ipsum - Use realistic mock data!
+6. **NEVER** skip business analysis - Analyze before building!
 7. **NEVER** forget to tell user what to do next - Response Excellence!
-8. **NEVER** deliver with build errors - ต้อง `npm run build` ผ่านก่อน!
-9. **NEVER** tell user to fix errors themselves - แก้ให้เสร็จก่อน deliver!
+8. **NEVER** deliver with build errors - `npm run build` must pass first!
+9. **NEVER** tell user to fix errors themselves - Fix everything before delivery!
 
-## ✅ Rules (ต้องทำเสมอ!)
+## ✅ Rules (ALWAYS DO!)
 
 1. **ALWAYS** analyze business type first
 2. **ALWAYS** select appropriate design pattern

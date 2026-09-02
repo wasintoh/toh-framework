@@ -1,6 +1,6 @@
 {
   "name": "toh-framework",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "type": "module",
   "description": "AI-Orchestration Driven Development - Type Once, Have it all! Approve once and the TOH LOOP builds, tests, and fixes a whole app until verified DONE. For Claude Code, Cursor, Antigravity (+ Antigravity CLI), Codex (CLI + desktop app), and ZCode.",
   "author": {

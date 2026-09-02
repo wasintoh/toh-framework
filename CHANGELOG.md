@@ -2,13 +2,24 @@
 
 All notable changes to Toh Framework will be documented in this file.
 
-## [Unreleased]
+## [2.2.0] - 2026-09-03
+
+### 🤖 Codex Gets a Real Team
+
+v2.2 gives Codex what Claude Code, Cursor and Antigravity already had — a native team. ทีม agent ตัวจริงบน Codex. Every Toh agent now installs as a project-scoped Codex custom agent, the 14 workflows are invoked as `$toh-<cmd>` skills, and for the first time the repo has an automated test suite gating every release. This release began as [PR #3](https://github.com/wasintoh/toh-framework/pull/3) by @pcbimon — the first external code contribution to Toh Framework.
 
 #### Added
 
 - **Native Codex agents** — every Toh agent in `.toh/agents/` is now also installed as a project-scoped Codex custom agent in `.codex/agents/<name>.toml` (`name`, `description`, `model_reasoning_effort`, `sandbox_mode`, `developer_instructions`), so Codex can delegate to `ui-builder`, `plan-orchestrator` and friends natively. The files deliberately carry **no `model` key**: they inherit the parent session's model, so one config choice governs every agent and a future model rename never strands an install. Reasoning effort comes from a new `modelIntent` frontmatter key (`lightweight | implementation | planning | review`, falling back to the Claude tier), and agents whose tool allowlist has no write tool get Codex's `read-only` sandbox. Ownership is tracked by sha256 in `.codex/toh-framework.json`: a file you edited or created is never overwritten or removed. AGENTS.md now points Codex at `$toh-<cmd>` skill invocation and the native agents. Contributed by @pcbimon in [PR #3](https://github.com/wasintoh/toh-framework/pull/3); reshaped in review so `.agents/skills/` keeps a single writer (shared.js), an existing `.codex/config.toml` is still never modified, and the codex capability profile stays the probed v2.1.1 floor.
 - **`toh uninstall --ide codex`** — removes just the native agent files this installer wrote (hash-verified, backed up first) and their manifest; AGENTS.md, `.codex/config.toml` and `.toh/` stay. The full uninstall also knows the new paths.
-- **Test suite** — `npm test` runs `tests/codex.test.js` (node:test, in-band): install layout, TOML shape, single-writer invariant across IDE order, config.toml untouched, ownership by hash, AGENTS.md idempotency and budget, both uninstall paths. First automated tests in the repo; CI now runs them.
+- **Test suite** — `npm test` runs `tests/codex.test.js` (node:test, in-band): install layout, TOML shape, single-writer invariant across IDE order, config.toml untouched, ownership by hash, AGENTS.md idempotency and budget, both uninstall paths. First automated tests in the repo; CI and the release workflow now run it.
+
+#### Changed
+
+- **Codex quick start** — README and AGENTS.md now show `$toh-vibe` (native skill invocation) first; plain `/toh-vibe` text still works. AGENTS.md also tells Codex to hand a custom agent a self-contained brief, because a full-history fork is refused (seen in the live run).
+- **Hard-budget abort is thrown, not exited** — `setupIDEWithSpinner` still prints the same explanation on a fatal size-budget error, then throws; `bin/toh-cli.js` turns it into exit code 1. Same behaviour for users, observable by the test suite.
+- **`--quick` never prompts** — a missing target directory is created without the confirmation question.
+- **Banner** — bumped to 2.2 (the canvas widened by 102 px so the wider number keeps the same margins; every other pixel is unchanged).
 
 ## [2.1.1] - 2026-08-26
 

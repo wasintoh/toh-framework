@@ -1026,12 +1026,12 @@ function printNextSteps(config) {
   console.log(row(chalk.gray(pad('    (shows a preview and asks first; keeps your plan+notes)'))));
   console.log(mid);
   console.log(row(chalk.bold.yellow(pad(`  What's New in v${VERSION}:`))));
-  console.log(row(chalk.white(pad('  * NEW uninstall command: previewed, asks first, reversible'))));
-  console.log(row(chalk.white(pad('  * Codex: compact AGENTS.md, never truncated (24KiB guard)'))));
-  console.log(row(chalk.white(pad('  * Antigravity (agy): .agents/ + deterministic Stop hook'))));
-  console.log(row(chalk.white(pad('  * Cursor 2.4 native subagents (.cursor/agents/)'))));
-  console.log(row(chalk.white(pad('  * .agents/ standard: 37 skills + 14 commands shared'))));
-  console.log(row(chalk.white(pad('  * Live-read catalog + real /toh-* aliases (incl. /toh-pt)'))));
+  console.log(row(chalk.white(pad('  * Codex: 8 native agents in .codex/agents/*.toml'))));
+  console.log(row(chalk.white(pad('  * Codex: invoke workflows as $toh-<cmd> skills'))));
+  console.log(row(chalk.white(pad('  * Agents inherit your session model (no pinned names)'))));
+  console.log(row(chalk.white(pad('  * toh uninstall --ide codex (native agents only)'))));
+  console.log(row(chalk.white(pad('  * First test suite: npm test, 14 checks, runs in CI'))));
+  console.log(row(chalk.white(pad('  * Thanks @pcbimon for PR #3 - first outside contributor'))));
   console.log(bot);
   console.log('');
 }

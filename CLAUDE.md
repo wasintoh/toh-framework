@@ -5,7 +5,7 @@ Guide for a Claude Code agent developing the framework itself. Repo-only: not in
 
 ## What this is
 
-Toh Framework ("Type Once, Have it all") is the npm package `toh-framework` (v2.1.0, MIT, ESM,
+Toh Framework ("Type Once, Have it all") is the npm package `toh-framework` (v2.2.0, MIT, ESM,
 Node >= 18, no build step) that installs an AI-orchestration development system into 6 IDEs:
 Claude Code, Cursor (2.4+), Antigravity (agy CLI + IDE), Codex (CLI + desktop app), ZCode (Z.ai), and —
 Enterprise-only, behind `--legacy-gemini` — Gemini CLI (consumer service shut down 2026-06-18).
@@ -112,7 +112,7 @@ transformCommand(). install.js normalizes .toh/commands to the universal variant
   generated inline in 6 code sites (install.js + 5 of the 6 IDE handlers; zcode.js deliberately
   does not duplicate them).
 - `bin/` — toh-cli.js is the only entry (toh-npx-wrapper.js was deleted in v2.1).
-- `docs/` — README-TH.md (Thai mirror of README.md), V2-UPGRADE-PLAN.md, assets/.
+- `docs/` — README-TH.md (Thai mirror of README.md), assets/ (banner, repo-only), plans/ (gitignored, never ships).
 
 ## Core mechanics — never break these
 

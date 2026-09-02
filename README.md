@@ -27,26 +27,21 @@ Changed your mind? `npx toh-framework uninstall` shows you exactly what it will 
 
 > 📖 **[🇹🇭 Thai Documentation](docs/README-TH.md)**
 
-## 🆕 What's New in v2.1.0
+## 🆕 What's New in v2.2.0
 
-> **The compatibility release.** We tested every supported IDE against its current release — and fixed everything that had quietly broken. Same framework, now actually loaded everywhere.
+> **Codex gets a real team.** Every Toh agent now installs as a native Codex custom agent, the 14 workflows are native Codex skills, and the repo has its first automated test suite. This release started as [PR #3](https://github.com/wasintoh/toh-framework/pull/3) by [@pcbimon](https://github.com/pcbimon) — the first outside code contribution to Toh Framework.
 
 | Feature | What it means for you |
 |---------|----------------------|
-| 🛰️ **Antigravity, first-class** | Antigravity and the Antigravity CLI (`agy`) are now a native target, not an afterthought: a full workspace `.agents/` surface with an Always-On rule, 14 workflows, 8 file-based subagents, every skill, and a deterministic Stop hook (`.agents/hooks.json`) that refuses to end a session while `.toh/plan.md` still has unchecked work. |
-| 📦 **Codex — un-truncated** | Codex silently cuts project docs at 32 KB; our old AGENTS.md was 3.6× over, so 6 of 8 agents never loaded. The new AGENTS.md is a ~12.7 KB compact roster — everything fits, agents and commands are read from `.toh/` at runtime, and the installer hard-fails if the file ever outgrows the budget. It also writes a guarded `.codex/config.toml` that raises the doc limit (never overwriting yours). |
-| 🤝 **One skills standard, four IDEs** | All 37 skills (23 framework skills + 14 `/toh-*` command skills) are written once into `.agents/skills/` — the open standard natively discovered by Codex, Cursor 2.4+, Antigravity, and ZCode. One write, four tools, zero drift. |
-| 💠 **ZCode support, verified live** | ZCode (Z.ai) reads the same open surfaces, so it needs no bespoke files: `AGENTS.md` for project memory, `.agents/skills/` for all 37 skills, and `.agents/commands/` for 14 real `/toh-*` slash commands. Verified against ZCode CLI 0.16.3, not assumed — `zcode skills list` reports 37 project-scope skills and `zcode commands list` reports all 14 commands, both with zero diagnostics. |
-| 🧩 **Cursor 2.4 native subagents** | Cursor now gets a real team: 8 Toh specialists installed as native subagents in `.cursor/agents/` that Cursor can delegate to (before, our rule told Cursor "no team here" — leaving free speed on the table). |
-| ⚡ **Claude Code skills preload** | Subagents now start with their skills fully loaded via the native `skills` frontmatter key — no more hoping the model remembers to open the file. |
-| 🧹 **`toh uninstall` — finally** | Until now, installing Toh Framework was a one-way door. Now `npx toh-framework uninstall` prints a plain-language preview of every file it would remove, keep, or edit, and asks once before touching anything. It only deletes what it can *prove* it installed (a sha256 record written at install time); a file you edited is kept and named on screen, shared files like `CLAUDE.md` are edited surgically instead of rewritten, and your plan, notes, and memory survive unless you opt in separately. `--dry-run` to look without touching. |
+| 🤖 **Native Codex agents** | All 8 Toh specialists are installed as project-scoped Codex custom agents in `.codex/agents/*.toml`, generated from `.toh/agents/`. Codex can now delegate to `ui-builder`, `plan-orchestrator` and friends the same way Claude Code, Cursor and Antigravity already could. Verified live on Codex CLI 0.145.0: the agent spawned, ran read-only where its tool allowlist says so, and reported back through the Toh announce contract. |
+| 🎛️ **Your model, their effort** | The agent files deliberately carry **no `model` key** — every agent inherits the model of your session, so one `/model` choice governs the whole team and a future model rename never strands an install. Each role only sets its reasoning effort (`lightweight`, `implementation`, `planning`, `review`) from a new `modelIntent` frontmatter key. |
+| 🔏 **Ownership by hash** | `.codex/toh-framework.json` records the sha256 of every agent file Toh wrote. Edit one, or add your own, and it is never overwritten or removed — by reinstall or by `toh uninstall --ide codex`, which takes out only the native agent files Toh can prove are its own (backed up first). |
 
-### Also in 2.1.0
+### Also in 2.2.0
 
-- ⌨️ **Real slash shortcuts on Claude Code** — `/toh-v`, `/toh-p`, `/toh-pt` and friends are now registered command files, not just prose patterns. The old `/toh-p` collision is resolved: `/toh-p` = `/toh-plan`, `/toh-pt` = `/toh-protect` (also `/toh-security`, `/toh-audit`).
-- 📇 **Live catalog** — `npx toh-framework list` now reads commands, agents, and skills straight from source, so its counts can never go stale again.
-- 🧾 **Skill descriptions everywhere** — all 23 skills now carry real frontmatter descriptions, so every IDE's auto-invocation actually knows what each skill is for.
-- 🏳️ **Legacy escape hatches, off by default** — `--legacy-gemini` keeps `.gemini/` output for Enterprise/GCP Gemini CLI users; `--legacy-cursorrules` writes the old root `.cursorrules` for very old Cursor versions.
+- 💲 **`$toh-vibe` on Codex** — the 14 workflows are native Codex skills: invoke one with `$toh-<cmd>` or browse with `/skills`. Plain `/toh-vibe ...` text still works, and AGENTS.md now tells Codex to hand a delegated agent a self-contained brief (a full-history fork is refused).
+- 🧪 **First test suite** — `npm test` runs 14 checks against real installs into a temp directory: layout, TOML shape, the single-writer rule for `.agents/skills/` across IDE order, your `config.toml` left untouched, ownership by hash, AGENTS.md idempotency and budget, both uninstall paths. It gates CI and every release.
+- 🧭 **Unchanged on purpose** — `.agents/skills/` still has one writer, an existing `.codex/config.toml` is still never modified, and Codex capabilities are still probed at install time rather than assumed.
 
 ## 🤖 Supported IDEs
 
@@ -79,6 +74,7 @@ See [CHANGELOG.md](CHANGELOG.md) for complete version history.
 
 | Version | Date | Key Feature |
 |---------|------|-------------|
+| v2.1.1 | 2026-08-26 | Repair release: updates keep your memory, Stop hooks respect a parked plan, Codex capabilities probed not assumed |
 | v2.1.0 | 2026-08-16 | Compatibility release: agy support, Codex un-truncated, Cursor native subagents, shared `.agents/skills` |
 | v2.0.0 | 2026-07-14 | One-Go Build, TOH LOOP, Design Identity, Auto-Resume |
 | v1.8.0 | 2026-01-11 | 7-File Memory System, Agent Announcements |
@@ -376,7 +372,7 @@ claude -p "/toh-vibe coffee shop management system" --permission-mode acceptEdit
 
 ## 📊 Framework Stats
 
-- 🤖 **8 Sub-Agents** - Specialized for different tasks, installed natively on Claude Code, Cursor 2.4+, and Antigravity
+- 🤖 **8 Sub-Agents** - Specialized for different tasks, installed natively on Claude Code, Cursor 2.4+, Antigravity, and Codex
 - 🎯 **14 Commands** - From planning to deployment
 - 📚 **23 Skills** - Comprehensive AI capabilities, shipped once to `.agents/skills/` for every IDE that reads the open standard `[NEW in 2.1]`
 - 🎨 **Design Identity** - Per-project DESIGN.md design identity + versioned AVOID-LIST

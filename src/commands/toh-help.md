@@ -9,7 +9,7 @@ description: Display all Toh Framework commands and quick usage guide
 When user calls `/toh-help`, display the following:
 
 <help_response>
-## 🎯 Toh Framework v2.1.0
+## 🎯 Toh Framework v2.2.0
 
 **"Type anything, AI does it for you"** - AI-Orchestration Driven Development
 
@@ -150,14 +150,14 @@ Every response from Toh includes:
 
 ---
 
-### 🆕 What's New in v2.1.0
+### 🆕 What's New in v2.2.0
 
-- 🔌 **Codex Un-truncated** - Codex now reads the whole framework instead of silently dropping 6 of 8 agents: `AGENTS.md` slimmed from ~117 KB to under 13 KB with a hard size guard (Codex เห็นทีมผู้ช่วยครบทุกตัวแล้ว)
-- 🌌 **Antigravity + Antigravity CLI (agy)** - a native target with the full workspace `.agents/` surface: rules, workflows, subagents, skills + a deterministic Stop hook (Gemini CLI แบบเดิมยังใช้ได้ผ่าน `--legacy-gemini`)
-- 🧩 **Shared `.agents/skills/`** - one write, four tools: Codex, Cursor 2.4, Antigravity, and ZCode all discover the same 37 skills — 23 framework skills + 14 `/toh-*` command skills (ลงครั้งเดียว ใช้ได้สี่เครื่องมือ)
-- 💠 **ZCode (Z.ai) supported** - reads `AGENTS.md` + `.agents/skills/`, plus 14 native `/toh-*` slash commands from `.agents/commands/`; verified live with `zcode skills list` / `zcode commands list` (ZCode ใช้ /toh ได้ครบเหมือน IDE อื่น)
-- ⌨️ **Real Slash Aliases** - `/toh-v`, `/toh-p`, `/toh-pt` are now real Claude Code commands — no more "Unknown command"; `/toh-p` belongs solely to `/toh-plan`, `/toh-protect` moved to `/toh-pt` (ทางลัดใช้ได้จริงทุกตัว)
-- 🤖 **Native Agent Upgrades** - Claude Code subagents preload their skills natively, and Cursor 2.4 runs all 8 agents as native subagents instead of being told they don't exist (ทีมผู้ช่วยทำงานเต็มระบบทั้งใน Claude Code และ Cursor)
+- 🤖 **Native Codex Agents** - all 8 Toh agents are installed as project-scoped Codex custom agents in `.codex/agents/*.toml`, so Codex can delegate to `ui-builder`, `plan-orchestrator` and friends natively (Codex ได้ทีม agent ตัวจริงแล้ว)
+- 🎛️ **Model inherited, effort per role** - the TOML files carry no `model` key; every agent uses your session's model and only sets `model_reasoning_effort` from its `modelIntent` (เปลี่ยน model ที่เดียว agent ตามหมด)
+- 💲 **`$toh-<cmd>` on Codex** - the 14 workflows are native Codex skills: `$toh-vibe ...`, browse with `/skills`; plain `/toh-vibe` text still works (เรียก workflow แบบ native ของ Codex ได้เลย)
+- 🧹 **`toh uninstall --ide codex`** - removes only the native agent files Toh wrote (hash-verified, backed up first); AGENTS.md, config.toml and `.toh/` stay (ถอนเฉพาะส่วน Codex ได้)
+- 🧪 **First test suite** - `npm test` runs 14 real-install checks and gates CI and every release (มี test จริงเป็นครั้งแรก)
+- 🙏 **First outside contribution** - this release started as PR #3 by @pcbimon (ขอบคุณ contributor คนแรกของโปรเจค)
 
 ---
 

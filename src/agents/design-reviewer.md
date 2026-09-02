@@ -13,6 +13,7 @@ tools:
   - Edit
   - Bash
 model: opus
+modelIntent: review
 memory: project
 skills:
   - design-craft         # Two-pass identity process + AVOID-LIST + usability floor

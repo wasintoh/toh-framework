@@ -11,6 +11,7 @@ tools:
   - Edit
   - Bash
 model: sonnet
+modelIntent: implementation
 skills:
   - backend-engineer     # Core backend / Supabase skills
   - engineer-harness     # Smart tool selection + human-friendly reporting + next steps

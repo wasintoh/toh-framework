@@ -7,7 +7,7 @@ Guide for a Claude Code agent developing the framework itself. Repo-only: not in
 
 Toh Framework ("Type Once, Have it all") is the npm package `toh-framework` (v2.1.0, MIT, ESM,
 Node >= 18, no build step) that installs an AI-orchestration development system into 6 IDEs:
-Claude Code, Cursor (2.4+), Antigravity (agy CLI + IDE), Codex CLI, ZCode (Z.ai), and —
+Claude Code, Cursor (2.4+), Antigravity (agy CLI + IDE), Codex (CLI + desktop app), ZCode (Z.ai), and —
 Enterprise-only, behind `--legacy-gemini` — Gemini CLI (consumer service shut down 2026-06-18).
 
 North Star: a non-technical person types one sentence, approves once ("Go"), and THE TOH LOOP
@@ -30,7 +30,8 @@ All npm scripts wrap `node bin/toh-cli.js <cmd>`, which lazy-loads `installer/*.
 
 ## Verification protocol
 
-There is NO automated test suite — .github/workflows/ci.yml only smoke-tests the CLI. Verify by running for real:
+`npm test` runs tests/codex.test.js (node:test, in-band via tests/run.js; TOH_QUIET=1 silences ora) —
+it covers the Codex surfaces only. Everything else is still verified by running for real:
 
 1. Run what you touched — install into a scratch dir, `npm run list`/`status`, `npm pack --dry-run`.
    Inspect the generated output (.toh/, .claude/, .cursor/rules/ + .cursor/agents/, AGENTS.md +
@@ -69,6 +70,11 @@ skills converted from the TOML; throws on unparseable sources):
 - codex.js → one root AGENTS.md between TOH-FRAMEWORK-START/END markers — compact agent roster +
   indexed command table; bodies read at runtime from .toh/. Hard-asserts the block <=24 KiB (Codex
   silently truncates at 32 KiB) and emits .codex/config.toml raising project_doc_max_bytes, never overwriting an existing one.
+  v2.2: also writes one native Codex agent per Toh agent to .codex/agents/<name>.toml — NO `model`
+  key (inherits the session), `model_reasoning_effort` from the agent's `modelIntent` frontmatter,
+  `sandbox_mode = "read-only"` when the tool allowlist has no write tool. Ownership by sha256 in
+  .codex/toh-framework.json: an edited or user-created file is never overwritten or removed.
+  It never writes .agents/skills/ — shared.js is the single writer for that directory.
 - zcode.js → thin by design. ZCode reads the same open surfaces, so it writes NO `.zcode/`: it
   reuses codex.js's exported writeAgentsMd() for AGENTS.md (ide 'zcode' swaps three sentences) and
   shared.js writeAgentsCommands() for `.agents/commands/` — 14 native `/toh-*` slash commands, the

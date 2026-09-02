@@ -55,7 +55,7 @@ Changed your mind? `npx toh-framework uninstall` shows you exactly what it will 
 | 🧠 **Claude Code** | ✅ Full Support | Native subagents + skills preload, Stop hook, slash commands & shortcuts |
 | 📝 **Cursor (2.4+)** | ✅ Full Support | Native subagents (`.cursor/agents/`), skills via `.agents/skills/`, always-on rules |
 | 🛰️ **Antigravity CLI (agy) + IDE** | ✅ Full Support | `.agents/` rules + skills + workflows + subagents + Stop hook |
-| 🤖 **Codex** — CLI + Codex desktop app (ChatGPT app) | ✅ Supported | Compact AGENTS.md + repo-level skills |
+| 🤖 **Codex** — CLI + Codex desktop app (ChatGPT app) | ✅ Supported | Compact AGENTS.md + repo-level skills + native agents in `.codex/agents/` |
 | 💠 **ZCode (Z.ai)** | ✅ Supported | AGENTS.md + `.agents/skills/` + native `/toh-*` in `.agents/commands/` |
 | 💎 **Gemini CLI** | 🏢 Legacy | Enterprise/GCP only, behind `--legacy-gemini` |
 
@@ -236,9 +236,16 @@ agy
 ```bash
 codex
 
-# Same commands — AGENTS.md teaches Codex the full command set
+# Invoke a Toh workflow as a native Codex skill ($ + name), or browse with /skills
+$toh-vibe Inventory management system
+
+# Plain /toh-* text works too — AGENTS.md teaches Codex the full command set
 /toh-vibe Inventory management system
 ```
+
+The 8 Toh agents are also installed as native Codex agents in `.codex/agents/*.toml`
+(generated from `.toh/agents/`, ownership-tracked so your edits are never overwritten).
+They inherit the model of your session and carry only a reasoning-effort hint per role.
 
 ### ZCode (Z.ai)
 

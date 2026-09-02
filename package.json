@@ -58,7 +58,8 @@
     "uninstall:local": "node bin/toh-cli.js uninstall",
     "list": "node bin/toh-cli.js list",
     "status": "node bin/toh-cli.js status",
-    "bundle": "node bin/toh-cli.js bundle"
+    "bundle": "node bin/toh-cli.js bundle",
+    "test": "node tests/run.js"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -69,6 +70,7 @@
     "fs-extra": "^11.2.0",
     "inquirer": "^9.2.23",
     "js-yaml": "^4.3.0",
-    "ora": "^8.0.1"
+    "ora": "^8.0.1",
+    "smol-toml": "^1.8.0"
   }
 }

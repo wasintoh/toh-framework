@@ -37,8 +37,9 @@ import yaml from 'js-yaml';
 import crypto from 'crypto';
 import os from 'os';
 import { fileURLToPath } from 'url';
-import { dirname, join, resolve, basename, parse as parsePath } from 'path';
+import { dirname, join, resolve, relative, basename, parse as parsePath } from 'path';
 import { generateClaudeMd } from './ide-handlers/claude-code.js';
+import { uninstallCodex } from './ide-handlers/codex.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -280,6 +281,9 @@ function derivedPaths(cat) {
   }
   for (const d of cat.agentsSkillDirs) add(`.agents/skills/${d}/SKILL.md`);
   for (const f of cat.agentsCommandFiles) add(`.agents/commands/${f}`);
+  // v2.2: native Codex agents + their ownership manifest
+  for (const n of cat.agentNames) add(`.codex/agents/${n.replace(/\.md$/, '')}.toml`);
+  add('.codex/toh-framework.json');
   for (const f of cat.workflowFiles) {
     add(`.agents/workflows/${f}`);
     add(`.agent/workflows/${f}`);
@@ -1336,6 +1340,9 @@ export async function uninstall(options = {}) {
   const assumeYes = !!options.yes;
   const includeUserWork = !!options.all;
   const verbose = !!options.verbose;
+  const requestedIdes = options.ide
+    ? String(options.ide).split(',').map((ide) => ide.trim().toLowerCase()).filter(Boolean)
+    : null;
 
   console.log(chalk.cyan(`\n🧹 Removing Toh Framework from:\n   ${targetDir}\n`));
 
@@ -1353,6 +1360,60 @@ export async function uninstall(options = {}) {
       `or point at it with:  ${CMD_UNINSTALL} -t /path/to/your/project\n`
     ));
     return 1;
+  }
+
+  // --- per-IDE removal (v2.2: Codex only) ------------------------------------
+  // `--ide codex` removes just the native agent files this installer wrote
+  // (hash-verified) plus their manifest. AGENTS.md and .codex/config.toml are
+  // shared surfaces (ZCode reads AGENTS.md too) and stay — run without --ide
+  // for the complete, previewed removal.
+  if (requestedIdes) {
+    const isCodex = (ide) => ide === 'codex' || ide === 'codex-cli';
+    if (!requestedIdes.every(isCodex)) {
+      const unsupported = requestedIdes.filter((ide) => !isCodex(ide));
+      console.log(chalk.yellow(
+        `Per-IDE removal currently supports Codex only (got: ${unsupported.join(', ')}).\n` +
+        `Run without --ide for a full uninstall, or use --ide codex.\n`
+      ));
+      return 1;
+    }
+    // Same manners as the full path: preview first, then one question.
+    const preview = await uninstallCodex(targetDir, { dryRun: true });
+    const keptNote = preview.keptAgents.length
+      ? ` ${plural(preview.keptAgents.length, 'file', 'files')} you edited will stay: ${preview.keptAgents.join(', ')}.`
+      : '';
+    const staysNote = 'AGENTS.md, .codex/config.toml and .toh/ stay (shared surfaces — run without --ide to remove everything).';
+    if (preview.removedAgents.length === 0) {
+      console.log(chalk.yellow(`No Toh-written native agent files found in .codex/agents/ — nothing to remove.${keptNote}\n${staysNote}\n`));
+      return 0;
+    }
+    console.log(chalk.white(
+      `I will remove ${plural(preview.removedAgents.length, 'native agent file', 'native agent files')} from .codex/agents/ ` +
+      `(${preview.removedAgents.join(', ')}) plus .codex/toh-framework.json.${keptNote}\n${staysNote}\n`
+    ));
+    if (dryRun) {
+      console.log(chalk.gray('This was a preview (--dry-run). Nothing was deleted or changed.\n'));
+      return 0;
+    }
+    if (!assumeYes) {
+      let go = false;
+      try {
+        ({ go } = await inquirer.prompt([{ type: 'confirm', name: 'go', message: 'Go ahead?', default: false }]));
+      } catch {
+        console.log(chalk.yellow('\nI could not read your answer, so I stopped and changed nothing.\n'));
+        return 1;
+      }
+      if (!go) {
+        console.log(chalk.yellow('\nStopped. Nothing was changed.\n'));
+        return 0;
+      }
+    }
+    const result = await uninstallCodex(targetDir, { dryRun: false, backup: options.backup !== false });
+    console.log(chalk.green(
+      `Codex: removed ${plural(result.removedAgents.length, 'native agent file', 'native agent files')} from .codex/agents/.` +
+      (result.backupPath ? ` A copy was saved to ${relative(targetDir, result.backupPath)}/ first.` : '') + '\n'
+    ));
+    return 0;
   }
 
   // --- gather evidence ------------------------------------------------------

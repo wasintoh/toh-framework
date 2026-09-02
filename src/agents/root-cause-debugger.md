@@ -11,6 +11,7 @@ tools:
   - Glob
   - Bash
 model: sonnet
+modelIntent: review
 skills:
   - debug-protocol
   - error-handling

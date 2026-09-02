@@ -12,6 +12,7 @@ tools:
   - Edit
   - Bash
 model: sonnet
+modelIntent: implementation
 skills:
   - platform-specialist  # Core platform adaptation skills (doc-driven)
   - engineer-harness     # Human-friendly reporting + next steps

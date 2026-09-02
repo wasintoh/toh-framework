@@ -42,6 +42,7 @@ jobs:
       - run: npm ci
       - run: node bin/toh-cli.js --version
       - run: node bin/toh-cli.js --help
+      - run: npm test
       - run: npm run list
       - run: npm pack --dry-run
 

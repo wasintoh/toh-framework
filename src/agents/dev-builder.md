@@ -12,6 +12,7 @@ tools:
   - Bash
   - WebFetch
 model: sonnet
+modelIntent: implementation
 isolation: worktree
 skills:
   - dev-engineer         # Core dev skills

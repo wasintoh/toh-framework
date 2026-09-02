@@ -34,7 +34,9 @@ const VERSION = pkg.version;
 //     math divide by zero and loop forever inside stop()/succeed(). On a
 //     zero-width TTY fall back to plain non-animated output (isEnabled: false).
 const spin = (text) => {
-  const options = { text, discardStdin: false };
+  // TOH_QUIET=1: no spinner output at all (the in-band test runner sets it —
+  // ora's stream writes corrupt node:test's IPC channel on Node 24).
+  const options = { text, discardStdin: false, isSilent: process.env.TOH_QUIET === '1' };
   if (process.stderr.isTTY && !(process.stderr.columns > 0)) {
     options.isEnabled = false; // zero-width pty: plain output, no animation
   }
@@ -167,14 +169,18 @@ export async function install(options) {
   // Validate target directory
   const spinner = spin('Validating target directory...').start();
   if (!fs.existsSync(config.targetDir)) {
-    spinner.warn('Target directory does not exist');
-    const { create } = await inquirer.prompt([{
-      type: 'confirm',
-      name: 'create',
-      message: `Create directory ${config.targetDir}?`,
-      default: true
-    }]);
-    
+    // --quick is the non-interactive path: create the directory and proceed.
+    let create = quick;
+    if (!quick) {
+      spinner.warn('Target directory does not exist');
+      ({ create } = await inquirer.prompt([{
+        type: 'confirm',
+        name: 'create',
+        message: `Create directory ${config.targetDir}?`,
+        default: true
+      }]));
+    }
+
     if (create) {
       fs.mkdirSync(config.targetDir, { recursive: true });
       spinner.succeed('Directory created');
@@ -508,7 +514,10 @@ async function setupIDEWithSpinner(ideName, setupFn) {
         `\n✖ Installation aborted: ${ideName} failed a hard size-budget check (see above). ` +
         `Fix the generator and re-run the installer.\n`
       ));
-      process.exit(1);
+      // Thrown (not process.exit) so bin/toh-cli.js sets the exit code and the
+      // test suite can observe the abort. `reported` stops a second message.
+      error.reported = true;
+      throw error;
     }
   }
 }
@@ -990,7 +999,11 @@ function printNextSteps(config) {
     // 9 chars green + 51 chars gray = 60
     console.log(row(chalk.green('    codex') + chalk.gray('     - Start Codex CLI in project'.padEnd(51))));
     // 13 chars green + 47 chars gray = 60
-    console.log(row(chalk.green('    /toh-vibe') + chalk.gray(' - Create new project'.padEnd(47))));
+    console.log(row(chalk.green('    $toh-vibe') + chalk.gray(' - Create new project (native skill)'.padEnd(47))));
+    // 11 chars green + 49 chars gray = 60
+    console.log(row(chalk.green('    /skills') + chalk.gray('   - Browse all 14 /toh-* skills'.padEnd(49))));
+    // 18 chars green + 42 chars gray = 60
+    console.log(row(chalk.green('    .codex/agents/') + chalk.gray(' - 8 native Toh agents'.padEnd(42))));
     console.log(empty);
   }
 

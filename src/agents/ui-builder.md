@@ -11,6 +11,7 @@ tools:
   - Edit
   - Bash
 model: sonnet
+modelIntent: implementation
 isolation: worktree
 skills:
   - ui-first-builder     # Core UI building methodology

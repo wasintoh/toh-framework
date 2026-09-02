@@ -14,6 +14,7 @@ tools:
   - Bash
   - WebFetch
 model: opus
+modelIntent: planning
 memory: project
 skills:
   - plan-orchestrator      # Planning + plan artifact + single-gate handoff

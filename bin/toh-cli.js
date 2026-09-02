@@ -55,7 +55,13 @@ program
   .option('--legacy-cursorrules', 'Also write the legacy root .cursorrules file (very old Cursor versions)')
   .action(async (options) => {
     const { install } = await import('../installer/install.js');
-    await install(options);
+    try {
+      await install(options);
+    } catch (error) {
+      // Hard-budget aborts already printed their explanation (error.reported).
+      if (!error.reported) console.error(chalk.red(`\n✖ Installation failed: ${error.message}\n`));
+      process.exit(1);
+    }
   });
 
 // Uninstall command — the counterpart to install.
@@ -70,6 +76,8 @@ program
   .option('-y, --yes', 'Skip the confirmation question (for scripts)')
   .option('--all', 'ALSO delete your own plan, work log and project notes (a backup copy is saved first)')
   .option('--verbose', 'List every file in the preview instead of a per-tool summary')
+  .option('-i, --ide <ides>', 'Remove one IDE surface only (currently: codex = the native .codex/agents/ files). Omit for the full uninstall')
+  .option('--no-backup', 'With --ide: skip the backup copy of removed files')
   .action(async (options) => {
     const { uninstall } = await import('../installer/uninstall.js');
     const code = await uninstall(options);

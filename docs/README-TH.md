@@ -63,7 +63,7 @@ AI จะเขียนแผนออกมาเป็นรายการ�
 | 🧠 **Claude Code** | ✅ รองรับเต็ม | Native subagents + skills preload, Stop hook, slash commands และทางลัด |
 | 📝 **Cursor (2.4+)** | ✅ รองรับเต็ม | Native subagents (`.cursor/agents/`), skills ผ่าน `.agents/skills/`, rule แบบ always-on |
 | 🛰️ **Antigravity CLI (agy) + IDE** | ✅ รองรับเต็ม | `.agents/` rules + skills + workflows + subagents + Stop hook |
-| 🤖 **Codex** (CLI + Codex desktop app / ChatGPT app) | ✅ รองรับ | AGENTS.md แบบกะทัดรัด + repo-level skills |
+| 🤖 **Codex** (CLI + Codex desktop app / ChatGPT app) | ✅ รองรับ | AGENTS.md แบบกะทัดรัด + repo-level skills + native agents ใน `.codex/agents/` |
 | 💠 **ZCode (Z.ai)** | ✅ รองรับ | AGENTS.md + `.agents/skills/` + คำสั่ง `/toh-*` native ใน `.agents/commands/` |
 | 💎 **Gemini CLI** | 🏢 Legacy | เฉพาะ Enterprise/GCP ใช้ผ่าน `--legacy-gemini` |
 
@@ -243,9 +243,16 @@ agy
 ```bash
 codex
 
-# ใช้คำสั่งเดียวกัน AGENTS.md สอนชุดคำสั่งครบให้ Codex
+# เรียก workflow ของ Toh เป็น skill ของ Codex ตรงๆ ด้วย $ ตามด้วยชื่อ หรือพิมพ์ /skills ดูทั้งหมด
+$toh-vibe ระบบจัดการ inventory
+
+# พิมพ์ /toh-* แบบเดิมก็ยังใช้ได้ AGENTS.md สอนชุดคำสั่งครบให้ Codex อยู่แล้ว
 /toh-vibe ระบบจัดการ inventory
 ```
+
+agent ทั้ง 8 ตัวของ Toh ถูกติดตั้งเป็น native agent ของ Codex ด้วย อยู่ที่ `.codex/agents/*.toml`
+สร้างจาก `.toh/agents/` และจำไว้ว่าไฟล์ไหนเป็นของเรา ไฟล์ที่คุณแก้เองจะไม่ถูกเขียนทับ
+ทุกตัวใช้ model เดียวกับ session ของคุณ มีแค่ระดับ reasoning ที่ตั้งไว้ตามหน้าที่ของแต่ละตัว
 
 ### ZCode (Z.ai)
 

@@ -2,6 +2,14 @@
 
 All notable changes to Toh Framework will be documented in this file.
 
+## [Unreleased]
+
+#### Added
+
+- **Native Codex agents** — every Toh agent in `.toh/agents/` is now also installed as a project-scoped Codex custom agent in `.codex/agents/<name>.toml` (`name`, `description`, `model_reasoning_effort`, `sandbox_mode`, `developer_instructions`), so Codex can delegate to `ui-builder`, `plan-orchestrator` and friends natively. The files deliberately carry **no `model` key**: they inherit the parent session's model, so one config choice governs every agent and a future model rename never strands an install. Reasoning effort comes from a new `modelIntent` frontmatter key (`lightweight | implementation | planning | review`, falling back to the Claude tier), and agents whose tool allowlist has no write tool get Codex's `read-only` sandbox. Ownership is tracked by sha256 in `.codex/toh-framework.json`: a file you edited or created is never overwritten or removed. AGENTS.md now points Codex at `$toh-<cmd>` skill invocation and the native agents. Contributed by @pcbimon in [PR #3](https://github.com/wasintoh/toh-framework/pull/3); reshaped in review so `.agents/skills/` keeps a single writer (shared.js), an existing `.codex/config.toml` is still never modified, and the codex capability profile stays the probed v2.1.1 floor.
+- **`toh uninstall --ide codex`** — removes just the native agent files this installer wrote (hash-verified, backed up first) and their manifest; AGENTS.md, `.codex/config.toml` and `.toh/` stay. The full uninstall also knows the new paths.
+- **Test suite** — `npm test` runs `tests/codex.test.js` (node:test, in-band): install layout, TOML shape, single-writer invariant across IDE order, config.toml untouched, ownership by hash, AGENTS.md idempotency and budget, both uninstall paths. First automated tests in the repo; CI now runs them.
+
 ## [2.1.1] - 2026-08-26
 
 ### 🩹 Patch: Updates That Respect Your Work

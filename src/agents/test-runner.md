@@ -11,6 +11,7 @@ tools:
   - Edit
   - Bash
 model: haiku
+modelIntent: lightweight
 maxTurns: 30
 skills:
   - test-engineer        # Core testing skills

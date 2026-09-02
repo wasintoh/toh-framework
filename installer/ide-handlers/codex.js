@@ -1,8 +1,9 @@
 /**
- * Codex CLI IDE Handler
- * Creates AGENTS.md file for Codex CLI and Codex Web
- * 
- * Codex uses AGENTS.md as "project memory" - automatically loaded on startup
+ * Codex IDE Handler (CLI + desktop app)
+ * Creates AGENTS.md (project memory, auto-loaded by Codex) and, since v2.2,
+ * one native Codex agent per Toh agent in .codex/agents/*.toml.
+ * The 14 /toh-* command skills and 23 framework skills reach Codex through
+ * the shared .agents/skills/ writer in shared.js — this file never writes there.
  */
 
 import fs from 'fs-extra';
@@ -11,6 +12,8 @@ import { fileURLToPath } from 'url';
 import yaml from 'js-yaml';
 import { transformCommand, renderCapabilitiesSection, seedFileIfAbsent } from './shared.js';
 import { probeCodexCapabilitiesCached } from './capability-probe.js';
+import crypto from 'crypto';
+import { parse as parseToml } from 'smol-toml';
 
 // Hard budget for the TOH marker block inside AGENTS.md. Codex silently
 // truncates project docs at 32 KiB COMBINED (project_doc_max_bytes default),
@@ -27,7 +30,7 @@ const AGENTS_MD_RUNTIMES = {
     memoryEN: 'This file serves as project memory for Codex (CLI and desktop app). It contains the Toh Framework configuration and agent definitions.',
     memoryTH: 'This file is project memory for Codex (CLI and desktop app) containing Toh Framework configuration and agent definitions',
     runtimeName: 'Codex',
-    commandHint: ''
+    commandHint: ' The 14 `/toh-*` workflows are also installed as Codex skills in `.agents/skills/` — invoke one explicitly with `$toh-<cmd>` (e.g. `$toh-vibe`) or browse them with `/skills`; typing `/toh-vibe ...` as plain text works too. The 8 Toh agents are installed as native Codex agents in `.codex/agents/*.toml` (full specs stay in `.toh/agents/`); when you delegate to one, hand it a self-contained brief — custom agents cannot receive a full-history fork.'
   },
   zcode: {
     memoryEN: 'This file serves as project memory for ZCode (Z.ai). It contains the Toh Framework configuration and agent definitions.',
@@ -59,6 +62,268 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../../package.json'), 'utf-8'));
 const VERSION = pkg.version;
+
+// ---------------------------------------------------------------------------
+// Native Codex agents (v2.2 — contributed by @pcbimon in PR #3, reshaped in
+// review). Codex discovers project-scoped custom agents in .codex/agents/*.toml
+// (developers.openai.com/codex/subagents); each Toh agent in .toh/agents/<name>.md
+// becomes one TOML file. Two deliberate choices:
+//   1. NO `model` key. An agent file without `model` inherits the parent
+//      session's model (per the subagents doc), so the user's one config choice
+//      governs every agent and a future model rename never strands an install.
+//      Only `model_reasoning_effort` is set, from the agent's declared intent.
+//   2. Ownership by hash. .codex/toh-framework.json records the sha256 of every
+//      agent file we wrote. A file whose hash no longer matches was edited (or
+//      created) by the user and is never overwritten or removed.
+// ---------------------------------------------------------------------------
+export const CODEX_AGENTS_DIR = path.join('.codex', 'agents');
+export const CODEX_MANIFEST_PATH = path.join('.codex', 'toh-framework.json');
+const MANIFEST_GENERATOR = 'toh-framework';
+const AGENT_NAME_RE = /^[a-z0-9-]{1,64}$/;
+const MODEL_INTENTS = new Set(['lightweight', 'implementation', 'planning', 'review']);
+// Same rule cursor.js uses for `readonly`: an allowlist with no write tool is
+// read-only by design (root-cause-debugger: Read/Grep/Glob/Bash).
+const READ_ONLY_TOOLS = new Set(['Read', 'Grep', 'Glob', 'Bash']);
+
+/** Toh model intent → Codex reasoning effort. The model itself is inherited. */
+export const CODEX_REASONING_EFFORT = Object.freeze({
+  lightweight: 'low',
+  implementation: 'medium',
+  planning: 'high',
+  review: 'high'
+});
+
+function sha256(value) {
+  return crypto.createHash('sha256').update(value).digest('hex');
+}
+
+function agentRelPath(name) {
+  // Manifest keys are POSIX so the file is portable across platforms.
+  return `.codex/agents/${name}.toml`;
+}
+
+function normalizeModelIntent(value) {
+  const intent = String(value || '').trim().toLowerCase().replaceAll('_', '-');
+  const aliases = {
+    exploration: 'lightweight',
+    explore: 'lightweight',
+    scaffold: 'lightweight',
+    deep: 'planning',
+    'deep-reasoning': 'planning',
+    security: 'review'
+  };
+  return aliases[intent] || intent;
+}
+
+/**
+ * `modelIntent` frontmatter wins; otherwise derive from the Claude tier so
+ * agents that predate the key still get sensible reasoning effort.
+ */
+export function resolveCodexModelIntent(frontmatter = {}) {
+  const explicit = normalizeModelIntent(frontmatter.modelIntent || frontmatter.model_intent);
+  if (MODEL_INTENTS.has(explicit)) return explicit;
+  const tier = String(frontmatter.model || '').trim().toLowerCase();
+  if (tier === 'haiku') return 'lightweight';
+  if (tier === 'opus') return 'planning';
+  return 'implementation';
+}
+
+function parseAgentFile(raw, label) {
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+  if (!match) throw new Error(`[toh-framework] ${label} must start with YAML frontmatter.`);
+  try {
+    return { frontmatter: yaml.load(match[1]) || {}, body: match[2] };
+  } catch (error) {
+    throw new Error(`[toh-framework] Invalid YAML frontmatter in ${label}: ${error.message}`);
+  }
+}
+
+/** Read the installed Toh agents from .toh/agents/ (the runtime source of truth). */
+export async function readAgentCatalog(targetDir) {
+  const agentsDir = path.join(targetDir, '.toh', 'agents');
+  if (!(await fs.pathExists(agentsDir))) return [];
+  const files = (await fs.readdir(agentsDir, { withFileTypes: true }))
+    .filter((entry) => entry.isFile() && entry.name.endsWith('.md') && entry.name !== 'README.md')
+    .map((entry) => entry.name)
+    .sort();
+  const agents = [];
+  for (const file of files) {
+    const sourcePath = path.join(agentsDir, file);
+    const { frontmatter, body } = parseAgentFile(await fs.readFile(sourcePath, 'utf-8'), sourcePath);
+    const name = String(frontmatter.name || file.replace(/\.md$/, '')).trim();
+    if (!AGENT_NAME_RE.test(name)) continue;
+    agents.push({
+      name,
+      description: String(frontmatter.description || `${name} (Toh Framework agent)`).replace(/\s+/g, ' ').trim().slice(0, 1024),
+      body,
+      tools: Array.isArray(frontmatter.tools) ? frontmatter.tools.map(String) : [],
+      skills: Array.isArray(frontmatter.skills) ? frontmatter.skills.map(String) : [],
+      triggers: Array.isArray(frontmatter.triggers) ? frontmatter.triggers.map(String) : [],
+      modelIntent: resolveCodexModelIntent(frontmatter),
+      maxTurns: frontmatter.maxTurns
+    });
+  }
+  return agents;
+}
+
+function isReadOnlyAgent(agent) {
+  return agent.tools.length > 0 && agent.tools.every((tool) => READ_ONLY_TOOLS.has(tool));
+}
+
+/** One Toh agent → one Codex agent TOML document (validated before it is returned). */
+export function translateAgentToCodex(agent) {
+  const effort = CODEX_REASONING_EFFORT[agent.modelIntent] || CODEX_REASONING_EFFORT.implementation;
+  const skillRefs = agent.skills.length
+    ? `\nAssociated Toh skills (read before acting):\n${agent.skills.map((skill) => `- .toh/skills/${skill}/SKILL.md`).join('\n')}`
+    : '';
+  const toolBoundary = agent.tools.length
+    ? `\nSource tool boundary: ${agent.tools.join(', ')}. Do not widen it.`
+    : '';
+  const triggerHints = agent.triggers.length ? `\nRouting hints: ${agent.triggers.join('; ')}` : '';
+  const turnHint = agent.maxTurns === undefined ? '' : `\nSource turn budget hint: ${agent.maxTurns}.`;
+  const instructions = `${agent.body.trim()}
+
+## Codex runtime contract
+- Own only the task and files assigned by the parent.
+- Return Status, Result, Evidence, Files, and Blockers.
+- Run the supplied checkpoint; the parent re-runs it before changing .toh/plan.md.
+- Keep dependent work sequential and return to the parent when complete.${skillRefs}${toolBoundary}${triggerHints}${turnHint}`;
+
+  const content = [
+    `# Generated by Toh Framework v${VERSION} from .toh/agents/${agent.name}.md`,
+    `# Toh model intent: ${agent.modelIntent}. No \`model\` key on purpose: the agent`,
+    `# inherits the parent session's model, so your one config choice governs it.`,
+    `name = ${JSON.stringify(agent.name)}`,
+    `description = ${JSON.stringify(agent.description)}`,
+    `model_reasoning_effort = ${JSON.stringify(effort)}`,
+    `sandbox_mode = ${JSON.stringify(isReadOnlyAgent(agent) ? 'read-only' : 'workspace-write')}`,
+    `developer_instructions = ${JSON.stringify(instructions.trim())}`,
+    ''
+  ].join('\n');
+  try {
+    parseToml(content);
+  } catch (error) {
+    throw new Error(`[toh-framework] Generated Codex agent TOML for ${agent.name} is invalid: ${error.message}`);
+  }
+  return content;
+}
+
+async function readCodexManifest(targetDir) {
+  const manifestPath = path.join(targetDir, CODEX_MANIFEST_PATH);
+  const empty = { generator: MANIFEST_GENERATOR, version: VERSION, agents: {} };
+  if (!(await fs.pathExists(manifestPath))) return empty;
+  try {
+    const manifest = await fs.readJson(manifestPath);
+    if (manifest.generator !== MANIFEST_GENERATOR || typeof manifest.agents !== 'object' || manifest.agents === null) {
+      return empty;
+    }
+    return { ...empty, ...manifest };
+  } catch {
+    return empty;
+  }
+}
+
+async function writeCodexManifest(targetDir, manifest) {
+  const manifestPath = path.join(targetDir, CODEX_MANIFEST_PATH);
+  await fs.ensureDir(path.dirname(manifestPath));
+  await fs.writeJson(manifestPath, manifest, { spaces: 2 });
+}
+
+async function fileMatchesHash(filePath, expectedHash) {
+  if (!expectedHash || !(await fs.pathExists(filePath))) return false;
+  try {
+    return sha256(await fs.readFile(filePath)) === expectedHash;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Write .codex/agents/<name>.toml for every agent in .toh/agents/.
+ * Ownership-safe: a file we did not write (or that the user edited since) is
+ * kept as-is and reported; stale files we wrote for agents that no longer
+ * exist are removed only when still byte-identical to what we wrote.
+ */
+export async function installCodexAgents(targetDir) {
+  const agents = await readAgentCatalog(targetDir);
+  if (agents.length === 0) return { installed: [], kept: [], total: 0 };
+
+  const previous = await readCodexManifest(targetDir);
+  const previousAgents = previous.agents || {};
+  const nextAgents = {};
+  const wanted = new Set(agents.map((agent) => agentRelPath(agent.name)));
+  await fs.ensureDir(path.join(targetDir, CODEX_AGENTS_DIR));
+
+  for (const [rel, record] of Object.entries(previousAgents)) {
+    if (wanted.has(rel) || !rel.startsWith('.codex/agents/')) continue;
+    const filePath = path.join(targetDir, rel);
+    if (await fileMatchesHash(filePath, record.sha256)) await fs.remove(filePath);
+  }
+
+  const installed = [];
+  const kept = [];
+  for (const agent of agents) {
+    const rel = agentRelPath(agent.name);
+    const filePath = path.join(targetDir, rel);
+    const content = translateAgentToCodex(agent);
+    const record = previousAgents[rel];
+    const exists = await fs.pathExists(filePath);
+    if (exists && !(await fileMatchesHash(filePath, record?.sha256))) {
+      // Not ours, or edited since we wrote it — the user's file wins.
+      if (record) nextAgents[rel] = record;
+      kept.push(agent.name);
+      continue;
+    }
+    await fs.writeFile(filePath, content);
+    nextAgents[rel] = { sha256: sha256(content), source: `.toh/agents/${agent.name}.md`, modelIntent: agent.modelIntent };
+    installed.push(agent.name);
+  }
+  await writeCodexManifest(targetDir, { ...previous, version: VERSION, agents: nextAgents });
+  return { installed, kept, total: agents.length };
+}
+
+/**
+ * `toh uninstall --ide codex`: remove ONLY the native agent files this
+ * installer wrote (hash-verified) plus the manifest. AGENTS.md and
+ * .codex/config.toml are shared surfaces (ZCode reads AGENTS.md too) and are
+ * handled by the full uninstall planner in installer/uninstall.js.
+ */
+export async function uninstallCodex(targetDir, options = {}) {
+  const { dryRun = false, backup = true } = options;
+  const manifest = await readCodexManifest(targetDir);
+  const removed = [];
+  const kept = [];
+  for (const [rel, record] of Object.entries(manifest.agents || {})) {
+    if (!rel.startsWith('.codex/agents/') || !rel.endsWith('.toml')) continue;
+    const filePath = path.join(targetDir, rel);
+    if (!(await fs.pathExists(filePath))) continue;
+    if (await fileMatchesHash(filePath, record.sha256)) removed.push({ rel, filePath });
+    else kept.push(rel);
+  }
+  const result = {
+    removedAgents: removed.map((item) => path.basename(item.rel, '.toml')).sort(),
+    keptAgents: kept.map((rel) => path.basename(rel, '.toml')).sort(),
+    dryRun,
+    backupPath: null
+  };
+  if (dryRun) return result;
+
+  if (backup && removed.length > 0) {
+    const backupDir = path.join(targetDir, '.toh-uninstall-backup', `codex-agents-${Date.now()}`);
+    for (const item of removed) {
+      const destination = path.join(backupDir, item.rel);
+      await fs.ensureDir(path.dirname(destination));
+      await fs.copy(item.filePath, destination);
+    }
+    result.backupPath = backupDir;
+  }
+  for (const item of removed) await fs.remove(item.filePath);
+  const agentsDir = path.join(targetDir, CODEX_AGENTS_DIR);
+  if (await fs.pathExists(agentsDir) && (await fs.readdir(agentsDir)).length === 0) await fs.remove(agentsDir);
+  const manifestPath = path.join(targetDir, CODEX_MANIFEST_PATH);
+  if (await fs.pathExists(manifestPath)) await fs.remove(manifestPath);
+  return result;
+}
 
 /**
  * Create memory template files for the Memory System (v1.7.0)
@@ -397,7 +662,10 @@ export async function setupCodex(targetDir, srcDir, language = 'en', options = {
     );
   }
 
-  return true;
+  // v2.2: native Codex agents, one TOML per Toh agent (ownership-safe).
+  const agents = await installCodexAgents(targetDir);
+  const keptNote = agents.kept.length ? `, ${agents.kept.length} kept as edited` : '';
+  return `AGENTS.md + .codex/agents/ (${agents.installed.length}/${agents.total} agents${keptNote})`;
 }
 
 function generateAgentsMdEN(agentRoster, ide = 'codex', probedSubagents = false) {

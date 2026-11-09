@@ -162,7 +162,9 @@ transformCommand(). install.js normalizes .toh/commands to the universal variant
 1. Bump semver in package.json (pre-releases: X.Y.Z-beta.N).
 2. Add a newest-first CHANGELOG.md entry `## [X.Y.Z] - YYYY-MM-DD` with Changed/Added/Technical
    subsections; Technical records agent/skill/command counts and every synced IDE surface.
-3. Sync user-facing text in README.md AND docs/README-TH.md.
+3. Sync user-facing text in README.md AND docs/README-TH.md. Banner docs/assets/toh-framework-banner.png
+   shows the FULL version (e.g. 2.2.1): change only the number — same glyphs, colours and left
+   side pixel-for-pixel; reuse digits from earlier banners in git history, widen the canvas to keep the right margin.
 4. `npm pack --dry-run`: the files whitelist stays [bin, installer, src, docs, !docs/assets, dist]
    (+ auto package.json, README.md, LICENSE) — 325.5 kB / 142 files at v2.1.0. Keep the !docs/assets negation
    (and matching .npmignore line): dropping it triples the tarball. CHANGELOG.md does not ship.

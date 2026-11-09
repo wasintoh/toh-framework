@@ -17,6 +17,7 @@ v2.2.1 changes nothing you install — ปล่อยเวอร์ชัน�
 
 - Release job runs on Node 24 (trusted publishing needs npm >= 11.5.1) and fails loudly on an older npm.
 - No agent, skill, command or installer changes — counts unchanged (8 agents / 23 skills / 14 commands).
+- Banner now shows the full version `2.2.1` (number only; canvas widened 141 px to keep the right margin).
 
 ## [2.2.0] - 2026-09-03
 

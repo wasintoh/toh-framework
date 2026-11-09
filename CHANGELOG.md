@@ -2,6 +2,22 @@
 
 All notable changes to Toh Framework will be documented in this file.
 
+## [2.2.1] - 2026-11-09
+
+### 🔁 Releases Publish Themselves
+
+v2.2.1 changes nothing you install — ปล่อยเวอร์ชันใหม่ได้ด้วยการ push ครั้งเดียว. It moves the release pipeline off a long-lived npm token and onto npm Trusted Publishing, so a release is now just "bump the version and push".
+
+#### Changed
+
+- **Release on push** — `.github/workflows/release.yml` runs on every push to `main`. When the `package.json` version is not on npm yet, it smoke-tests, publishes, then creates tag `vX.Y.Z` and the GitHub Release from this file. A push that keeps the version publishes nothing.
+- **npm Trusted Publishing (OIDC)** — no `NPM_TOKEN` secret, nothing to expire; provenance is attached automatically. Pre-release versions (`X.Y.Z-beta.N`) go to the `next` dist-tag.
+
+#### Technical
+
+- Release job runs on Node 24 (trusted publishing needs npm >= 11.5.1) and fails loudly on an older npm.
+- No agent, skill, command or installer changes — counts unchanged (8 agents / 23 skills / 14 commands).
+
 ## [2.2.0] - 2026-09-03
 
 ### 🤖 Codex Gets a Real Team

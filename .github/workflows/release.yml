@@ -1,20 +1,30 @@
-# Release — publish to npm with provenance + create a GitHub Release.
-# Triggered by pushing a tag matching v* (e.g. `git tag v2.1.0 && git push --tags`).
+# Release — push to main is the whole release process.
 #
-# Required secret: NPM_TOKEN — an npm granular access token with
-# read-and-write on the toh-framework package. Add it under
-# repo Settings → Secrets and variables → Actions → New repository secret.
-# `id-token: write` lets npm attach a provenance attestation (Sigstore),
-# so npmjs.com shows the package was built from this repo by this workflow.
+# Every push to main runs this job. It reads the version in package.json and
+# asks npm whether that version already exists:
+#   - already on npm  → nothing to release, the job ends green (docs/code push)
+#   - not on npm yet  → smoke-test, publish to npm, tag vX.Y.Z, GitHub Release
+# So "ship a release" = bump package.json version + CHANGELOG section + push.
+#
+# Auth: npm Trusted Publishing (OIDC). No NPM_TOKEN secret, nothing expires.
+# npmjs.com → toh-framework → Settings → Trusted publishing must list:
+#   GitHub Actions · user wasintoh · repo toh-framework · workflow release.yml
+#   · allowed actions include `npm publish`.
+# Needs npm CLI >= 11.5.1 and Node >= 22.14 on a GitHub-hosted runner.
 name: release
 
 on:
   push:
-    tags: ["v*"]
+    branches: [main]
 
 permissions:
-  contents: write # create the GitHub Release
-  id-token: write # npm --provenance attestation
+  contents: write # create the tag + GitHub Release
+  id-token: write # npm trusted publishing (OIDC) + provenance
+
+# Two quick pushes must not race to publish the same version
+concurrency:
+  group: release
+  cancel-in-progress: false
 
 jobs:
   release:
@@ -23,38 +33,62 @@ jobs:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
           registry-url: "https://registry.npmjs.org"
 
-      # Guard: the tag must match package.json version
-      - name: Verify tag matches package.json
+      # Decide: is this push a new version?
+      - name: Check whether this version is already on npm
+        id: ver
         run: |
-          TAG_VERSION="${GITHUB_REF_NAME#v}"
-          PKG_VERSION="$(node -p "require('./package.json').version")"
-          if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
-            echo "Tag v$TAG_VERSION != package.json $PKG_VERSION" >&2
-            exit 1
+          NAME="$(node -p "require('./package.json').name")"
+          VERSION="$(node -p "require('./package.json').version")"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          if [ -n "$(npm view "$NAME@$VERSION" version 2>/dev/null || true)" ]; then
+            echo "$NAME@$VERSION is already on npm — nothing to release."
+            echo "release=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "$NAME@$VERSION is new — releasing."
+            echo "release=true" >> "$GITHUB_OUTPUT"
           fi
+          # pre-releases (X.Y.Z-beta.N) go to the "next" dist-tag, not "latest"
+          case "$VERSION" in
+            *-*) echo "disttag=next" >> "$GITHUB_OUTPUT" ;;
+            *)   echo "disttag=latest" >> "$GITHUB_OUTPUT" ;;
+          esac
 
-      # Quality gate: the repo has no test suite yet, so the gate is
-      # "the CLI actually runs" + "the tarball packs clean"
-      - run: npm ci
-      - run: node bin/toh-cli.js --version
-      - run: node bin/toh-cli.js --help
-      - run: npm test
-      - run: npm run list
-      - run: npm pack --dry-run
+      # Quality gate: the CLI actually runs + tests pass + the tarball packs clean
+      - if: steps.ver.outputs.release == 'true'
+        run: npm ci
+      - if: steps.ver.outputs.release == 'true'
+        run: |
+          node bin/toh-cli.js --version
+          node bin/toh-cli.js --help
+          npm test
+          npm run list
+          npm pack --dry-run
 
-      - name: Publish to npm (with provenance)
-        run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # Trusted publishing needs npm >= 11.5.1; fail loudly instead of
+      # falling back to token auth with no token
+      - name: Check npm supports trusted publishing
+        if: steps.ver.outputs.release == 'true'
+        run: |
+          NPM_V="$(npm --version)"
+          echo "npm $NPM_V"
+          node -e 'const [a,b,c]=process.argv[1].split(".").map(Number);process.exit(a>11||(a===11&&(b>5||(b===5&&c>=1)))?0:1)' "$NPM_V" \
+            || { echo "npm $NPM_V < 11.5.1 — trusted publishing unsupported" >&2; exit 1; }
+
+      # OIDC auth, no token. Provenance is attached automatically.
+      - name: Publish to npm (trusted publishing)
+        if: steps.ver.outputs.release == 'true'
+        run: npm publish --access public --tag "${{ steps.ver.outputs.disttag }}"
 
       # Pull the matching "## [X.Y.Z]" section out of CHANGELOG.md
       - name: Extract changelog section
+        if: steps.ver.outputs.release == 'true'
+        env:
+          VERSION: ${{ steps.ver.outputs.version }}
         run: |
-          VERSION="${GITHUB_REF_NAME#v}"
           awk -v ver="$VERSION" '
             $0 ~ ("^## \\[" ver "\\]") { found = 1; next }
             found && /^## \[/ { exit }
@@ -64,11 +98,21 @@ jobs:
             echo "No CHANGELOG.md section for ${VERSION} — see CHANGELOG.md." > RELEASE_BODY.md
           fi
 
-      - name: Create GitHub Release
+      # Creates tag vX.Y.Z on this commit + the GitHub Release
+      - name: Create tag + GitHub Release
+        if: steps.ver.outputs.release == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.ver.outputs.version }}
         run: |
-          gh release create "$GITHUB_REF_NAME" \
-            --verify-tag \
-            --title "$GITHUB_REF_NAME" \
-            --notes-file RELEASE_BODY.md
+          TAG="v$VERSION"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists — skipping."
+            exit 0
+          fi
+          PRE=""
+          case "$VERSION" in *-*) PRE="--prerelease" ;; esac
+          gh release create "$TAG" \
+            --target "$GITHUB_SHA" \
+            --title "$TAG" \
+            --notes-file RELEASE_BODY.md $PRE

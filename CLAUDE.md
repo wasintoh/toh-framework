@@ -166,8 +166,11 @@ transformCommand(). install.js normalizes .toh/commands to the universal variant
 4. `npm pack --dry-run`: the files whitelist stays [bin, installer, src, docs, !docs/assets, dist]
    (+ auto package.json, README.md, LICENSE) — 325.5 kB / 142 files at v2.1.0. Keep the !docs/assets negation
    (and matching .npmignore line): dropping it triples the tarball. CHANGELOG.md does not ship.
-5. Tag lowercase vX.Y.Z on the release commit and push the tag — release.yml smoke-tests, publishes
-   to npm with provenance (NPM_TOKEN secret), and creates the GitHub Release from that CHANGELOG section. Never publish unverified by hand.
+5. Commit and push to main. That is the whole release: release.yml sees the package.json version
+   is not on npm yet, smoke-tests, publishes via npm Trusted Publishing (OIDC, no token, provenance
+   automatic), then creates tag vX.Y.Z and the GitHub Release from that CHANGELOG section. A push
+   that keeps the version publishes nothing. Never tag or `npm publish` by hand.
+6. When the owner says ship / release / ปล่อย, do steps 1–5 in one go without asking again.
 
 ## Gotchas
 
